@@ -1,0 +1,139 @@
+{% extends "auzonetweb/base.html" %}
+{% load bootstrap3 %}
+{% load static from staticfiles %}
+{% block scripts %}
+<script>
+</script>
+{% endblock %}
+
+{% block title %}AuzoNet - {{offer.title}}{% endblock %}
+{% block content%}
+{%if is_client == 1%}
+<!-- Modal finalize order-->
+<div class="modal fade" id="confirmEndModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Terminar acuerdo</h4>
+      </div>
+      <div class="modal-body">
+        ¿Estás satisfecho con el servicio/producto prestado por {{offer.owner.username}}?
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-lg btn-success" href="{%url 'finalize-order' orderid=client_order.id feedback='1'%}" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> Si</a>
+        <a class="btn btn-lg btn-danger" href="{%url 'finalize-order' orderid=client_order.id feedback='0'%}" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> No</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endif%}
+<!-- Modal delete-->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Finalizar oferta</h4>
+      </div>
+      <div class="modal-body">
+        ¿Seguro que quieres finalizar tu oferta? <br>
+        Recuerda que siempre puedes ponerla de nuevo a la vista desde tu panel de usuario.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No hacer cambios</button>
+        <a class="btn btn-danger" href="{%url 'delete-post' postid=offer.id posttype='O'%}" role="button">Finalizar oferta</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal hiring-->
+<div class="modal fade" id="confirmHireModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">¿Seguro que quieres contratar esta oferta?</h4>
+      </div>
+      <div class="modal-body">
+        Se enviará un email a <b>{{offer.owner.username}}</b> para informar de que estás interesado en su oferta. Recibirás un aviso si <b>{{offer.owner.username}}</b> acepta a trabajar contigo.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-primary" href="{%url 'hire-offer' offerid=offer.id%}" role="button">Contratar</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead text-center">
+                {% if  offer.owner.publicuser.avatar %}
+                    {% static offer.owner.publicuser.avatar.url as avatar %}
+                    <img src="{{avatar}}" height="150" width="150" class="thumbnail center-block" alt="owner_avatar" />
+                {% endif %}
+                {{offer.owner.first_name}} {{offer.owner.last_name}} ({{offer.owner}})
+                <br>
+                Karma: {{offer.owner.publicuser.karma}}
+            </p>
+            {%if offer.owner.id == request.user.id%}
+                {% if orders.count > 0 %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">Acuerdos</div>
+                    <div class="panel-body">
+                        {% for o in orders %}
+                            Usuario: {{o.client.username}} <br>
+                            Fecha: {{o.date_created}} <br><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% endif %}
+                <a class="btn btn-warning btn-block" href="{%url 'edit-offer' offer.id%}" role="button">Editar</a>
+                <button id="btn-finish" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDeleteModal">Finalizar</button>
+            {%else%}
+                {%if is_client == 1%}
+                    <button id="btn-cancel" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmEndModal">Terminar acuerdo</button>
+                {%else%}
+                    <button id="btn-hire" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmHireModal">Contratar</button>
+                {%endif%}
+            {%endif%}
+
+            <a class="btn btn-default btn-block" href="{%url 'index'%}" role="button">Volver</a>
+        </div>
+
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <div class="caption-full">
+                    <h4 class="pull-right">
+                        {% if offer.price == 0%}
+                        Gratis
+                        {% else %}
+                        Precio: {{offer.price}} €
+                        {% endif %}
+                    </h4>
+                    <h4><a href="#">{{offer.title}}</a>
+                    </h4>
+                    <p>{{offer.detail}}</p>
+                </div>
+                {% if offer.image%}
+                    {% static offer.image.url as photo %}
+                    <img src="{{photo}}" height="800" width="300" class="img-resposive" alt="offer_photo" />
+                {% else %}
+                    <img class="img-responsive" src="http://placehold.it/800x300" alt="" height="300" width="800">
+                {% endif %}
+            </div>
+            {%if offer.owner.id != request.user.id%}
+            <div class="well">
+                <div class="text-right">
+                    <button id="btn-hire" class="btn btn-success " data-toggle="modal" data-target="#confirmHireModal">Contratar</button>
+                </div>
+            </div>
+            {%endif%}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

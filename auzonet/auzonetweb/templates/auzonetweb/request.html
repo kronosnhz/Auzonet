@@ -1,0 +1,35 @@
+{% extends "auzonetweb/base.html" %}
+{% load bootstrap3 %}
+{% load static from staticfiles %}
+{% block scripts %}
+<script>
+$(document).ready(function(){
+    $("#id_due_date").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "yy-mm-dd"
+    });
+
+});
+</script>
+{% endblock %}
+
+{% block title %}AuzoNet - Nueva petición{% endblock %}
+{% block content%}
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form requestForm%}
+            {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                Publicar
+            </button>
+            <a class="btn btn-danger" href="{% url 'index' %}">Cancelar</a>
+            {% endbuttons %}
+        </form>
+    </div>
+    <div class="col-lg-3"></div>
+</div> <!-- end my topics-->
+{% endblock %}

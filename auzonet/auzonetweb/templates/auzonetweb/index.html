@@ -1,0 +1,250 @@
+{% extends "auzonetweb/base.html" %}
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+        $( "#appointment-tabs" ).tabs();
+    });
+</script>
+{% endblock %}
+
+{% block title %}AuzoNet - {{request.session.currentCommunityAddress}}{% endblock %}
+{% block content%}
+<!-- Modal New Message-->
+    <div class="modal fade" id="modalNewMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Publicar mensaje en la corchera</h4>
+                </div>
+                <form action="" method="post">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% bootstrap_form messageModelForm %}
+                    </div>
+                    <div class="modal-footer">
+                        {% buttons %}
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">
+                        Publicar mensaje
+                        </button>
+                        {% endbuttons %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-lg-5">
+        {% static request.user.publicuser.avatar.url as avatar %}
+        <img src="{{avatar}}" height="150" width="150" class="img-responsive img-circle center-block" alt="owner_avatar" />
+
+    </div>
+    <div class="col-lg-7">
+        <h1>{{request.user.first_name}} {{request.user.last_name}}</h1>
+        <p>Karma: <a href="#">{{request.user.publicuser.karma}}</a></p>
+        <a class="btn btn-info btn-lg btn-block" href="{%url 'new-offer'%}"><span class="glyphicon glyphicon-hand-up"></span> Quiero ofrecer algo</a>
+        <a class="btn btn-warning btn-lg btn-block" href="{%url 'new-request'%}"><span class="glyphicon glyphicon-thumbs-up"></span> Necesito algo</a>
+    </div>
+</div>
+<div class="row">
+    <div id="community-panel" class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Corchera de {{request.session.currentCommunityAddress}}</h3>
+        </div>
+        <div class="panel-body">
+            <button id="btn-new-message" class="btn btn-xs btn-default pull-right" data-toggle="modal" data-target="#modalNewMessage"><span class="glyphicon glyphicon-pencil"></span> Publicar mensaje</button>
+            <br><br>
+            {%if communityMessages.count == 0%}
+            <p class="text-center">Aún no se ha publicado nada.</p>
+            {% else %}
+                {%for msg in communityMessages%}
+                    {%if msg.message_type == 'I'%}
+                        <div class="alert alert-info" role="alert">
+                            {%if msg.owner.id == request.user.id %}
+                            <a href="{%url 'delete-message' msg.id%}" role="button" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                            {%endif%}
+                            [{{msg.date_published}}] por <i>{{msg.owner.username}}</i>:<br>
+                            <b>INFO:</b> {{msg.message_text}}
+                    {%elif msg.message_type == 'W'%}
+                        <div class="alert alert-warning" role="alert">
+                            {%if msg.owner.id == request.user.id %}
+                            <a href="{%url 'delete-message' msg.id%}" role="button" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                            {%endif%}
+                            [{{msg.date_published}}] por <i>{{msg.owner.username}}</i>:<br>
+                            <b>AVISO:</b> {{msg.message_text}}
+                    {%endif%}
+                    </div>
+                {%endfor%}
+            {%endif%}
+        </div>
+    </div>
+    <div id="appointment-tabs">
+        <ul>
+            <li><a href="#tabs-1">Ofertas ({{offers.count}})</a></li>
+            <li><a href="#tabs-2">Peticiones ({{requests.count}})</a></li>
+        </ul>
+        <div id="tabs-1">
+            {% if offers.count == 0 %}
+                <p class="text-center">Aún no se ha publicado nada</p>
+            {% else %}
+                <div id="table-recent" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Usuario</th>
+                                <th>Coste</th>
+                                <th>Categoría</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for offer in offers %}
+                            {%if offer.owner == request.user %}
+                                <tr class="info">
+                            {%else%}
+                                <tr>
+                            {%endif%}
+                                <td>
+                                    <a href="{%url 'detail-offer' offer.id%}">
+                                        {{ offer.title }}
+                                    </a>
+                                </td>
+                                <td>{{ offer.owner.username }}</td>
+                                <td>
+                                    {% if offer.price == 0%}
+                                    Gratis
+                                    {% else %}
+                                    {{offer.price}} €
+                                    {% endif %}
+                                </td>
+                                <td>{{ offer.category.title }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+        <div id="tabs-2">
+            {% if requests.count == 0 %}
+                <p class="text-center">Aún no se ha publicado nada</p>
+            {% else %}
+                <div id="table-recent" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Usuario</th>
+                                <th>Recompensa</th>
+                                <th>Categoría</th>
+                                <th>Fecha límite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for request in requests %}
+                            <tr>
+                                <td>{{ request.title }}</td>
+                                <td>{{ request.owner.username }}</td>
+                                <td>
+                                    {% if request.reward == 0 %}
+                                    No
+                                    {% else %}
+                                    {{request.reward}} €
+                                    {% endif %}
+                                </td>
+                                <td>{{ request.category.title }}</td>
+                                <td>
+                                    {% if request.due_date != None %}
+                                        {{request.due_date}}
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div> <!-- end Recent posts-->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Mis publicaciones activas</h3>
+            </div>
+            <div class="panel-body">
+                {% if myRequests.count == 0 and myOffers.count == 0%}
+                    <p class="text-center">Aún no se ha publicado nada</p>
+                {% else %}
+                <ul>
+                    {% for req in myRequests %}
+                    <li>
+                        [{{req.date_published}}]
+                        <a href="#">
+                            NECESITO:
+                        </a>
+                        {{req.title}}
+                    </li>
+                    {% endfor %}
+                    {% for offer in myOffers %}
+                    <li>
+                        [{{offer.date_published}}]
+                        <a href="{%url 'detail-offer' offer.id%}">
+                            OFREZCO:
+                        </a>
+                        {{offer.title}}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">En atención</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    {% if myOrders.count == 0 %}
+                        <p class="text-center">No tengo acuerdos activos</p>
+                    {% else %}
+                    <ul>
+                        {% for o in myOrders %}
+                        <li>
+                            [{{o.date_created}}]
+                            {%if o.order_type == 'O'%}
+                            <a href="{%url 'detail-offer' o.id%}">
+                                ({{o.owner.username}}) OFERTA:{{o.offer.title}}
+                                {{o.title}}
+                            </a>
+                            {%else%}
+                            <a href="{%url 'detail-offer' o.id%}">
+                                ({{o.owner.username}}) NECESITO:{{o.offer.title}}
+                                {{o.title}}
+                            {%endif%}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {%endif%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> <!-- end my topics-->
+{% endblock %}

@@ -1,0 +1,195 @@
+{% extends "auzonetweb/base.html" %}
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+{% block scripts %}
+<script src="{% static 'Chart.js/Chart.min.js' %}"></script>
+<script>
+var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+var lineChartData = {
+    labels : ["January","February","March","April","May","June","July"],
+    datasets : [
+        {
+            label: "My First dataset",
+            fillColor : "rgba(220,220,220,0.2)",
+            strokeColor : "rgba(220,220,220,1)",
+            pointColor : "rgba(220,220,220,1)",
+            pointStrokeColor : "#fff",
+            pointHighlightFill : "#fff",
+            pointHighlightStroke : "rgba(220,220,220,1)",
+            data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+        },
+        {
+            label: "My Second dataset",
+            fillColor : "rgba(151,187,205,0.2)",
+            strokeColor : "rgba(151,187,205,1)",
+            pointColor : "rgba(151,187,205,1)",
+            pointStrokeColor : "#fff",
+            pointHighlightFill : "#fff",
+            pointHighlightStroke : "rgba(151,187,205,1)",
+            data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+        }
+    ]
+
+}
+
+window.onload = function(){
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myLine = new Chart(ctx).Line(lineChartData, {
+        responsive: true
+    });
+}
+</script>
+{% endblock %}
+{% block title %}AuzoNet - {{currentUser.first_name}} {{currentUser.last_name}}{% endblock %}
+{% block content%}
+<div class="row" id="profile">
+    <img src="{%static currentUser.publicuser.avatar.url%}"  class="center-block img-circle" alt="avatar" width="250" height="250">
+    <h1 class="text-center">{{currentUser.first_name}} {{currentUser.last_name}}</h1>
+    <p class="text-center"><i>Miembro de </i></p>
+    <p class="text-center">
+    {%for community in request.user.publicuser.communities.all%}
+        <a href="{%url 'indexcommunity' community.id%}"><span class="glyphicon glyphicon-home"></span> {{community.address}}</a><br>
+    {%endfor%}
+    </p>
+</div>
+<div class="row profile-panel" id="stats">
+    <div class="col-md-10">
+        <canvas id="canvas" height="190" width="600"></canvas>
+    </div>
+    <div class="col-md-2">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Karma</th>
+                    <th>89</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Peticiones publicadas</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Peticiones atendidas</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>Ofertas publicadas</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>Ofertas recibidas</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row profile-panel" id="attending">
+    <h2>En atención</h2>
+    <table class="table table-responsive">
+        <thead>
+            <th>Título</th>
+            <th>Tipo</th>
+            <th>Usuario</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>asdasads</td>
+                <td>Oferta</td>
+                <td>asdsadsadsa</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-danger">Abandonar</button>
+                        <button type="button" class="btn btn-success">Finalizar</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>asdsadsads</td>
+                <td>Petición</td>
+                <td>asdsadsds</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-danger">Abandonar</button>
+                        <button type="button" class="btn btn-success">Finalizar</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row profile-panel" id="my-posts">
+    <h2>Mis publicaciones</h2>
+    <table class="table table-responsive">
+        <thead>
+            <th>Título</th>
+            <th>Tipo</th>
+            <th>Fecha de publicación</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>asdasads</td>
+                <td>Oferta</td>
+                <td>18/02/2016</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-warning">Editar</button>
+                        <button type="button" class="btn btn-success">Finalizar</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>asdsadsads</td>
+                <td>Petición</td>
+                <td>18/02/2016</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-warning">Editar</button>
+                        <button type="button" class="btn btn-success">Finalizar</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row profile-panel" id="my-posts">
+    <h2>Historial</h2>
+    <table class="table table-condensed table-responsive">
+        <thead>
+            <th>Título</th>
+            <th>Tipo</th>
+            <th>Fecha de publicación</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>asdasads</td>
+                <td>Oferta</td>
+                <td>18/02/2016</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-warning">Recuperar</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>asdsadsads</td>
+                <td>Petición</td>
+                <td>18/02/2016</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-warning">Recuperar</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

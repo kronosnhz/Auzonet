@@ -1,0 +1,36 @@
+#main-title {
+    font-size: 55px;
+}
+#main-subtitle {
+    font-size: 40px;
+}
+#top-card {
+    padding-top: 7em;
+    padding-bottom: 7em;
+}
+.account-buttons {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    margin-top: 3em;
+    margin-bottom: 1em;
+}
+.thin-text {
+    color: white;
+    text-shadow: 2px 2px 5px black;
+    font-family: 'Lato', sans-serif;
+    font-weight: 100;
+}
+.btn.outline {
+    background: none;
+    padding: 12px 22px;
+}
+.btn-primary.outline {
+    border: 3px solid white;
+    color: white;
+}
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+    color: white;
+    border-color: white;
+    background: rgba(0, 0, 0, 0.56);
+
+}
