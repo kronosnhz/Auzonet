@@ -19,6 +19,7 @@ ORDER_TYPES = (
 )
 STATUS = (
     ('A', 'Active'),
+    ('P', 'Pending'),
     ('F', 'Finished'),
 )
 
@@ -50,8 +51,6 @@ class Category(models.Model):
     description = models.TextField()
     def __unicode__(self):
         return self.title
-
-
 
 class Request(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -90,6 +89,8 @@ class Order(models.Model):
     offer = models.ForeignKey(Offer, blank=True, null=True, on_delete=models.CASCADE)
     request = models.ForeignKey(Request, blank=True, null=True, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
+    owner_voted = models.BooleanField(blank=True, default=False)
+    client_voted = models.BooleanField(blank=True, default=False)
     status = models.CharField(max_length=1, choices=STATUS, default='A')
     def __unicode__(self):
         return "Client: "+self.client.username+" Owner: "+self.owner.username+" Type: "+self.order_type+" Created on: "+str(self.date_created)

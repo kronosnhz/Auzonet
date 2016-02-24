@@ -17,6 +17,9 @@ import requests
 OFFER_TYPE = 'O'
 REQUEST_TYPE = 'R'
 KARMA_REWARD = 10
+STATUS_ACTIVE = 'A'
+STATUS_FINISHED = 'F'
+STATUS_PENDING = 'P'
 
 # COMMON PLACES
 @login_required
@@ -29,14 +32,14 @@ def index(request, comid=None):
         request.session['currentCommunityId'] = request.user.publicuser.communities.all()[0].id
         request.session['currentCommunityAddress'] = request.user.publicuser.communities.all()[0].address
 
-    offers = Offer.objects.filter(community=request.session['currentCommunityId']).exclude(status='F').order_by('-date_published')
-    requests = Request.objects.filter(community=request.session['currentCommunityId']).exclude(status='F').order_by('-date_published')
+    offers = Offer.objects.filter(community=request.session['currentCommunityId']).exclude(status=STATUS_FINISHED).order_by('-date_published')
+    requests = Request.objects.filter(community=request.session['currentCommunityId']).exclude(status=STATUS_FINISHED).order_by('-date_published')
 
-    myRequests = Request.objects.filter(owner=request.user).exclude(status='F').order_by('-date_published')
-    myOffers = Offer.objects.filter(owner=request.user).exclude(status='F').order_by('-date_published')
+    myRequests = Request.objects.filter(owner=request.user).exclude(status=STATUS_FINISHED).order_by('-date_published')
+    myOffers = Offer.objects.filter(owner=request.user).exclude(status=STATUS_FINISHED).order_by('-date_published')
     communityMessages = CommunityMessage.objects.filter(community=request.session['currentCommunityId']).order_by('-date_published')
 
-    myOrders = Order.objects.filter(client=request.user).exclude(status='F')
+    myOrders = Order.objects.filter(client=request.user).exclude(status=STATUS_FINISHED)
 
     if request.method == 'POST':
         # Form with filled data
@@ -75,7 +78,7 @@ def delete_post(request, postid, posttype):
     elif posttype == 'O':
         p = Offer.objects.get(id=postid)
 
-    p.status = 'F'
+    p.status = STATUS_FINISHED
     p.save()
     return redirect('index')
 
@@ -232,12 +235,15 @@ def edit_offer(request, offerid=None):
 
 @login_required
 def detail_offer(request, offerid):
+    # Obtain the offer shown
     offer = Offer.objects.get(id=offerid)
-    orders = Order.objects.filter(offer=offer).exclude(status='F')
-
+    # Get the non-finished orders related to this offer
+    orders = Order.objects.filter(offer=offer).exclude(status=STATUS_FINISHED).exclude(status=STATUS_PENDING)
+    # Check if the logged user is client of this offer and the corresponding order
     is_client = 0
     client_order = None
     for o in orders:
+        # Is the current user client of this order?
         if o.client == request.user:
             is_client = 1
             client_order = o
@@ -245,19 +251,12 @@ def detail_offer(request, offerid):
     return render(request, 'auzonetweb/detail-offer.html', {'offer': offer, 'orders': orders, 'is_client':is_client, 'client_order':client_order})
 
 @login_required
-def accept_offer(request, offerid, interestedid):
-    userOwner = request.user
-    userInterested = User.objects.get(id=interestedid)
-    offer = Offer.objects.get(id=offerid)
+def accept_offer(request, orderid):
+    order = Order.objects.get(id=orderid)
 
-    if request.user == offer.owner:
+    if request.user == order.offer.owner:
         # The logged user is the owner
-        order = Order()
-        order.order_type = OFFER_TYPE
-        order.owner = userOwner
-        order.client = userInterested
-        order.offer = offer
-        order.status = 'A'
+        order.status = STATUS_ACTIVE
         order.save()
 
         return redirect('confirmation-success')
@@ -270,9 +269,18 @@ def hire_offer(request, offerid):
     offer = Offer.objects.get(id=offerid)
     userOwner = offer.owner
     userInterested = request.user
+    # The logged user is the owner
+    order = Order()
+    order.order_type = OFFER_TYPE
+    order.owner = userOwner
+    order.client = userInterested
+    order.offer = offer
+    order.status = STATUS_PENDING
+    order.save()
+
     # Email notification
     subject = userInterested.username+" ha solicitado contratar tus servicios"
-    html_message = userInterested.username+" esta interesado en tu oferta "+offer.title+". Pulsa <a href="+reverse('accept-offer', kwargs={'offerid':offer.id, 'interestedid':userInterested.id})+">aqui</a> para aceptar su solicitud."
+    html_message = userInterested.username+" esta interesado en tu oferta "+offer.title+". Pulsa <a href="+reverse('accept-offer', kwargs={'orderid':order.id})+">aqui</a> para aceptar su solicitud."
     from_email = userInterested.email
     if subject and html_message and from_email:
         try:
@@ -287,25 +295,39 @@ def hire_offer(request, offerid):
 
 @login_required
 def finalize_order(request, orderid, feedback):
+    # Get the order
     order = Order.objects.get(id=orderid)
+    # Check wether is the owner or the client
     if order.client == request.user:
         # The client is finalizing the order
-        if feedback == 1:
+        if feedback == '1':
+            # Good feedback
             order.owner.publicuser.karma+=KARMA_REWARD
         else:
+            # Bad feedback
             order.owner.publicuser.karma-=KARMA_REWARD
-        order.status = 'F'
-        order.owner.save()
+        # Mark that the client already has voted
+        order.client_voted = True
+        # Check if the owner has voted also for finishing the order
+        if order.owner_voted:
+            order.status = STATUS_FINISHED
+        # Save the publicuser rating and the order new status
+        order.owner.publicuser.save()
         order.save()
         return redirect('index')
     elif order.owner == request.user:
-        # The server is finalizing the order
-        if feedback == 1:
+        # The owner is finalizing the order
+        if feedback == '1':
             order.client.publicuser.karma+=KARMA_REWARD
         else:
             order.client.publicuser.karma-=KARMA_REWARD
-        order.status = 'F'
-        order.owner.save()
+        # Mark that the owner already has voted
+        order.owner_voted = True
+        # Check if the client has voted also for finishing the order
+        if order.client_voted:
+            order.status = STATUS_FINISHED
+        # Save the publicuser rating and the order new status
+        order.client.publicuser.save()
         order.save()
         return redirect('index')
     else:

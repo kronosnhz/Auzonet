@@ -9,13 +9,13 @@
 {% block title %}AuzoNet - {{offer.title}}{% endblock %}
 {% block content%}
 {%if is_client == 1%}
-<!-- Modal finalize order-->
-<div class="modal fade" id="confirmEndModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal finalize order by client-->
+<div class="modal fade" id="confirmEndClientModal" tabindex="-1" role="dialog" aria-labelledby="finalizeClientModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Terminar acuerdo</h4>
+        <h4 class="modal-title" id="finalizeClientModal">Terminar acuerdo</h4>
       </div>
       <div class="modal-body">
         ¿Estás satisfecho con el servicio/producto prestado por {{offer.owner.username}}?
@@ -27,15 +27,15 @@
     </div>
   </div>
 </div>
-
 {%endif%}
+
 <!-- Modal delete-->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalTitle">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Finalizar oferta</h4>
+        <h4 class="modal-title" id="confirmDeleteModalTitle">Finalizar oferta</h4>
       </div>
       <div class="modal-body">
         ¿Seguro que quieres finalizar tu oferta? <br>
@@ -49,12 +49,12 @@
   </div>
 </div>
 <!-- Modal hiring-->
-<div class="modal fade" id="confirmHireModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="confirmHireModal" tabindex="-1" role="dialog" aria-labelledby="confirmHireModalTitle">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">¿Seguro que quieres contratar esta oferta?</h4>
+        <h4 class="modal-title" id="confirmHireModalTitle">¿Seguro que quieres contratar esta oferta?</h4>
       </div>
       <div class="modal-body">
         Se enviará un email a <b>{{offer.owner.username}}</b> para informar de que estás interesado en su oferta. Recibirás un aviso si <b>{{offer.owner.username}}</b> acepta a trabajar contigo.
@@ -84,8 +84,40 @@
                     <div class="panel-heading">Acuerdos</div>
                     <div class="panel-body">
                         {% for o in orders %}
-                            Usuario: {{o.client.username}} <br>
-                            Fecha: {{o.date_created}} <br><br>
+                        <!-- Modal finalize order by owner-->
+                        <div class="modal fade" id="confirmEndOwnerModal" tabindex="-1" role="dialog" aria-labelledby="finalizeOwnerModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="finalizeOwnerModal">Terminar acuerdo</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Estás satisfecho con el trato de {{o.client.username}}?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a class="btn btn-lg btn-success" href="{%url 'finalize-order' orderid=o.id feedback='1'%}" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> Si</a>
+                                        <a class="btn btn-lg btn-danger" href="{%url 'finalize-order' orderid=o.id feedback='0'%}" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> No</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                  <img class="media-object" src="{% static o.client.publicuser.avatar.url%}" height="64" width"64" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                            <h4 class="media-heading">{{o.client.username}}</h4>
+                            {{o.date_created}} <br>
+                            {%if o.owner_voted %}
+                                <button class="btn btn-default btn-xs btn-block" disabled>Esperando valoración de {{o.client.username}}</button>
+                            {%else%}
+                                <button data-target="#confirmEndOwnerModal" data-toggle="modal" class="btn btn-default btn-xs btn-block"><span class="glyphicon glyphicon-ok"></span> Terminar acuerdo</button>
+                            {%endif%}
+                            </div>
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -95,7 +127,11 @@
                 <button id="btn-finish" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDeleteModal">Finalizar</button>
             {%else%}
                 {%if is_client == 1%}
-                    <button id="btn-cancel" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmEndModal">Terminar acuerdo</button>
+                    {%if client_order.client_voted%}
+                        <button class="btn btn-default btn-block" disabled>Esperando valoración de {{client_order.owner.username}}</button>
+                    {%else%}
+                        <button id="btn-cancel" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmEndClientModal">Terminar acuerdo</button>
+                    {%endif%}
                 {%else%}
                     <button id="btn-hire" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmHireModal">Contratar</button>
                 {%endif%}

@@ -229,12 +229,12 @@
                         <li>
                             [{{o.date_created}}]
                             {%if o.order_type == 'O'%}
-                            <a href="{%url 'detail-offer' o.id%}">
+                            <a href="{%url 'detail-offer' o.offer.id%}">
                                 ({{o.owner.username}}) OFERTA:{{o.offer.title}}
                                 {{o.title}}
                             </a>
                             {%else%}
-                            <a href="{%url 'detail-offer' o.id%}">
+                            <a href="{%url 'detail-offer' o.request.id%}">
                                 ({{o.owner.username}}) NECESITO:{{o.offer.title}}
                                 {{o.title}}
                             {%endif%}
