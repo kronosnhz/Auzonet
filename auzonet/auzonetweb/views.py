@@ -1,19 +1,20 @@
-from django.shortcuts import render, redirect
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
+import requests
 from django.contrib.auth import authenticate, login, logout
-from .models import Community, User, PublicUser, Request, Offer, Category, CommunityMessage, Order
-from .forms import LoginForm, RegisterForm, NewCommunityModelForm, NewRequestModelForm, JoinCommunityForm, NewOfferModelForm, NewCommunityMsgModelForm
-from django.forms import modelformset_factory
-from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail, BadHeaderError
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-import requests
+from django.shortcuts import render, redirect
 
-## Here is where the POST and GET request are processed
-## Auth API docs https://docs.djangoproject.com/en/1.9/topics/auth/default/
-## Customizing the authentication on Django https://docs.djangoproject.com/en/1.9/topics/auth/customizing/
+from .forms import LoginForm, RegisterForm, NewCommunityModelForm, NewRequestModelForm, JoinCommunityForm, \
+    NewOfferModelForm, NewCommunityMsgModelForm
+from .models import Community, User, PublicUser, Request, Offer, CommunityMessage, Order
 
+"""
+Here is where the POST and GET request are processed
+Auth API docs https://docs.djangoproject.com/en/1.9/topics/auth/default/
+Customizing the authentication on Django https://docs.djangoproject.com/en/1.9/topics/auth/customizing/
+"""
 OFFER_TYPE = 'O'
 REQUEST_TYPE = 'R'
 KARMA_REWARD = 10
@@ -21,23 +22,26 @@ STATUS_ACTIVE = 'A'
 STATUS_FINISHED = 'F'
 STATUS_PENDING = 'P'
 
+
 # COMMON PLACES
 @login_required
 def index(request, comid=None):
-
-    if comid != None:
+    if comid is not None:
         request.session['currentCommunityId'] = comid
         request.session['currentCommunityAddress'] = Community.objects.get(id=comid).address
     else:
         request.session['currentCommunityId'] = request.user.publicuser.communities.all()[0].id
         request.session['currentCommunityAddress'] = request.user.publicuser.communities.all()[0].address
 
-    offers = Offer.objects.filter(community=request.session['currentCommunityId']).exclude(status=STATUS_FINISHED).order_by('-date_published')
-    requests = Request.objects.filter(community=request.session['currentCommunityId']).exclude(status=STATUS_FINISHED).order_by('-date_published')
+    offers = Offer.objects.filter(community=request.session['currentCommunityId']).exclude(
+        status=STATUS_FINISHED).order_by('-date_published')
+    requests = Request.objects.filter(community=request.session['currentCommunityId']).exclude(
+        status=STATUS_FINISHED).order_by('-date_published')
 
     myRequests = Request.objects.filter(owner=request.user).exclude(status=STATUS_FINISHED).order_by('-date_published')
     myOffers = Offer.objects.filter(owner=request.user).exclude(status=STATUS_FINISHED).order_by('-date_published')
-    communityMessages = CommunityMessage.objects.filter(community=request.session['currentCommunityId']).order_by('-date_published')
+    communityMessages = CommunityMessage.objects.filter(community=request.session['currentCommunityId']).order_by(
+        '-date_published')
 
     myOrders = Order.objects.filter(client=request.user).exclude(status=STATUS_FINISHED)
 
@@ -54,22 +58,24 @@ def index(request, comid=None):
         messageModelForm = NewCommunityMsgModelForm()
 
     return render(request, 'auzonetweb/index.html', {
-    'offers': offers,
-    'requests': requests,
-    'myRequests': myRequests,
-    'myOrders': myOrders,
-    'myOffers':myOffers,
-    'communityMessages': communityMessages,
-    'messageModelForm': messageModelForm
+        'offers': offers,
+        'requests': requests,
+        'myRequests': myRequests,
+        'myOrders': myOrders,
+        'myOffers': myOffers,
+        'communityMessages': communityMessages,
+        'messageModelForm': messageModelForm
     })
+
 
 @login_required
 def user_profile(request, userid=None):
     if userid:
         currentUser = User.objects.get(id=userid)
-        return render(request, 'auzonetweb/user-profile.html', {'currentUser':currentUser})
+        return render(request, 'auzonetweb/user-profile.html', {'currentUser': currentUser})
     else:
-        return render(request, 'auzonetweb/user-profile.html', {'currentUser':request.user})
+        return render(request, 'auzonetweb/user-profile.html', {'currentUser': request.user})
+
 
 @login_required
 def delete_post(request, postid, posttype):
@@ -82,6 +88,7 @@ def delete_post(request, postid, posttype):
     p.save()
     return redirect('index')
 
+
 @login_required
 def delete_message(request, messageid):
     message = CommunityMessage.objects.get(id=messageid)
@@ -90,13 +97,14 @@ def delete_message(request, messageid):
 
     return redirect('index')
 
+
 @login_required
 def confirmation_success(request):
     return render(request, 'auzonetweb/confirmation-success.html')
 
+
 @login_required
 def wizard(request):
-
     communities = Community.objects.all()
 
     if request.method == 'POST':
@@ -128,7 +136,10 @@ def wizard(request):
         newCommunityModelForm = NewCommunityModelForm()
         selectCommunityForm = JoinCommunityForm()
 
-    return render(request, 'auzonetweb/wizard.html', {'newCommunityForm':newCommunityModelForm,'selectCommunityForm': selectCommunityForm, 'communities': communities})
+    return render(request, 'auzonetweb/wizard.html',
+                  {'newCommunityForm': newCommunityModelForm, 'selectCommunityForm': selectCommunityForm,
+                   'communities': communities})
+
 
 def welcome(request):
     if request.user.is_authenticated():
@@ -149,7 +160,8 @@ def welcome(request):
                         if user.is_active:
                             login(request, user)
                             request.session['currentCommunityId'] = request.user.publicuser.communities.all()[0].id
-                            request.session['currentCommunityAddress'] = request.user.publicuser.communities.all()[0].address
+                            request.session['currentCommunityAddress'] = request.user.publicuser.communities.all()[
+                                0].address
                             # Redirect to a success page.
                             return redirect('indexcommunity', comid=request.user.publicuser.communities.all()[0].id)
                         else:
@@ -194,17 +206,20 @@ def welcome(request):
             loginForm = LoginForm()
             registerForm = RegisterForm()
 
-        return render(request, 'auzonetweb/welcome.html', {'loginForm': loginForm, 'registerForm':registerForm})
+        return render(request, 'auzonetweb/welcome.html', {'loginForm': loginForm, 'registerForm': registerForm})
+
 
 def bootcamp(request):
     datasets = requests.get('https://dev.welive.eu/dev/api/ods/dataset/all', verify=False)
     datasetsjson = datasets.json()
     return render(request, 'auzonetweb/bootcamp.html')
 
+
 def logout_view(request):
     logout(request)
     # Redirect to a success page.
     return redirect('welcome')
+
 
 # OFFERS
 @login_required
@@ -213,7 +228,7 @@ def edit_offer(request, offerid=None):
         # Form with filled data
         if offerid:
             currentOffer = Offer.objects.get(id=offerid)
-            offerForm = NewOfferModelForm(request.POST,request.FILES, instance=currentOffer)
+            offerForm = NewOfferModelForm(request.POST, request.FILES, instance=currentOffer)
         else:
             offerForm = NewOfferModelForm(request.POST, request.FILES)
 
@@ -223,7 +238,7 @@ def edit_offer(request, offerid=None):
         newOffer.save()
 
         return redirect('index')
-    elif offerid!=None:
+    elif offerid != None:
         # Form for edition
         ap = Offer.objects.get(id=offerid)
         offerForm = NewOfferModelForm(instance=ap)
@@ -232,6 +247,7 @@ def edit_offer(request, offerid=None):
         offerForm = NewOfferModelForm()
 
     return render(request, 'auzonetweb/offer.html', {'offerForm': offerForm})
+
 
 @login_required
 def detail_offer(request, offerid):
@@ -248,7 +264,9 @@ def detail_offer(request, offerid):
             is_client = 1
             client_order = o
 
-    return render(request, 'auzonetweb/detail-offer.html', {'offer': offer, 'orders': orders, 'is_client':is_client, 'client_order':client_order})
+    return render(request, 'auzonetweb/detail-offer.html',
+                  {'offer': offer, 'orders': orders, 'is_client': is_client, 'client_order': client_order})
+
 
 @login_required
 def accept_offer(request, orderid):
@@ -263,6 +281,7 @@ def accept_offer(request, orderid):
     else:
         # The logged user is not the owner
         return HttpResponse('You have to be the owner of the offer for accept.')
+
 
 @login_required
 def hire_offer(request, offerid):
@@ -279,8 +298,9 @@ def hire_offer(request, offerid):
     order.save()
 
     # Email notification
-    subject = userInterested.username+" ha solicitado contratar tus servicios"
-    html_message = userInterested.username+" esta interesado en tu oferta "+offer.title+". Pulsa <a href="+reverse('accept-offer', kwargs={'orderid':order.id})+">aqui</a> para aceptar su solicitud."
+    subject = userInterested.username + " ha solicitado contratar tus servicios"
+    html_message = userInterested.username + " esta interesado en tu oferta " + offer.title + ". Pulsa <a href=" + reverse(
+        'accept-offer', kwargs={'orderid': order.id}) + ">aqui</a> para aceptar su solicitud."
     from_email = userInterested.email
     if subject and html_message and from_email:
         try:
@@ -293,6 +313,7 @@ def hire_offer(request, offerid):
         # to get proper validation errors.
         return HttpResponse('Make sure all fields are entered and valid.')
 
+
 @login_required
 def finalize_order(request, orderid, feedback):
     # Get the order
@@ -302,10 +323,10 @@ def finalize_order(request, orderid, feedback):
         # The client is finalizing the order
         if feedback == '1':
             # Good feedback
-            order.owner.publicuser.karma+=KARMA_REWARD
+            order.owner.publicuser.karma += KARMA_REWARD
         else:
             # Bad feedback
-            order.owner.publicuser.karma-=KARMA_REWARD
+            order.owner.publicuser.karma -= KARMA_REWARD
         # Mark that the client already has voted
         order.client_voted = True
         # Check if the owner has voted also for finishing the order
@@ -318,9 +339,9 @@ def finalize_order(request, orderid, feedback):
     elif order.owner == request.user:
         # The owner is finalizing the order
         if feedback == '1':
-            order.client.publicuser.karma+=KARMA_REWARD
+            order.client.publicuser.karma += KARMA_REWARD
         else:
-            order.client.publicuser.karma-=KARMA_REWARD
+            order.client.publicuser.karma -= KARMA_REWARD
         # Mark that the owner already has voted
         order.owner_voted = True
         # Check if the client has voted also for finishing the order
@@ -332,6 +353,7 @@ def finalize_order(request, orderid, feedback):
         return redirect('index')
     else:
         return HttpResponse('You must be a part of the order for making changes')
+
 
 # REQUESTS
 @login_required
@@ -350,7 +372,7 @@ def edit_request(request, requestid=None):
         newRequest.save()
 
         return redirect('index')
-    elif requestid!=None:
+    elif requestid != None:
         # Form for edition
         ap = Request.objects.get(id=requestid)
         requestForm = NewRequestModelForm(instance=ap)

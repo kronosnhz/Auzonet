@@ -1,12 +1,10 @@
 from __future__ import unicode_literals
 
-from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
-
+from django.db import models
 
 GENDERS = (
-    ('M','Male'),
+    ('M', 'Male'),
     ('F', 'Female')
 )
 ACCESS_TYPE = (
@@ -29,28 +27,35 @@ SCOPE = (
     ('PRO', 'Province'),
 )
 MESSAGE_TYPES = (
-    ('I','Info'),
+    ('I', 'Info'),
     ('W', 'Warning'),
 )
+
 
 class Community(models.Model):
     class Meta:
         verbose_name_plural = "Communities"
+
     access_type = models.CharField(max_length=2, choices=ACCESS_TYPE, default='PU')
     address = models.CharField(max_length=250)
     coordinates = models.CharField(max_length=250)
     password = models.CharField(blank=True, max_length=250)
     welcome_message = models.TextField()
+
     def __unicode__(self):
         return self.address
+
 
 class Category(models.Model):
     class Meta:
         verbose_name_plural = "Categories"
+
     title = models.CharField(max_length=250)
     description = models.TextField()
+
     def __unicode__(self):
         return self.title
+
 
 class Request(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -64,8 +69,9 @@ class Request(models.Model):
     status = models.CharField(max_length=1, choices=STATUS, default='A')
     reward = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=10, default=0)
     image = models.ImageField(blank=True, upload_to='uploads/requests/%Y/%m/%d/')
+
     def __unicode__(self):
-        return (self.title + " created on "+str(self.date_published))
+        return self.title + " created on " + str(self.date_published)
 
 
 class Offer(models.Model):
@@ -79,8 +85,10 @@ class Offer(models.Model):
     status = models.CharField(max_length=1, choices=STATUS, default='A')
     price = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=10, default=0)
     image = models.ImageField(blank=True, upload_to='uploads/offers/%Y/%m/%d/')
+
     def __unicode__(self):
-        return (self.title + " created on "+str(self.date_published))
+        return self.title + " created on " + str(self.date_published)
+
 
 class Order(models.Model):
     order_type = models.CharField(max_length=1, choices=ORDER_TYPES)
@@ -92,8 +100,11 @@ class Order(models.Model):
     owner_voted = models.BooleanField(blank=True, default=False)
     client_voted = models.BooleanField(blank=True, default=False)
     status = models.CharField(max_length=1, choices=STATUS, default='A')
+
     def __unicode__(self):
-        return "Client: "+self.client.username+" Owner: "+self.owner.username+" Type: "+self.order_type+" Created on: "+str(self.date_created)
+        return "Client: " + self.client.username + " Owner: " + self.owner.username + " Type: " + self.order_type + " Created on: " + str(
+            self.date_created)
+
 
 # fist_name, last_name, email, password belongs to superclass User
 class PublicUser(models.Model):
@@ -103,6 +114,7 @@ class PublicUser(models.Model):
     gender = models.CharField(max_length=1, choices=GENDERS, default='M')
     karma = models.IntegerField(default=0)
     avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m/%d/')
+
     def __unicode__(self):
         return self.user.username
 
@@ -146,11 +158,13 @@ class PublicUser(models.Model):
         userAvatar.save(self.avatar.path)
         """
 
+
 class CommunityMessage(models.Model):
     community = models.ForeignKey(Community, on_delete=models.CASCADE)
     message_type = models.CharField(max_length=1, choices=MESSAGE_TYPES, default='I')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posted_by")
     date_published = models.DateTimeField(auto_now_add=True)
     message_text = models.TextField()
+
     def __unicode__(self):
-        return (self.message_type + " created on "+str(self.date_published))
+        return self.message_type + " created on " + str(self.date_published)
