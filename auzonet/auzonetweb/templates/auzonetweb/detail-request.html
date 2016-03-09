@@ -1,0 +1,215 @@
+{% extends "auzonetweb/base.html" %}
+{% load bootstrap3 %}
+{% load static from staticfiles %}
+{% block scripts %}
+    <script>
+    </script>
+{% endblock %}
+
+{% block title %}AuzoNet - {{ auzonetrequest.title }}{% endblock %}
+{% block content %}
+    {% if is_client == 1 %}
+        <!-- Modal finalize order by client-->
+        <div class="modal fade" id="confirmEndClientModal" tabindex="-1" role="dialog"
+             aria-labelledby="finalizeClientModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="finalizeClientModal">Terminar acuerdo</h4>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás satisfecho con el trato de {{ auzonetrequest.owner.username }}?
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-lg btn-success"
+                           href="{% url 'finalize-order' orderid=client_order.id feedback='1' %}" role="button"><span
+                                class="glyphicon glyphicon-thumbs-up"></span> Si</a>
+                        <a class="btn btn-lg btn-danger"
+                           href="{% url 'finalize-order' orderid=client_order.id feedback='0' %}" role="button"><span
+                                class="glyphicon glyphicon-thumbs-down"></span> No</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Modal delete-->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog"
+         aria-labelledby="confirmDeleteModalTitle">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="confirmDeleteModalTitle">Cancelar petición</h4>
+                </div>
+                <div class="modal-body">
+                    ¿Seguro que quieres cancelar tu petición? <br>
+                    Recuerda que siempre puedes ponerla de nuevo a la vista desde tu panel de usuario.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No hacer cambios</button>
+                    <a class="btn btn-danger" href="{% url 'delete-post' postid=auzonetrequest.id posttype='R' %}"
+                       role="button">Cancelar petición</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal hiring-->
+    <div class="modal fade" id="confirmHireModal" tabindex="-1" role="dialog" aria-labelledby="confirmHireModalTitle">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="confirmHireModalTitle">¿Seguro que atender esta petición?</h4>
+                </div>
+                <div class="modal-body">
+                    Se enviará un email a <b>{{ auzonetrequest.owner.username }}</b> para informar de que quieres
+                    atender su petición. Recibirás un aviso si <b>{{ auzonetrequest.owner.username }}</b> lo acepta.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="{% url 'hire-request' requestid=auzonetrequest.id %}"
+                       role="button">Atender</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead text-center">
+                    {% if  auzonetrequest.owner.publicuser.avatar %}
+                        {% static auzonetrequest.owner.publicuser.avatar.url as avatar %}
+                        <img src="{{ avatar }}" height="150" width="150" class="thumbnail center-block"
+                             alt="owner_avatar"/>
+                    {% endif %}
+                    {{ auzonetrequest.owner.first_name }} {{ auzonetrequest.owner.last_name }}
+                    ({{ auzonetrequest.owner }})
+                    <br>
+                    Karma: {{ auzonetrequest.owner.publicuser.karma }}
+                </p>
+                {% if auzonetrequest.owner.id == request.user.id %}
+                    {% if orders.count > 0 %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Acuerdos</div>
+                            <div class="panel-body">
+                                {% for o in orders %}
+                                    <!-- Modal finalize order by owner-->
+                                    <div class="modal fade" id="confirmEndOwnerModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="finalizeOwnerModal">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <h4 class="modal-title" id="finalizeOwnerModal">Terminar
+                                                        acuerdo</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Estás satisfecho con el trato de {{ o.client.username }}?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a class="btn btn-lg btn-success"
+                                                       href="{% url 'finalize-order' orderid=o.id feedback='1' %}"
+                                                       role="button"><span class="glyphicon glyphicon-thumbs-up"></span>
+                                                        Si</a>
+                                                    <a class="btn btn-lg btn-danger"
+                                                       href="{% url 'finalize-order' orderid=o.id feedback='0' %}"
+                                                       role="button"><span
+                                                            class="glyphicon glyphicon-thumbs-down"></span> No</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img class="media-object"
+                                                     src="{% static o.client.publicuser.avatar.url %}" height="64"
+                                                     width="64" alt="...">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{ o.client.username }}</h4>
+                                            {{ o.date_created }} <br>
+                                            {% if o.owner_voted %}
+                                                <button class="btn btn-default btn-xs btn-block" disabled>Esperando
+                                                    valoración de {{ o.client.username }}</button>
+                                            {% else %}
+                                                <button data-target="#confirmEndOwnerModal" data-toggle="modal"
+                                                        class="btn btn-default btn-xs btn-block"><span
+                                                        class="glyphicon glyphicon-ok"></span> Terminar acuerdo
+                                                </button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    {% endif %}
+                    <a class="btn btn-warning btn-block" href="{% url 'edit-request' auzonetrequest.id %}"
+                       role="button">Editar</a>
+                    <button id="btn-finish" class="btn btn-danger btn-block" data-toggle="modal"
+                            data-target="#confirmDeleteModal">Cancelar
+                    </button>
+                {% else %}
+                    {% if is_client == 1 %}
+                        {% if client_order.client_voted %}
+                            <button class="btn btn-default btn-block" disabled>Esperando valoración
+                                de {{ client_order.owner.username }}</button>
+                        {% else %}
+                            <button id="btn-cancel" class="btn btn-danger btn-block" data-toggle="modal"
+                                    data-target="#confirmEndClientModal">Terminar acuerdo
+                            </button>
+                        {% endif %}
+                    {% else %}
+                        <button id="btn-hire" class="btn btn-success btn-block" data-toggle="modal"
+                                data-target="#confirmHireModal">Atender petición
+                        </button>
+                    {% endif %}
+                {% endif %}
+
+                <a class="btn btn-default btn-block" href="{% url 'index' %}" role="button">Volver</a>
+            </div>
+
+            <div class="col-md-9">
+                <div class="thumbnail">
+                    <div class="caption-full">
+                        <h4 class="pull-right">
+                            {% if auzonetrequest.reward == 0 %}
+                                Gratis
+                            {% else %}
+                                Precio: {{ auzonetrequest.reward }} €
+                            {% endif %}
+                        </h4>
+                        <h4><a href="#">{{ auzonetrequest.title }} antes del {{ auzonetrequest.due_date }}</a>
+                        </h4>
+                        <p>{{ auzonetrequest.detail }}</p>
+                    </div>
+                    {% if auzonetrequest.image %}
+                        {% static auzonetrequest.image.url as photo %}
+                        <img src="{{ photo }}" height="800" width="300" class="img-resposive" alt="request_photo"/>
+                    {% else %}
+                        <img class="img-responsive" src="http://placehold.it/800x300" alt="" height="300" width="800">
+                    {% endif %}
+                </div>
+                {% if auzonetrequest.owner.id != request.user.id %}
+                    <div class="well">
+                        <div class="text-right">
+                            <button id="btn-hire" class="btn btn-success " data-toggle="modal"
+                                    data-target="#confirmHireModal">Atender petición
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

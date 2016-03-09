@@ -152,21 +152,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for request in requests %}
-                            <tr>
-                                <td>{{ request.title }}</td>
-                                <td>{{ request.owner.username }}</td>
+                        {% for r in requests %}
+                            {% if r.owner == request.user %}
+                                <tr class="info">
+                                    {% else %}
+                                <tr>
+                            {% endif %}
                                 <td>
-                                    {% if request.reward == 0 %}
+                                    <a href="{% url 'detail-request' r.id %}">
+                                        {{ r.title }}
+                                    </a>
+                                </td>
+                        <td>{{ r.owner.username }}</td>
+                        <td>
+                            {% if r.reward == 0 %}
                                     No
                                     {% else %}
-                                    {{request.reward}} €
+                                {{ r.reward }} €
                                     {% endif %}
                                 </td>
-                                <td>{{ request.category.title }}</td>
+                        <td>{{ r.category.title }}</td>
                                 <td>
-                                    {% if request.due_date != None %}
-                                        {{request.due_date}}
+                                    {% if r.due_date != None %}
+                                        {{ r.due_date }}
                                     {% else %}
                                         No
                                     {% endif %}
@@ -194,7 +202,7 @@
                     {% for req in myRequests %}
                     <li>
                         [{{req.date_published}}]
-                        <a href="#">
+                        <a href="{% url 'detail-request' req.id %}">
                             NECESITO:
                         </a>
                         {{req.title}}
@@ -234,9 +242,10 @@
                                 {{o.title}}
                             </a>
                             {%else%}
-                            <a href="{%url 'detail-offer' o.request.id%}">
-                                ({{o.owner.username}}) NECESITO:{{o.offer.title}}
+                                <a href="{% url 'detail-request' o.auzonetrequest.id %}">
+                                    ({{ o.owner.username }}) NECESITO:{{ o.auzonetrequest.title }}
                                 {{o.title}}
+                                </a>
                             {%endif%}
                         </li>
                         {% endfor %}

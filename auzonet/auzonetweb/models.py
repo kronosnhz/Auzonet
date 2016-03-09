@@ -95,7 +95,7 @@ class Order(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="server")
     client = models.ForeignKey(User, on_delete=models.CASCADE, related_name="client")
     offer = models.ForeignKey(Offer, blank=True, null=True, on_delete=models.CASCADE)
-    request = models.ForeignKey(Request, blank=True, null=True, on_delete=models.CASCADE)
+    auzonetrequest = models.ForeignKey(Request, blank=True, null=True, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     owner_voted = models.BooleanField(blank=True, default=False)
     client_voted = models.BooleanField(blank=True, default=False)

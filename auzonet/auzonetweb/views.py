@@ -81,10 +81,19 @@ def user_profile(request, userid=None):
 def delete_post(request, postid, posttype):
     if posttype == 'R':
         p = Request.objects.get(id=postid)
+        orders = Order.objects.filter(auzonetrequest=p)
+        for o in orders:
+            o.status = STATUS_FINISHED
+            o.save()
     elif posttype == 'O':
         p = Offer.objects.get(id=postid)
+        orders = Order.objects.filter(offer=p)
+        for o in orders:
+            o.status = STATUS_FINISHED
+            o.save()
 
     p.status = STATUS_FINISHED
+
     p.save()
     return redirect('index')
 
@@ -102,6 +111,46 @@ def delete_message(request, messageid):
 def confirmation_success(request):
     return render(request, 'auzonetweb/confirmation-success.html')
 
+
+@login_required
+def finalize_order(request, orderid, feedback):
+    # Get the order
+    order = Order.objects.get(id=orderid)
+    # Check wether is the owner or the client
+    if order.client == request.user:
+        # The client is finalizing the order
+        if feedback == '1':
+            # Good feedback
+            order.owner.publicuser.karma += KARMA_REWARD
+        else:
+            # Bad feedback
+            order.owner.publicuser.karma -= KARMA_REWARD
+        # Mark that the client already has voted
+        order.client_voted = True
+        # Check if the owner has voted also for finishing the order
+        if order.owner_voted:
+            order.status = STATUS_FINISHED
+        # Save the publicuser rating and the order new status
+        order.owner.publicuser.save()
+        order.save()
+        return redirect('index')
+    elif order.owner == request.user:
+        # The owner is finalizing the order
+        if feedback == '1':
+            order.client.publicuser.karma += KARMA_REWARD
+        else:
+            order.client.publicuser.karma -= KARMA_REWARD
+        # Mark that the owner already has voted
+        order.owner_voted = True
+        # Check if the client has voted also for finishing the order
+        if order.client_voted:
+            order.status = STATUS_FINISHED
+        # Save the publicuser rating and the order new status
+        order.client.publicuser.save()
+        order.save()
+        return redirect('index')
+    else:
+        return HttpResponse('You must be a part of the order for making changes')
 
 @login_required
 def wizard(request):
@@ -313,48 +362,6 @@ def hire_offer(request, offerid):
         # to get proper validation errors.
         return HttpResponse('Make sure all fields are entered and valid.')
 
-
-@login_required
-def finalize_order(request, orderid, feedback):
-    # Get the order
-    order = Order.objects.get(id=orderid)
-    # Check wether is the owner or the client
-    if order.client == request.user:
-        # The client is finalizing the order
-        if feedback == '1':
-            # Good feedback
-            order.owner.publicuser.karma += KARMA_REWARD
-        else:
-            # Bad feedback
-            order.owner.publicuser.karma -= KARMA_REWARD
-        # Mark that the client already has voted
-        order.client_voted = True
-        # Check if the owner has voted also for finishing the order
-        if order.owner_voted:
-            order.status = STATUS_FINISHED
-        # Save the publicuser rating and the order new status
-        order.owner.publicuser.save()
-        order.save()
-        return redirect('index')
-    elif order.owner == request.user:
-        # The owner is finalizing the order
-        if feedback == '1':
-            order.client.publicuser.karma += KARMA_REWARD
-        else:
-            order.client.publicuser.karma -= KARMA_REWARD
-        # Mark that the owner already has voted
-        order.owner_voted = True
-        # Check if the client has voted also for finishing the order
-        if order.client_voted:
-            order.status = STATUS_FINISHED
-        # Save the publicuser rating and the order new status
-        order.client.publicuser.save()
-        order.save()
-        return redirect('index')
-    else:
-        return HttpResponse('You must be a part of the order for making changes')
-
-
 # REQUESTS
 @login_required
 def edit_request(request, requestid=None):
@@ -382,5 +389,71 @@ def edit_request(request, requestid=None):
 
     return render(request, 'auzonetweb/request.html', {'requestForm': requestForm})
 
+
+@login_required
+def detail_request(request, requestid):
+    # Obtain the request shown
+    auzonetrequest = Request.objects.get(id=requestid)
+    # Get the non-finished orders related to this request
+    orders = Order.objects.filter(auzonetrequest=auzonetrequest).exclude(status=STATUS_FINISHED).exclude(
+        status=STATUS_PENDING)
+    # Check if the logged user is client of this offer and the corresponding order
+    is_client = 0
+    client_order = None
+    for o in orders:
+        # Is the current user client of this order?
+        if o.client == request.user:
+            is_client = 1
+            client_order = o
+
+    return render(request, 'auzonetweb/detail-request.html',
+                  {'auzonetrequest': auzonetrequest, 'requests': requests, 'is_client': is_client,
+                   'client_order': client_order})
+
+
+@login_required
+def accept_request(request, orderid):
+    order = Order.objects.get(id=orderid)
+
+    if request.user == order.auzonetrequest.owner:
+        # The logged user is the owner
+        order.status = STATUS_ACTIVE
+        order.save()
+
+        return redirect('confirmation-success')
+    else:
+        # The logged user is not the owner
+        return HttpResponse('You have to be the owner of the offer for accept.')
+
+
+@login_required
+def hire_request(request, requestid):
+    auzonetrequest = Request.objects.get(id=requestid)
+    userOwner = auzonetrequest.owner
+    userInterested = request.user
+    # The logged user is the owner
+    order = Order()
+    order.order_type = REQUEST_TYPE
+    order.owner = userOwner
+    order.client = userInterested
+    order.auzonetrequest = auzonetrequest
+    order.status = STATUS_PENDING
+    order.save()
+
+    # Email notification
+    subject = userInterested.username + " quiere atender tu peticion"
+    html_message = userInterested.username + " esta interesado en atender tu peticion " + auzonetrequest.title + ". Pulsa <a href=" + reverse(
+        'accept-request', kwargs={'orderid': order.id}) + ">aqui</a> para aceptar su ofrecimiento."
+    from_email = userInterested.email
+    if subject and html_message and from_email:
+        try:
+            send_mail(subject, html_message, from_email, [auzonetrequest.owner.email])
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+        return redirect('index')
+    else:
+        # In reality we'd use a form class
+        # to get proper validation errors.
+        return HttpResponse('Make sure all fields are entered and valid.')
 # REST API
 # Under construction...

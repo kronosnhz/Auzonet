@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="744823685">
-    <data-source source="LOCAL" name="AuzonetDB" uuid="d1836a19-7e45-4b28-8830-20bb6b8a29ef">
+  <component name="DataSourceManagerImpl" format="xml" hash="1757466010">
+    <data-source source="LOCAL" name="Django default" uuid="5de2bc6a-e70e-4e31-ab33-e922daa57485">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
