@@ -1,0 +1,262 @@
+PWD /Users/aitor/Workspaces/Auzonet (PFG)/Memoria
+INPUT /usr/local/texlive/2015/texmf.cnf
+INPUT /usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2015/texmf-var/web2c/xetex/xelatex.fmt
+INPUT BrazaolaVicario_Aitor_PFG.tex
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.log
+INPUT DeustoFDP.cls
+INPUT DeustoFDP.cls
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/book.cls
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/book.cls
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/bk10.clo
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/bk10.clo
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/babel/babel.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/babel/babel.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/babel-spanish/spanish.ldf
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/babel-spanish/spanish.ldf
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/babel/babel.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/babel/xebabel.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/csquotes/csquotes.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/csquotes/csquotes.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/csquotes/csquotes.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/csquotes/csquotes.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/csquotes/csquotes.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/csquotes/csquotes.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex2.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex2.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/logreq/logreq.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/logreq/logreq.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/logreq/logreq.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/logreq/logreq.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/blx-dm.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/blx-dm.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/blx-compat.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/blx-compat.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/geometry/geometry.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/geometry/geometry.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/setspace/setspace.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/setspace/setspace.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/enumitem/enumitem.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/enumitem/enumitem.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/l3kernel/expl3.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/l3kernel/expl3.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/unicode-data/UnicodeData.txt
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/unicode-data/CaseFolding.txt
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/unicode-data/SpecialCasing.txt
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/tuenc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/fontenc.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/fontenc.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1enc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1enc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmr.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmr.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/xelatex/xunicode/xunicode.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/xelatex/xunicode/xunicode.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tipa/t3enc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmss.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmss.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/trig.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/trig.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/graphics.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/graphics.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/xelatex/xetex-def/xetex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/xelatex/xetex-def/xetex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fontspec/fontspec.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/booktabs/booktabs.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/booktabs/booktabs.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/minted/minted.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/minted/minted.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/float/float.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/float/float.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/catchfile.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/catchfile.sty
+INPUT /dev/null
+INPUT BrazaolaVicario_Aitor_PFG.w18
+INPUT BrazaolaVicario_Aitor_PFG.w18
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/xstring/xstring.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/xstring/xstring.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/xstring/xstring.tex
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/lineno/lineno.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/lineno/lineno.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmtt.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/euenc/eu1lmtt.fd
+INPUT _minted-BrazaolaVicario_Aitor_PFG/default.pygstyle
+INPUT _minted-BrazaolaVicario_Aitor_PFG/default.pygstyle
+INPUT _minted-BrazaolaVicario_Aitor_PFG/default.pygstyle
+INPUT _minted-BrazaolaVicario_Aitor_PFG/default.pygstyle
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/titlesec/titlesec.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/titlesec/titlesec.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/titlesec/ttlkeys.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/titlesec/ttlkeys.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tocloft/tocloft.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tocloft/tocloft.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hyperref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hyperref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/auxhook.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/auxhook.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/pd1enc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/pd1enc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hxetex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hxetex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/puenc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/puenc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/stringenc.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/stringenc.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/microtype.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/microtype.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/microtype-xetex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/microtype-xetex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/microtype.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/microtype.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/microtype.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/flafter.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/flafter.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hologo.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hologo.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.aux
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.aux
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.aux
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tipa/t3cmr.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tipa/t3cmr.fd
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.bcf
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.bbl
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.bbl
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.bbl
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
+INPUT _minted-BrazaolaVicario_Aitor_PFG/default-pyg-prefix.pygstyle
+INPUT _minted-BrazaolaVicario_Aitor_PFG/default-pyg-prefix.pygstyle
+INPUT _minted-BrazaolaVicario_Aitor_PFG/default-pyg-prefix.pygstyle
+INPUT _minted-BrazaolaVicario_Aitor_PFG/default-pyg-prefix.pygstyle
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.out
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.out
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.out
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.out
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.out
+INPUT fig/portada.pdf
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.toc
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.toc
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.toc
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lof
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lof
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lof
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lot
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lot
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lot
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lol
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lol
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lol
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
+INPUT fig/ud.pdf
+INPUT fig/ud.pdf
+INPUT fig/dt.pdf
+INPUT fig/ESIDE.pdf
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.pyg
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.mintedcmd
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.pyg
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.mintedcmd
+INPUT normativa.tex
+INPUT normativa.tex
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.mintedcmd
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.pyg
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.aux
+INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.run.xml
+OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.run.xml

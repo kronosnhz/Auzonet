@@ -1,0 +1,4 @@
+      # Returns $\sum_{i=1}^{n}i$
+      def sum_from_one_to(n):
+        r = range(1, n + 1)
+        return sum(r)

@@ -1,0 +1,1 @@
+pygmentize -l python -f latex -P commandprefix=PYG -F tokenmerge -P mathescape=True -F gobble:n=6 -o "BrazaolaVicario_Aitor_PFG.out.pyg" "BrazaolaVicario_Aitor_PFG.pyg" 
