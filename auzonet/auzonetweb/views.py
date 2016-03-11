@@ -502,22 +502,5 @@ def handler500(request):
     response.status_code = 500
     return response
 
-# EMAIL TEMPLATES
-def email_hire(request):
-    subject = "I am an HTML email"
-    to = ['buddy@buddylindsey.com']
-    from_email = 'test@example.com'
-
-    ctx = {
-        'user': 'buddy',
-        'purchase': 'Books'
-    }
-
-    message = get_template('main/email/email.html').render(Context(ctx))
-    msg = EmailMessage(subject, message, to=to, from_email=from_email)
-    msg.content_subtype = 'html'
-    msg.send()
-
-    return HttpResponse('email_two')
 # REST API
 # Under construction...
