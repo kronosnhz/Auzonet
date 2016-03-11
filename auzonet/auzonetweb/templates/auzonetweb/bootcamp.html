@@ -42,13 +42,17 @@
     Buena suerte! Y que la fuerza esté contigo!
 </div>
 <div>
-    {% if jsondata%}
+    {% if datasetsjson%}
     <div id="tabs">
         <ul>
             <li><a href="#tabs-1">All datasets</a></li>
+            <li><a href="#tabs-2">Portales</a></li>
         </ul>
         <div id="tabs-1">
-            <p><pre>{{jsondata}}</pre></p>
+            <p><pre>{{datasetsjson}}</pre></p>
+        </div>
+    <div id="tabs-2">
+            <p><pre>{{portalesjson}}</pre></p>
         </div>
     </div>
     {%endif%}

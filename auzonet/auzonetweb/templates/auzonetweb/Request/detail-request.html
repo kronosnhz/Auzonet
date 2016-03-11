@@ -84,7 +84,7 @@
                 <p class="lead text-center">
                     {% if  auzonetrequest.owner.publicuser.avatar %}
                         {% static auzonetrequest.owner.publicuser.avatar.url as avatar %}
-                        <img src="{{ avatar }}" height="150" width="150" class="thumbnail center-block"
+                        <img src="{{ avatar }}" height="150" width=auto class="thumbnail center-block"
                              alt="owner_avatar"/>
                     {% endif %}
                     {{ auzonetrequest.owner.first_name }} {{ auzonetrequest.owner.last_name }}

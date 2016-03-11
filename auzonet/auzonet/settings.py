@@ -19,7 +19,7 @@ SECRET_KEY = 'f_+dc(p+5!uiuvmf5ym(^uu8bqafbd(m8_)vc_^h_tuage9%oe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Media files management
 MEDIA_ROOT = os.path.join(BASE_DIR, 'auzonetweb/media/')
