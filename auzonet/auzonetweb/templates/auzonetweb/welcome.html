@@ -53,6 +53,12 @@
                 </div>
                 <form action="" method="post">
                     <div class="modal-body">
+                            {% if errorMessage != None and modal == 'login'%}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong>Error:</strong> {{ errorMessage }}
+                            </div>
+                            {% endif %}
                             {% csrf_token %}
                             {% bootstrap_form loginForm %}
                             <input type="hidden" name="formtype" value="login">
@@ -78,9 +84,15 @@
                 </div>
                 <form enctype="multipart/form-data" action="" method="post">
                     <div class="modal-body">
-                            {% csrf_token %}
-                            {% bootstrap_form registerForm %}
-                            <input type="hidden" name="formtype" value="register">
+                        {% if errorMessage != None and modal == 'register'%}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong>Error:</strong> {{ errorMessage }}
+                            </div>
+                        {% endif %}
+                        {% csrf_token %}
+                        {% bootstrap_form registerForm %}
+                        <input type="hidden" name="formtype" value="register">
                     </div>
                     <div class="modal-footer">
                         {% buttons %}
@@ -107,5 +119,18 @@
     	  dateFormat: "yy-mm-dd"
         });
     </script>
+    {% if modal == 'register' %}
+        <script>
+            $(document).ready(function(){
+                $("#registerModal").modal('toggle');
+            });
+        </script>
+    {% elif modal == 'login'%}
+        <script>
+            $(document).ready(function(){
+                $("#loginModal").modal('toggle');
+            });
+        </script>
+    {% endif %}
 </body>
 </html>

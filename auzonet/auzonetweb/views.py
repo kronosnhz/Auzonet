@@ -4,10 +4,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail, BadHeaderError, EmailMessage
 from django.core.urlresolvers import reverse
+from django.db import IntegrityError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.template import RequestContext, Context
 from django.template.loader import get_template
+from django.db.models import Q
 
 from .forms import LoginForm, RegisterForm, NewCommunityModelForm, NewRequestModelForm, JoinCommunityForm, \
     NewOfferModelForm, NewCommunityMsgModelForm
@@ -24,7 +26,7 @@ KARMA_REWARD = 10
 STATUS_ACTIVE = 'A'
 STATUS_FINISHED = 'F'
 STATUS_PENDING = 'P'
-
+MESSAGE_TYPE_WARNING = 'W'
 
 # COMMON PLACES
 @login_required
@@ -46,7 +48,7 @@ def index(request, comid=None):
     communityMessages = CommunityMessage.objects.filter(community=request.session['currentCommunityId']).order_by(
         '-date_published')
 
-    myOrders = Order.objects.filter(client=request.user).exclude(status=STATUS_FINISHED).exclude(status=STATUS_PENDING)
+    myOrders = Order.objects.filter(Q(client=request.user) | Q(owner=request.user)).exclude(status=STATUS_FINISHED).exclude(status=STATUS_PENDING)
 
     if request.method == 'POST':
         # Form with filled data
@@ -55,6 +57,19 @@ def index(request, comid=None):
         newMessage.community = get_object_or_404(Community, id=request.session['currentCommunityId'])
         newMessage.owner = request.user
         newMessage.save()
+
+        if newMessage.message_type == MESSAGE_TYPE_WARNING:
+            communityUsers = PublicUser.objects.filter(communities=request.session['currentCommunityId'])
+            for up in communityUsers:
+                send_notification_email(None,
+                                        up.user.email,
+                                        "Nuevo aviso en " + request.session['currentCommunityAddress'],
+                                        "Nuevo aviso",
+                                        newMessage.owner.first_name + " ha publicado un aviso importante en " + request.session['currentCommunityAddress'],
+                                        "Ver aviso",
+                                        reverse('indexcommunity', kwargs={'comid': request.session['currentCommunityId']}),
+                                        request.user.publicuser.avatar.url
+                                        )
 
         return redirect('index')
     else:
@@ -170,7 +185,13 @@ def wizard(request):
     if request.method == 'POST':
         if request.POST['formName'] == 'joinCommunity':
             selectCommunityForm = JoinCommunityForm(request.POST)
-            selectedCommunity = get_object_or_404(Community, id=request.POST['community'])
+            try:
+                selectedCommunity = get_object_or_404(Community, id=request.POST['community'])
+            except ValueError:
+                return render(request, 'auzonetweb/wizard.html',
+                              {'newCommunityForm': NewCommunityModelForm(), 'selectCommunityForm': selectCommunityForm,
+                               'communities': communities,
+                               'errorMessage': 'Tienes que seleccionar una comunidad de la lista.', 'modal': 'join'})
             if selectCommunityForm.is_valid():
                 currentUser = get_object_or_404(User, id=request.user.id)
                 currentUser.publicuser.communities.add(selectedCommunity)
@@ -178,6 +199,11 @@ def wizard(request):
                 request.session['currentCommunityId'] = selectedCommunity.id
                 request.session['currentCommunityAddress'] = selectedCommunity.address
                 return redirect('index')
+            else:
+                return render(request, 'auzonetweb/wizard.html',
+                              {'newCommunityForm': NewCommunityModelForm(), 'selectCommunityForm': selectCommunityForm,
+                               'communities': communities, 'errorMessage': 'Por favor, revisa los campos indicados',
+                               'modal': 'join'})
         elif request.POST['formName'] == 'newCommunity':
             newCommunityModelForm = NewCommunityModelForm(request.POST)
             if newCommunityModelForm.is_valid():
@@ -191,7 +217,10 @@ def wizard(request):
 
                 return redirect('index')
             else:
-                return redirect('logout')
+                return render(request, 'auzonetweb/wizard.html',
+                              {'newCommunityForm': newCommunityModelForm, 'selectCommunityForm': JoinCommunityForm(),
+                               'communities': communities, 'errorMessage': 'Por favor, revisa los campos indicados',
+                               'modal': 'new'})
     else:
         newCommunityModelForm = NewCommunityModelForm()
         selectCommunityForm = JoinCommunityForm()
@@ -229,13 +258,18 @@ def welcome(request):
                             return redirect('welcome')
                     else:
                         # Return an 'invalid login' error message.
-                        return redirect('welcome')
+                        return render(request, 'auzonetweb/welcome.html',
+                                      {'loginForm': loginForm, 'registerForm': RegisterForm(),
+                                       'errorMessage': 'Usuario o contraseña incorrectos', 'modal': 'login'})
+                else:
+                    return render(request, 'auzonetweb/welcome.html',
+                                  {'loginForm': loginForm, 'registerForm': RegisterForm(),
+                                   'errorMessage': 'Por favor, revise los campos indicados', 'modal': 'login'})
             elif request.POST['formtype'] == 'register':
                 # check whether it's valid:
                 if registerForm.is_valid():
                     # process the data in form.cleaned_data as required
                     username = request.POST['username']
-                    password = request.POST['password']
                     email = request.POST['email']
                     first_name = request.POST['first_name']
                     last_name = request.POST['last_name']
@@ -243,25 +277,48 @@ def welcome(request):
                     birthdate = request.POST['birthdate']
                     avatar = request.FILES['avatar']
 
-                    user = User.objects.create_user(username, email, password)
-                    user.first_name = first_name
-                    user.last_name = last_name
-                    user.save()
+                    try:
+                        user = User.objects.create_user(username, email, password)
+                        user.first_name = first_name
+                        user.last_name = last_name
+                        user.save()
 
-                    public = PublicUser()
-                    public.user = user
-                    public.save()
+                        public = PublicUser()
+                        public.user = user
+                        public.save()
 
-                    user.publicuser = public
-                    user.publicuser.birthdate = birthdate
-                    user.publicuser.avatar = avatar
-                    user.publicuser.save()
-                    user.save()
+                        user.publicuser = public
+                        user.publicuser.birthdate = birthdate
+                        user.publicuser.avatar = avatar
+                        user.publicuser.save()
+                        user.save()
+                        send_notification_email(None,
+                                                email,
+                                                "Bienvenido a Auzonet",
+                                                "Bienvenido a Auzonet",
+                                                "Gracias por registrarte" + first_name + ", busca tu comunidad entre las que ya están " +
+                                                "registradas o crea la tuya para empezar a disfrutar de todo lo que " +
+                                                "ofrece el servicio",
+                                                None,
+                                                None,
+                                                None
+                                                )
+                    except IntegrityError:
+                        return render(request, 'auzonetweb/welcome.html',
+                                      {'loginForm': LoginForm(), 'registerForm': registerForm,
+                                       'errorMessage': 'El nombre de usuario ya existe.', 'modal': 'register'})
 
                     user = authenticate(username=username, password=password)
                     login(request, user)
 
+                    # Send a confirmation email
+
+
                     return redirect('wizard')
+                else:
+                    return render(request, 'auzonetweb/welcome.html',
+                                  {'loginForm': LoginForm(), 'registerForm': registerForm,
+                                   'errorMessage': 'Por favor, revise los campos indicados', 'modal': 'register'})
         else:
             loginForm = LoginForm()
             registerForm = RegisterForm()
@@ -294,11 +351,15 @@ def edit_offer(request, offerid=None):
         else:
             offerForm = NewOfferModelForm(request.POST, request.FILES)
 
-        newOffer = offerForm.save(commit=False)
-        newOffer.community = get_object_or_404(Community, id=request.session['currentCommunityId'])
-        newOffer.owner = request.user
-        newOffer.save()
-        return redirect('indexcommunity', comid=request.session['currentCommunityId'])
+        if offerForm.is_valid():
+            newOffer = offerForm.save(commit=False)
+            newOffer.community = get_object_or_404(Community, id=request.session['currentCommunityId'])
+            newOffer.owner = request.user
+            newOffer.save()
+            return redirect('detail-offer', offerid=newOffer.id)
+        else:
+            return render(request, 'auzonetweb/Offer/offer.html',
+                          {'offerForm': offerForm, 'errorMessage': 'Por favor, revisa los campos indicados.'})
 
     elif offerid is not None:
         # Form for edition
@@ -362,34 +423,18 @@ def hire_offer(request, offerid):
     order.status = STATUS_PENDING
     order.save()
 
-    # Email notification
+    fromEmail = userInterested.email
+    toEmail = offer.owner.email
     subject = "Auzonet: " + userInterested.username + " esta interesado en tu oferta."
+    subtitle = 'Me interesa'
+    content = 'El usuario ' + userInterested.username + ' esta interesado en tu oferta ' + offer.title
+    buttonText = 'Aceptar solicitud'
+    buttonLink = reverse('accept-offer', kwargs={'orderid': order.id})
+    avatarLink = userInterested.publicuser.avatar.url
 
-    ctx = {
-        'subtitle':'Me interesa',
-        'content':'El usuario ' + userInterested.username + ' esta interesado en tu oferta ' + offer.title,
-        'buttontext':'Aceptar solicitud',
-        'buttonlink':reverse('accept-offer', kwargs={'orderid': order.id}),
-        'userInterested': userInterested,
-        'offer': offer.title,
-        'acceptlink': reverse('accept-offer', kwargs={'orderid': order.id})
-    }
+    send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink)
 
-    message = get_template('auzonetweb/Mail/hire.html').render(Context(ctx))
-
-    from_email = userInterested.email
-    if subject and message and from_email:
-        try:
-            msg = EmailMessage(subject, message, from_email, [offer.owner.email])
-            msg.content_subtype = "html"  # Main content is now text/html
-            msg.send()
-        except BadHeaderError:
-            return HttpResponse('Invalid header found.')
-        return redirect('index')
-    else:
-        # In reality we'd use a form class
-        # to get proper validation errors.
-        return HttpResponse('Make sure all fields are entered and valid.')
+    return redirect('index')
 
 
 # REQUESTS
@@ -403,12 +448,16 @@ def edit_request(request, requestid=None):
         else:
             requestForm = NewRequestModelForm(request.POST, request.FILES)
 
-        newRequest = requestForm.save(commit=False)
-        newRequest.community = get_object_or_404(Community, id=request.session['currentCommunityId'])
-        newRequest.owner = request.user
-        newRequest.save()
+        if requestForm.is_valid():
+            newRequest = requestForm.save(commit=False)
+            newRequest.community = get_object_or_404(Community, id=request.session['currentCommunityId'])
+            newRequest.owner = request.user
+            newRequest.save()
+        else:
+            return render(request, 'auzonetweb/Request/request.html',
+                          {'requestForm': requestForm, 'errorMessage': 'Por favor, revisa los campos indicados.'})
 
-        return redirect('indexcommunity', comid=request.session['currentCommunityId'])
+        return redirect('detail-request', requestid=newRequest.id)
     elif requestid is not None:
         # Form for edition
         ap = get_object_or_404(Request, id=requestid)
@@ -473,21 +522,18 @@ def hire_request(request, requestid):
     order.status = STATUS_PENDING
     order.save()
 
-    # Email notification
-    subject = userInterested.username + " quiere atender tu peticion"
-    html_message = userInterested.username + " esta interesado en atender tu peticion " + auzonetrequest.title + ". Pulsa <a href=" + reverse(
-        'accept-request', kwargs={'orderid': order.id}) + ">aqui</a> para aceptar su ofrecimiento."
-    from_email = userInterested.email
-    if subject and html_message and from_email:
-        try:
-            send_mail(subject, html_message, from_email, [auzonetrequest.owner.email])
-        except BadHeaderError:
-            return HttpResponse('Invalid header found.')
-        return redirect('index')
-    else:
-        # In reality we'd use a form class
-        # to get proper validation errors.
-        return HttpResponse('Make sure all fields are entered and valid.')
+    fromEmail = userInterested.email
+    toEmail = userOwner.email
+    subject = "Auzonet: " + userInterested.username + " quiere atender tu peticion"
+    subtitle = '¿Te echo una mano?'
+    content = 'El usuario ' + userInterested.username + ' quiere atender tu peticion ' + auzonetrequest.title
+    buttonText = 'Aceptar colaboración'
+    buttonLink = reverse('accept-request', kwargs={'requestid': auzonetrequest.id})
+    avatarLink = userInterested.publicuser.avatar.url
+
+    send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink)
+
+    return redirect('index')
 
 
 # SUPPORTING VIEWS
@@ -502,5 +548,26 @@ def handler500(request):
     response.status_code = 500
     return response
 
+
 # REST API
 # Under construction...
+
+# EMAIL
+def send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink):
+    # Email notification
+    ctx = {
+        'subtitle': subtitle,
+        'content': content,
+        'buttontext': buttonText,
+        'buttonlink': buttonLink,
+        'avatarlink': avatarLink,
+    }
+
+    message = get_template('auzonetweb/Mail/notification.html').render(Context(ctx))
+
+    try:
+        msg = EmailMessage(subject, message, fromEmail, [toEmail])
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
+    except BadHeaderError:
+        return HttpResponse('Invalid header found.')

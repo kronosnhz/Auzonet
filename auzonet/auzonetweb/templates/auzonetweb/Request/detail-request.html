@@ -188,8 +188,11 @@
                                 Precio: {{ auzonetrequest.reward }} €
                             {% endif %}
                         </h4>
-                        <h4><a href="#">{{ auzonetrequest.title }} antes del {{ auzonetrequest.due_date }}</a>
-                        </h4>
+                        {% if auzonetrequest.due_date == None  %}
+                            <h4><a href="#">{{ auzonetrequest.title }}</a></h4>
+                        {% else %}
+                            <h4><a href="#">{{ auzonetrequest.title }} antes del {{ auzonetrequest.due_date }}</a></h4>
+                        {% endif %}
                         <p>{{ auzonetrequest.detail }}</p>
                     </div>
                     {% if auzonetrequest.image %}

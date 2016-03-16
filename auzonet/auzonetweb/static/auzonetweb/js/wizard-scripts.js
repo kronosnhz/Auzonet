@@ -17,7 +17,8 @@ $('#btn-new-community').on("click", function(){
 
     });
 });
-$('#btn-cancel').on("click", function(){
+$('#btn-cancel').on("click", function(event){
+    event.preventDefault()
     $('#form-new-community').fadeOut(function(){
         $('#form-join-existing').fadeIn();
     });

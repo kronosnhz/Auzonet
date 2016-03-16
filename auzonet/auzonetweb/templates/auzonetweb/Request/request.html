@@ -19,7 +19,14 @@ $(document).ready(function(){
 <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
+        <h1>Necesito</h1>
         <form action="" method="post" enctype="multipart/form-data">
+            {% if errorMessage != None%}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Error:</strong> {{ errorMessage }}
+                </div>
+            {% endif %}
             {% csrf_token %}
             {% bootstrap_form requestForm%}
             {% buttons %}

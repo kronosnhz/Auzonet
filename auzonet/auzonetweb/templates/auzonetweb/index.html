@@ -9,6 +9,9 @@
 <script>
     $(document).ready(function(){
         $( "#appointment-tabs" ).tabs();
+        $( "#btn-publish-post").on("submit", function(){
+            $( "#btn-publish-post").prop('disabled', true);
+        });
     });
 </script>
 {% endblock %}
@@ -25,13 +28,17 @@
                 </div>
                 <form action="" method="post">
                     <div class="modal-body">
+                        <div class="alert alert-info" role="alert">
+                            <b>Consejo:</b> Publica como AVISO si quieres que todos los miembros de tu comunidad sean notificados por email
+                            sobre el nuevo mensaje.
+                        </div>
                         {% csrf_token %}
                         {% bootstrap_form messageModelForm %}
                     </div>
                     <div class="modal-footer">
                         {% buttons %}
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" id="btn-publish-post">
                         Publicar mensaje
                         </button>
                         {% endbuttons %}
@@ -106,6 +113,7 @@
                                 <th>Usuario</th>
                                 <th>Coste</th>
                                 <th>Categoría</th>
+                                <th>Publicado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,6 +137,7 @@
                                     {% endif %}
                                 </td>
                                 <td>{{ offer.category.title }}</td>
+                                <td>{{ offer.date_published }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -149,37 +158,39 @@
                                 <th>Recompensa</th>
                                 <th>Categoría</th>
                                 <th>Fecha límite</th>
+                                <th>Publicado</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {% for r in requests %}
-                            {% if r.owner == request.user %}
-                                <tr class="info">
-                                    {% else %}
-                                <tr>
-                            {% endif %}
-                                <td>
-                                    <a href="{% url 'detail-request' r.id %}">
-                                        {{ r.title }}
-                                    </a>
-                                </td>
-                        <td>{{ r.owner.username }}</td>
-                        <td>
-                            {% if r.reward == 0 %}
-                                    No
-                                    {% else %}
-                                {{ r.reward }} €
-                                    {% endif %}
-                                </td>
-                        <td>{{ r.category.title }}</td>
-                                <td>
-                                    {% if r.due_date != None %}
-                                        {{ r.due_date }}
-                                    {% else %}
-                                        No
-                                    {% endif %}
-                                </td>
-                            </tr>
+                            {% for r in requests %}
+                                {% if r.owner == request.user %}
+                                    <tr class="info">
+                                {% else %}
+                                    <tr>
+                                {% endif %}
+                                        <td>
+                                            <a href="{% url 'detail-request' r.id %}">
+                                                {{ r.title }}
+                                            </a>
+                                        </td>
+                                        <td>{{ r.owner.username }}</td>
+                                        <td>
+                                            {% if r.reward == 0 %}
+                                                    No
+                                                    {% else %}
+                                                {{ r.reward }} €
+                                                    {% endif %}
+                                                </td>
+                                        <td>{{ r.category.title }}</td>
+                                        <td>
+                                            {% if r.due_date != None %}
+                                                {{ r.due_date }}
+                                            {% else %}
+                                                No
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ r.date_published }}</td>
+                                    </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -205,7 +216,7 @@
                         <a href="{% url 'detail-request' req.id %}">
                             NECESITO:
                         </a>
-                        {{req.title}}
+                        {{req.title}} en <a href="{%url 'indexcommunity' req.community.id%}">{{ req.community.address }}</a>
                     </li>
                     {% endfor %}
                     {% for offer in myOffers %}
@@ -214,7 +225,7 @@
                         <a href="{%url 'detail-offer' offer.id%}">
                             OFREZCO:
                         </a>
-                        {{offer.title}}
+                        {{offer.title}} en <a href="{%url 'indexcommunity' offer.community.id%}">{{ offer.community.address }}</a>
                     </li>
                     {% endfor %}
                 </ul>
