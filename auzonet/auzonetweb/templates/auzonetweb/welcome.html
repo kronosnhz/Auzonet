@@ -1,5 +1,6 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {# Display django.contrib.messages as Bootstrap alerts #}
@@ -33,10 +34,10 @@
             <div class="col-lg-3"></div>
             <div class="col-lg-6">
                 <div class="vertical-center">
-                    <h1 id="main-title" class="text-center thin-text">Bienvenido a AuzoNet</h1>
-                    <h2 id="main-subtitle" class="text-center thin-text">La red social de vecinos</h2>
-                    <button class="btn btn-primary btn-lg account-buttons center-block btn-block outline" data-toggle="modal" data-target="#loginModal">Inicia sesión</button>
-                    <button class="btn btn-primary btn-lg account-buttons center-block btn-block outline" data-toggle="modal" data-target="#registerModal">Regístrate</button>
+                    <h1 id="main-title" class="text-center thin-text">{% trans "Bienvenido a AuzoNet" %}</h1>
+                    <h2 id="main-subtitle" class="text-center thin-text">{% trans "La red social de vecinos" %}</h2>
+                    <button class="btn btn-primary btn-lg account-buttons center-block btn-block outline" data-toggle="modal" data-target="#loginModal">{% trans "Inicia sesión" %}</button>
+                    <button class="btn btn-primary btn-lg account-buttons center-block btn-block outline" data-toggle="modal" data-target="#registerModal">{% trans "Regístrate" %}</button>
                 </div>
 
             </div>
@@ -49,7 +50,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="loginModalLabel">Iniciar sesión</h4>
+                    <h4 class="modal-title" id="loginModalLabel">{% trans "Iniciar sesión" %}</h4>
                 </div>
                 <form action="" method="post">
                     <div class="modal-body">
@@ -66,7 +67,7 @@
                     <div class="modal-footer">
                         {% buttons %}
                         <button type="submit" class="btn btn-primary center-block">
-                            Login
+                            {% trans "Login" %}
                         </button>
                         {% endbuttons %}
                     </div>
@@ -80,7 +81,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="registerModalLabel">Register</h4>
+                    <h4 class="modal-title" id="registerModalLabel">{% trans "Register" %}</h4>
                 </div>
                 <form enctype="multipart/form-data" action="" method="post">
                     <div class="modal-body">
@@ -97,7 +98,7 @@
                     <div class="modal-footer">
                         {% buttons %}
                         <button type="submit" class="btn btn-primary center-block">
-                            Register
+                            {% trans "Register" %}
                         </button>
                         {% endbuttons %}
                     </div>

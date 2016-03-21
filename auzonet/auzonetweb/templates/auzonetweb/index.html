@@ -1,6 +1,7 @@
 {% extends "auzonetweb/base.html" %}
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {# Display django.contrib.messages as Bootstrap alerts #}
@@ -24,22 +25,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Publicar mensaje en la corchera</h4>
+                    <h4 class="modal-title" id="myModalLabel">{% trans "Publicar mensaje en la corchera" %}</h4>
                 </div>
                 <form action="" method="post">
                     <div class="modal-body">
                         <div class="alert alert-info" role="alert">
-                            <b>Consejo:</b> Publica como AVISO si quieres que todos los miembros de tu comunidad sean notificados por email
-                            sobre el nuevo mensaje.
+                            <b>{% trans "Consejo:" %}</b> {% trans "Publica como AVISO si quieres que todos los miembros de tu comunidad sean notificados por email sobre el nuevo mensaje." %}
                         </div>
                         {% csrf_token %}
                         {% bootstrap_form messageModelForm %}
                     </div>
                     <div class="modal-footer">
                         {% buttons %}
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancelar" %}</button>
                         <button type="submit" class="btn btn-primary" id="btn-publish-post">
-                        Publicar mensaje
+                        {% trans "Publicar mensaje" %}
                         </button>
                         {% endbuttons %}
                     </div>
@@ -56,20 +56,20 @@
     <div class="col-lg-7">
         <h1>{{request.user.first_name}} {{request.user.last_name}}</h1>
         <p>Karma: <a href="#">{{request.user.publicuser.karma}}</a></p>
-        <a class="btn btn-info btn-lg btn-block" href="{%url 'new-offer'%}"><span class="glyphicon glyphicon-hand-up"></span> Quiero ofrecer algo</a>
-        <a class="btn btn-warning btn-lg btn-block" href="{%url 'new-request'%}"><span class="glyphicon glyphicon-thumbs-up"></span> Necesito algo</a>
+        <a class="btn btn-info btn-lg btn-block" href="{%url 'new-offer'%}"><span class="glyphicon glyphicon-hand-up"></span> {% trans "Quiero ofrecer algo" %}</a>
+        <a class="btn btn-warning btn-lg btn-block" href="{%url 'new-request'%}"><span class="glyphicon glyphicon-thumbs-up"></span> {% trans "Necesito algo" %}</a>
     </div>
 </div>
 <div class="row">
     <div id="community-panel" class="panel panel-info">
         <div class="panel-heading">
-            <h3 class="panel-title">Corchera de {{request.session.currentCommunityAddress}}</h3>
+            <h3 class="panel-title">{% trans "Corchera de" %} {{request.session.currentCommunityAddress}}</h3>
         </div>
         <div class="panel-body">
-            <button id="btn-new-message" class="btn btn-xs btn-default pull-right" data-toggle="modal" data-target="#modalNewMessage"><span class="glyphicon glyphicon-pencil"></span> Publicar mensaje</button>
+            <button id="btn-new-message" class="btn btn-xs btn-default pull-right" data-toggle="modal" data-target="#modalNewMessage"><span class="glyphicon glyphicon-pencil"></span> {% trans "Publicar mensaje" %}</button>
             <br><br>
             {%if communityMessages.count == 0%}
-            <p class="text-center">Aún no se ha publicado nada.</p>
+            <p class="text-center">{% trans "Aún no se ha publicado nada." %}</p>
             {% else %}
                 {%for msg in communityMessages%}
                     {%if msg.message_type == 'I'%}
@@ -93,45 +93,58 @@
                     {%endif%}
                     </div>
                 {%endfor%}
+                <div class="pagination pull-right">
+                    <span>
+                        {% if communityMessages.has_previous %}
+                            <a href="?page={{ communityMessages.previous_page_number }}">{% trans "previous" %}</a>
+                        {% endif %}
+
+                        <span class="current">
+                            {% trans "Page" %} {{ communityMessages.number }} {% trans "of" %} {{ communityMessages.paginator.num_pages }}.
+                        </span>
+
+                        {% if communityMessages.has_next %}
+                            <a href="?page={{ communityMessages.next_page_number }}">{% trans "next" %}</a>
+                        {% endif %}
+                    </span>
+                </div>
             {%endif%}
         </div>
     </div>
     <div id="appointment-tabs">
         <ul>
-            <li><a href="#tabs-1">Ofertas ({{offers.count}})</a></li>
-            <li><a href="#tabs-2">Peticiones ({{requests.count}})</a></li>
+            <li><a href="#tabs-1">{% trans "Ofertas" %} ({{offers.count}})</a></li>
+            <li><a href="#tabs-2">{% trans "Peticiones" %} ({{requests.count}})</a></li>
         </ul>
         <div id="tabs-1">
             {% if offers.count == 0 %}
-                <p class="text-center">Aún no se ha publicado nada</p>
+                <p class="text-center">{% trans "Aún no se ha publicado nada" %}</p>
             {% else %}
                 <div id="table-recent" class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Título</th>
-                                <th>Usuario</th>
-                                <th>Coste</th>
-                                <th>Categoría</th>
-                                <th>Publicado</th>
+                                <th>{% trans "Título" %}</th>
+                                <th>{% trans "Usuario" %}</th>
+                                <th>{% trans "Coste" %}</th>
+                                <th>{% trans "Categoría" %}</th>
+                                <th>{% trans "Publicado" %}</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for offer in offers %}
+
                             {%if offer.owner == request.user %}
                                 <tr class="info">
                             {%else%}
                                 <tr>
                             {%endif%}
-                                <td>
-                                    <a href="{%url 'detail-offer' offer.id%}">
-                                        {{ offer.title }}
-                                    </a>
-                                </td>
+
+                                <td><a href="{%url 'detail-offer' offer.id%}">{{ offer.title }}</a></td>
                                 <td>{{ offer.owner.username }}</td>
                                 <td>
                                     {% if offer.price == 0%}
-                                    Gratis
+                                    {% trans "Gratis" %}
                                     {% else %}
                                     {{offer.price}} €
                                     {% endif %}
@@ -139,6 +152,7 @@
                                 <td>{{ offer.category.title }}</td>
                                 <td>{{ offer.date_published }}</td>
                             </tr>
+
                             {% endfor %}
                         </tbody>
                     </table>
@@ -147,36 +161,33 @@
         </div>
         <div id="tabs-2">
             {% if requests.count == 0 %}
-                <p class="text-center">Aún no se ha publicado nada</p>
+                <p class="text-center">{% trans "Aún no se ha publicado nada" %}</p>
             {% else %}
                 <div id="table-recent" class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Título</th>
-                                <th>Usuario</th>
-                                <th>Recompensa</th>
-                                <th>Categoría</th>
-                                <th>Fecha límite</th>
-                                <th>Publicado</th>
+                                <th>{% trans "Título" %}</th>
+                                <th>{% trans "Usuario" %}</th>
+                                <th>{% trans "Recompensa" %}</th>
+                                <th>{% trans "Categoría" %}</th>
+                                <th>{% trans "Fecha límite" %}</th>
+                                <th>{% trans "Publicado" %}</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for r in requests %}
+
                                 {% if r.owner == request.user %}
                                     <tr class="info">
                                 {% else %}
                                     <tr>
                                 {% endif %}
-                                        <td>
-                                            <a href="{% url 'detail-request' r.id %}">
-                                                {{ r.title }}
-                                            </a>
-                                        </td>
+                                        <td><a href="{% url 'detail-request' r.id %}">{{ r.title }}</a></td>
                                         <td>{{ r.owner.username }}</td>
                                         <td>
                                             {% if r.reward == 0 %}
-                                                    No
+                                                    {% trans "No" %}
                                                     {% else %}
                                                 {{ r.reward }} €
                                                     {% endif %}
@@ -186,11 +197,12 @@
                                             {% if r.due_date != None %}
                                                 {{ r.due_date }}
                                             {% else %}
-                                                No
+                                                {% trans "No" %}
                                             {% endif %}
                                         </td>
                                         <td>{{ r.date_published }}</td>
                                     </tr>
+
                             {% endfor %}
                         </tbody>
                     </table>
@@ -203,29 +215,29 @@
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Mis publicaciones activas</h3>
+                <h3 class="panel-title">{% trans "Mis publicaciones activas" %}</h3>
             </div>
             <div class="panel-body">
                 {% if myRequests.count == 0 and myOffers.count == 0%}
-                    <p class="text-center">Aún no se ha publicado nada</p>
+                    <p class="text-center">{% trans "Aún no se ha publicado nada" %}</p>
                 {% else %}
                 <ul>
                     {% for req in myRequests %}
                     <li>
                         [{{req.date_published}}]
                         <a href="{% url 'detail-request' req.id %}">
-                            NECESITO:
+                            {% trans "NECESITO" %}:
                         </a>
-                        {{req.title}} en <a href="{%url 'indexcommunity' req.community.id%}">{{ req.community.address }}</a>
+                        {{req.title}} {% trans "en" %} <a href="{%url 'indexcommunity' req.community.id%}">{{ req.community.address }}</a>
                     </li>
                     {% endfor %}
                     {% for offer in myOffers %}
                     <li>
                         [{{offer.date_published}}]
                         <a href="{%url 'detail-offer' offer.id%}">
-                            OFREZCO:
+                            {% trans "OFREZCO" %}:
                         </a>
-                        {{offer.title}} en <a href="{%url 'indexcommunity' offer.community.id%}">{{ offer.community.address }}</a>
+                        {{offer.title}} {% trans "en" %} <a href="{%url 'indexcommunity' offer.community.id%}">{{ offer.community.address }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -236,12 +248,12 @@
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">En atención</h3>
+                <h3 class="panel-title">{% trans "En atención" %}</h3>
             </div>
             <div class="panel-body">
                 <ul>
                     {% if myOrders.count == 0 %}
-                        <p class="text-center">No tengo acuerdos activos</p>
+                        <p class="text-center">{% trans "No tengo acuerdos activos" %}</p>
                     {% else %}
                     <ul>
                         {% for o in myOrders %}
@@ -249,12 +261,12 @@
                             [{{o.date_created}}]
                             {%if o.order_type == 'O'%}
                             <a href="{%url 'detail-offer' o.offer.id%}">
-                                ({{o.owner.username}}) OFERTA:{{o.offer.title}}
+                                ({{o.owner.username}}) {% trans "OFERTA" %}:{{o.offer.title}}
                                 {{o.title}}
                             </a>
                             {%else%}
                                 <a href="{% url 'detail-request' o.auzonetrequest.id %}">
-                                    ({{ o.owner.username }}) NECESITO:{{ o.auzonetrequest.title }}
+                                    ({{ o.owner.username }}) {% trans "NECESITO" %}:{{ o.auzonetrequest.title }}
                                 {{o.title}}
                                 </a>
                             {%endif%}

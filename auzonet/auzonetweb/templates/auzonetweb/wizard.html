@@ -1,5 +1,6 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {# Display django.contrib.messages as Bootstrap alerts #}
@@ -34,10 +35,10 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div id="form-join-existing">
-                    <h1 class="text-center">Bienvenido</h1>
+                    <h1 class="text-center">{% trans "Bienvenido" %}</h1>
                     {%if communities.count > 0%}
                     <div >
-                        <h2 class="text-center">Unirme a una comunidad existente</h2>
+                        <h2 class="text-center">{% trans "Unirme a una comunidad existente" %}</h2>
                         <form action="" method="POST">
                             {% if errorMessage != None and modal == 'join'%}
                                 <div class="alert alert-danger alert-dismissible" role="alert">
@@ -50,7 +51,7 @@
                             <input type="hidden" name="formName" value="joinCommunity">
                             {% buttons %}
                             <button type="submit" class="btn btn-lg btn-primary center-block">
-                                Unirme
+                                {% trans "Unirme" %}
                             </button>
                             {% endbuttons %}
                         </form>
@@ -58,9 +59,11 @@
                     </div>
                     <p class="text-center">o</p>
                     {%else%}
-                    <div>Aún no hay comunidades de vecinos activas</div>
+                    <div>{% trans "Aún no hay comunidades de vecinos activas" %}</div>
                     {%endif%}
-                    <button class="btn btn-default btn-lg center-block" id="btn-new-community">Crear una nueva</button>
+                    <button class="btn btn-default btn-lg center-block" id="btn-new-community">{% trans "Crear una nueva" %}</button>
+                    <br>
+                    <p class="text-center"><a href="{% url 'logout' %}" >{% trans "Cerrar sesión" %}</a></p>
                 </div>
                 <div id="form-new-community">
                     <form action="" method="post">
@@ -75,9 +78,9 @@
                         <input type="hidden" name="formName" value="newCommunity">
                         {% buttons %}
                         <button type="submit" class="btn btn-primary">
-                            Crear
+                            {% trans "Crear" %}
                         </button>
-                        <button id="btn-cancel" class="btn btn-default">Cancelar</button>
+                        <button id="btn-cancel" class="btn btn-default">{% trans "Cancelar" %}</button>
                         {% endbuttons %}
                     </form>
                 </div>

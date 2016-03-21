@@ -1,5 +1,6 @@
 {% extends "auzonetweb/base.html" %}
 {% load bootstrap3 %}
+{% load i18n %}
 {% load static from staticfiles %}
 {% block scripts %}
 <script>
@@ -9,12 +10,12 @@ $(document).ready(function(){
         changeYear: true,
         dateFormat: "yy-mm-dd"
     });
-
+    $("#id_reward").numeric();
 });
 </script>
 {% endblock %}
 
-{% block title %}AuzoNet - Nueva petición{% endblock %}
+{% block title %}{% trans "AuzoNet - Nueva petición" %}{% endblock %}
 {% block content%}
 <div class="row">
     <div class="col-lg-3"></div>
@@ -31,9 +32,9 @@ $(document).ready(function(){
             {% bootstrap_form requestForm%}
             {% buttons %}
             <button type="submit" class="btn btn-primary">
-                Publicar
+                {% trans "Publicar" %}
             </button>
-            <a class="btn btn-danger" href="{% url 'index' %}">Cancelar</a>
+            <a class="btn btn-danger" href="{% url 'index' %}">{% trans "Cancelar" %}</a>
             {% endbuttons %}
         </form>
     </div>

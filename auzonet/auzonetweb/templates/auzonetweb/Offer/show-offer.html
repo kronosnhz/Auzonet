@@ -1,5 +1,6 @@
 {% extends "auzonetweb/base.html" %}
 {% load bootstrap3 %}
+{% load i18n %}
 {% load static from staticfiles %}
 {% block scripts %}
 <script>
@@ -15,14 +16,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="finalizeClientModal">Terminar acuerdo</h4>
+        <h4 class="modal-title" id="finalizeClientModal">{% trans "Terminar acuerdo" %}</h4>
       </div>
       <div class="modal-body">
-        ¿Estás satisfecho con el servicio/producto prestado por {{offer.owner.username}}?
+        {% trans "¿Estás satisfecho con el servicio/producto prestado por" %} {{offer.owner.username}}?
       </div>
       <div class="modal-footer">
-        <a class="btn btn-lg btn-success" href="{%url 'finalize-order' orderid=client_order.id feedback='1'%}" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> Si</a>
-        <a class="btn btn-lg btn-danger" href="{%url 'finalize-order' orderid=client_order.id feedback='0'%}" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> No</a>
+        <a class="btn btn-lg btn-success" href="{%url 'finalize-order' orderid=client_order.id feedback='1'%}" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> {% trans "Si" %}</a>
+        <a class="btn btn-lg btn-danger" href="{%url 'finalize-order' orderid=client_order.id feedback='0'%}" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> {% trans "No" %}</a>
       </div>
     </div>
   </div>
@@ -35,15 +36,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="confirmDeleteModalTitle">Finalizar oferta</h4>
+        <h4 class="modal-title" id="confirmDeleteModalTitle">{% trans "Finalizar oferta" %}</h4>
       </div>
       <div class="modal-body">
-        ¿Seguro que quieres finalizar tu oferta? <br>
-        Recuerda que siempre puedes ponerla de nuevo a la vista desde tu panel de usuario.
+        {% trans "¿Seguro que quieres finalizar tu oferta?" %} <br>
+        {% trans "Recuerda que siempre puedes ponerla de nuevo a la vista desde tu panel de usuario." %}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">No hacer cambios</button>
-        <a class="btn btn-danger" href="{%url 'delete-post' postid=offer.id posttype='O'%}" role="button">Finalizar oferta</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "No hacer cambios" %}</button>
+        <a class="btn btn-danger" href="{%url 'delete-post' postid=offer.id posttype='O'%}" role="button">{% trans "Finalizar oferta" %}</a>
       </div>
     </div>
   </div>
@@ -54,14 +55,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="confirmHireModalTitle">¿Seguro que quieres contratar esta oferta?</h4>
+        <h4 class="modal-title" id="confirmHireModalTitle">{% trans "¿Seguro que quieres contratar esta oferta?" %}</h4>
       </div>
       <div class="modal-body">
-        Se enviará un email a <b>{{offer.owner.username}}</b> para informar de que estás interesado en su oferta. Recibirás un aviso si <b>{{offer.owner.username}}</b> acepta a trabajar contigo.
+        {% trans "Se enviará un email a" %} <b>{{offer.owner.username}}</b> {% trans "para informar de que estás interesado en su oferta. Recibirás un aviso si" %} <b>{{offer.owner.username}}</b> {% trans "acepta a trabajar contigo." %}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-primary" href="{%url 'hire-offer' offerid=offer.id%}" role="button">Contratar</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancelar" %}</button>
+        <a class="btn btn-primary" href="{%url 'hire-offer' offerid=offer.id%}" role="button">{% trans "Contratar" %}</a>
       </div>
     </div>
   </div>
@@ -81,7 +82,7 @@
             {%if offer.owner.id == request.user.id%}
                 {% if orders.count > 0 %}
                 <div class="panel panel-default">
-                    <div class="panel-heading">Acuerdos</div>
+                    <div class="panel-heading">{% trans "Acuerdos" %}</div>
                     <div class="panel-body">
                         {% for o in orders %}
                         <!-- Modal finalize order by owner-->
@@ -90,14 +91,14 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="finalizeOwnerModal">Terminar acuerdo</h4>
+                                        <h4 class="modal-title" id="finalizeOwnerModal">{% trans "Terminar acuerdo" %}</h4>
                                     </div>
                                     <div class="modal-body">
-                                        ¿Estás satisfecho con el trato de {{o.client.username}}?
+                                        {% trans "¿Estás satisfecho con el trato de" %} {{o.client.username}}?
                                     </div>
                                     <div class="modal-footer">
-                                        <a class="btn btn-lg btn-success" href="{%url 'finalize-order' orderid=o.id feedback='1'%}" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> Si</a>
-                                        <a class="btn btn-lg btn-danger" href="{%url 'finalize-order' orderid=o.id feedback='0'%}" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> No</a>
+                                        <a class="btn btn-lg btn-success" href="{%url 'finalize-order' orderid=o.id feedback='1'%}" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> {% trans "Si" %}</a>
+                                        <a class="btn btn-lg btn-danger" href="{%url 'finalize-order' orderid=o.id feedback='0'%}" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> {% trans "No" %}</a>
                                     </div>
                                 </div>
                             </div>
@@ -105,16 +106,16 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                  <img class="media-object" src="{% static o.client.publicuser.avatar.url%}" height="64" width"64" alt="...">
+                                  <img class="media-object" src="{% static o.client.publicuser.avatar.url %}" height="64" width="64" alt="...">
                                 </a>
                             </div>
                             <div class="media-body">
                             <h4 class="media-heading">{{o.client.username}}</h4>
                             {{o.date_created}} <br>
                             {%if o.owner_voted %}
-                                <button class="btn btn-default btn-xs btn-block" disabled>Esperando valoración de {{o.client.username}}</button>
+                                <button class="btn btn-default btn-xs btn-block" disabled>{% trans "Esperando valoración de" %} {{o.client.username}}</button>
                             {%else%}
-                                <button data-target="#confirmEndOwnerModal" data-toggle="modal" class="btn btn-default btn-xs btn-block"><span class="glyphicon glyphicon-ok"></span> Terminar acuerdo</button>
+                                <button data-target="#confirmEndOwnerModal" data-toggle="modal" class="btn btn-default btn-xs btn-block"><span class="glyphicon glyphicon-ok"></span> {% trans "Terminar acuerdo" %}</button>
                             {%endif%}
                             </div>
                         </div>
@@ -124,20 +125,20 @@
 
                 {% endif %}
                 <a class="btn btn-warning btn-block" href="{%url 'edit-offer' offer.id%}" role="button">Editar</a>
-                <button id="btn-finish" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDeleteModal">Finalizar</button>
+                <button id="btn-finish" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDeleteModal">{% trans "Finalizar" %}</button>
             {%else%}
                 {%if is_client == 1%}
                     {%if client_order.client_voted%}
-                        <button class="btn btn-default btn-block" disabled>Esperando valoración de {{client_order.owner.username}}</button>
+                        <button class="btn btn-default btn-block" disabled>{% trans "Esperando valoración de" %} {{client_order.owner.username}}</button>
                     {%else%}
-                        <button id="btn-cancel" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmEndClientModal">Terminar acuerdo</button>
+                        <button id="btn-cancel" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmEndClientModal">{% trans "Terminar acuerdo" %}</button>
                     {%endif%}
                 {%else%}
-                    <button id="btn-hire" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmHireModal">Contratar</button>
+                    <button id="btn-hire" class="btn btn-success btn-block" data-toggle="modal" data-target="#confirmHireModal">{% trans "Contratar" %}</button>
                 {%endif%}
             {%endif%}
 
-            <a class="btn btn-default btn-block" href="{%url 'index'%}" role="button">Volver</a>
+            <a class="btn btn-default btn-block" href="{%url 'index'%}" role="button">{% trans "Volver" %}</a>
         </div>
 
         <div class="col-md-9">
@@ -145,9 +146,9 @@
                 <div class="caption-full">
                     <h4 class="pull-right">
                         {% if offer.price == 0%}
-                        Gratis
+                        {% trans "Gratis" %}
                         {% else %}
-                        Precio: {{offer.price}} €
+                        {% trans "Precio" %}: {{offer.price}} €
                         {% endif %}
                     </h4>
                     <h4><a href="#">{{offer.title}}</a>
@@ -164,7 +165,7 @@
             {%if offer.owner.id != request.user.id%}
             <div class="well">
                 <div class="text-right">
-                    <button id="btn-hire" class="btn btn-success " data-toggle="modal" data-target="#confirmHireModal">Contratar</button>
+                    <button id="btn-hire" class="btn btn-success " data-toggle="modal" data-target="#confirmHireModal">{% trans "Contratar" %}</button>
                 </div>
             </div>
             {%endif%}

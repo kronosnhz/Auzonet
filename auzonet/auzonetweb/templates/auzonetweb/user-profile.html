@@ -1,6 +1,7 @@
 {% extends "auzonetweb/base.html" %}
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {# Display django.contrib.messages as Bootstrap alerts #}
@@ -49,7 +50,7 @@ window.onload = function(){
 <div class="row" id="profile">
     <img src="{%static currentUser.publicuser.avatar.url%}"  class="center-block img-circle" alt="avatar" width="250" height="250">
     <h1 class="text-center">{{currentUser.first_name}} {{currentUser.last_name}}</h1>
-    <p class="text-center"><i>Miembro de </i></p>
+    <p class="text-center"><i>{% trans "Miembro de" %} </i></p>
     <p class="text-center">
     {%for community in request.user.publicuser.communities.all%}
         <a href="{%url 'indexcommunity' community.id%}"><span class="glyphicon glyphicon-home"></span> {{community.address}}</a><br>
@@ -70,19 +71,19 @@ window.onload = function(){
             </thead>
             <tbody>
                 <tr>
-                    <td>Peticiones publicadas</td>
+                    <td>{% trans "Peticiones publicadas" %}</td>
                     <td>2</td>
                 </tr>
                 <tr>
-                    <td>Peticiones atendidas</td>
+                    <td>{% trans "Peticiones atendidas" %}</td>
                     <td>6</td>
                 </tr>
                 <tr>
-                    <td>Ofertas publicadas</td>
+                    <td>{% trans "Ofertas publicadas" %}</td>
                     <td>9</td>
                 </tr>
                 <tr>
-                    <td>Ofertas recibidas</td>
+                    <td>{% trans "Ofertas recibidas" %}</td>
                     <td>0</td>
                 </tr>
             </tbody>
@@ -90,13 +91,13 @@ window.onload = function(){
     </div>
 </div>
 <div class="row profile-panel" id="attending">
-    <h2>En atención</h2>
+    <h2>{% trans "En atención" %}</h2>
     <table class="table table-responsive">
         <thead>
-            <th>Título</th>
-            <th>Tipo</th>
-            <th>Usuario</th>
-            <th>Acciones</th>
+            <th>{% trans "Título" %}</th>
+            <th>{% trans "Tipo" %}</th>
+            <th>{% trans "Usuario" %}</th>
+            <th>{% trans "Acciones" %}</th>
         </thead>
         <tbody>
             <tr>
@@ -125,13 +126,13 @@ window.onload = function(){
     </table>
 </div>
 <div class="row profile-panel" id="my-posts">
-    <h2>Mis publicaciones</h2>
+    <h2>{% trans "Mis publicaciones" %}</h2>
     <table class="table table-responsive">
         <thead>
-            <th>Título</th>
-            <th>Tipo</th>
-            <th>Fecha de publicación</th>
-            <th>Acciones</th>
+            <th>{% trans "Título" %}</th>
+            <th>{% trans "Tipo" %}</th>
+            <th>{% trans "Fecha de publicación" %}</th>
+            <th>{% trans "Acciones" %}</th>
         </thead>
         <tbody>
             <tr>
@@ -160,13 +161,13 @@ window.onload = function(){
     </table>
 </div>
 <div class="row profile-panel" id="my-posts">
-    <h2>Historial</h2>
+    <h2>{% trans "Historial" %}</h2>
     <table class="table table-condensed table-responsive">
         <thead>
-            <th>Título</th>
-            <th>Tipo</th>
-            <th>Fecha de publicación</th>
-            <th>Acciones</th>
+            <th>{% trans "Título" %}</th>
+            <th>{% trans "Tipo" %}</th>
+            <th>{% trans "Fecha de publicación" %}</th>
+            <th>{% trans "Acciones" %}</th>
         </thead>
         <tbody>
             <tr>

@@ -1,5 +1,6 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {# Display django.contrib.messages as Bootstrap alerts #}
@@ -41,19 +42,21 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{%url 'my-profile'%}"><span class="glyphicon glyphicon-user"></span> {{request.user.username}}</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{request.session.currentCommunityAddress}}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
-                            <li><a href="{% url 'wizard' %}"><span class="glyphicon glyphicon-search"></span> Search community</a></li>
+
+                            <li><a href="{% url 'wizard' %}"><span class="glyphicon glyphicon-search"></span> {% trans "Search community" %}</a></li>
                             <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">My communities</li>
+                            <li class="dropdown-header">{% trans "My communities" %}</li>
                             {%for community in request.user.publicuser.communities.all%}
                                 <li><a href="{%url 'indexcommunity' community.id%}">{{community.address}}</a></li>
                             {%endfor%}
                         </ul>
                     </li>
+                    <!--<li><a href="{%url 'my-profile'%}"><span class="glyphicon glyphicon-user"></span> {{request.user.username}}</a></li>-->
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{request.user.username}}</a></li>
+                    <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-off"></span> {% trans "Cerrar sesión" %}</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!-- end Container -->
@@ -63,13 +66,14 @@
     </div> <!-- /container -->
     <footer>
         <div class="container">
-            <small><p class="text-right">Copyright 2015. Aitor Brazaola. Universidad de Deusto.</p></small>
+            <small><p class="text-right">{% trans "Copyright 2015. Aitor Brazaola. Universidad de Deusto." %}</p></small>
         </div>
     </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'jquery/jquery.js' %}"></script>
     <script src="{% static 'jquery-ui/jquery-ui.js' %}"></script>
+    <script type="text/javascript" src='{% static 'jquery-numeric/dist/jquery-numeric.js' %}'></script>
     {% bootstrap_javascript %}
     {% block scripts %}{% endblock %}
 </body>

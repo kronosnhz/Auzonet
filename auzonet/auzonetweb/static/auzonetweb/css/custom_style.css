@@ -98,3 +98,8 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=0 ); /* IE6-9 */
 
 }
+
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
