@@ -50,21 +50,25 @@ class NewCommunityMsgModelForm(ModelForm):
     class Meta:
         model = CommunityMessage
         fields = ['message_type', 'message_text']
+        localized_fields = '__all__'
 
 
 class NewCommunityModelForm(ModelForm):
     class Meta:
         model = Community
+        localized_fields = '__all__'
         fields = ['address', 'coordinates', 'access_type', 'password', 'welcome_message']
 
 
 class NewOfferModelForm(ModelForm):
     class Meta:
         model = Offer
+        localized_fields = '__all__'
         fields = ['category', 'title', 'detail', 'scope', 'status', 'price', 'image']
 
 
 class NewRequestModelForm(ModelForm):
     class Meta:
         model = Request
+        localized_fields = '__all__'
         fields = ['category', 'title', 'detail', 'scope', 'status', 'due_date', 'reward', 'image']

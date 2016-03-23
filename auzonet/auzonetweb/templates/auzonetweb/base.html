@@ -54,8 +54,7 @@
                             {%endfor%}
                         </ul>
                     </li>
-                    <!--<li><a href="{%url 'my-profile'%}"><span class="glyphicon glyphicon-user"></span> {{request.user.username}}</a></li>-->
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{request.user.username}}</a></li>
+                    <li><a href="{%url 'my-profile'%}"><span class="glyphicon glyphicon-user"></span> {{request.user.username}}</a></li>
                     <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-off"></span> {% trans "Cerrar sesión" %}</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
@@ -66,7 +65,21 @@
     </div> <!-- /container -->
     <footer>
         <div class="container">
-            <small><p class="text-right">{% trans "Copyright 2015. Aitor Brazaola. Universidad de Deusto." %}</p></small>
+
+            <form id="form-language" action="{% url 'set_language' %}" method="post" class="pull-right">{% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                <select name="language" id="input-language">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+            <small><p class="pull-right">{% trans "Copyright 2015. Aitor Brazaola. Universidad de Deusto. &nbsp;&nbsp;" %}</p></small>
         </div>
     </footer>
 
@@ -74,6 +87,11 @@
     <script src="{% static 'jquery/jquery.js' %}"></script>
     <script src="{% static 'jquery-ui/jquery-ui.js' %}"></script>
     <script type="text/javascript" src='{% static 'jquery-numeric/dist/jquery-numeric.js' %}'></script>
+    <script>
+        $("#input-language").on("change keyup", function(){
+            $("#form-language").submit();
+        });
+    </script>
     {% bootstrap_javascript %}
     {% block scripts %}{% endblock %}
 </body>

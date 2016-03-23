@@ -39,11 +39,29 @@
                     <button class="btn btn-primary btn-lg account-buttons center-block btn-block outline" data-toggle="modal" data-target="#loginModal">{% trans "Inicia sesión" %}</button>
                     <button class="btn btn-primary btn-lg account-buttons center-block btn-block outline" data-toggle="modal" data-target="#registerModal">{% trans "Regístrate" %}</button>
                 </div>
-
             </div>
             <div class="col-lg-3"></div>
         </div>
     </div> <!-- /container -->
+    <footer>
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form id="form-language" action="{% url 'set_language' %}" method="post" class="pull-right">{% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                <select name="language" id="input-language">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </footer>
     <!-- Modal login-->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
         <div class="modal-dialog" role="document">
@@ -118,6 +136,9 @@
           yearRange: "1900:",
           maxDate: new Date(),
     	  dateFormat: "yy-mm-dd"
+        });
+        $("#input-language").on("change keyup", function(){
+            $("#form-language").submit();
         });
     </script>
     {% if modal == 'register' %}

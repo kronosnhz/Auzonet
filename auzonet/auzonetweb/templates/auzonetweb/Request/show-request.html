@@ -197,8 +197,6 @@
                     {% if auzonetrequest.image %}
                         {% static auzonetrequest.image.url as photo %}
                         <img src="{{ photo }}" height="800" width="300" class="img-resposive" alt="request_photo"/>
-                    {% else %}
-                        <img class="img-responsive" src="http://placehold.it/800x300" alt="" height="300" width="800">
                     {% endif %}
                 </div>
                 {% if auzonetrequest.owner.id != request.user.id %}

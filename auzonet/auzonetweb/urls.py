@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 from . import views
 
@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^community/(?P<comid>\d+)/$', views.index, name='indexcommunity'),
     url(r'^new-offer/$', views.edit_offer, name='new-offer'),
     url(r'^new-request/$', views.edit_request, name='new-request'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 ]

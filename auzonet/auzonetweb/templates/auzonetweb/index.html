@@ -10,8 +10,11 @@
 <script>
     $(document).ready(function(){
         $( "#appointment-tabs" ).tabs();
-        $( "#btn-publish-post").on("submit", function(){
-            $( "#btn-publish-post").prop('disabled', true);
+        $( "#btn-publish-post").on("click", function(event){
+            event.preventDefault();
+            $("#btn-publish-post").prop('disabled', true);
+            $("#btn-cancel-post").prop('disabled', true);
+            $("#form-post-message").submit();
         });
     });
 </script>
@@ -27,7 +30,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">{% trans "Publicar mensaje en la corchera" %}</h4>
                 </div>
-                <form action="" method="post">
+                <form id="form-post-message" action="" method="post">
                     <div class="modal-body">
                         <div class="alert alert-info" role="alert">
                             <b>{% trans "Consejo:" %}</b> {% trans "Publica como AVISO si quieres que todos los miembros de tu comunidad sean notificados por email sobre el nuevo mensaje." %}
@@ -37,7 +40,7 @@
                     </div>
                     <div class="modal-footer">
                         {% buttons %}
-                        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancelar" %}</button>
+                        <button type="button" class="btn btn-default" id="btn-cancel-post" data-dismiss="modal">{% trans "Cancelar" %}</button>
                         <button type="submit" class="btn btn-primary" id="btn-publish-post">
                         {% trans "Publicar mensaje" %}
                         </button>
@@ -68,7 +71,7 @@
         <div class="panel-body">
             <button id="btn-new-message" class="btn btn-xs btn-default pull-right" data-toggle="modal" data-target="#modalNewMessage"><span class="glyphicon glyphicon-pencil"></span> {% trans "Publicar mensaje" %}</button>
             <br><br>
-            {%if communityMessages.count == 0%}
+            {%if communityMessages.paginator.count == 0%}
             <p class="text-center">{% trans "Aún no se ha publicado nada." %}</p>
             {% else %}
                 {%for msg in communityMessages%}

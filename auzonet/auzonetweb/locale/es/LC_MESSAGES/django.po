@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-21 13:09+0100\n"
+"POT-Creation-Date: 2016-03-23 11:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,26 +20,26 @@ msgstr ""
 
 #: auzonetweb/templates/auzonetweb/Offer/edit-offer.html:18
 msgid "AuzoNet - Nueva oferta"
-msgstr ""
+msgstr "Auzonet - Nueva oferta"
 
 #: auzonetweb/templates/auzonetweb/Offer/edit-offer.html:23
 msgid "Ofrezco"
-msgstr ""
+msgstr "Ofrezco"
 
 #: auzonetweb/templates/auzonetweb/Offer/edit-offer.html:35
 #: auzonetweb/templates/auzonetweb/Request/edit-request.html:35
 msgid "Publicar"
-msgstr ""
+msgstr "Publicar"
 
 #: auzonetweb/templates/auzonetweb/Offer/edit-offer.html:37
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:64
 #: auzonetweb/templates/auzonetweb/Request/edit-request.html:37
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:75
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:159
-#: auzonetweb/templates/auzonetweb/index.html:40
+#: auzonetweb/templates/auzonetweb/index.html:43
 #: auzonetweb/templates/auzonetweb/wizard.html:83
 msgid "Cancelar"
-msgstr ""
+msgstr "Cancelar"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:19
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:94
@@ -48,38 +48,38 @@ msgstr ""
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:21
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:146
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:167
-#: auzonetweb/views.py:191 auzonetweb/views.py:222
+#: auzonetweb/views.py:203 auzonetweb/views.py:234
 msgid "Terminar acuerdo"
-msgstr ""
+msgstr "Terminar acuerdo"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:22
 msgid "¿Estás satisfecho con el servicio/producto prestado por"
-msgstr ""
+msgstr "¿Estás satisfecho con el servicio/producto prestado por"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:25
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:100
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:29
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:121
 msgid "Si"
-msgstr ""
+msgstr "Si"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:26
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:101
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:32
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:125
-#: auzonetweb/templates/auzonetweb/index.html:190
-#: auzonetweb/templates/auzonetweb/index.html:200
+#: auzonetweb/templates/auzonetweb/index.html:193
+#: auzonetweb/templates/auzonetweb/index.html:203
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:39
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:47
 msgid "Finalizar oferta"
-msgstr ""
+msgstr "Finalizar oferta"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:42
 msgid "¿Seguro que quieres finalizar tu oferta?"
-msgstr ""
+msgstr "¿Seguro que quieres finalizar tu oferta?"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:43
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:51
@@ -87,410 +87,422 @@ msgid ""
 "Recuerda que siempre puedes ponerla de nuevo a la vista desde tu panel de "
 "usuario."
 msgstr ""
+"Recuerda que siempre puedes ponerla de nuevo a la vista desde tu panel de "
+"usuario."
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:46
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:54
 msgid "No hacer cambios"
-msgstr ""
+msgstr "No hacer cambios"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:58
 msgid "¿Seguro que quieres contratar esta oferta?"
-msgstr ""
+msgstr "¿Seguro que quieres contratar esta oferta?"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:61
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:71
 msgid "Se enviará un email a"
-msgstr ""
+msgstr "Se enviará un email a"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:61
 msgid ""
 "para informar de que estás interesado en su oferta. Recibirás un aviso si"
 msgstr ""
+"para informar de que estás interesado en su oferta. Recibirás un aviso si"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:61
 msgid "acepta a trabajar contigo."
-msgstr ""
+msgstr "acepta a trabajar contigo."
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:65
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:137
-#: auzonetweb/templates/auzonetweb/Offer/show-offer.html:168
+#: auzonetweb/templates/auzonetweb/Offer/show-offer.html:166
 msgid "Contratar"
-msgstr ""
+msgstr "Contratar"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:85
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:99
 msgid "Acuerdos"
-msgstr ""
+msgstr "Acuerdos"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:97
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:24
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:115
 msgid "¿Estás satisfecho con el trato de"
-msgstr ""
+msgstr "¿Estás satisfecho con el trato de"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:116
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:132
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:142
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:164
 msgid "Esperando valoración de"
-msgstr ""
+msgstr "Esperando valoración de"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:128
 msgid "Finalizar"
-msgstr ""
+msgstr "Finalizar"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:141
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:177
 msgid "Volver"
-msgstr ""
+msgstr "Volver"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:149
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:185
-#: auzonetweb/templates/auzonetweb/index.html:147
+#: auzonetweb/templates/auzonetweb/index.html:150
 msgid "Gratis"
-msgstr ""
+msgstr "Gratis"
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:151
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:187
 msgid "Precio"
-msgstr ""
+msgstr "Precio"
 
 #: auzonetweb/templates/auzonetweb/Request/edit-request.html:18
 msgid "AuzoNet - Nueva petición"
-msgstr ""
+msgstr "Auzonet - Nueva petición"
 
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:47
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:50
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:56
 msgid "Cancelar petición"
-msgstr ""
+msgstr "Cancelar petición"
 
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:68
 msgid "¿Seguro que atender esta petición?"
-msgstr ""
+msgstr "¿Seguro que atender esta petición?"
 
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:71
 msgid "para informar de que quieres atender su petición. Recibirás un aviso si"
 msgstr ""
+"para informar de que quieres atender su petición. Recibirás un aviso si"
 
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:72
 msgid "lo acepta"
-msgstr ""
+msgstr "lo acepta"
 
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:77
 msgid "Atender"
-msgstr ""
+msgstr "Atender"
 
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:157
 msgid "Editar"
-msgstr ""
+msgstr "Editar"
 
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:172
-#: auzonetweb/templates/auzonetweb/Request/show-request.html:208
+#: auzonetweb/templates/auzonetweb/Request/show-request.html:206
 msgid "Atender petición"
-msgstr ""
+msgstr "Atender petición"
 
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:193
 msgid "antes del"
-msgstr ""
+msgstr "antes del"
 
 #: auzonetweb/templates/auzonetweb/base.html:49
 msgid "Search community"
-msgstr ""
+msgstr "Search community"
 
 #: auzonetweb/templates/auzonetweb/base.html:51
 msgid "My communities"
-msgstr ""
+msgstr "My communities"
 
-#: auzonetweb/templates/auzonetweb/base.html:59
+#: auzonetweb/templates/auzonetweb/base.html:58
 #: auzonetweb/templates/auzonetweb/wizard.html:66
 msgid "Cerrar sesión"
-msgstr ""
+msgstr "Cerrar sesión"
 
-#: auzonetweb/templates/auzonetweb/base.html:69
-msgid "Copyright 2015. Aitor Brazaola. Universidad de Deusto."
-msgstr ""
+#: auzonetweb/templates/auzonetweb/base.html:82
+#, fuzzy
+#| msgid "Copyright 2015. Aitor Brazaola. Universidad de Deusto."
+msgid "Copyright 2015. Aitor Brazaola. Universidad de Deusto. &nbsp;&nbsp;"
+msgstr "Copyright 2015. Aitor Brazaola. Universidad de Deusto."
 
 #: auzonetweb/templates/auzonetweb/confirmation-success.html:11
-#: auzonetweb/views.py:486 auzonetweb/views.py:596
+#: auzonetweb/views.py:504 auzonetweb/views.py:614
 msgid "Acuerdo aceptado"
-msgstr ""
+msgstr "Acuerdo aceptado"
 
 #: auzonetweb/templates/auzonetweb/confirmation-success.html:16
 msgid "Fantástico"
-msgstr ""
+msgstr "Fantástico"
 
 #: auzonetweb/templates/auzonetweb/confirmation-success.html:17
 msgid "Ahora "
-msgstr ""
+msgstr "Ahora "
 
 #: auzonetweb/templates/auzonetweb/confirmation-success.html:17
 msgid ""
 "y tu colaboráis juntos recuerda votar tu experiencia al finalizar tu acuerdo "
 "desde la sección 'Acuerdos activos' de tu página de la comunidad."
 msgstr ""
+"y tu colaboráis juntos recuerda votar tu experiencia al finalizar tu acuerdo "
+"desde la sección 'Acuerdos activos' de tu página de la comunidad."
 
 #: auzonetweb/templates/auzonetweb/confirmation-success.html:18
 msgid "Volver al inicio"
-msgstr ""
+msgstr "Volver al inicio"
 
-#: auzonetweb/templates/auzonetweb/index.html:28
+#: auzonetweb/templates/auzonetweb/index.html:31
 msgid "Publicar mensaje en la corchera"
-msgstr ""
+msgstr "Publicar mensaje en la corchera"
 
-#: auzonetweb/templates/auzonetweb/index.html:33
+#: auzonetweb/templates/auzonetweb/index.html:36
 msgid "Consejo:"
-msgstr ""
+msgstr "Consejo:"
 
-#: auzonetweb/templates/auzonetweb/index.html:33
+#: auzonetweb/templates/auzonetweb/index.html:36
 msgid ""
 "Publica como AVISO si quieres que todos los miembros de tu comunidad sean "
 "notificados por email sobre el nuevo mensaje."
 msgstr ""
+"Publica como AVISO si quieres que todos los miembros de tu comunidad sean "
+"notificados por email sobre el nuevo mensaje."
 
-#: auzonetweb/templates/auzonetweb/index.html:42
-#: auzonetweb/templates/auzonetweb/index.html:69
-msgid "Publicar mensaje"
-msgstr ""
-
-#: auzonetweb/templates/auzonetweb/index.html:59
-msgid "Quiero ofrecer algo"
-msgstr ""
-
-#: auzonetweb/templates/auzonetweb/index.html:60
-msgid "Necesito algo"
-msgstr ""
-
-#: auzonetweb/templates/auzonetweb/index.html:66
-msgid "Corchera de"
-msgstr ""
-
+#: auzonetweb/templates/auzonetweb/index.html:45
 #: auzonetweb/templates/auzonetweb/index.html:72
+msgid "Publicar mensaje"
+msgstr "Publicar mensaje"
+
+#: auzonetweb/templates/auzonetweb/index.html:62
+msgid "Quiero ofrecer algo"
+msgstr "Quiero ofrecer algo"
+
+#: auzonetweb/templates/auzonetweb/index.html:63
+msgid "Necesito algo"
+msgstr "Necesito algo"
+
+#: auzonetweb/templates/auzonetweb/index.html:69
+msgid "Corchera de"
+msgstr "Corchera de"
+
+#: auzonetweb/templates/auzonetweb/index.html:75
 msgid "Aún no se ha publicado nada."
-msgstr ""
+msgstr "Aún no se ha publicado nada."
 
-#: auzonetweb/templates/auzonetweb/index.html:99
+#: auzonetweb/templates/auzonetweb/index.html:102
 msgid "previous"
-msgstr ""
+msgstr "Anterior"
 
-#: auzonetweb/templates/auzonetweb/index.html:103
+#: auzonetweb/templates/auzonetweb/index.html:106
 msgid "Page"
-msgstr ""
+msgstr "Página"
 
-#: auzonetweb/templates/auzonetweb/index.html:103
+#: auzonetweb/templates/auzonetweb/index.html:106
 msgid "of"
-msgstr ""
+msgstr "de"
 
-#: auzonetweb/templates/auzonetweb/index.html:107
+#: auzonetweb/templates/auzonetweb/index.html:110
 msgid "next"
-msgstr ""
+msgstr "Siguiente"
 
-#: auzonetweb/templates/auzonetweb/index.html:116
+#: auzonetweb/templates/auzonetweb/index.html:119
 msgid "Ofertas"
-msgstr ""
+msgstr "Ofertas"
 
-#: auzonetweb/templates/auzonetweb/index.html:117
+#: auzonetweb/templates/auzonetweb/index.html:120
 msgid "Peticiones"
-msgstr ""
+msgstr "Peticiones"
 
-#: auzonetweb/templates/auzonetweb/index.html:121
-#: auzonetweb/templates/auzonetweb/index.html:164
-#: auzonetweb/templates/auzonetweb/index.html:222
+#: auzonetweb/templates/auzonetweb/index.html:124
+#: auzonetweb/templates/auzonetweb/index.html:167
+#: auzonetweb/templates/auzonetweb/index.html:225
 msgid "Aún no se ha publicado nada"
-msgstr ""
+msgstr "Aún no se ha publicado nada"
 
-#: auzonetweb/templates/auzonetweb/index.html:127
-#: auzonetweb/templates/auzonetweb/index.html:170
+#: auzonetweb/templates/auzonetweb/index.html:130
+#: auzonetweb/templates/auzonetweb/index.html:173
 #: auzonetweb/templates/auzonetweb/user-profile.html:97
 #: auzonetweb/templates/auzonetweb/user-profile.html:132
 #: auzonetweb/templates/auzonetweb/user-profile.html:167
 msgid "Título"
-msgstr ""
-
-#: auzonetweb/templates/auzonetweb/index.html:128
-#: auzonetweb/templates/auzonetweb/index.html:171
-#: auzonetweb/templates/auzonetweb/user-profile.html:99
-msgid "Usuario"
-msgstr ""
-
-#: auzonetweb/templates/auzonetweb/index.html:129
-msgid "Coste"
-msgstr ""
-
-#: auzonetweb/templates/auzonetweb/index.html:130
-#: auzonetweb/templates/auzonetweb/index.html:173
-msgid "Categoría"
-msgstr ""
+msgstr "Título"
 
 #: auzonetweb/templates/auzonetweb/index.html:131
-#: auzonetweb/templates/auzonetweb/index.html:175
-msgid "Publicado"
-msgstr ""
-
-#: auzonetweb/templates/auzonetweb/index.html:172
-msgid "Recompensa"
-msgstr ""
-
 #: auzonetweb/templates/auzonetweb/index.html:174
+#: auzonetweb/templates/auzonetweb/user-profile.html:99
+msgid "Usuario"
+msgstr "Usuario"
+
+#: auzonetweb/templates/auzonetweb/index.html:132
+msgid "Coste"
+msgstr "Coste"
+
+#: auzonetweb/templates/auzonetweb/index.html:133
+#: auzonetweb/templates/auzonetweb/index.html:176
+msgid "Categoría"
+msgstr "Categoría"
+
+#: auzonetweb/templates/auzonetweb/index.html:134
+#: auzonetweb/templates/auzonetweb/index.html:178
+msgid "Publicado"
+msgstr "Publicado"
+
+#: auzonetweb/templates/auzonetweb/index.html:175
+msgid "Recompensa"
+msgstr "Recompensa"
+
+#: auzonetweb/templates/auzonetweb/index.html:177
 msgid "Fecha límite"
-msgstr ""
+msgstr "Fecha límite"
 
-#: auzonetweb/templates/auzonetweb/index.html:218
+#: auzonetweb/templates/auzonetweb/index.html:221
 msgid "Mis publicaciones activas"
-msgstr ""
+msgstr "Mis publicaciones activas"
 
-#: auzonetweb/templates/auzonetweb/index.html:229
-#: auzonetweb/templates/auzonetweb/index.html:269
+#: auzonetweb/templates/auzonetweb/index.html:232
+#: auzonetweb/templates/auzonetweb/index.html:272
 msgid "NECESITO"
-msgstr ""
+msgstr "NECESITO"
 
-#: auzonetweb/templates/auzonetweb/index.html:231
-#: auzonetweb/templates/auzonetweb/index.html:240
+#: auzonetweb/templates/auzonetweb/index.html:234
+#: auzonetweb/templates/auzonetweb/index.html:243
 msgid "en"
-msgstr ""
+msgstr "en"
 
-#: auzonetweb/templates/auzonetweb/index.html:238
+#: auzonetweb/templates/auzonetweb/index.html:241
 msgid "OFREZCO"
-msgstr ""
+msgstr "OFREZCO"
 
-#: auzonetweb/templates/auzonetweb/index.html:251
+#: auzonetweb/templates/auzonetweb/index.html:254
 #: auzonetweb/templates/auzonetweb/user-profile.html:94
 msgid "En atención"
-msgstr ""
+msgstr "En atención"
 
-#: auzonetweb/templates/auzonetweb/index.html:256
+#: auzonetweb/templates/auzonetweb/index.html:259
 msgid "No tengo acuerdos activos"
-msgstr ""
+msgstr "No tengo acuerdos activos"
 
-#: auzonetweb/templates/auzonetweb/index.html:264
+#: auzonetweb/templates/auzonetweb/index.html:267
 msgid "OFERTA"
-msgstr ""
+msgstr "OFERTA"
 
 #: auzonetweb/templates/auzonetweb/user-profile.html:53
 msgid "Miembro de"
-msgstr ""
+msgstr "Miembro de"
 
 #: auzonetweb/templates/auzonetweb/user-profile.html:74
 msgid "Peticiones publicadas"
-msgstr ""
+msgstr "Peticiones publicadas"
 
 #: auzonetweb/templates/auzonetweb/user-profile.html:78
 msgid "Peticiones atendidas"
-msgstr ""
+msgstr "Peticiones atendidas"
 
 #: auzonetweb/templates/auzonetweb/user-profile.html:82
 msgid "Ofertas publicadas"
-msgstr ""
+msgstr "Ofertas publicadas"
 
 #: auzonetweb/templates/auzonetweb/user-profile.html:86
-msgid "Ofertas recibidas"
-msgstr ""
+#, fuzzy
+#| msgid "Ofertas publicadas"
+msgid "Ofertas contratadas"
+msgstr "Ofertas publicadas"
 
 #: auzonetweb/templates/auzonetweb/user-profile.html:98
 #: auzonetweb/templates/auzonetweb/user-profile.html:133
 #: auzonetweb/templates/auzonetweb/user-profile.html:168
 msgid "Tipo"
-msgstr ""
+msgstr "Tipo"
 
 #: auzonetweb/templates/auzonetweb/user-profile.html:100
 #: auzonetweb/templates/auzonetweb/user-profile.html:135
 #: auzonetweb/templates/auzonetweb/user-profile.html:170
 msgid "Acciones"
-msgstr ""
+msgstr "Acciones"
 
 #: auzonetweb/templates/auzonetweb/user-profile.html:129
 msgid "Mis publicaciones"
-msgstr ""
+msgstr "Mis publicaciones"
 
 #: auzonetweb/templates/auzonetweb/user-profile.html:134
 #: auzonetweb/templates/auzonetweb/user-profile.html:169
 msgid "Fecha de publicación"
-msgstr ""
+msgstr "Fecha de publicación"
 
 #: auzonetweb/templates/auzonetweb/user-profile.html:164
 msgid "Historial"
-msgstr ""
+msgstr "Historial"
 
 #: auzonetweb/templates/auzonetweb/welcome.html:37
 msgid "Bienvenido a AuzoNet"
-msgstr ""
+msgstr "Bienvenido a Auzonet"
 
 #: auzonetweb/templates/auzonetweb/welcome.html:38
 msgid "La red social de vecinos"
-msgstr ""
+msgstr "La red social de vecinos"
 
 #: auzonetweb/templates/auzonetweb/welcome.html:39
 msgid "Inicia sesión"
-msgstr ""
+msgstr "Inicia sesión"
 
 #: auzonetweb/templates/auzonetweb/welcome.html:40
 msgid "Regístrate"
-msgstr ""
+msgstr "Regístrate"
 
-#: auzonetweb/templates/auzonetweb/welcome.html:53
+#: auzonetweb/templates/auzonetweb/welcome.html:71
 msgid "Iniciar sesión"
-msgstr ""
+msgstr "Iniciar sesión"
 
-#: auzonetweb/templates/auzonetweb/welcome.html:70
+#: auzonetweb/templates/auzonetweb/welcome.html:88
 msgid "Login"
-msgstr ""
+msgstr "Iniciar sesión"
 
-#: auzonetweb/templates/auzonetweb/welcome.html:84
-#: auzonetweb/templates/auzonetweb/welcome.html:101
+#: auzonetweb/templates/auzonetweb/welcome.html:102
+#: auzonetweb/templates/auzonetweb/welcome.html:119
 msgid "Register"
-msgstr ""
+msgstr "Registrarse"
 
 #: auzonetweb/templates/auzonetweb/wizard.html:38
 msgid "Bienvenido"
-msgstr ""
+msgstr "Bienvenido"
 
 #: auzonetweb/templates/auzonetweb/wizard.html:41
 msgid "Unirme a una comunidad existente"
-msgstr ""
+msgstr "Unirme a una comunidad existente"
 
 #: auzonetweb/templates/auzonetweb/wizard.html:54
 msgid "Unirme"
-msgstr ""
+msgstr "Unirme"
 
 #: auzonetweb/templates/auzonetweb/wizard.html:62
 msgid "Aún no hay comunidades de vecinos activas"
-msgstr ""
+msgstr "Aún no hay comunidades de vecinos activas"
 
 #: auzonetweb/templates/auzonetweb/wizard.html:64
 msgid "Crear una nueva"
-msgstr ""
+msgstr "Crear una nueva"
 
 #: auzonetweb/templates/auzonetweb/wizard.html:81
 msgid "Crear"
-msgstr ""
-
-#: auzonetweb/views.py:90
-msgid "Nuevo aviso en "
-msgstr ""
+msgstr "Crear"
 
 #: auzonetweb/views.py:91
-msgid "Nuevo aviso"
-msgstr ""
+msgid "Nuevo aviso en "
+msgstr "Nuevo aviso en "
 
 #: auzonetweb/views.py:92
+msgid "Nuevo aviso"
+msgstr "Nuevo aviso"
+
+#: auzonetweb/views.py:93
 msgid " ha publicado el siguiente aviso en "
-msgstr ""
+msgstr " ha publicado el siguiente aviso en "
 
-#: auzonetweb/views.py:95
+#: auzonetweb/views.py:96
 msgid "Ver el mensaje en la web"
-msgstr ""
+msgstr "Ver el mensaje en la web"
 
-#: auzonetweb/views.py:131 auzonetweb/views.py:140 auzonetweb/views.py:154
-#: auzonetweb/views.py:234 auzonetweb/views.py:555 auzonetweb/views.py:607
+#: auzonetweb/views.py:143 auzonetweb/views.py:152 auzonetweb/views.py:166
+#: auzonetweb/views.py:246 auzonetweb/views.py:573 auzonetweb/views.py:625
 msgid "Unauthorized"
-msgstr ""
+msgstr "No autorizado"
 
-#: auzonetweb/views.py:174 auzonetweb/views.py:178 auzonetweb/views.py:206
-#: auzonetweb/views.py:209
+#: auzonetweb/views.py:186 auzonetweb/views.py:190 auzonetweb/views.py:218
+#: auzonetweb/views.py:221
 msgid " ha marcado como terminado el acuerdo sobre "
-msgstr ""
+msgstr " ha marcado como terminado el acuerdo sobre "
 
-#: auzonetweb/views.py:174 auzonetweb/views.py:206
+#: auzonetweb/views.py:186 auzonetweb/views.py:218
 msgid ""
 " y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma "
 "que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n"
@@ -498,8 +510,13 @@ msgid ""
 " Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu "
 "experiencia con "
 msgstr ""
+" y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma "
+"que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n"
+"\n"
+" Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu "
+"experiencia con "
 
-#: auzonetweb/views.py:178 auzonetweb/views.py:209
+#: auzonetweb/views.py:190 auzonetweb/views.py:221
 msgid ""
 " y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma "
 "que empeoran tu reputacion en la comunidad. \n"
@@ -507,143 +524,155 @@ msgid ""
 " Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu "
 "experiencia con "
 msgstr ""
+" y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma "
+"que empeoran tu reputacion en la comunidad. \n"
+"\n"
+" Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu "
+"experiencia con "
 
-#: auzonetweb/views.py:188 auzonetweb/views.py:189 auzonetweb/views.py:219
-#: auzonetweb/views.py:220
+#: auzonetweb/views.py:200 auzonetweb/views.py:201 auzonetweb/views.py:231
+#: auzonetweb/views.py:232
 msgid " ha marcado como finalizada la colaboracion"
-msgstr ""
-
-#: auzonetweb/views.py:253
-msgid "Tienes que seleccionar una comunidad de la lista."
-msgstr ""
-
-#: auzonetweb/views.py:263 auzonetweb/views.py:264
-msgid "Bienvenido a "
-msgstr ""
-
-#: auzonetweb/views.py:265
-msgid "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, "
-msgstr ""
-
-#: auzonetweb/views.py:266
-msgid "estaras al dia de lo mas relevante que ocurra en ella. "
-msgstr ""
+msgstr " ha marcado como finalizada la colaboracion"
 
 #: auzonetweb/views.py:267
-msgid "Date una vuelta por la seccion de peticiones y ofertas por "
-msgstr ""
+msgid "Tienes que seleccionar una comunidad de la lista."
+msgstr "Tienes que seleccionar una comunidad de la lista."
 
-#: auzonetweb/views.py:268
+#: auzonetweb/views.py:277 auzonetweb/views.py:278
+msgid "Bienvenido a "
+msgstr "Bienvenido a "
+
+#: auzonetweb/views.py:279
+msgid "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, "
+msgstr ""
+"A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, "
+
+#: auzonetweb/views.py:280
+msgid "estaras al dia de lo mas relevante que ocurra en ella. "
+msgstr "estaras al dia de lo mas relevante que ocurra en ella. "
+
+#: auzonetweb/views.py:281
+msgid "Date una vuelta por la seccion de peticiones y ofertas por "
+msgstr "Date una vuelta por la seccion de peticiones y ofertas por "
+
+#: auzonetweb/views.py:282
 msgid ""
 "si encuentras algo de tu interes. \n"
 " \n"
 msgstr ""
+"si encuentras algo de tu interes. \n"
+" \n"
 
-#: auzonetweb/views.py:269
+#: auzonetweb/views.py:283
 msgid "Ir a la web"
-msgstr ""
+msgstr "Ir a la web"
 
-#: auzonetweb/views.py:278 auzonetweb/views.py:295
+#: auzonetweb/views.py:292 auzonetweb/views.py:309
 msgid "Por favor, revisa los campos indicados"
-msgstr ""
+msgstr "Por favor, revisa los campos indicados"
 
-#: auzonetweb/views.py:340
+#: auzonetweb/views.py:360
 msgid "Usuario o contraseña incorrectos"
-msgstr ""
+msgstr "Usuario o contraseña incorrectos"
 
-#: auzonetweb/views.py:344 auzonetweb/views.py:398
+#: auzonetweb/views.py:364 auzonetweb/views.py:416
 msgid "Por favor, revise los campos indicados"
-msgstr ""
+msgstr "Por favor, revise los campos indicados"
 
-#: auzonetweb/views.py:374 auzonetweb/views.py:375
+#: auzonetweb/views.py:394 auzonetweb/views.py:395
 msgid "Bienvenido a Auzonet"
-msgstr ""
+msgstr "Bienvenido a Auzonet"
 
-#: auzonetweb/views.py:376
+#: auzonetweb/views.py:396
 msgid "Gracias por registrarte"
-msgstr ""
+msgstr "Gracias por registrarte"
 
-#: auzonetweb/views.py:376
+#: auzonetweb/views.py:396
 msgid ", busca tu comunidad entre las que ya estan "
-msgstr ""
+msgstr ", busca tu comunidad entre las que ya estan "
 
-#: auzonetweb/views.py:377
+#: auzonetweb/views.py:397
 msgid "registradas o crea la tuya para empezar a disfrutar de todo lo que "
-msgstr ""
+msgstr "registradas o crea la tuya para empezar a disfrutar de todo lo que "
 
-#: auzonetweb/views.py:378
+#: auzonetweb/views.py:398
 msgid "ofrece el servicio"
-msgstr ""
+msgstr "ofrece el servicio"
 
-#: auzonetweb/views.py:386
+#: auzonetweb/views.py:406
 msgid "El nombre de usuario ya existe."
-msgstr ""
+msgstr "El nombre de usuario ya existe."
 
-#: auzonetweb/views.py:439 auzonetweb/views.py:546
+#: auzonetweb/views.py:457 auzonetweb/views.py:564
 msgid "Por favor, revisa los campos indicados."
-msgstr ""
+msgstr "Por favor, revisa los campos indicados."
 
-#: auzonetweb/views.py:485
+#: auzonetweb/views.py:503
 msgid " ha aceptado trabajar contigo"
-msgstr ""
+msgstr " ha aceptado trabajar contigo"
 
-#: auzonetweb/views.py:487 auzonetweb/views.py:597
+#: auzonetweb/views.py:505 auzonetweb/views.py:615
 msgid " ha aceptado el acuerdo sobre "
-msgstr ""
+msgstr " ha aceptado el acuerdo sobre "
 
-#: auzonetweb/views.py:488 auzonetweb/views.py:598
+#: auzonetweb/views.py:506 auzonetweb/views.py:616
 msgid ""
 " recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."
 msgstr ""
+" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."
 
-#: auzonetweb/views.py:489
+#: auzonetweb/views.py:507
 msgid "Ver la oferta"
-msgstr ""
+msgstr "Ver la oferta"
 
-#: auzonetweb/views.py:516 auzonetweb/views.py:626
+#: auzonetweb/views.py:534 auzonetweb/views.py:644
 msgid "Auzonet: "
-msgstr ""
+msgstr "Auzonet: "
 
-#: auzonetweb/views.py:516
+#: auzonetweb/views.py:534
 msgid " esta interesado en tu oferta."
-msgstr ""
+msgstr " esta interesado en tu oferta."
 
-#: auzonetweb/views.py:517
+#: auzonetweb/views.py:535
 msgid "Me interesa"
-msgstr ""
+msgstr "Me interesa"
 
-#: auzonetweb/views.py:518 auzonetweb/views.py:628
+#: auzonetweb/views.py:536 auzonetweb/views.py:646
 msgid "El usuario "
-msgstr ""
+msgstr "El usuario "
 
-#: auzonetweb/views.py:518
+#: auzonetweb/views.py:536
 msgid " esta interesado en tu oferta "
-msgstr ""
+msgstr " esta interesado en tu oferta "
 
-#: auzonetweb/views.py:519
+#: auzonetweb/views.py:537
 msgid "Aceptar solicitud"
-msgstr ""
+msgstr "Aceptar solicitud"
 
-#: auzonetweb/views.py:595
+#: auzonetweb/views.py:613
 msgid " ha aceptado tu ayuda"
-msgstr ""
+msgstr " ha aceptado tu ayuda"
 
-#: auzonetweb/views.py:599
+#: auzonetweb/views.py:617
 msgid "Ver la peticion"
-msgstr ""
+msgstr "Ver la peticion"
 
-#: auzonetweb/views.py:626
+#: auzonetweb/views.py:644
 msgid " quiere atender tu peticion"
-msgstr ""
+msgstr " quiere atender tu peticion"
 
-#: auzonetweb/views.py:627
+#: auzonetweb/views.py:645
 msgid "¿Te echo una mano?"
-msgstr ""
+msgstr "¿Te echo una mano?"
 
-#: auzonetweb/views.py:628
+#: auzonetweb/views.py:646
 msgid " quiere atender tu peticion "
-msgstr ""
+msgstr " quiere atender tu peticion "
 
-#: auzonetweb/views.py:629
+#: auzonetweb/views.py:647
 msgid "Aceptar colaboración"
-msgstr ""
+msgstr "Aceptar colaboración"
+
+#~ msgid "Ofertas recibidas"
+#~ msgstr "Ofertas recibidas"

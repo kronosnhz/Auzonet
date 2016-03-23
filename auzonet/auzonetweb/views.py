@@ -1,4 +1,5 @@
 # coding=utf-8
+import datetime
 import requests
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -77,28 +78,32 @@ def index(request, comid=None):
     if request.method == 'POST':
         # Form with filled data
         message_model_form = NewCommunityMsgModelForm(request.POST)
-        new_message = message_model_form.save(commit=False)
-        new_message.community = get_object_or_404(Community, id=request.session['currentCommunityId'])
-        new_message.owner = request.user
-        new_message.save()
+        if message_model_form.is_valid():
+            new_message = message_model_form.save(commit=False)
+            new_message.community = get_object_or_404(Community, id=request.session['currentCommunityId'])
+            new_message.owner = request.user
+            new_message.save()
 
-        if new_message.message_type == MESSAGE_TYPE_WARNING:
-            community_users = PublicUser.objects.filter(communities=request.session['currentCommunityId'])
-            for up in community_users:
-                send_notification_email(None,
-                                        up.user.email,
-                                        ugettext("Nuevo aviso en ") + request.session['currentCommunityAddress'],
-                                        ugettext("Nuevo aviso"),
-                                        new_message.owner.first_name + ugettext(" ha publicado el siguiente aviso en ") +
-                                        request.session['currentCommunityAddress'] +
-                                        ": " + new_message.message_text,
-                                        ugettext("Ver el mensaje en la web"),
-                                        reverse('indexcommunity',
-                                                kwargs={'comid': request.session['currentCommunityId']}),
-                                        request.user.publicuser.avatar.url
-                                        )
+            if new_message.message_type == MESSAGE_TYPE_WARNING:
+                community_users = PublicUser.objects.filter(communities=request.session['currentCommunityId'])
+                for up in community_users:
+                    send_notification_email(None,
+                                            up.user.email,
+                                            ugettext("Nuevo aviso en ") + request.session['currentCommunityAddress'],
+                                            ugettext("Nuevo aviso"),
+                                            new_message.owner.first_name + ugettext(
+                                                " ha publicado el siguiente aviso en ") +
+                                            request.session['currentCommunityAddress'] +
+                                            ": " + new_message.message_text,
+                                            ugettext("Ver el mensaje en la web"),
+                                            reverse('indexcommunity',
+                                                    kwargs={'comid': request.session['currentCommunityId']}),
+                                            request.user.publicuser.avatar.url
+                                            )
 
-        return redirect('index')
+            return redirect('indexcommunity', comid=request.session['currentCommunityId'])
+        else:
+            message_model_form = NewCommunityMsgModelForm(request.POST)
     else:
         message_model_form = NewCommunityMsgModelForm()
 
@@ -115,11 +120,45 @@ def index(request, comid=None):
 
 @login_required
 def user_profile(request):
-    return render(request, 'auzonetweb/user-profile.html', {'currentUser': request.user})
+    requests_published = Request.objects.all().filter(owner=request.user).order_by('-date_published')
+    requests_attended = Order.objects.all().filter(order_type=ORDER_TYPE_REQUEST).filter(client=request.user)
+    offers_published = Offer.objects.all().filter(owner=request.user).order_by('-date_published')
+    offers_hired = Order.objects.all().filter(order_type=ORDER_TYPE_OFFER).filter(client=request.user)
+    current_date = datetime.datetime.now()
+
+    # Count requests for the chart
+    requests_per_month = []
+    for i in range(current_date.month):
+        requests_per_month.append(0)
+
+    for i in range(current_date.month):
+        for r in requests_published:
+            if (r.date_published.month == i + 1) and (r.date_published.year == current_date.year):
+                requests_per_month[i] += 1
+
+    # Count offers for the chart
+    offers_per_month = []
+    for i in range(current_date.month):
+        offers_per_month.append(0)
+
+    for i in range(current_date.month):
+        for o in offers_published:
+            if (o.date_published.month == i + 1) and (o.date_published.year == current_date.year):
+                offers_per_month[i] += 1
+
+    return render(request, 'auzonetweb/user-profile.html', {'currentUser': request.user,
+                                                            'requests_attended': requests_attended,
+                                                            'requests_published': requests_published,
+                                                            'offers_published': offers_published,
+                                                            'offers_hired': offers_hired,
+                                                            'current_year': current_date.year,
+                                                            'requests_per_month': requests_per_month,
+                                                            'offers_per_month': offers_per_month})
 
 
 @login_required
 def delete_post(request, postid, posttype):
+    p = ""
     if posttype == 'R':
         p = get_object_or_404(Request, id=postid)
         if p.owner.id == request.user.id:
@@ -142,7 +181,7 @@ def delete_post(request, postid, posttype):
     p.status = STATUS_FINISHED
 
     p.save()
-    return redirect('index')
+    return redirect('indexcommunity', comid=request.session['currentCommunityId'])
 
 
 @login_required
@@ -153,7 +192,7 @@ def delete_message(request, messageid):
     else:
         return HttpResponse(ugettext('Unauthorized'), status=401)
 
-    return redirect('index')
+    return redirect('indexcommunity', comid=request.session['currentCommunityId'])
 
 
 @login_required
@@ -171,11 +210,15 @@ def finalize_order(request, orderid, feedback):
         if feedback == '1':
             # Good feedback
             order.owner.publicuser.karma += KARMA_REWARD
-            mailtext = order.client.user.first_name + ugettext(" ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(" y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.client.first_name + "."
+            mailtext = order.client.user.first_name + ugettext(
+                " ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
+                " y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.client.first_name + "."
         else:
             # Bad feedback
             order.owner.publicuser.karma -= KARMA_REWARD
-            mailtext = order.client.user.first_name + ugettext(" ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(" y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma que empeoran tu reputacion en la comunidad. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.client.first_name + "."
+            mailtext = order.client.user.first_name + ugettext(
+                " ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
+                " y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma que empeoran tu reputacion en la comunidad. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.client.first_name + "."
         # Mark that the client already has voted
         order.client_voted = True
         # Send notification
@@ -203,10 +246,14 @@ def finalize_order(request, orderid, feedback):
         # The owner is finalizing the order
         if feedback == '1':
             order.client.publicuser.karma += KARMA_REWARD
-            mailtext = order.owner.user.first_name + ugettext(" ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(" y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
+            mailtext = order.owner.user.first_name + ugettext(
+                " ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
+                " y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
         else:
             order.client.publicuser.karma -= KARMA_REWARD
-            mailtext = order.owner.user.first_name + ugettext(" ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(" y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma que empeoran tu reputacion en la comunidad. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
+            mailtext = order.owner.user.first_name + ugettext(
+                " ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
+                " y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma que empeoran tu reputacion en la comunidad. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
         # Mark that the owner already has voted
         order.owner_voted = True
         # Send notification
@@ -239,67 +286,76 @@ def wizard(request):
     # Documentación http://apps.morelab.deusto.es/doc-welive/query-mapper/json-mapping.html
     # Dataset de portales https://dev.welive.eu/ods/dataset/portales-de-bilbao/resource/73b6103b-0c12-4b2c-98ae-71ed33e55e8c
     # Interfaz Swagger https://dev.welive.eu/dev/swagger/
+    # DatasetID portales-de-bilbao
+    # ResourceID 73b6103b-0c12-4b2c-98ae-71ed33e55e8c
     communities = Community.objects.all()
 
     if request.method == 'POST':
         if request.POST['formName'] == 'joinCommunity':
-            selectCommunityForm = JoinCommunityForm(request.POST)
+            select_community_form = JoinCommunityForm(request.POST)
             try:
-                selectedCommunity = get_object_or_404(Community, id=request.POST['community'])
+                selected_community = get_object_or_404(Community, id=request.POST['community'])
             except ValueError:
                 return render(request, 'auzonetweb/wizard.html',
-                              {'newCommunityForm': NewCommunityModelForm(), 'selectCommunityForm': selectCommunityForm,
+                              {'newCommunityForm': NewCommunityModelForm(),
+                               'selectCommunityForm': select_community_form,
                                'communities': communities,
-                               'errorMessage': ugettext('Tienes que seleccionar una comunidad de la lista.'), 'modal': 'join'})
-            if selectCommunityForm.is_valid():
-                currentUser = get_object_or_404(User, id=request.user.id)
-                currentUser.publicuser.communities.add(selectedCommunity)
-                currentUser.save()
-                request.session['currentCommunityId'] = selectedCommunity.id
-                request.session['currentCommunityAddress'] = selectedCommunity.address
+                               'errorMessage': ugettext('Tienes que seleccionar una comunidad de la lista.'),
+                               'modal': 'join'})
+            if select_community_form.is_valid():
+                current_user = get_object_or_404(User, id=request.user.id)
+                current_user.publicuser.communities.add(selected_community)
+                current_user.save()
+                request.session['currentCommunityId'] = selected_community.id
+                request.session['currentCommunityAddress'] = selected_community.address
 
                 send_notification_email(None,
-                                        currentUser.email,
-                                        ugettext("Bienvenido a ") + selectedCommunity.address,
-                                        ugettext("Bienvenido a ") + selectedCommunity.address,
-                                        ugettext("A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
+                                        current_user.email,
+                                        ugettext("Bienvenido a ") + selected_community.address,
+                                        ugettext("Bienvenido a ") + selected_community.address,
+                                        ugettext(
+                                            "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
                                         ugettext("estaras al dia de lo mas relevante que ocurra en ella. ") +
                                         ugettext("Date una vuelta por la seccion de peticiones y ofertas por ") +
-                                        ugettext("si encuentras algo de tu interes. \n \n") + selectedCommunity.welcome_message,
+                                        ugettext(
+                                            "si encuentras algo de tu interes. \n \n") + selected_community.welcome_message,
                                         ugettext("Ir a la web"),
-                                        reverse('indexcommunity', kwargs={'comid': selectedCommunity.id}),
+                                        reverse('indexcommunity', kwargs={'comid': selected_community.id}),
                                         None
                                         )
 
                 return redirect('index')
             else:
                 return render(request, 'auzonetweb/wizard.html',
-                              {'newCommunityForm': NewCommunityModelForm(), 'selectCommunityForm': selectCommunityForm,
-                               'communities': communities, 'errorMessage': ugettext('Por favor, revisa los campos indicados'),
+                              {'newCommunityForm': NewCommunityModelForm(),
+                               'selectCommunityForm': select_community_form,
+                               'communities': communities,
+                               'errorMessage': ugettext('Por favor, revisa los campos indicados'),
                                'modal': 'join'})
         elif request.POST['formName'] == 'newCommunity':
-            newCommunityModelForm = NewCommunityModelForm(request.POST)
-            if newCommunityModelForm.is_valid():
-                newCommunity = newCommunityModelForm.save()
+            new_community_model_form = NewCommunityModelForm(request.POST)
+            if new_community_model_form.is_valid():
+                new_community = new_community_model_form.save()
 
-                currentUser = get_object_or_404(User, id=request.user.id)
-                currentUser.publicuser.communities.add(newCommunity)
-                currentUser.save()
-                request.session['currentCommunityId'] = newCommunity.id
-                request.session['currentCommunityAddress'] = newCommunity.address
+                current_user = get_object_or_404(User, id=request.user.id)
+                current_user.publicuser.communities.add(new_community)
+                current_user.save()
+                request.session['currentCommunityId'] = new_community.id
+                request.session['currentCommunityAddress'] = new_community.address
 
                 return redirect('index')
             else:
                 return render(request, 'auzonetweb/wizard.html',
-                              {'newCommunityForm': newCommunityModelForm, 'selectCommunityForm': JoinCommunityForm(),
-                               'communities': communities, 'errorMessage': ugettext('Por favor, revisa los campos indicados'),
+                              {'newCommunityForm': new_community_model_form, 'selectCommunityForm': JoinCommunityForm(),
+                               'communities': communities,
+                               'errorMessage': ugettext('Por favor, revisa los campos indicados'),
                                'modal': 'new'})
     else:
-        newCommunityModelForm = NewCommunityModelForm()
-        selectCommunityForm = JoinCommunityForm()
+        new_community_model_form = NewCommunityModelForm()
+        select_community_form = JoinCommunityForm()
 
     return render(request, 'auzonetweb/wizard.html',
-                  {'newCommunityForm': newCommunityModelForm, 'selectCommunityForm': selectCommunityForm,
+                  {'newCommunityForm': new_community_model_form, 'selectCommunityForm': select_community_form,
                    'communities': communities})
 
 
@@ -308,12 +364,15 @@ def welcome(request):
         return redirect('index')
     else:
         # if this is a POST request we need to process the form data
+        next = ""
+        if request.GET:
+            next = request.GET['next']
         if request.method == 'POST':
-            loginForm = LoginForm(request.POST)
-            registerForm = RegisterForm(request.POST, request.FILES)
+            login_form = LoginForm(request.POST)
+            register_form = RegisterForm(request.POST, request.FILES)
             if request.POST['formtype'] == 'login':
                 # check whether it's valid:
-                if loginForm.is_valid():
+                if login_form.is_valid():
                     # process the data in form.cleaned_data as required
                     username = request.POST['username']
                     password = request.POST['password']
@@ -326,7 +385,11 @@ def welcome(request):
                                 request.session['currentCommunityAddress'] = request.user.publicuser.communities.all()[
                                     0].address
                                 # Redirect to a success page.
-                                return redirect('indexcommunity', comid=request.user.publicuser.communities.all()[0].id)
+                                if next:
+                                    return redirect(next)
+                                else:
+                                    return redirect('indexcommunity',
+                                                    comid=request.user.publicuser.communities.all()[0].id)
                             except IndexError:
                                 # The user does not have community yet
                                 return redirect('wizard')
@@ -336,15 +399,16 @@ def welcome(request):
                     else:
                         # Return an 'invalid login' error message.
                         return render(request, 'auzonetweb/welcome.html',
-                                      {'loginForm': loginForm, 'registerForm': RegisterForm(),
+                                      {'loginForm': login_form, 'registerForm': RegisterForm(),
                                        'errorMessage': ugettext('Usuario o contraseña incorrectos'), 'modal': 'login'})
                 else:
                     return render(request, 'auzonetweb/welcome.html',
-                                  {'loginForm': loginForm, 'registerForm': RegisterForm(),
-                                   'errorMessage': ugettext('Por favor, revise los campos indicados'), 'modal': 'login'})
+                                  {'loginForm': login_form, 'registerForm': RegisterForm(),
+                                   'errorMessage': ugettext('Por favor, revise los campos indicados'),
+                                   'modal': 'login'})
             elif request.POST['formtype'] == 'register':
                 # check whether it's valid:
-                if registerForm.is_valid():
+                if register_form.is_valid():
                     # process the data in form.cleaned_data as required
                     username = request.POST['username']
                     email = request.POST['email']
@@ -373,8 +437,10 @@ def welcome(request):
                                                 email,
                                                 ugettext("Bienvenido a Auzonet"),
                                                 ugettext("Bienvenido a Auzonet"),
-                                                ugettext("Gracias por registrarte") + first_name + ugettext(", busca tu comunidad entre las que ya estan ") +
-                                                ugettext("registradas o crea la tuya para empezar a disfrutar de todo lo que ") +
+                                                ugettext("Gracias por registrarte") + first_name + ugettext(
+                                                    ", busca tu comunidad entre las que ya estan ") +
+                                                ugettext(
+                                                    "registradas o crea la tuya para empezar a disfrutar de todo lo que ") +
                                                 ugettext("ofrece el servicio"),
                                                 None,
                                                 None,
@@ -382,25 +448,25 @@ def welcome(request):
                                                 )
                     except IntegrityError:
                         return render(request, 'auzonetweb/welcome.html',
-                                      {'loginForm': LoginForm(), 'registerForm': registerForm,
-                                       'errorMessage': ugettext('El nombre de usuario ya existe.'), 'modal': 'register'})
+                                      {'loginForm': LoginForm(), 'registerForm': register_form,
+                                       'errorMessage': ugettext('El nombre de usuario ya existe.'),
+                                       'modal': 'register'})
 
                     user = authenticate(username=username, password=password)
                     login(request, user)
 
                     # Send a confirmation email
-
-
                     return redirect('wizard')
                 else:
                     return render(request, 'auzonetweb/welcome.html',
-                                  {'loginForm': LoginForm(), 'registerForm': registerForm,
-                                   'errorMessage': ugettext('Por favor, revise los campos indicados'), 'modal': 'register'})
+                                  {'loginForm': LoginForm(), 'registerForm': register_form,
+                                   'errorMessage': ugettext('Por favor, revise los campos indicados'),
+                                   'modal': 'register'})
         else:
-            loginForm = LoginForm()
-            registerForm = RegisterForm()
+            login_form = LoginForm()
+            register_form = RegisterForm()
 
-        return render(request, 'auzonetweb/welcome.html', {'loginForm': loginForm, 'registerForm': registerForm})
+        return render(request, 'auzonetweb/welcome.html', {'loginForm': login_form, 'registerForm': register_form})
 
 
 def bootcamp(request):
@@ -484,7 +550,8 @@ def accept_offer(request, orderid):
                                 order.offer.client.user.email,
                                 order.offer.owner.user.first_name + ugettext(" ha aceptado trabajar contigo"),
                                 ugettext("Acuerdo aceptado"),
-                                order.offer.owner.user.first_name + ugettext(" ha aceptado el acuerdo sobre ") + order.offer.title +
+                                order.offer.owner.user.first_name + ugettext(
+                                    " ha aceptado el acuerdo sobre ") + order.offer.title +
                                 ugettext(" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
                                 ugettext("Ver la oferta"),
                                 reverse('detail-offer', order.offer.id),
@@ -515,7 +582,8 @@ def hire_offer(request, offerid):
     toEmail = offer.owner.email
     subject = ugettext("Auzonet: ") + userInterested.username + ugettext(" esta interesado en tu oferta.")
     subtitle = ugettext('Me interesa')
-    content = ugettext('El usuario ') + userInterested.username + ugettext(' esta interesado en tu oferta ') + offer.title
+    content = ugettext('El usuario ') + userInterested.username + ugettext(
+        ' esta interesado en tu oferta ') + offer.title
     buttonText = ugettext('Aceptar solicitud')
     buttonLink = reverse('accept-offer', kwargs={'orderid': order.id})
     avatarLink = userInterested.publicuser.avatar.url
@@ -543,7 +611,8 @@ def edit_request(request, requestid=None):
             newRequest.save()
         else:
             return render(request, 'auzonetweb/Request/edit-request.html',
-                          {'requestForm': requestForm, 'errorMessage': ugettext('Por favor, revisa los campos indicados.')})
+                          {'requestForm': requestForm,
+                           'errorMessage': ugettext('Por favor, revisa los campos indicados.')})
 
         return redirect('detail-request', requestid=newRequest.id)
     elif requestid is not None:
@@ -594,7 +663,8 @@ def accept_request(request, orderid):
                                 order.auzonetrequest.client.user.email,
                                 order.auzonetrequest.owner.user.first_name + ugettext(" ha aceptado tu ayuda"),
                                 ugettext("Acuerdo aceptado"),
-                                order.auzonetrequest.owner.user.first_name + ugettext(" ha aceptado el acuerdo sobre ") + order.auzonetrequest.title +
+                                order.auzonetrequest.owner.user.first_name + ugettext(
+                                    " ha aceptado el acuerdo sobre ") + order.auzonetrequest.title +
                                 ugettext(" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
                                 ugettext("Ver la peticion"),
                                 reverse('detail-request', order.auzonetrequest.id),
@@ -625,7 +695,8 @@ def hire_request(request, requestid):
     toEmail = userOwner.email
     subject = ugettext("Auzonet: ") + userInterested.username + ugettext(" quiere atender tu peticion")
     subtitle = ugettext('¿Te echo una mano?')
-    content = ugettext('El usuario ') + userInterested.username + ugettext(' quiere atender tu peticion ') + auzonetrequest.title
+    content = ugettext('El usuario ') + userInterested.username + ugettext(
+        ' quiere atender tu peticion ') + auzonetrequest.title
     buttonText = ugettext('Aceptar colaboración')
     buttonLink = reverse('accept-request', kwargs={'requestid': auzonetrequest.id})
     avatarLink = userInterested.publicuser.avatar.url
