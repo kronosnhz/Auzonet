@@ -136,7 +136,7 @@ Finalmente se contempla la creación de un manual de usuario que detalle todas l
 \section{Descripción de la realización}
 La realización de Azonet se va a separar en unidades funcionales, en primer lugar se centará en finalizar la aplicación web y después la móvil.
 
-Como se puede ver en el EDT las fases del proyecto van a ser las siguientes:
+Como se puede ver en el EDT \ref{fig:edt} las fases del proyecto van a ser las siguientes:
 \begin{description}
   \item[Requisitos:] Análisis de los principales requisitos funcionales.
   \item[Diseño:] Diseño de las estrucutras de datos y lógicas que harán funcionar la aplicación, creación de maquetas y aproximación al diseño estético de la solución.
@@ -152,6 +152,14 @@ Como se puede ver en el EDT las fases del proyecto van a ser las siguientes:
   \item Aplicación móvil funcional.
 \end{itemize}
 
+\newgeometry{left=0cm,right=0cm,bottom=0cm,top=0cm}
+\begin{figure}
+    \centering
+    \includegraphics{fig/EDT}
+    \caption{EDT}\label{fig:edt}
+\end{figure}
+\restoregeometry
+
 \section{Organización}
 \subsection{Estructura de la organización}
 El desarrollo del proyecto se va a llevar a cabo durante la jornada de trabajo en DeustoTech MORELab de 4 horas diarias y solo se contará un un solo recurso humano que hará los siguientes perfiles:
@@ -164,6 +172,74 @@ El desarrollo del proyecto se va a llevar a cabo durante la jornada de trabajo e
 \end{description}
 
 Cada dos semanas se hará una sesión en la que se valorará el trabajo realizado y los cambios necesarios y si ya constituye suficiente producto como para considerar lo hecho una unidad funcional.
+
+\section{Estimación de cargas de trabajo}
+\begin{itemize}
+    \item 1. Definición de requisitos: 15
+    \item 2. Aplicación web: 171
+    \begin{itemize}
+        \item 2.1. Creación de prototipo de la aplicación web: 15
+        \item 2.2. Modelado de datos: 9
+        \item 2.3. Diseño del software: 15
+        \item 2.4. Implementación de las funciones básicas del portal: 45
+        \item 2.5. Creación de un sistema de usuarios: 18
+        \item 2.6. Implementación de los avisos por mail: 9
+        \item 2.7. Securización de enlaces: 3
+        \item 2.8. Mensajes de error: 3
+        \item 2.9. Internacionalización: 6
+        \item 2.10. Despliegue en servidor: 12
+        \item 2.12. Autenticación con Google: 6
+        \item 2.13. Autenticación con Facebook: 6
+        \item 2.14. Integración con WeLive: 6
+        \item 2.15. API Rest: 12
+        \item 2.16. Corrección de errores visuales en pantallas de alta densidad: 3
+    \end{itemize}
+    \item 3. Aplicación móvil: 60
+    \begin{itemize}
+        \item 3.1. Prototipo de aplicación móvil: 3
+        \item 3.2. Formación en la tecnología elegida para el desarrollo: 12
+        \item 3.3. Implementación de la app móvil: 45
+    \end{itemize}
+    \item 4. Pruebas: 12
+\end{itemize}
+\section{Reparto de cargas de trabajo}
+A continuación, se especifica la carga de trabajo èstimada para cada perfil del proyecto sobre el total de 258:
+\begin{description}
+    \item[Desarrollador de software:] 218
+    \item[Diseñador:] 22
+    \item[Director de proyecto:] 15
+    \item[Experto en plataforma WeLive:] 3
+\end{description}
+
+\section{Diagrama de GANTT}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=350pt]{fig/gantt}
+    \caption{Diagrama de GANTT}\label{fig:gantt}
+\end{figure}
+
+\section{Diagrama de precedencia}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=280pt]{fig/precedencia}
+    \caption{Diagrama de precedencia}\label{fig:precedencia}
+\end{figure}
+
+\section{Presupuesto orientativo}
+\begin{table}
+  \centering
+  \caption{Ejemplo de un entorno tabulado.}\label{tab:ejemplo}
+  \begin{tabular}{cccc}
+    \toprule
+      \textbf{Nombre} & \emph{Valor 1} & \emph{Valor 2} & \emph{Valor 3}\\
+    \midrule
+      Pedro  & 100     & 200     & 300 \\
+      Juan   & 200     & 100     & 600 \\
+      Mar\'ia& 300     & 50      & 200 \\
+      Carmen & 400     & 10      & 7000\\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \printbibliography[heading=bibintoc]
 
