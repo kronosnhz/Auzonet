@@ -1,0 +1,73 @@
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load i18n %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Comunidad protegida por contraseña</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'auzonetweb/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="{% static 'auzonetweb/css/custom_style.css' %}" rel="stylesheet">
+    <!-- jQuery UI CSS -->
+    <link href="{% static 'jquery-ui/themes/smoothness/jquery-ui.css' %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="well well-lg text-center">
+                    <h1>{{ address }}</h1>
+                    <span id="lock-icon" class="glyphicon glyphicon-lock"></span> <br><br>
+
+                    La comunidad a la que estás intentando acceder está protegida por contraseña. <br>
+                    Introduce la clave de acceso para unirte a ella. <br><br>
+
+                    {% if errorMessage %}
+                        <div class="alert alert-danger" role="alert">{{ errorMessage }}</div>
+                    {% endif %}
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {%bootstrap_form protectedCommunityForm layout="inline"%}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-primary center-block">
+                                {% trans "Unirme" %}
+                            </button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div> <!-- /container -->
+    <footer>
+        <div class="container">
+        </div>
+    </footer>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'jquery/jquery.js' %}"></script>
+    <script src="{% static 'jquery-ui/jquery-ui.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    {% bootstrap_javascript %}
+</body>
+</html>

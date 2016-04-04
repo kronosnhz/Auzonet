@@ -20,6 +20,9 @@ body {
 #community-panel {
     margin: 1em;
 }
+#lock-icon {
+    font-size: 70px;
+}
 #custom-search-input {
     margin:0;
     margin-top: 10px;

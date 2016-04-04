@@ -46,6 +46,10 @@ class JoinCommunityForm(forms.Form):
     community = forms.ModelChoiceField(queryset=Community.objects.all())
 
 
+class ProtectedCommunityForm(forms.Form):
+    password = forms.CharField(required=True, label='Password', max_length=100, widget=forms.PasswordInput)
+
+
 class NewCommunityMsgModelForm(ModelForm):
     class Meta:
         model = CommunityMessage

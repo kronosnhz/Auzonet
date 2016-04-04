@@ -15,7 +15,7 @@ from django.db.models import Q
 from django.utils.translation import ugettext
 
 from .forms import LoginForm, RegisterForm, NewCommunityModelForm, NewRequestModelForm, JoinCommunityForm, \
-    NewOfferModelForm, NewCommunityMsgModelForm
+    NewOfferModelForm, NewCommunityMsgModelForm, ProtectedCommunityForm
 from .models import Community, User, PublicUser, Request, Offer, CommunityMessage, Order
 
 """
@@ -32,13 +32,28 @@ STATUS_PENDING = 'P'
 MESSAGE_TYPE_WARNING = 'W'
 ORDER_TYPE_OFFER = 'O'
 ORDER_TYPE_REQUEST = 'R'
+ACCESS_TYPE_PRIVATE = 'PR'
+
+
+def access_control(comid, userid):
+    accessing_community = get_object_or_404(Community, id=comid)
+    logged_public_user = get_object_or_404(User, id=userid).publicuser
+
+    if accessing_community.access_type == ACCESS_TYPE_PRIVATE:
+        if accessing_community in logged_public_user.communities.all():
+            return True
+        else:
+            return False
+    else:
+        return True
 
 
 # COMMON PLACES
 @login_required
 def index(request, comid=None):
+
     # Check the community to load
-    if comid is not None:
+    if comid is not None and access_control(comid, request.user.id):
         request.session['currentCommunityId'] = comid
         request.session['currentCommunityAddress'] = get_object_or_404(Community, id=comid).address
     else:
@@ -303,28 +318,31 @@ def wizard(request):
                                'errorMessage': ugettext('Tienes que seleccionar una comunidad de la lista.'),
                                'modal': 'join'})
             if select_community_form.is_valid():
-                current_user = get_object_or_404(User, id=request.user.id)
-                current_user.publicuser.communities.add(selected_community)
-                current_user.save()
-                request.session['currentCommunityId'] = selected_community.id
-                request.session['currentCommunityAddress'] = selected_community.address
+                if selected_community.access_type == ACCESS_TYPE_PRIVATE:
+                    return redirect('protectedcommunity', comid=selected_community.id)
+                else:
+                    current_user = get_object_or_404(User, id=request.user.id)
+                    current_user.publicuser.communities.add(selected_community)
+                    current_user.save()
+                    request.session['currentCommunityId'] = selected_community.id
+                    request.session['currentCommunityAddress'] = selected_community.address
 
-                send_notification_email(None,
-                                        current_user.email,
-                                        ugettext("Bienvenido a ") + selected_community.address,
-                                        ugettext("Bienvenido a ") + selected_community.address,
-                                        ugettext(
-                                            "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
-                                        ugettext("estaras al dia de lo mas relevante que ocurra en ella. ") +
-                                        ugettext("Date una vuelta por la seccion de peticiones y ofertas por ") +
-                                        ugettext(
-                                            "si encuentras algo de tu interes. \n \n") + selected_community.welcome_message,
-                                        ugettext("Ir a la web"),
-                                        reverse('indexcommunity', kwargs={'comid': selected_community.id}),
-                                        None
-                                        )
+                    send_notification_email(None,
+                                            current_user.email,
+                                            ugettext("Bienvenido a ") + selected_community.address,
+                                            ugettext("Bienvenido a ") + selected_community.address,
+                                            ugettext(
+                                                "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
+                                            ugettext("estaras al dia de lo mas relevante que ocurra en ella. ") +
+                                            ugettext("Date una vuelta por la seccion de peticiones y ofertas por ") +
+                                            ugettext(
+                                                "si encuentras algo de tu interes. \n \n") + selected_community.welcome_message,
+                                            ugettext("Ir a la web"),
+                                            reverse('indexcommunity', kwargs={'comid': selected_community.id}),
+                                            None
+                                            )
 
-                return redirect('index')
+                    return redirect('index')
             else:
                 return render(request, 'auzonetweb/wizard.html',
                               {'newCommunityForm': NewCommunityModelForm(),
@@ -343,7 +361,7 @@ def wizard(request):
                 request.session['currentCommunityId'] = new_community.id
                 request.session['currentCommunityAddress'] = new_community.address
 
-                return redirect('index')
+                return redirect('indexcommunity', comid=new_community.id)
             else:
                 return render(request, 'auzonetweb/wizard.html',
                               {'newCommunityForm': new_community_model_form, 'selectCommunityForm': JoinCommunityForm(),
@@ -357,6 +375,58 @@ def wizard(request):
     return render(request, 'auzonetweb/wizard.html',
                   {'newCommunityForm': new_community_model_form, 'selectCommunityForm': select_community_form,
                    'communities': communities})
+
+
+@login_required
+def protected_community(request, comid):
+    community = get_object_or_404(Community, id=comid)
+
+    if request.method == 'POST':
+        protected_community_form = ProtectedCommunityForm(request.POST)
+        if protected_community_form.is_valid():
+            # Do things
+            if community.password == protected_community_form.cleaned_data['password']:
+                # Unirse
+                current_user = get_object_or_404(User, id=request.user.id)
+                current_user.publicuser.communities.add(community)
+                current_user.save()
+                request.session['currentCommunityId'] = community.id
+                request.session['currentCommunityAddress'] = community.address
+
+                send_notification_email(None,
+                                        current_user.email,
+                                        ugettext("Bienvenido a ") + community.address,
+                                        ugettext("Bienvenido a ") + community.address,
+                                        ugettext(
+                                            "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
+                                        ugettext("estaras al dia de lo mas relevante que ocurra en ella. ") +
+                                        ugettext("Date una vuelta por la seccion de peticiones y ofertas por ") +
+                                        ugettext(
+                                            "si encuentras algo de tu interes. \n \n") + community.welcome_message,
+                                        ugettext("Ir a la web"),
+                                        reverse('indexcommunity', kwargs={'comid': community.id}),
+                                        None
+                                        )
+
+                return redirect('indexcommunity', comid=community.id)
+            else:
+                # Contraseña incorrecta
+                error_message = "Contraseña incorrecta"
+                protected_community_form = ProtectedCommunityForm()
+
+                return render(request, 'auzonetweb/protected-community.html', {"errorMessage": error_message,
+                                                                               "address": community.address,
+                                                                               "protectedCommunityForm": protected_community_form
+                                                                               })
+        else:
+            # A tu casa no me times
+            return redirect('protectedcommunity', comid=comid)
+    else:
+        protected_community_form = ProtectedCommunityForm()
+
+    return render(request, 'auzonetweb/protected-community.html', {"address": community.address,
+                                                                   "protectedCommunityForm": protected_community_form
+                                                                   })
 
 
 def welcome(request):
@@ -502,7 +572,8 @@ def edit_offer(request, offerid=None):
             return redirect('detail-offer', offerid=newOffer.id)
         else:
             return render(request, 'auzonetweb/Offer/edit-offer.html',
-                          {'offerForm': offerForm, 'errorMessage': ugettext('Por favor, revisa los campos indicados.')})
+                          {'offerForm': offerForm,
+                           'errorMessage': ugettext('Por favor, revisa los campos indicados.')})
 
     elif offerid is not None:
         # Form for edition
@@ -522,19 +593,22 @@ def edit_offer(request, offerid=None):
 def detail_offer(request, offerid):
     # Obtain the offer shown
     offer = get_object_or_404(Offer, id=offerid)
-    # Get the non-finished orders related to this offer
-    orders = Order.objects.filter(offer=offer).exclude(status=STATUS_FINISHED).exclude(status=STATUS_PENDING)
-    # Check if the logged user is client of this offer and the corresponding order
-    is_client = 0
-    client_order = None
-    for o in orders:
-        # Is the current user client of this order?
-        if o.client == request.user:
-            is_client = 1
-            client_order = o
+    if access_control(offer.community_id, request.user.id):
+        # Get the non-finished orders related to this offer
+        orders = Order.objects.filter(offer=offer).exclude(status=STATUS_FINISHED).exclude(status=STATUS_PENDING)
+        # Check if the logged user is client of this offer and the corresponding order
+        is_client = 0
+        client_order = None
+        for o in orders:
+            # Is the current user client of this order?
+            if o.client == request.user:
+                is_client = 1
+                client_order = o
 
-    return render(request, 'auzonetweb/Offer/show-offer.html',
-                  {'offer': offer, 'orders': orders, 'is_client': is_client, 'client_order': client_order})
+        return render(request, 'auzonetweb/Offer/show-offer.html',
+                      {'offer': offer, 'orders': orders, 'is_client': is_client, 'client_order': client_order})
+    else:
+        return redirect('index')
 
 
 @login_required
@@ -633,21 +707,24 @@ def edit_request(request, requestid=None):
 def detail_request(request, requestid):
     # Obtain the request shown
     auzonetrequest = get_object_or_404(Request, id=requestid)
-    # Get the non-finished orders related to this request
-    orders = Order.objects.filter(auzonetrequest=auzonetrequest).exclude(status=STATUS_FINISHED).exclude(
-        status=STATUS_PENDING)
-    # Check if the logged user is client of this offer and the corresponding order
-    is_client = 0
-    client_order = None
-    for o in orders:
-        # Is the current user client of this order?
-        if o.client == request.user:
-            is_client = 1
-            client_order = o
+    if access_control(auzonetrequest.community_id, request.user.id):
+        # Get the non-finished orders related to this request
+        orders = Order.objects.filter(auzonetrequest=auzonetrequest).exclude(status=STATUS_FINISHED).exclude(
+            status=STATUS_PENDING)
+        # Check if the logged user is client of this offer and the corresponding order
+        is_client = 0
+        client_order = None
+        for o in orders:
+            # Is the current user client of this order?
+            if o.client == request.user:
+                is_client = 1
+                client_order = o
 
-    return render(request, 'auzonetweb/Request/show-request.html',
-                  {'auzonetrequest': auzonetrequest, 'requests': requests, 'is_client': is_client,
-                   'client_order': client_order})
+        return render(request, 'auzonetweb/Request/show-request.html',
+                      {'auzonetrequest': auzonetrequest, 'requests': requests, 'is_client': is_client,
+                       'client_order': client_order})
+    else:
+        return redirect('index')
 
 
 @login_required
