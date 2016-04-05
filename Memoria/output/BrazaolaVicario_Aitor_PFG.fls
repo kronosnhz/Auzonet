@@ -235,22 +235,29 @@ OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aito
 INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lol
 INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lol
 OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lol
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
-INPUT fig/ud.pdf
-INPUT fig/ud.pdf
-INPUT fig/dt.pdf
-INPUT fig/ESIDE.pdf
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.pyg
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.mintedcmd
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.pyg
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.mintedcmd
-INPUT normativa.tex
-INPUT normativa.tex
+INPUT fig/EDT.png
+INPUT fig/gantt.png
+INPUT fig/precedencia.png
+INPUT fig/Tareas/1.pdf
+INPUT fig/Tareas/21.pdf
+INPUT fig/Tareas/22.pdf
+INPUT fig/Tareas/23.pdf
+INPUT fig/Tareas/24.pdf
+INPUT fig/Tareas/25.pdf
+INPUT fig/Tareas/26.pdf
+INPUT fig/Tareas/27.pdf
+INPUT fig/Tareas/28.pdf
+INPUT fig/Tareas/29.pdf
+INPUT fig/Tareas/210.pdf
+INPUT fig/Tareas/212.pdf
+INPUT fig/Tareas/213.pdf
+INPUT fig/Tareas/214.pdf
+INPUT fig/Tareas/215.pdf
+INPUT fig/Tareas/216.pdf
+INPUT fig/Tareas/31.pdf
+INPUT fig/Tareas/32.pdf
+INPUT fig/Tareas/33.pdf
+INPUT fig/Tareas/4.pdf
 INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.mintedcmd
 INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.pyg
 INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.aux
