@@ -3,7 +3,7 @@ INPUT /usr/local/texlive/2015/texmf.cnf
 INPUT /usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2015/texmf-var/web2c/xetex/xelatex.fmt
 INPUT BrazaolaVicario_Aitor_PFG.tex
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.log
+OUTPUT BrazaolaVicario_Aitor_PFG.log
 INPUT DeustoFDP.cls
 INPUT DeustoFDP.cls
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/book.cls
@@ -198,15 +198,15 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
 INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.aux
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.aux
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.aux
+INPUT BrazaolaVicario_Aitor_PFG.aux
+INPUT BrazaolaVicario_Aitor_PFG.aux
+OUTPUT BrazaolaVicario_Aitor_PFG.aux
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tipa/t3cmr.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tipa/t3cmr.fd
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.bcf
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.bbl
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.bbl
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.bbl
+OUTPUT BrazaolaVicario_Aitor_PFG.bcf
+INPUT BrazaolaVicario_Aitor_PFG.bbl
+INPUT BrazaolaVicario_Aitor_PFG.bbl
+INPUT BrazaolaVicario_Aitor_PFG.bbl
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
@@ -215,29 +215,25 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.out
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.out
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.out
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.out
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.out
+INPUT BrazaolaVicario_Aitor_PFG.out
+INPUT BrazaolaVicario_Aitor_PFG.out
+INPUT BrazaolaVicario_Aitor_PFG.out
+INPUT BrazaolaVicario_Aitor_PFG.out
+OUTPUT BrazaolaVicario_Aitor_PFG.out
 INPUT fig/portada.pdf
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.toc
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.toc
-INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-cmr.cfg
-INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-cmr.cfg
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.toc
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lof
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lof
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lof
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lot
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lot
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lot
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lol
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lol
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.lol
+INPUT BrazaolaVicario_Aitor_PFG.toc
+OUTPUT BrazaolaVicario_Aitor_PFG.toc
+INPUT BrazaolaVicario_Aitor_PFG.lof
+OUTPUT BrazaolaVicario_Aitor_PFG.lof
+INPUT BrazaolaVicario_Aitor_PFG.lot
+OUTPUT BrazaolaVicario_Aitor_PFG.lot
+INPUT BrazaolaVicario_Aitor_PFG.lol
+OUTPUT BrazaolaVicario_Aitor_PFG.lol
 INPUT fig/EDT.png
 INPUT fig/gantt.png
 INPUT fig/precedencia.png
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 INPUT fig/Tareas/1.pdf
 INPUT fig/Tareas/21.pdf
 INPUT fig/Tareas/22.pdf
@@ -258,8 +254,6 @@ INPUT fig/Tareas/31.pdf
 INPUT fig/Tareas/32.pdf
 INPUT fig/Tareas/33.pdf
 INPUT fig/Tareas/4.pdf
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.mintedcmd
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.pyg
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.aux
-INPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.run.xml
-OUTPUT /Users/aitor/Workspaces/Auzonet (PFG)/Memoria/output/BrazaolaVicario_Aitor_PFG.run.xml
+INPUT BrazaolaVicario_Aitor_PFG.aux
+INPUT BrazaolaVicario_Aitor_PFG.run.xml
+OUTPUT BrazaolaVicario_Aitor_PFG.run.xml
