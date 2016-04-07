@@ -19,7 +19,7 @@ SECRET_KEY = 'f_+dc(p+5!uiuvmf5ym(^uu8bqafbd(m8_)vc_^h_tuage9%oe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'apps.morelab.deusto.es']
 
 # Media files management
 MEDIA_ROOT = os.path.join(BASE_DIR, 'auzonetweb/media/')
@@ -129,6 +129,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'djangobower.finders.BowerFinder',
 )
+
+USE_X_FORWARDED_HOST = True
+FORCE_SCRIPT_NAME = '/auzonet'
 
 # Bower package manager
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
