@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.views.static import serve
 
 urlpatterns = [
-    url(r'^auzonetweb/', include('auzonetweb.urls')),
+    url(r'^', include('auzonetweb.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 
