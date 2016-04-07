@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e5eeb4b-82ff-4b67-90dc-34347ce14484" name="Default" comment="Request section workflow finished">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/auzonet/urls.py" afterPath="$PROJECT_DIR$/auzonet/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/auzonet/settings.py" afterPath="$PROJECT_DIR$/auzonet/settings.py" />
     </list>
     <ignored path="auzonet.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,21 +44,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/auzonet/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+            <state relative-caret-position="337">
+              <caret line="24" column="45" selection-start-line="24" selection-start-column="45" selection-end-line="24" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auzonet/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
-              <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+              <caret line="27" column="15" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -110,8 +110,8 @@
         <option value="$PROJECT_DIR$/auzonetweb/views.py" />
         <option value="$PROJECT_DIR$/auzonet/wsgi.py" />
         <option value="$PROJECT_DIR$/auzonetweb/templates/auzonetweb/base.html" />
-        <option value="$PROJECT_DIR$/auzonet/settings.py" />
         <option value="$PROJECT_DIR$/auzonet/urls.py" />
+        <option value="$PROJECT_DIR$/auzonet/settings.py" />
       </list>
     </option>
   </component>
@@ -965,18 +965,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/auzonet/settings.py">
+    <entry file="file://$PROJECT_DIR$/auzonet/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+        <state relative-caret-position="360">
+          <caret line="27" column="15" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/auzonet/urls.py">
+    <entry file="file://$PROJECT_DIR$/auzonet/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        <state relative-caret-position="337">
+          <caret line="24" column="45" selection-start-line="24" selection-start-column="45" selection-end-line="24" selection-end-column="45" />
           <folding />
         </state>
       </provider>
