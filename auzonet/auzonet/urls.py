@@ -25,7 +25,7 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^auzonetweb/media/(?P<path>.*)$', serve, {
+        url(r'^auzonet/auzonetweb/media/(?P<path>.*)$', serve, {
             'document_root': settings.MEDIA_ROOT,
         }),
     ]
