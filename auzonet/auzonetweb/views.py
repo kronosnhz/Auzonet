@@ -1,17 +1,18 @@
 # coding=utf-8
 import datetime
+
 import requests
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail, BadHeaderError, EmailMessage
+from django.core.mail import BadHeaderError, EmailMessage
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse
 from django.db import IntegrityError
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.template import RequestContext, Context
 from django.template.loader import get_template
-from django.db.models import Q
 from django.utils.translation import ugettext
 
 from .forms import LoginForm, RegisterForm, NewCommunityModelForm, NewRequestModelForm, JoinCommunityForm, \
@@ -104,13 +105,13 @@ def index(request, comid=None):
                 for up in community_users:
                     send_notification_email(None,
                                             up.user.email,
-                                            ugettext("Nuevo aviso en ") + request.session['currentCommunityAddress'],
-                                            ugettext("Nuevo aviso"),
+                                            ugettext(u"Nuevo aviso en ") + request.session['currentCommunityAddress'],
+                                            ugettext(u"Nuevo aviso"),
                                             new_message.owner.first_name + ugettext(
                                                 " ha publicado el siguiente aviso en ") +
                                             request.session['currentCommunityAddress'] +
                                             ": " + new_message.message_text,
-                                            ugettext("Ver el mensaje en la web"),
+                                            ugettext(u"Ver el mensaje en la web"),
                                             reverse('indexcommunity',
                                                     kwargs={'comid': request.session['currentCommunityId']}),
                                             request.user.publicuser.avatar.url
@@ -243,10 +244,10 @@ def finalize_order(request, orderid, feedback):
             order_link = reverse('detail-request', order.auzonetrequest.id)
         send_notification_email(None,
                                 order.owner.user.email,
-                                order.client.user.first_name + ugettext(" ha marcado como finalizada la colaboracion"),
-                                order.client.user.first_name + ugettext(" ha marcado como finalizada la colaboracion"),
+                                order.client.user.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
+                                order.client.user.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 mailtext,
-                                ugettext("Terminar acuerdo"),
+                                ugettext(u"Terminar acuerdo"),
                                 order_link,
                                 order.client.publicuser.avatar.url
                                 )
@@ -278,10 +279,10 @@ def finalize_order(request, orderid, feedback):
             order_link = reverse('detail-request', order.auzonetrequest.id)
         send_notification_email(None,
                                 order.client.user.email,
-                                order.owner.user.first_name + ugettext(" ha marcado como finalizada la colaboracion"),
-                                order.owner.user.first_name + ugettext(" ha marcado como finalizada la colaboracion"),
+                                order.owner.user.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
+                                order.owner.user.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 mailtext,
-                                ugettext("Terminar acuerdo"),
+                                ugettext(u"Terminar acuerdo"),
                                 order_link,
                                 order.owner.publicuser.avatar.url
                                 )
@@ -329,15 +330,15 @@ def wizard(request):
 
                     send_notification_email(None,
                                             current_user.email,
-                                            ugettext("Bienvenido a ") + selected_community.address,
-                                            ugettext("Bienvenido a ") + selected_community.address,
+                                            ugettext(u"Bienvenido a ") + selected_community.address,
+                                            ugettext(u"Bienvenido a ") + selected_community.address,
                                             ugettext(
                                                 "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
-                                            ugettext("estaras al dia de lo mas relevante que ocurra en ella. ") +
-                                            ugettext("Date una vuelta por la seccion de peticiones y ofertas por ") +
+                                            ugettext(u"estaras al dia de lo mas relevante que ocurra en ella. ") +
+                                            ugettext(u"Date una vuelta por la seccion de peticiones y ofertas por ") +
                                             ugettext(
                                                 "si encuentras algo de tu interes. \n \n") + selected_community.welcome_message,
-                                            ugettext("Ir a la web"),
+                                            ugettext(u"Ir a la web"),
                                             reverse('indexcommunity', kwargs={'comid': selected_community.id}),
                                             None
                                             )
@@ -395,15 +396,15 @@ def protected_community(request, comid):
 
                 send_notification_email(None,
                                         current_user.email,
-                                        ugettext("Bienvenido a ") + community.address,
-                                        ugettext("Bienvenido a ") + community.address,
+                                        ugettext(u"Bienvenido a ") + community.address,
+                                        ugettext(u"Bienvenido a ") + community.address,
                                         ugettext(
                                             "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
-                                        ugettext("estaras al dia de lo mas relevante que ocurra en ella. ") +
-                                        ugettext("Date una vuelta por la seccion de peticiones y ofertas por ") +
+                                        ugettext(u"estaras al dia de lo mas relevante que ocurra en ella. ") +
+                                        ugettext(u"Date una vuelta por la seccion de peticiones y ofertas por ") +
                                         ugettext(
                                             "si encuentras algo de tu interes. \n \n") + community.welcome_message,
-                                        ugettext("Ir a la web"),
+                                        ugettext(u"Ir a la web"),
                                         reverse('indexcommunity', kwargs={'comid': community.id}),
                                         None
                                         )
@@ -505,13 +506,13 @@ def welcome(request):
                         user.save()
                         send_notification_email(None,
                                                 email,
-                                                ugettext("Bienvenido a Auzonet"),
-                                                ugettext("Bienvenido a Auzonet"),
-                                                ugettext("Gracias por registrarte") + first_name + ugettext(
+                                                ugettext(u"Bienvenido a Auzonet"),
+                                                ugettext(u"Bienvenido a Auzonet"),
+                                                ugettext(u"Gracias por registrarte") + first_name + ugettext(
                                                     ", busca tu comunidad entre las que ya estan ") +
                                                 ugettext(
                                                     "registradas o crea la tuya para empezar a disfrutar de todo lo que ") +
-                                                ugettext("ofrece el servicio"),
+                                                ugettext(u"ofrece el servicio"),
                                                 None,
                                                 None,
                                                 None
@@ -622,13 +623,13 @@ def accept_offer(request, orderid):
 
         send_notification_email(None,
                                 order.client.email,
-                                order.offer.owner.first_name + ugettext(" ha aceptado trabajar contigo"),
-                                ugettext("Acuerdo aceptado"),
+                                order.offer.owner.first_name + ugettext(u" ha aceptado trabajar contigo"),
+                                ugettext(u"Acuerdo aceptado"),
                                 order.offer.owner.first_name + ugettext(
                                     " ha aceptado el acuerdo sobre ") + order.offer.title +
-                                ugettext(" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
-                                ugettext("Ver la oferta"),
-                                "auzonet/detail-offer/"+str(order.offer.id)+"/",
+                                ugettext(u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
+                                ugettext(u"Ver la oferta"),
+                                "auzonet/detail-offer/" + str(order.offer.id) + "/",
                                 order.offer.owner.publicuser.avatar.url
                                 )
 
@@ -654,7 +655,7 @@ def hire_offer(request, offerid):
 
     fromEmail = userInterested.email
     toEmail = offer.owner.email
-    subject = ugettext("Auzonet: ") + userInterested.username + ugettext(" esta interesado en tu oferta.")
+    subject = ugettext(u"Auzonet: ") + userInterested.username + ugettext(u" esta interesado en tu oferta.")
     subtitle = ugettext('Me interesa')
     content = ugettext('El usuario ') + userInterested.username + ugettext(
         ' esta interesado en tu oferta ') + offer.title
@@ -737,14 +738,14 @@ def accept_request(request, orderid):
         order.save()
 
         send_notification_email(None,
-                                order.auzonetrequest.client.user.email,
-                                order.auzonetrequest.owner.user.first_name + ugettext(" ha aceptado tu ayuda"),
-                                ugettext("Acuerdo aceptado"),
-                                order.auzonetrequest.owner.user.first_name + ugettext(
+                                order.auzonetrequest.client.email,
+                                order.auzonetrequest.owner.first_name + ugettext(u" ha aceptado tu ayuda"),
+                                ugettext(u"Acuerdo aceptado"),
+                                order.auzonetrequest.owner.first_name + ugettext(
                                     " ha aceptado el acuerdo sobre ") + order.auzonetrequest.title +
-                                ugettext(" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
-                                ugettext("Ver la peticion"),
-                                reverse('detail-request', order.auzonetrequest.id),
+                                ugettext(u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
+                                ugettext(u"Ver la peticion"),
+                                "auzonet/detail-request/" + str(order.auzonetrequest.id) + "/",
                                 order.auzonetrequest.owner.publicuser.avatar.url
                                 )
 
@@ -770,7 +771,7 @@ def hire_request(request, requestid):
 
     fromEmail = userInterested.email
     toEmail = userOwner.email
-    subject = ugettext("Auzonet: ") + userInterested.username + ugettext(" quiere atender tu peticion")
+    subject = ugettext(u"Auzonet: ") + userInterested.username + ugettext(u" quiere atender tu peticion")
     subtitle = ugettext('¿Te echo una mano?')
     content = ugettext('El usuario ') + userInterested.username + ugettext(
         ' quiere atender tu peticion ') + auzonetrequest.title
