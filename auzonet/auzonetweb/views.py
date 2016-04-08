@@ -628,7 +628,7 @@ def accept_offer(request, orderid):
                                     " ha aceptado el acuerdo sobre ") + order.offer.title +
                                 ugettext(" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
                                 ugettext("Ver la oferta"),
-                                reverse('detail-offer', order.offer.id),
+                                "auzonet/detail-offer/"+str(order.offer.id)+"/",
                                 order.offer.owner.publicuser.avatar.url
                                 )
 
