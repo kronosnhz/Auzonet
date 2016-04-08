@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail, BadHeaderError, EmailMessage
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
@@ -470,7 +470,7 @@ def welcome(request):
                         # Return an 'invalid login' error message.
                         return render(request, 'auzonetweb/welcome.html',
                                       {'loginForm': login_form, 'registerForm': RegisterForm(),
-                                       'errorMessage': ugettext('Usuario o contraseña incorrectos'), 'modal': 'login'})
+                                       'errorMessage': ugettext(u'Usuario o contraseña incorrectos'), 'modal': 'login'})
                 else:
                     return render(request, 'auzonetweb/welcome.html',
                                   {'loginForm': login_form, 'registerForm': RegisterForm(),
@@ -621,10 +621,10 @@ def accept_offer(request, orderid):
         order.save()
 
         send_notification_email(None,
-                                order.offer.client.user.email,
-                                order.offer.owner.user.first_name + ugettext(" ha aceptado trabajar contigo"),
+                                order.client.email,
+                                order.offer.owner.first_name + ugettext(" ha aceptado trabajar contigo"),
                                 ugettext("Acuerdo aceptado"),
-                                order.offer.owner.user.first_name + ugettext(
+                                order.offer.owner.first_name + ugettext(
                                     " ha aceptado el acuerdo sobre ") + order.offer.title +
                                 ugettext(" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
                                 ugettext("Ver la oferta"),

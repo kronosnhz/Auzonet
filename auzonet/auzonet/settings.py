@@ -22,8 +22,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'apps.morelab.deusto.es']
 
 # Media files management
-MEDIA_ROOT = os.path.join(BASE_DIR, 'auzonet/auzonetweb/media/')
-MEDIA_URL = 'auzonet/auzonetweb/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'auzonetweb/media/')
+MEDIA_URL = '/auzonet/auzonetweb/media/'
 
 # Email settings
 EMAIL_HOST = 'smtp.gmail.com'
