@@ -108,9 +108,9 @@ def index(request, comid=None):
                                             ugettext(u"Nuevo aviso en ") + request.session['currentCommunityAddress'],
                                             ugettext(u"Nuevo aviso"),
                                             new_message.owner.first_name + ugettext(
-                                                " ha publicado el siguiente aviso en ") +
+                                                u" ha publicado el siguiente aviso en ") +
                                             request.session['currentCommunityAddress'] +
-                                            ": " + new_message.message_text,
+                                            u": " + new_message.message_text,
                                             ugettext(u"Ver el mensaje en la web"),
                                             reverse('indexcommunity',
                                                     kwargs={'comid': request.session['currentCommunityId']}),
@@ -263,13 +263,13 @@ def finalize_order(request, orderid, feedback):
         if feedback == '1':
             order.client.publicuser.karma += KARMA_REWARD
             mailtext = order.owner.first_name + ugettext(
-                " ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
-                " y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
+                u" ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
+                u" y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
         else:
             order.client.publicuser.karma -= KARMA_REWARD
             mailtext = order.owner.first_name + ugettext(
-                " ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
-                " y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma que empeoran tu reputacion en la comunidad. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
+                u" ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
+                u" y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma que empeoran tu reputacion en la comunidad. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
         # Mark that the owner already has voted
         order.owner_voted = True
         # Send notification
@@ -316,7 +316,7 @@ def wizard(request):
                               {'newCommunityForm': NewCommunityModelForm(),
                                'selectCommunityForm': select_community_form,
                                'communities': communities,
-                               'errorMessage': ugettext('Tienes que seleccionar una comunidad de la lista.'),
+                               'errorMessage': ugettext(u'Tienes que seleccionar una comunidad de la lista.'),
                                'modal': 'join'})
             if select_community_form.is_valid():
                 if selected_community.access_type == ACCESS_TYPE_PRIVATE:
@@ -333,11 +333,11 @@ def wizard(request):
                                             ugettext(u"Bienvenido a ") + selected_community.address,
                                             ugettext(u"Bienvenido a ") + selected_community.address,
                                             ugettext(
-                                                "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
+                                                u"A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
                                             ugettext(u"estaras al dia de lo mas relevante que ocurra en ella. ") +
                                             ugettext(u"Date una vuelta por la seccion de peticiones y ofertas por ") +
                                             ugettext(
-                                                "si encuentras algo de tu interes. \n \n") + selected_community.welcome_message,
+                                                u"si encuentras algo de tu interes. \n \n") + selected_community.welcome_message,
                                             ugettext(u"Ir a la web"),
                                             reverse('indexcommunity', kwargs={'comid': selected_community.id}),
                                             None
@@ -349,7 +349,7 @@ def wizard(request):
                               {'newCommunityForm': NewCommunityModelForm(),
                                'selectCommunityForm': select_community_form,
                                'communities': communities,
-                               'errorMessage': ugettext('Por favor, revisa los campos indicados'),
+                               'errorMessage': ugettext(u'Por favor, revisa los campos indicados'),
                                'modal': 'join'})
         elif request.POST['formName'] == 'newCommunity':
             new_community_model_form = NewCommunityModelForm(request.POST)
@@ -367,7 +367,7 @@ def wizard(request):
                 return render(request, 'auzonetweb/wizard.html',
                               {'newCommunityForm': new_community_model_form, 'selectCommunityForm': JoinCommunityForm(),
                                'communities': communities,
-                               'errorMessage': ugettext('Por favor, revisa los campos indicados'),
+                               'errorMessage': ugettext(u'Por favor, revisa los campos indicados'),
                                'modal': 'new'})
     else:
         new_community_model_form = NewCommunityModelForm()
@@ -399,11 +399,11 @@ def protected_community(request, comid):
                                         ugettext(u"Bienvenido a ") + community.address,
                                         ugettext(u"Bienvenido a ") + community.address,
                                         ugettext(
-                                            "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
+                                            u"A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
                                         ugettext(u"estaras al dia de lo mas relevante que ocurra en ella. ") +
                                         ugettext(u"Date una vuelta por la seccion de peticiones y ofertas por ") +
                                         ugettext(
-                                            "si encuentras algo de tu interes. \n \n") + community.welcome_message,
+                                            u"si encuentras algo de tu interes. \n \n") + community.welcome_message,
                                         ugettext(u"Ir a la web"),
                                         reverse('indexcommunity', kwargs={'comid': community.id}),
                                         None
@@ -412,7 +412,7 @@ def protected_community(request, comid):
                 return redirect('indexcommunity', comid=community.id)
             else:
                 # Contraseña incorrecta
-                error_message = "Contraseña incorrecta"
+                error_message = u"Contraseña incorrecta"
                 protected_community_form = ProtectedCommunityForm()
 
                 return render(request, 'auzonetweb/protected-community.html', {"errorMessage": error_message,
@@ -475,7 +475,7 @@ def welcome(request):
                 else:
                     return render(request, 'auzonetweb/welcome.html',
                                   {'loginForm': login_form, 'registerForm': RegisterForm(),
-                                   'errorMessage': ugettext('Por favor, revise los campos indicados'),
+                                   'errorMessage': ugettext(u'Por favor, revise los campos indicados'),
                                    'modal': 'login'})
             elif request.POST['formtype'] == 'register':
                 # check whether it's valid:
@@ -509,9 +509,9 @@ def welcome(request):
                                                 ugettext(u"Bienvenido a Auzonet"),
                                                 ugettext(u"Bienvenido a Auzonet"),
                                                 ugettext(u"Gracias por registrarte") + first_name + ugettext(
-                                                    ", busca tu comunidad entre las que ya estan ") +
+                                                    u", busca tu comunidad entre las que ya estan ") +
                                                 ugettext(
-                                                    "registradas o crea la tuya para empezar a disfrutar de todo lo que ") +
+                                                    u"registradas o crea la tuya para empezar a disfrutar de todo lo que ") +
                                                 ugettext(u"ofrece el servicio"),
                                                 None,
                                                 None,
@@ -520,7 +520,7 @@ def welcome(request):
                     except IntegrityError:
                         return render(request, 'auzonetweb/welcome.html',
                                       {'loginForm': LoginForm(), 'registerForm': register_form,
-                                       'errorMessage': ugettext('El nombre de usuario ya existe.'),
+                                       'errorMessage': ugettext(u'El nombre de usuario ya existe.'),
                                        'modal': 'register'})
 
                     user = authenticate(username=username, password=password)
@@ -531,7 +531,7 @@ def welcome(request):
                 else:
                     return render(request, 'auzonetweb/welcome.html',
                                   {'loginForm': LoginForm(), 'registerForm': register_form,
-                                   'errorMessage': ugettext('Por favor, revise los campos indicados'),
+                                   'errorMessage': ugettext(u'Por favor, revise los campos indicados'),
                                    'modal': 'register'})
         else:
             login_form = LoginForm()
@@ -574,7 +574,7 @@ def edit_offer(request, offerid=None):
         else:
             return render(request, 'auzonetweb/Offer/edit-offer.html',
                           {'offerForm': offerForm,
-                           'errorMessage': ugettext('Por favor, revisa los campos indicados.')})
+                           'errorMessage': ugettext(u'Por favor, revisa los campos indicados.')})
 
     elif offerid is not None:
         # Form for edition
@@ -626,7 +626,7 @@ def accept_offer(request, orderid):
                                 order.offer.owner.first_name + ugettext(u" ha aceptado trabajar contigo"),
                                 ugettext(u"Acuerdo aceptado"),
                                 order.offer.owner.first_name + ugettext(
-                                    " ha aceptado el acuerdo sobre ") + order.offer.title +
+                                    u" ha aceptado el acuerdo sobre ") + order.offer.title +
                                 ugettext(u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
                                 ugettext(u"Ver la oferta"),
                                 "auzonet/detail-offer/" + str(order.offer.id) + "/",
@@ -656,9 +656,9 @@ def hire_offer(request, offerid):
     fromEmail = userInterested.email
     toEmail = offer.owner.email
     subject = ugettext(u"Auzonet: ") + userInterested.username + ugettext(u" esta interesado en tu oferta.")
-    subtitle = ugettext('Me interesa')
-    content = ugettext('El usuario ') + userInterested.username + ugettext(
-        ' esta interesado en tu oferta ') + offer.title
+    subtitle = ugettext(u'Me interesa')
+    content = ugettext(u'El usuario ') + userInterested.username + ugettext(
+        u' esta interesado en tu oferta ') + offer.title
     buttonText = ugettext('Aceptar solicitud')
     buttonLink = reverse('accept-offer', kwargs={'orderid': order.id})
     avatarLink = userInterested.publicuser.avatar.url
@@ -687,7 +687,7 @@ def edit_request(request, requestid=None):
         else:
             return render(request, 'auzonetweb/Request/edit-request.html',
                           {'requestForm': requestForm,
-                           'errorMessage': ugettext('Por favor, revisa los campos indicados.')})
+                           'errorMessage': ugettext(u'Por favor, revisa los campos indicados.')})
 
         return redirect('detail-request', requestid=newRequest.id)
     elif requestid is not None:
@@ -742,7 +742,7 @@ def accept_request(request, orderid):
                                 order.auzonetrequest.owner.first_name + ugettext(u" ha aceptado tu ayuda"),
                                 ugettext(u"Acuerdo aceptado"),
                                 order.auzonetrequest.owner.first_name + ugettext(
-                                    " ha aceptado el acuerdo sobre ") + order.auzonetrequest.title +
+                                    u" ha aceptado el acuerdo sobre ") + order.auzonetrequest.title +
                                 ugettext(u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
                                 ugettext(u"Ver la peticion"),
                                 "auzonet/detail-request/" + str(order.auzonetrequest.id) + "/",
@@ -774,7 +774,7 @@ def hire_request(request, requestid):
     subject = ugettext(u"Auzonet: ") + userInterested.username + ugettext(u" quiere atender tu peticion")
     subtitle = ugettext('¿Te echo una mano?')
     content = ugettext('El usuario ') + userInterested.username + ugettext(
-        ' quiere atender tu peticion ') + auzonetrequest.title
+        u' quiere atender tu peticion ') + auzonetrequest.title
     buttonText = ugettext('Aceptar colaboración')
     buttonLink = reverse('accept-request', kwargs={'requestid': auzonetrequest.id})
     avatarLink = userInterested.publicuser.avatar.url
