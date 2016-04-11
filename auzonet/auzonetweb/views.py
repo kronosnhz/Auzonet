@@ -113,7 +113,7 @@ def index(request, comid=None):
                                             u": " + new_message.message_text,
                                             ugettext(u"Ver el mensaje en la web"),
                                             PUBLIC_URL_BASE + 'community/' + request.session['currentCommunityId'],
-                                            request.user.publicuser.avatar.url
+                                            PUBLIC_URL_BASE + request.user.publicuser.avatar.url
                                             )
 
             return redirect('indexcommunity', comid=request.session['currentCommunityId'])
@@ -247,8 +247,8 @@ def finalize_order(request, orderid, feedback):
                                 order.client.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 mailtext,
                                 ugettext(u"Terminar acuerdo"),
-                                order_link,
-                                order.client.publicuser.avatar.url
+                                PUBLIC_URL_BASE + order_link,
+                                PUBLIC_URL_BASE + order.client.publicuser.avatar.url
                                 )
         # Check if the owner has voted also for finishing the order
         if order.owner_voted:
@@ -282,8 +282,8 @@ def finalize_order(request, orderid, feedback):
                                 order.owner.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 mailtext,
                                 ugettext(u"Terminar acuerdo"),
-                                order_link,
-                                order.owner.publicuser.avatar.url
+                                PUBLIC_URL_BASE + order_link,
+                                PUBLIC_URL_BASE + order.owner.publicuser.avatar.url
                                 )
         # Check if the client has voted also for finishing the order
         if order.client_voted:
@@ -628,8 +628,8 @@ def accept_offer(request, orderid):
                                     u" ha aceptado el acuerdo sobre ") + order.offer.title +
                                 ugettext(u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
                                 ugettext(u"Ver la oferta"),
-                                "auzonet/detail-offer/" + str(order.offer.id) + "/",
-                                order.offer.owner.publicuser.avatar.url
+                                PUBLIC_URL_BASE + "auzonet/detail-offer/" + str(order.offer.id) + "/",
+                                PUBLIC_URL_BASE + order.offer.owner.publicuser.avatar.url
                                 )
 
         return redirect('confirmation-success')
@@ -660,7 +660,7 @@ def hire_offer(request, offerid):
         u' esta interesado en tu oferta ') + offer.title
     buttonText = ugettext('Aceptar solicitud')
     buttonLink = PUBLIC_URL_BASE + 'accept-offer/' + str(order.id)
-    avatarLink = userInterested.publicuser.avatar.url
+    avatarLink = PUBLIC_URL_BASE + userInterested.publicuser.avatar.url
 
     send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink)
 
@@ -744,8 +744,8 @@ def accept_request(request, orderid):
                                     u" ha aceptado el acuerdo sobre ") + order.auzonetrequest.title +
                                 ugettext(u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
                                 ugettext(u"Ver la peticion"),
-                                "auzonet/detail-request/" + str(order.auzonetrequest.id) + "/",
-                                order.auzonetrequest.owner.publicuser.avatar.url
+                                PUBLIC_URL_BASE + "auzonet/detail-request/" + str(order.auzonetrequest.id) + "/",
+                                PUBLIC_URL_BASE + order.auzonetrequest.owner.publicuser.avatar.url
                                 )
 
         return redirect('confirmation-success')
@@ -776,7 +776,7 @@ def hire_request(request, requestid):
         u' quiere atender tu peticion ') + auzonetrequest.title
     buttonText = ugettext('Aceptar colaboración')
     buttonLink = PUBLIC_URL_BASE + 'accept-request/' + str(auzonetrequest.id)
-    avatarLink = userInterested.publicuser.avatar.url
+    avatarLink = PUBLIC_URL_BASE + userInterested.publicuser.avatar.url
 
     send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink)
 
