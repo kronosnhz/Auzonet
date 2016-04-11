@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2e5eeb4b-82ff-4b67-90dc-34347ce14484" name="Default" comment="Converted more string to unicode.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/auzonetweb/views.py" afterPath="$PROJECT_DIR$/auzonetweb/views.py" />
     </list>
     <ignored path="auzonet.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,7 +50,6 @@
             <state relative-caret-position="15">
               <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
               <folding>
-                <element signature="e#15#30#0" expanded="true" />
                 <element signature="e#950#1187#1" expanded="false" />
                 <element signature="e#1458#1821#0" expanded="false" />
                 <element signature="e#1662#1788#0" expanded="false" />
@@ -677,7 +675,14 @@
       <option name="project" value="LOCAL" />
       <updated>1460366577496</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Converted more string to unicode.">
+      <created>1460367371739</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1460367371739</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1105,7 +1110,6 @@
         <state relative-caret-position="15">
           <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
           <folding>
-            <element signature="e#15#30#0" expanded="true" />
             <element signature="e#950#1187#1" expanded="false" />
             <element signature="e#1458#1821#0" expanded="false" />
             <element signature="e#1662#1788#0" expanded="false" />
