@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 11:26+0100\n"
+"POT-Creation-Date: 2016-04-11 13:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Cancel"
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:21
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:146
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:167
-#: auzonetweb/views.py:203 auzonetweb/views.py:234
+#: auzonetweb/views.py:256 auzonetweb/views.py:295
 msgid "Terminar acuerdo"
 msgstr "End agreement"
 
@@ -114,7 +114,6 @@ msgstr "accept working with you."
 
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:65
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:137
-#: auzonetweb/templates/auzonetweb/Offer/show-offer.html:166
 msgid "Contratar"
 msgstr "Hire"
 
@@ -189,7 +188,6 @@ msgid "Editar"
 msgstr "Edit"
 
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:172
-#: auzonetweb/templates/auzonetweb/Request/show-request.html:206
 msgid "Atender petición"
 msgstr "Attend request"
 
@@ -211,13 +209,11 @@ msgid "Cerrar sesión"
 msgstr "Logout"
 
 #: auzonetweb/templates/auzonetweb/base.html:82
-#, fuzzy
-#| msgid "Copyright 2015. Aitor Brazaola. Universidad de Deusto."
 msgid "Copyright 2015. Aitor Brazaola. Universidad de Deusto. &nbsp;&nbsp;"
 msgstr "Copyright 2015. Aitor Brazaola. University of Deusto."
 
 #: auzonetweb/templates/auzonetweb/confirmation-success.html:11
-#: auzonetweb/views.py:504 auzonetweb/views.py:614
+#: auzonetweb/views.py:636 auzonetweb/views.py:756
 msgid "Acuerdo aceptado"
 msgstr "Agreement accepted"
 
@@ -309,15 +305,15 @@ msgstr "Nothing published yet"
 
 #: auzonetweb/templates/auzonetweb/index.html:130
 #: auzonetweb/templates/auzonetweb/index.html:173
-#: auzonetweb/templates/auzonetweb/user-profile.html:97
-#: auzonetweb/templates/auzonetweb/user-profile.html:132
-#: auzonetweb/templates/auzonetweb/user-profile.html:167
+#: auzonetweb/templates/auzonetweb/user-profile.html:98
+#: auzonetweb/templates/auzonetweb/user-profile.html:133
+#: auzonetweb/templates/auzonetweb/user-profile.html:168
 msgid "Título"
 msgstr "Title"
 
 #: auzonetweb/templates/auzonetweb/index.html:131
 #: auzonetweb/templates/auzonetweb/index.html:174
-#: auzonetweb/templates/auzonetweb/user-profile.html:99
+#: auzonetweb/templates/auzonetweb/user-profile.html:100
 msgid "Usuario"
 msgstr "User"
 
@@ -362,7 +358,7 @@ msgid "OFREZCO"
 msgstr "OFFER"
 
 #: auzonetweb/templates/auzonetweb/index.html:254
-#: auzonetweb/templates/auzonetweb/user-profile.html:94
+#: auzonetweb/templates/auzonetweb/user-profile.html:95
 msgid "En atención"
 msgstr "In attention"
 
@@ -374,50 +370,57 @@ msgstr "No active agreements"
 msgid "OFERTA"
 msgstr "OFFER"
 
+#: auzonetweb/templates/auzonetweb/protected-community.html:52
+#: auzonetweb/templates/auzonetweb/wizard.html:54
+msgid "Unirme"
+msgstr "Join"
+
 #: auzonetweb/templates/auzonetweb/user-profile.html:53
 msgid "Miembro de"
 msgstr "Member of"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:74
+#: auzonetweb/templates/auzonetweb/user-profile.html:62
+msgid "Mi actividad en "
+msgstr ""
+
+#: auzonetweb/templates/auzonetweb/user-profile.html:75
 msgid "Peticiones publicadas"
 msgstr "Requests published"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:78
+#: auzonetweb/templates/auzonetweb/user-profile.html:79
 msgid "Peticiones atendidas"
 msgstr "Attended requests"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:82
+#: auzonetweb/templates/auzonetweb/user-profile.html:83
 msgid "Ofertas publicadas"
 msgstr "Offers published"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:86
-#, fuzzy
-#| msgid "Ofertas publicadas"
+#: auzonetweb/templates/auzonetweb/user-profile.html:87
 msgid "Ofertas contratadas"
 msgstr "Offers published"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:98
-#: auzonetweb/templates/auzonetweb/user-profile.html:133
-#: auzonetweb/templates/auzonetweb/user-profile.html:168
+#: auzonetweb/templates/auzonetweb/user-profile.html:99
+#: auzonetweb/templates/auzonetweb/user-profile.html:134
+#: auzonetweb/templates/auzonetweb/user-profile.html:169
 msgid "Tipo"
 msgstr "Type"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:100
-#: auzonetweb/templates/auzonetweb/user-profile.html:135
-#: auzonetweb/templates/auzonetweb/user-profile.html:170
+#: auzonetweb/templates/auzonetweb/user-profile.html:101
+#: auzonetweb/templates/auzonetweb/user-profile.html:136
+#: auzonetweb/templates/auzonetweb/user-profile.html:171
 msgid "Acciones"
 msgstr "Actions"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:129
+#: auzonetweb/templates/auzonetweb/user-profile.html:130
 msgid "Mis publicaciones"
 msgstr "My posts"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:134
-#: auzonetweb/templates/auzonetweb/user-profile.html:169
+#: auzonetweb/templates/auzonetweb/user-profile.html:135
+#: auzonetweb/templates/auzonetweb/user-profile.html:170
 msgid "Fecha de publicación"
 msgstr "Post date"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:164
+#: auzonetweb/templates/auzonetweb/user-profile.html:165
 msgid "Historial"
 msgstr "History"
 
@@ -458,10 +461,6 @@ msgstr "Welcome"
 msgid "Unirme a una comunidad existente"
 msgstr "Join to existing community"
 
-#: auzonetweb/templates/auzonetweb/wizard.html:54
-msgid "Unirme"
-msgstr "Join"
-
 #: auzonetweb/templates/auzonetweb/wizard.html:62
 msgid "Aún no hay comunidades de vecinos activas"
 msgstr "There are no active communities"
@@ -474,84 +473,95 @@ msgstr "Create new one"
 msgid "Crear"
 msgstr "Create"
 
-#: auzonetweb/views.py:91
+#: auzonetweb/views.py:107
 msgid "Nuevo aviso en "
 msgstr "New notification in"
 
-#: auzonetweb/views.py:92
+#: auzonetweb/views.py:108
 msgid "Nuevo aviso"
 msgstr "New notification"
 
-#: auzonetweb/views.py:93
+#: auzonetweb/views.py:110
 msgid " ha publicado el siguiente aviso en "
 msgstr " has published the following notice at "
 
-#: auzonetweb/views.py:96
+#: auzonetweb/views.py:113
 msgid "Ver el mensaje en la web"
 msgstr "Check the message on the web"
 
-#: auzonetweb/views.py:143 auzonetweb/views.py:152 auzonetweb/views.py:166
-#: auzonetweb/views.py:246 auzonetweb/views.py:573 auzonetweb/views.py:625
+#: auzonetweb/views.py:185 auzonetweb/views.py:194 auzonetweb/views.py:208
+#: auzonetweb/views.py:304 auzonetweb/views.py:711 auzonetweb/views.py:771
 msgid "Unauthorized"
 msgstr "Unauthorized"
 
-#: auzonetweb/views.py:186 auzonetweb/views.py:190 auzonetweb/views.py:218
-#: auzonetweb/views.py:221
+#: auzonetweb/views.py:229 auzonetweb/views.py:235 auzonetweb/views.py:270
+#: auzonetweb/views.py:275
 msgid " ha marcado como terminado el acuerdo sobre "
 msgstr " has marked as finished the agreement of "
 
-#: auzonetweb/views.py:186 auzonetweb/views.py:218
+#: auzonetweb/views.py:230 auzonetweb/views.py:271
 msgid ""
 " y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma "
-"que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n"
-"\n"
-" Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu "
-"experiencia con "
+"que mejoran tu reputacion en la comunidad. ¡Felicidades!."
 msgstr ""
 " and has rated the experience as positive, this adds 10 points of Karma to "
-"your profile that improves your community reputation. ¡Congratulations!\n"
-" Now remember mark as finished you alse the agreement and rate your "
-"experience with "
+"your profile that improves your community reputation. ¡Congratulations!"
 
-#: auzonetweb/views.py:190 auzonetweb/views.py:221
+#: auzonetweb/views.py:236
 msgid ""
 " y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma "
-"que empeoran tu reputacion en la comunidad. \n"
+"que empeoran tu reputacion en la comunidad. "
+msgstr ""
+" and has rated the experience as negative, this undermines 10 points of "
+"Karma to your profile that improves your community reputation."
+
+#: auzonetweb/views.py:244 auzonetweb/views.py:283
+msgid ""
+"\n"
 "\n"
 " Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu "
 "experiencia con "
 msgstr ""
-" and has rated the experience as negative, this undermines 10 points of "
-"Karma to your profile that improves your community reputation. \n"
+"\n"
+"\n"
 " Now remember mark as finished you alse the agreement and rate your "
 "experience with "
 
-#: auzonetweb/views.py:200 auzonetweb/views.py:201 auzonetweb/views.py:231
-#: auzonetweb/views.py:232
+#: auzonetweb/views.py:253 auzonetweb/views.py:254 auzonetweb/views.py:292
+#: auzonetweb/views.py:293
 msgid " ha marcado como finalizada la colaboracion"
 msgstr " has marked as finished the collaboration"
 
-#: auzonetweb/views.py:267
+#: auzonetweb/views.py:276
+msgid ""
+" y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma "
+"que empeoran tu reputacion en la comunidad."
+msgstr ""
+" and has rated the experience as negative, this undermines 10 points of "
+"Karma to your profile that improves your community reputation."
+
+#: auzonetweb/views.py:326
 msgid "Tienes que seleccionar una comunidad de la lista."
 msgstr "You have to select a community of the list."
 
-#: auzonetweb/views.py:277 auzonetweb/views.py:278
+#: auzonetweb/views.py:340 auzonetweb/views.py:341 auzonetweb/views.py:406
+#: auzonetweb/views.py:407
 msgid "Bienvenido a "
 msgstr "Welcome to "
 
-#: auzonetweb/views.py:279
+#: auzonetweb/views.py:343 auzonetweb/views.py:409
 msgid "A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, "
 msgstr "Hereinafter, forms part of your neighborhood in Auzonet,  "
 
-#: auzonetweb/views.py:280
+#: auzonetweb/views.py:344 auzonetweb/views.py:410
 msgid "estaras al dia de lo mas relevante que ocurra en ella. "
 msgstr "you will be aware of all relevant that happens. "
 
-#: auzonetweb/views.py:281
+#: auzonetweb/views.py:345 auzonetweb/views.py:411
 msgid "Date una vuelta por la seccion de peticiones y ofertas por "
 msgstr "Give a walk for the requests and offers sections if"
 
-#: auzonetweb/views.py:282
+#: auzonetweb/views.py:347 auzonetweb/views.py:413
 msgid ""
 "si encuentras algo de tu interes. \n"
 " \n"
@@ -559,113 +569,113 @@ msgstr ""
 "you find something of your interest. \n"
 "\n"
 
-#: auzonetweb/views.py:283
+#: auzonetweb/views.py:348 auzonetweb/views.py:414
 msgid "Ir a la web"
 msgstr "Go to the web"
 
-#: auzonetweb/views.py:292 auzonetweb/views.py:309
+#: auzonetweb/views.py:359 auzonetweb/views.py:377
 msgid "Por favor, revisa los campos indicados"
 msgstr "Please, check the marked fields"
 
-#: auzonetweb/views.py:360
+#: auzonetweb/views.py:481
 msgid "Usuario o contraseña incorrectos"
 msgstr "User or password incorrect"
 
-#: auzonetweb/views.py:364 auzonetweb/views.py:416
+#: auzonetweb/views.py:485 auzonetweb/views.py:541
 msgid "Por favor, revise los campos indicados"
 msgstr "Please, check the marked fields"
 
-#: auzonetweb/views.py:394 auzonetweb/views.py:395
+#: auzonetweb/views.py:516 auzonetweb/views.py:517
 msgid "Bienvenido a Auzonet"
 msgstr "Welcome to Auzonet"
 
-#: auzonetweb/views.py:396
+#: auzonetweb/views.py:518
 msgid "Gracias por registrarte"
 msgstr "Thanks for registering"
 
-#: auzonetweb/views.py:396
+#: auzonetweb/views.py:519
 msgid ", busca tu comunidad entre las que ya estan "
 msgstr ", search your neighborhood from the existing ones "
 
-#: auzonetweb/views.py:397
+#: auzonetweb/views.py:521
 msgid "registradas o crea la tuya para empezar a disfrutar de todo lo que "
 msgstr "or create your own to start enjoying all what is offering "
 
-#: auzonetweb/views.py:398
+#: auzonetweb/views.py:522
 msgid "ofrece el servicio"
 msgstr "the service"
 
-#: auzonetweb/views.py:406
+#: auzonetweb/views.py:530
 msgid "El nombre de usuario ya existe."
 msgstr "This username already exists."
 
-#: auzonetweb/views.py:457 auzonetweb/views.py:564
+#: auzonetweb/views.py:584 auzonetweb/views.py:702
 msgid "Por favor, revisa los campos indicados."
 msgstr "Please, check the marked fields."
 
-#: auzonetweb/views.py:503
+#: auzonetweb/views.py:635
 msgid " ha aceptado trabajar contigo"
 msgstr " has accepted working with you"
 
-#: auzonetweb/views.py:505 auzonetweb/views.py:615
+#: auzonetweb/views.py:638 auzonetweb/views.py:758
 msgid " ha aceptado el acuerdo sobre "
 msgstr " has accepted the agreement of "
 
-#: auzonetweb/views.py:506 auzonetweb/views.py:616
+#: auzonetweb/views.py:640 auzonetweb/views.py:760
 msgid ""
 " recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."
 msgstr ""
 " remember to marks as finished the agreement when you consider as finished."
 
-#: auzonetweb/views.py:507
+#: auzonetweb/views.py:641
 msgid "Ver la oferta"
 msgstr "Show the offer"
 
-#: auzonetweb/views.py:534 auzonetweb/views.py:644
+#: auzonetweb/views.py:670 auzonetweb/views.py:790
 msgid "Auzonet: "
 msgstr "Auzonet: "
 
-#: auzonetweb/views.py:534
+#: auzonetweb/views.py:670
 msgid " esta interesado en tu oferta."
 msgstr " is interested in your offer."
 
-#: auzonetweb/views.py:535
+#: auzonetweb/views.py:671
 msgid "Me interesa"
 msgstr "I'm interested"
 
-#: auzonetweb/views.py:536 auzonetweb/views.py:646
+#: auzonetweb/views.py:672 auzonetweb/views.py:792
 msgid "El usuario "
 msgstr "The user "
 
-#: auzonetweb/views.py:536
+#: auzonetweb/views.py:673
 msgid " esta interesado en tu oferta "
 msgstr " is interested in your offer "
 
-#: auzonetweb/views.py:537
+#: auzonetweb/views.py:674
 msgid "Aceptar solicitud"
 msgstr "Accept request"
 
-#: auzonetweb/views.py:613
+#: auzonetweb/views.py:755
 msgid " ha aceptado tu ayuda"
 msgstr " has accepted your help"
 
-#: auzonetweb/views.py:617
+#: auzonetweb/views.py:761
 msgid "Ver la peticion"
 msgstr "Show the request"
 
-#: auzonetweb/views.py:644
+#: auzonetweb/views.py:790
 msgid " quiere atender tu peticion"
 msgstr " wants to attend your request"
 
-#: auzonetweb/views.py:645
+#: auzonetweb/views.py:791
 msgid "¿Te echo una mano?"
 msgstr "May I help you?"
 
-#: auzonetweb/views.py:646
+#: auzonetweb/views.py:793
 msgid " quiere atender tu peticion "
 msgstr " wants to attend your request "
 
-#: auzonetweb/views.py:647
+#: auzonetweb/views.py:794
 msgid "Aceptar colaboración"
 msgstr "Accept collaboration"
 
