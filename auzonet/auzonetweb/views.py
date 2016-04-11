@@ -617,7 +617,7 @@ def accept_offer(request, orderid):
     order = get_object_or_404(Order, id=orderid)
 
     if request.user == order.offer.owner:
-        if order.status == STATUS_ACTIVE:
+        if order.status != STATUS_ACTIVE:
 
             # The logged user is the owner
             order.status = STATUS_ACTIVE
@@ -739,7 +739,7 @@ def accept_request(request, orderid):
 
     if request.user == order.auzonetrequest.owner:
         # The logged user is the owner
-        if order.status == STATUS_ACTIVE:
+        if order.status != STATUS_ACTIVE:
             order.status = STATUS_ACTIVE
             order.save()
 
