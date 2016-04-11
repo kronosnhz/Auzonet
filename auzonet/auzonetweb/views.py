@@ -237,7 +237,7 @@ def finalize_order(request, orderid, feedback):
         # Mark that the client already has voted
         order.client_voted = True
         # Send notification
-        if order.order_type is ORDER_TYPE_OFFER:
+        if order.order_type == ORDER_TYPE_OFFER:
             order_link = 'auzonet/detail-offer/' + str(order.offer.id) + '/'
         else:
             order_link = 'auzonet/detail-request/' + str(order.auzonetrequest.id) + '/'
