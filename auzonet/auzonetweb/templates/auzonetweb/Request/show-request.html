@@ -199,15 +199,6 @@
                         <img src="{{ photo }}" height="800" width="300" class="img-resposive" alt="request_photo"/>
                     {% endif %}
                 </div>
-                {% if auzonetrequest.owner.id != request.user.id %}
-                    <div class="well">
-                        <div class="text-right">
-                            <button id="btn-hire" class="btn btn-success " data-toggle="modal"
-                                    data-target="#confirmHireModal">{% trans "Atender petición" %}
-                            </button>
-                        </div>
-                    </div>
-                {% endif %}
             </div>
 
         </div>

@@ -52,7 +52,6 @@ def access_control(comid, userid):
 # COMMON PLACES
 @login_required
 def index(request, comid=None):
-
     # Check the community to load
     if comid is not None and access_control(comid, request.user.id):
         request.session['currentCommunityId'] = comid
@@ -228,32 +227,37 @@ def finalize_order(request, orderid, feedback):
             order.owner.publicuser.karma += KARMA_REWARD
             mailtext = order.client.first_name + ugettext(
                 u" ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
-                u" y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.client.first_name + "."
+                u" y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma que mejoran tu reputacion en la comunidad. ¡Felicidades!.")
         else:
             # Bad feedback
             order.owner.publicuser.karma -= KARMA_REWARD
             mailtext = order.client.first_name + ugettext(
                 u" ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
-                u" y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma que empeoran tu reputacion en la comunidad. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.client.first_name + "."
+                u" y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma que empeoran tu reputacion en la comunidad. ")
+
         # Mark that the client already has voted
         order.client_voted = True
         # Send notification
-        if order.order_type == ORDER_TYPE_OFFER:
-            order_link = 'auzonet/detail-offer/' + str(order.offer.id) + '/'
+        order_link = None
+        if not order.owner_voted:
+            mailtext += ugettext(
+                u"\n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.client.first_name + "."
+            if order.order_type == ORDER_TYPE_OFFER:
+                order_link = PUBLIC_URL_BASE + 'auzonet/detail-offer/' + str(order.offer.id) + '/'
+            else:
+                order_link = PUBLIC_URL_BASE + 'auzonet/detail-request/' + str(order.auzonetrequest.id) + '/'
         else:
-            order_link = 'auzonet/detail-request/' + str(order.auzonetrequest.id) + '/'
+            order.status = STATUS_FINISHED
         send_notification_email(None,
                                 order.owner.email,
                                 order.client.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 order.client.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 mailtext,
                                 ugettext(u"Terminar acuerdo"),
-                                PUBLIC_URL_BASE + order_link,
+                                order_link,
                                 PUBLIC_URL_BASE + order.client.publicuser.avatar.url
                                 )
-        # Check if the owner has voted also for finishing the order
-        if order.owner_voted:
-            order.status = STATUS_FINISHED
+
         # Save the publicuser rating and the order new status
         order.owner.publicuser.save()
         order.save()
@@ -264,31 +268,34 @@ def finalize_order(request, orderid, feedback):
             order.client.publicuser.karma += KARMA_REWARD
             mailtext = order.owner.first_name + ugettext(
                 u" ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
-                u" y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma que mejoran tu reputacion en la comunidad. ¡Felicidades!. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
+                u" y ha votado la experiencia como positiva, esto te añade 10 puntos de Karma que mejoran tu reputacion en la comunidad. ¡Felicidades!.")
         else:
             order.client.publicuser.karma -= KARMA_REWARD
             mailtext = order.owner.first_name + ugettext(
                 u" ha marcado como terminado el acuerdo sobre ") + order.offer.title + ugettext(
-                u" y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma que empeoran tu reputacion en la comunidad. \n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
+                u" y ha votado la experiencia como negativa, esto te resta 10 puntos de Karma que empeoran tu reputacion en la comunidad.")
         # Mark that the owner already has voted
         order.owner_voted = True
         # Send notification
-        if order.order_type == ORDER_TYPE_OFFER:
-            order_link = PUBLIC_URL_BASE + 'auzonet/detail-offer/' + str(order.offer.id)
+        order_link = None
+        if not order.client_voted:
+            mailtext += ugettext(
+                "\n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
+            if order.order_type == ORDER_TYPE_OFFER:
+                order_link = PUBLIC_URL_BASE + 'auzonet/detail-offer/' + str(order.offer.id)
+            else:
+                order_link = PUBLIC_URL_BASE + 'auzonet/detail-request/' + str(order.auzonetrequest.id)
         else:
-            order_link = PUBLIC_URL_BASE + 'auzonet/detail-request/' + str(order.auzonetrequest.id)
+            order.status = STATUS_FINISHED
         send_notification_email(None,
                                 order.client.email,
                                 order.owner.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 order.owner.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 mailtext,
                                 ugettext(u"Terminar acuerdo"),
-                                PUBLIC_URL_BASE + order_link,
+                                order_link,
                                 PUBLIC_URL_BASE + order.owner.publicuser.avatar.url
                                 )
-        # Check if the client has voted also for finishing the order
-        if order.client_voted:
-            order.status = STATUS_FINISHED
         # Save the publicuser rating and the order new status
         order.client.publicuser.save()
         order.save()
