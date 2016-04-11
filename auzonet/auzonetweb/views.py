@@ -24,8 +24,8 @@ Here is where the POST and GET request are processed
 Auth API docs https://docs.djangoproject.com/en/1.9/topics/auth/default/
 Customizing the authentication on Django https://docs.djangoproject.com/en/1.9/topics/auth/customizing/
 """
-OFFER_TYPE = 'Offer'
 REQUEST_TYPE = 'Request'
+OFFER_TYPE = 'Offer'
 KARMA_REWARD = 10
 STATUS_ACTIVE = 'A'
 STATUS_FINISHED = 'F'
