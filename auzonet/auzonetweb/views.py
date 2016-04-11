@@ -272,7 +272,7 @@ def finalize_order(request, orderid, feedback):
         # Mark that the owner already has voted
         order.owner_voted = True
         # Send notification
-        if order.order_type is ORDER_TYPE_OFFER:
+        if order.order_type is not ORDER_TYPE_OFFER:
             order_link = PUBLIC_URL_BASE + 'detail-offer/' + order.offer.id
         else:
             order_link = PUBLIC_URL_BASE + 'detail-request/' + order.auzonetrequest.id
