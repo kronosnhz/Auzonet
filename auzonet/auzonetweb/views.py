@@ -33,7 +33,7 @@ MESSAGE_TYPE_WARNING = 'W'
 ORDER_TYPE_OFFER = 'O'
 ORDER_TYPE_REQUEST = 'R'
 ACCESS_TYPE_PRIVATE = 'PR'
-PUBLIC_URL_BASE = 'http://apps.morelab.deusto.es/'
+PUBLIC_URL_BASE = 'http://apps.morelab.deusto.es/auzonet/'
 
 
 def access_control(comid, userid):
