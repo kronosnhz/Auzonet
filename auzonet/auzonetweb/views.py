@@ -617,23 +617,28 @@ def accept_offer(request, orderid):
     order = get_object_or_404(Order, id=orderid)
 
     if request.user == order.offer.owner:
-        # The logged user is the owner
-        order.status = STATUS_ACTIVE
-        order.save()
+        if order.status == STATUS_ACTIVE:
 
-        send_notification_email(None,
-                                order.client.email,
-                                order.offer.owner.first_name + ugettext(u" ha aceptado trabajar contigo"),
-                                ugettext(u"Acuerdo aceptado"),
-                                order.offer.owner.first_name + ugettext(
-                                    u" ha aceptado el acuerdo sobre ") + order.offer.title +
-                                ugettext(u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
-                                ugettext(u"Ver la oferta"),
-                                PUBLIC_URL_BASE + "auzonet/detail-offer/" + str(order.offer.id) + "/",
-                                PUBLIC_URL_BASE + order.offer.owner.publicuser.avatar.url
-                                )
+            # The logged user is the owner
+            order.status = STATUS_ACTIVE
+            order.save()
 
-        return redirect('confirmation-success')
+            send_notification_email(None,
+                                    order.client.email,
+                                    order.offer.owner.first_name + ugettext(u" ha aceptado trabajar contigo"),
+                                    ugettext(u"Acuerdo aceptado"),
+                                    order.offer.owner.first_name + ugettext(
+                                        u" ha aceptado el acuerdo sobre ") + order.offer.title +
+                                    ugettext(
+                                        u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
+                                    ugettext(u"Ver la oferta"),
+                                    PUBLIC_URL_BASE + "auzonet/detail-offer/" + str(order.offer.id) + "/",
+                                    PUBLIC_URL_BASE + order.offer.owner.publicuser.avatar.url
+                                    )
+
+            return redirect('confirmation-success')
+        else:
+            return HttpResponse('You already have accepted this offer.')
     else:
         # The logged user is not the owner
         return HttpResponse('Unauthorized', status=401)
@@ -734,22 +739,26 @@ def accept_request(request, orderid):
 
     if request.user == order.auzonetrequest.owner:
         # The logged user is the owner
-        order.status = STATUS_ACTIVE
-        order.save()
+        if order.status == STATUS_ACTIVE:
+            order.status = STATUS_ACTIVE
+            order.save()
 
-        send_notification_email(None,
-                                order.auzonetrequest.client.email,
-                                order.auzonetrequest.owner.first_name + ugettext(u" ha aceptado tu ayuda"),
-                                ugettext(u"Acuerdo aceptado"),
-                                order.auzonetrequest.owner.first_name + ugettext(
-                                    u" ha aceptado el acuerdo sobre ") + order.auzonetrequest.title +
-                                ugettext(u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
-                                ugettext(u"Ver la peticion"),
-                                PUBLIC_URL_BASE + "auzonet/detail-request/" + str(order.auzonetrequest.id) + "/",
-                                PUBLIC_URL_BASE + order.auzonetrequest.owner.publicuser.avatar.url
-                                )
+            send_notification_email(None,
+                                    order.auzonetrequest.client.email,
+                                    order.auzonetrequest.owner.first_name + ugettext(u" ha aceptado tu ayuda"),
+                                    ugettext(u"Acuerdo aceptado"),
+                                    order.auzonetrequest.owner.first_name + ugettext(
+                                        u" ha aceptado el acuerdo sobre ") + order.auzonetrequest.title +
+                                    ugettext(
+                                        u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
+                                    ugettext(u"Ver la peticion"),
+                                    PUBLIC_URL_BASE + "auzonet/detail-request/" + str(order.auzonetrequest.id) + "/",
+                                    PUBLIC_URL_BASE + order.auzonetrequest.owner.publicuser.avatar.url
+                                    )
 
-        return redirect('confirmation-success')
+            return redirect('confirmation-success')
+        else:
+            return HttpResponse('You already have accepted this request')
     else:
         # The logged user is not the owner
         return HttpResponse(ugettext('Unauthorized'), status=401)
