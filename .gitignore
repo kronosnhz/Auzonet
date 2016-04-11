@@ -89,3 +89,5 @@ target/
 *.synctex.gz
 
 *.sqlite3
+
+auzonet/.idea/workspace.xml
