@@ -33,7 +33,7 @@ MESSAGE_TYPE_WARNING = 'W'
 ORDER_TYPE_OFFER = 'O'
 ORDER_TYPE_REQUEST = 'R'
 ACCESS_TYPE_PRIVATE = 'PR'
-PUBLIC_URL_BASE = 'http://apps.morelab.deusto.es/auzonet/'
+PUBLIC_URL_BASE = 'http://apps.morelab.deusto.es/'
 
 
 def access_control(comid, userid):
@@ -112,7 +112,8 @@ def index(request, comid=None):
                                             request.session['currentCommunityAddress'] +
                                             u": " + new_message.message_text,
                                             ugettext(u"Ver el mensaje en la web"),
-                                            PUBLIC_URL_BASE + 'community/' + request.session['currentCommunityId'],
+                                            PUBLIC_URL_BASE + 'auzonet/community/' + request.session[
+                                                'currentCommunityId'],
                                             PUBLIC_URL_BASE + request.user.publicuser.avatar.url
                                             )
 
@@ -273,9 +274,9 @@ def finalize_order(request, orderid, feedback):
         order.owner_voted = True
         # Send notification
         if order.order_type == ORDER_TYPE_OFFER:
-            order_link = PUBLIC_URL_BASE + 'detail-offer/' + str(order.offer.id)
+            order_link = PUBLIC_URL_BASE + 'auzonet/detail-offer/' + str(order.offer.id)
         else:
-            order_link = PUBLIC_URL_BASE + 'detail-request/' + str(order.auzonetrequest.id)
+            order_link = PUBLIC_URL_BASE + 'auzonet/detail-request/' + str(order.auzonetrequest.id)
         send_notification_email(None,
                                 order.client.email,
                                 order.owner.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
@@ -338,7 +339,7 @@ def wizard(request):
                                             ugettext(
                                                 u"si encuentras algo de tu interes. \n \n") + selected_community.welcome_message,
                                             ugettext(u"Ir a la web"),
-                                            PUBLIC_URL_BASE + 'community/' + str(selected_community.id),
+                                            PUBLIC_URL_BASE + 'auzonet/community/' + str(selected_community.id),
                                             None
                                             )
 
@@ -404,7 +405,7 @@ def protected_community(request, comid):
                                         ugettext(
                                             u"si encuentras algo de tu interes. \n \n") + community.welcome_message,
                                         ugettext(u"Ir a la web"),
-                                        PUBLIC_URL_BASE + 'community/' + str(community.id),
+                                        PUBLIC_URL_BASE + 'auzonet/community/' + str(community.id),
                                         None
                                         )
 
@@ -659,7 +660,7 @@ def hire_offer(request, offerid):
     content = ugettext(u'El usuario ') + userInterested.username + ugettext(
         u' esta interesado en tu oferta ') + offer.title
     buttonText = ugettext('Aceptar solicitud')
-    buttonLink = PUBLIC_URL_BASE + 'accept-offer/' + str(order.id)
+    buttonLink = PUBLIC_URL_BASE + 'auzonet/accept-offer/' + str(order.id)
     avatarLink = PUBLIC_URL_BASE + userInterested.publicuser.avatar.url
 
     send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink)
@@ -775,7 +776,7 @@ def hire_request(request, requestid):
     content = ugettext('El usuario ') + userInterested.username + ugettext(
         u' quiere atender tu peticion ') + auzonetrequest.title
     buttonText = ugettext('Aceptar colaboración')
-    buttonLink = PUBLIC_URL_BASE + 'accept-request/' + str(auzonetrequest.id)
+    buttonLink = PUBLIC_URL_BASE + 'auzonet/accept-request/' + str(auzonetrequest.id)
     avatarLink = PUBLIC_URL_BASE + userInterested.publicuser.avatar.url
 
     send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink)
