@@ -746,7 +746,7 @@ def detail_request(request, requestid):
 
 @login_required
 def accept_request(request, orderid):
-    order = Order.objects.get_object_or_404(id=orderid)
+    order = get_object_or_404(Order, id=orderid)
 
     if request.user == order.auzonetrequest.owner:
         # The logged user is the owner
