@@ -796,7 +796,7 @@ def hire_request(request, requestid):
     content = ugettext(u'El usuario ') + userInterested.username + ugettext(
         u' quiere atender tu peticion ') + auzonetrequest.title
     buttonText = ugettext(u'Aceptar colaboración')
-    buttonLink = PUBLIC_URL_BASE + 'auzonet/accept-request/' + str(auzonetrequest.id)
+    buttonLink = PUBLIC_URL_BASE + 'auzonet/accept-request/' + str(order.id)
     avatarLink = PUBLIC_URL_BASE + userInterested.publicuser.avatar.url
 
     send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink)
