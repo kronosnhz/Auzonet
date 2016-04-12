@@ -137,12 +137,12 @@ def index(request, comid=None):
 def user_profile(request):
     requests_published = Request.objects.all().filter(owner=request.user).order_by('-date_published')
     requests_attended = Order.objects.all().filter(order_type=ORDER_TYPE_REQUEST).filter(client=request.user)
-    requests_attended_active = Order.objects.all().filter(order_type=ORDER_TYPE_REQUEST).filter(
-        client=request.user).filter(status=STATUS_ACTIVE)
+    requests_attended_active = Request.objects.all().filter(
+        owner=request.user).filter(status=STATUS_ACTIVE)
 
     offers_published = Offer.objects.all().filter(owner=request.user).order_by('-date_published')
     offers_hired = Order.objects.all().filter(order_type=ORDER_TYPE_OFFER).filter(client=request.user)
-    offers_hired_active = Order.objects.all().filter(order_type=ORDER_TYPE_OFFER).filter(client=request.user).filter(
+    offers_hired_active = Offer.objects.all().filter(owner=request.user).filter(
         status=STATUS_ACTIVE)
 
     my_orders = Order.objects.filter(owner=request.user).exclude(
@@ -228,7 +228,7 @@ def recover_post(request, postid, posttype):
     else:
         return HttpResponse(ugettext('Unauthorized'), status=401)
 
-    return redirect(PUBLIC_URL_BASE + request.path)
+    return redirect('my-profile')
 
 
 @login_required
