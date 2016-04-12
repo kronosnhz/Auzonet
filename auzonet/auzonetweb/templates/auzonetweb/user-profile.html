@@ -115,17 +115,19 @@ window.onload = function(){
             </tr>
             <tr>
                 {% for req in requests_attended_active %}
-                    <td>req.title</td>
+                    <td>{{ req.title }}</td>
                     <td>{% trans "Peticion" %}</td>
                     <td>{{ req.owner.username }}</td>
                     <td>
-                        <a class="btn btn-default" href="{% url 'detail-request' req.id %}"
+                        <a class="btn btn-default" href="{% url 'detail-request' req.auzonetrequest.id %}"
                            role="button">{% trans "Abrir" %}</a>
                     </td>
                 {% endfor %}
             </tr>
         {% else %}
-            <tr>{% trans "No tienes nada bajo tu atención actualmente." %}</tr>
+            <tr>
+                <td>{% trans "No tienes nada bajo tu atención actualmente." %}</td>
+            </tr>
         {% endif %}
         </tbody>
     </table>
