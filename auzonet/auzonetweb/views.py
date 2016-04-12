@@ -111,8 +111,8 @@ def index(request, comid=None):
                                             request.session['currentCommunityAddress'] +
                                             u": " + new_message.message_text,
                                             ugettext(u"Ver el mensaje en la web"),
-                                            PUBLIC_URL_BASE + 'auzonet/community/' + request.session[
-                                                'currentCommunityId'],
+                                            PUBLIC_URL_BASE + 'auzonet/community/' + str(request.session[
+                                                                                             'currentCommunityId']),
                                             PUBLIC_URL_BASE + request.user.publicuser.avatar.url
                                             )
 
@@ -239,7 +239,9 @@ def finalize_order(request, orderid, feedback):
         order.client_voted = True
         # Send notification
         order_link = None
+        button_text = None
         if not order.owner_voted:
+            button_text = ugettext(u"Terminar acuerdo")
             mailtext += ugettext(
                 u"\n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.client.first_name + "."
             if order.order_type == ORDER_TYPE_OFFER:
@@ -253,7 +255,7 @@ def finalize_order(request, orderid, feedback):
                                 order.client.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 order.client.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 mailtext,
-                                ugettext(u"Terminar acuerdo"),
+                                button_text,
                                 order_link,
                                 PUBLIC_URL_BASE + order.client.publicuser.avatar.url
                                 )
@@ -278,7 +280,9 @@ def finalize_order(request, orderid, feedback):
         order.owner_voted = True
         # Send notification
         order_link = None
+        button_text = None
         if not order.client_voted:
+            button_text = ugettext(u"Terminar acuerdo")
             mailtext += ugettext(
                 "\n\n Ahora tienes que marcar como terminado tu tambien el acuerdo y valorar tu experiencia con ") + order.owner.first_name + "."
             if order.order_type == ORDER_TYPE_OFFER:
@@ -292,7 +296,7 @@ def finalize_order(request, orderid, feedback):
                                 order.owner.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 order.owner.first_name + ugettext(u" ha marcado como finalizada la colaboracion"),
                                 mailtext,
-                                ugettext(u"Terminar acuerdo"),
+                                button_text,
                                 order_link,
                                 PUBLIC_URL_BASE + order.owner.publicuser.avatar.url
                                 )
@@ -788,10 +792,10 @@ def hire_request(request, requestid):
     fromEmail = userInterested.email
     toEmail = userOwner.email
     subject = ugettext(u"Auzonet: ") + userInterested.username + ugettext(u" quiere atender tu peticion")
-    subtitle = ugettext('¿Te echo una mano?')
-    content = ugettext('El usuario ') + userInterested.username + ugettext(
+    subtitle = ugettext(u'¿Te echo una mano?')
+    content = ugettext(u'El usuario ') + userInterested.username + ugettext(
         u' quiere atender tu peticion ') + auzonetrequest.title
-    buttonText = ugettext('Aceptar colaboración')
+    buttonText = ugettext(u'Aceptar colaboración')
     buttonLink = PUBLIC_URL_BASE + 'auzonet/accept-request/' + str(auzonetrequest.id)
     avatarLink = PUBLIC_URL_BASE + userInterested.publicuser.avatar.url
 
