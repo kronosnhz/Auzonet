@@ -143,6 +143,48 @@ window.onload = function(){
             <th>{% trans "Acciones" %}</th>
         </thead>
         <tbody>
+        {% if my_orders.count > 0 %}
+            {% for order in my_orders %}
+                {% if  order.order_type == 'O' %}
+                    <tr>
+                        <td>{{ order.offer.title }}</td>
+                        <td>{% trans "Oferta" %}</td>
+                        <td>{{ order.offer.date_published }}</td>
+                        <td>
+                            <a class="btn btn-default" href="{% url 'detail-offer' order.offer.id %}"
+                               role="button">{% trans "Abrir" %}</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>{{ order.auzonetrequest.title }}</td>
+                        <td>{% trans "Peticion" %}</td>
+                        <td>{{ order.auzonetrequest.date_published }}</td>
+                        <td>
+                            <a class="btn btn-default" href="{% url 'detail-request' order.auzonetrequest.id %}"
+                               role="button">{% trans "Abrir" %}</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>{% trans "No tienes nada publicado actualmente." %}</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+<div class="row profile-panel" id="my-posts">
+    <h2>{% trans "Historial" %}</h2>
+    <table class="table table-condensed table-responsive">
+        <thead>
+            <th>{% trans "Título" %}</th>
+            <th>{% trans "Tipo" %}</th>
+            <th>{% trans "Fecha de publicación" %}</th>
+            <th>{% trans "Acciones" %}</th>
+        </thead>
+        <tbody>
         {% if my_finished_orders.count > 0 %}
             {% for order in my_finished_orders %}
                 {% if  order.order_type == 'O' %}
@@ -172,48 +214,6 @@ window.onload = function(){
         {% else %}
             <tr>
                 <td>{% trans "Nunca has publicado nada." %}</td>
-            </tr>
-        {% endif %}
-        </tbody>
-    </table>
-</div>
-<div class="row profile-panel" id="my-posts">
-    <h2>{% trans "Historial" %}</h2>
-    <table class="table table-condensed table-responsive">
-        <thead>
-            <th>{% trans "Título" %}</th>
-            <th>{% trans "Tipo" %}</th>
-            <th>{% trans "Fecha de publicación" %}</th>
-            <th>{% trans "Acciones" %}</th>
-        </thead>
-        <tbody>
-        {% if my_orders.count > 0 %}
-            {% for order in my_orders %}
-                {% if  order.order_type == 'O' %}
-                    <tr>
-                        <td>{{ order.offer.title }}</td>
-                        <td>{% trans "Oferta" %}</td>
-                        <td>{{ order.offer.date_published }}</td>
-                        <td>
-                            <a class="btn btn-default" href="{% url 'detail-offer' order.offer.id %}"
-                               role="button">{% trans "Abrir" %}</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td>{{ order.auzonetrequest.title }}</td>
-                        <td>{% trans "Peticion" %}</td>
-                        <td>{{ order.auzonetrequest.date_published }}</td>
-                        <td>
-                            <a class="btn btn-default" href="{% url 'detail-request' order.auzonetrequest.id %}"
-                               role="button">{% trans "Abrir" %}</a>
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        {% else %}
-            <tr>
-                <td>{% trans "No tienes nada publicado actualmente." %}</td>
             </tr>
         {% endif %}
         </tbody>
