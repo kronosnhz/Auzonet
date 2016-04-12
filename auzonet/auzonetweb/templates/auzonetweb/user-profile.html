@@ -115,7 +115,7 @@ window.onload = function(){
             </tr>
             <tr>
                 {% for req in requests_attended_active %}
-                    <td>{{ req.title }}</td>
+                    <td>{{ req.auzonetrequest.title }}</td>
                     <td>{% trans "Peticion" %}</td>
                     <td>{{ req.owner.username }}</td>
                     <td>
@@ -133,7 +133,7 @@ window.onload = function(){
     </table>
 </div>
 <div class="row profile-panel" id="my-posts">
-    <h2>{% trans "Mis publicaciones" %}</h2>
+    <h2>{% trans "Mis publicaciones activas" %}</h2>
     <table class="table table-responsive">
         <thead>
             <th>{% trans "Título" %}</th>
@@ -142,28 +142,35 @@ window.onload = function(){
             <th>{% trans "Acciones" %}</th>
         </thead>
         <tbody>
+        {% if my_orders.count > 0 %}
+            {% for order in my_orders %}
+                {% if  order.order_type == 'O' %}
+                    <tr>
+                        <td>{{ order.offer.title }}</td>
+                        <td>{% trans "Oferta" %}</td>
+                        <td>{{ order.offer.date_published }}</td>
+                        <td>
+                            <a class="btn btn-default" href="{% url 'detail-offer' order.offer.id %}"
+                               role="button">{% trans "Abrir" %}</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>{{ order.auzonetrequest.title }}</td>
+                        <td>{% trans "Peticion" %}</td>
+                        <td>{{ order.auzonetrequest.date_published }}</td>
+                        <td>
+                            <a class="btn btn-default" href="{% url 'detail-request' order.auzonetrequest.id %}"
+                               role="button">{% trans "Abrir" %}</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% else %}
             <tr>
-                <td>asdasads</td>
-                <td>Oferta</td>
-                <td>18/02/2016</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-warning">Editar</button>
-                        <button type="button" class="btn btn-success">Finalizar</button>
-                    </div>
-                </td>
+                <td>{% trans "No tienes nada publicado actualmente." %}</td>
             </tr>
-            <tr>
-                <td>asdsadsads</td>
-                <td>Petición</td>
-                <td>18/02/2016</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-warning">Editar</button>
-                        <button type="button" class="btn btn-success">Finalizar</button>
-                    </div>
-                </td>
-            </tr>
+        {% endif %}
         </tbody>
     </table>
 </div>
@@ -177,26 +184,37 @@ window.onload = function(){
             <th>{% trans "Acciones" %}</th>
         </thead>
         <tbody>
+        {% if my_finished_orders.count > 0 %}
+            {% for order in my_finished_orders %}
+                {% if  order.order_type == 'O' %}
+                    <tr>
+                        <td>{{ order.offer.title }}</td>
+                        <td>{% trans "Oferta" %}</td>
+                        <td>{{ order.offer.date_published }}</td>
+                        <td>
+                            <a class="btn btn-warning"
+                               href="{% url 'recover-post' postid=order.offer.id posttype='O' %}"
+                               role="button">{% trans "Publicar de nuevo" %}</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>{{ order.auzonetrequest.title }}</td>
+                        <td>{% trans "Peticion" %}</td>
+                        <td>{{ order.auzonetrequest.date_published }}</td>
+                        <td>
+                            <a class="btn btn-warning"
+                               href="{% url 'recover-post' postid=order.auzonetrequest.id posttype='R' %}"
+                               role="button">{% trans "Publicar de nuevo" %}</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% else %}
             <tr>
-                <td>asdasads</td>
-                <td>Oferta</td>
-                <td>18/02/2016</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-warning">Recuperar</button>
-                    </div>
-                </td>
+                <td>{% trans "Nunca has publicado nada." %}</td>
             </tr>
-            <tr>
-                <td>asdsadsads</td>
-                <td>Petición</td>
-                <td>18/02/2016</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-warning">Recuperar</button>
-                    </div>
-                </td>
-            </tr>
+        {% endif %}
         </tbody>
     </table>
 </div>

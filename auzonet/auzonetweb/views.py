@@ -145,6 +145,11 @@ def user_profile(request):
     offers_hired_active = Order.objects.all().filter(order_type=ORDER_TYPE_OFFER).filter(client=request.user).filter(
         status=STATUS_ACTIVE)
 
+    my_orders = Order.objects.filter(owner=request.user).exclude(
+        status=STATUS_FINISHED)
+    my_finished_orders = Order.objects.filter(owner=request.user).exclude(
+        status=STATUS_ACTIVE).exclude(status=STATUS_PENDING)
+
     current_date = datetime.datetime.now()
 
     # Count requests for the chart
@@ -174,6 +179,8 @@ def user_profile(request):
                                                             'offers_published': offers_published,
                                                             'offers_hired': offers_hired,
                                                             'offers_hired_active': offers_hired_active,
+                                                            'my_orders': my_orders,
+                                                            'my_finished_orders': my_finished_orders,
                                                             'current_year': current_date.year,
                                                             'requests_per_month': requests_per_month,
                                                             'offers_per_month': offers_per_month})
@@ -205,6 +212,23 @@ def delete_post(request, postid, posttype):
 
     p.save()
     return redirect('indexcommunity', comid=request.session['currentCommunityId'])
+
+
+@login_required
+def recover_post(request, postid, posttype):
+    p = ""
+    if posttype == 'R':
+        p = get_object_or_404(Request, id=postid)
+    elif posttype == 'O':
+        p = get_object_or_404(Offer, id=postid)
+
+    if p.owner.id == request.user.id:
+        p.status = STATUS_ACTIVE
+        p.save()
+    else:
+        return HttpResponse(ugettext('Unauthorized'), status=401)
+
+    return redirect(PUBLIC_URL_BASE + request.path)
 
 
 @login_required

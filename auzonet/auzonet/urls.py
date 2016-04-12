@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^my-profile/$', views.user_profile, name='my-profile'),
     url(r'^delete-post/(?P<postid>\d+)/(?P<posttype>["R","O"]+)/$', views.delete_post, name='delete-post'),
+    url(r'^recover-post/(?P<postid>\d+)/(?P<posttype>["R","O"]+)/$', views.recover_post, name='recover-post'),
     url(r'^delete-message/(?P<messageid>\d+)/$', views.delete_message, name='delete-message'),
     url(r'^confirmation-success/$', views.confirmation_success, name='confirmation-success'),
     url(r'^finalize-order/(?P<orderid>\d+)/(?P<feedback>["0","1"]+)/$', views.finalize_order, name='finalize-order'),
