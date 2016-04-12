@@ -91,13 +91,13 @@ window.onload = function(){
         </table>
     </div>
 </div>
-<div class="row profile-panel" id="attending">
-    <h2>{% trans "En atención de otros usuarios" %}</h2>
+<div class="row profile-panel" id="my-posts">
+    <h2>{% trans "Mis publicaciones activas" %}</h2>
     <table class="table table-responsive">
         <thead>
             <th>{% trans "Título" %}</th>
             <th>{% trans "Tipo" %}</th>
-            <th>{% trans "Usuario" %}</th>
+            <th>{% trans "Fecha de publicacion" %}</th>
             <th>{% trans "Acciones" %}</th>
         </thead>
         <tbody>
@@ -107,7 +107,7 @@ window.onload = function(){
 
                     <td>{{ offer.title }}</td>
                     <td>{% trans "Oferta" %}</td>
-                    <td>{{ offer.owner.username }}</td>
+                    <td>{{ offer.date_published }}</td>
                     <td>
                         <a class="btn btn-default" href="{% url 'detail-offer' offer.id %}"
                            role="button">{% trans "Abrir" %}</a>
@@ -118,54 +118,12 @@ window.onload = function(){
                 <tr>
                     <td>{{ req.title }}</td>
                     <td>{% trans "Peticion" %}</td>
-                    <td>{{ req.owner.username }}</td>
+                    <td>{{ req.date_published }}</td>
                     <td>
                         <a class="btn btn-default" href="{% url 'detail-request' req.id %}"
                            role="button">{% trans "Abrir" %}</a>
                     </td>
                 </tr>
-            {% endfor %}
-        {% else %}
-            <tr>
-                <td>{% trans "No tienes nada bajo tu atención actualmente." %}</td>
-            </tr>
-        {% endif %}
-        </tbody>
-    </table>
-</div>
-<div class="row profile-panel" id="my-posts">
-    <h2>{% trans "Mis publicaciones activas" %}</h2>
-    <table class="table table-responsive">
-        <thead>
-            <th>{% trans "Título" %}</th>
-            <th>{% trans "Tipo" %}</th>
-            <th>{% trans "Fecha de publicación" %}</th>
-            <th>{% trans "Acciones" %}</th>
-        </thead>
-        <tbody>
-        {% if my_orders.count > 0 %}
-            {% for order in my_orders %}
-                {% if  order.order_type == 'O' %}
-                    <tr>
-                        <td>{{ order.offer.title }}</td>
-                        <td>{% trans "Oferta" %}</td>
-                        <td>{{ order.offer.date_published }}</td>
-                        <td>
-                            <a class="btn btn-default" href="{% url 'detail-offer' order.offer.id %}"
-                               role="button">{% trans "Abrir" %}</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td>{{ order.auzonetrequest.title }}</td>
-                        <td>{% trans "Peticion" %}</td>
-                        <td>{{ order.auzonetrequest.date_published }}</td>
-                        <td>
-                            <a class="btn btn-default" href="{% url 'detail-request' order.auzonetrequest.id %}"
-                               role="button">{% trans "Abrir" %}</a>
-                        </td>
-                    </tr>
-                {% endif %}
             {% endfor %}
         {% else %}
             <tr>
