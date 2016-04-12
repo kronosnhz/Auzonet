@@ -35,7 +35,7 @@ var lineChartData = {
         }
     ]
 
-}
+};
 
 window.onload = function(){
     var ctx = document.getElementById("canvas").getContext("2d");
@@ -101,28 +101,32 @@ window.onload = function(){
             <th>{% trans "Acciones" %}</th>
         </thead>
         <tbody>
+        {% if ((offers_hired.count > 0) || (requests_attended > 0)) %}
             <tr>
-                <td>asdasads</td>
-                <td>Oferta</td>
-                <td>asdsadsadsa</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-danger">Abandonar</button>
-                        <button type="button" class="btn btn-success">Finalizar</button>
-                    </div>
-                </td>
+                {% for offer in offers_hired %}
+                    <td>{{ offer.title }}</td>
+                    <td>{% trans "Oferta" %}</td>
+                    <td>{{ offer.owner.username }}</td>
+                    <td>
+                        <a class="btn btn-default" href="{% url 'detail-offer' offer.id %}"
+                           role="button">{% trans "Abrir" %}</a>
+                    </td>
+                {% endfor %}
             </tr>
             <tr>
-                <td>asdsadsads</td>
-                <td>Petición</td>
-                <td>asdsadsds</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-danger">Abandonar</button>
-                        <button type="button" class="btn btn-success">Finalizar</button>
-                    </div>
-                </td>
+                {% for req in requests_attended %}
+                    <td>req.title</td>
+                    <td>{% trans "Peticion" %}</td>
+                    <td>{{ req.owner.username }}</td>
+                    <td>
+                        <a class="btn btn-default" href="{% url 'detail-request' req.id %}"
+                           role="button">{% trans "Abrir" %}</a>
+                    </td>
+                {% endfor %}
             </tr>
+        {% else %}
+            {% trans "No has publicado nada." %}
+        {% endif %}
         </tbody>
     </table>
 </div>
