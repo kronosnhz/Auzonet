@@ -755,7 +755,7 @@ def accept_request(request, orderid):
             order.save()
 
             send_notification_email(None,
-                                    order.auzonetrequest.client.email,
+                                    order.client.email,
                                     order.auzonetrequest.owner.first_name + ugettext(u" ha aceptado tu ayuda"),
                                     ugettext(u"Acuerdo aceptado"),
                                     order.auzonetrequest.owner.first_name + ugettext(
