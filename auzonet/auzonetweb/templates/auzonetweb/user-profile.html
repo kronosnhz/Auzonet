@@ -92,7 +92,7 @@ window.onload = function(){
     </div>
 </div>
 <div class="row profile-panel" id="attending">
-    <h2>{% trans "En atención" %}</h2>
+    <h2>{% trans "En atención de otros usuarios" %}</h2>
     <table class="table table-responsive">
         <thead>
             <th>{% trans "Título" %}</th>
@@ -125,7 +125,7 @@ window.onload = function(){
                 {% endfor %}
             </tr>
         {% else %}
-            {% trans "No has publicado nada." %}
+            <tr>{% trans "No tienes nada bajo tu atención actualmente." %}</tr>
         {% endif %}
         </tbody>
     </table>
