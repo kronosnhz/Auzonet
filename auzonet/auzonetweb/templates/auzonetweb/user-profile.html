@@ -143,31 +143,30 @@ window.onload = function(){
             <th>{% trans "Acciones" %}</th>
         </thead>
         <tbody>
-        {% if my_finished_orders.count > 0 %}
-            {% for order in my_finished_orders %}
-                {% if  order.order_type == 'O' %}
-                    <tr>
-                        <td>{{ order.offer.title }}</td>
-                        <td>{% trans "Oferta" %}</td>
-                        <td>{{ order.offer.date_published }}</td>
-                        <td>
-                            <a class="btn btn-warning"
-                               href="{% url 'recover-post' postid=order.offer.id posttype='O' %}"
-                               role="button">{% trans "Publicar de nuevo" %}</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td>{{ order.auzonetrequest.title }}</td>
-                        <td>{% trans "Peticion" %}</td>
-                        <td>{{ order.auzonetrequest.date_published }}</td>
-                        <td>
-                            <a class="btn btn-warning"
-                               href="{% url 'recover-post' postid=order.auzonetrequest.id posttype='R' %}"
-                               role="button">{% trans "Publicar de nuevo" %}</a>
-                        </td>
-                    </tr>
-                {% endif %}
+        {% if my_finished_offers.count > 0 or my_finished_requests.count > 0 %}
+            {% for offer in my_finished_offers %}
+                <tr>
+                    <td>{{ offer.title }}</td>
+                    <td>{% trans "Oferta" %}</td>
+                    <td>{{ offer.date_published }}</td>
+                    <td>
+                        <a class="btn btn-warning"
+                           href="{% url 'recover-post' postid=offer.id posttype='O' %}"
+                           role="button">{% trans "Publicar de nuevo" %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% for req in my_finished_requests %}
+                <tr>
+                    <td>{{ req.title }}</td>
+                    <td>{% trans "Peticion" %}</td>
+                    <td>{{ req.date_published }}</td>
+                    <td>
+                        <a class="btn btn-warning"
+                           href="{% url 'recover-post' postid=req.id posttype='R' %}"
+                           role="button">{% trans "Publicar de nuevo" %}</a>
+                    </td>
+                </tr>
             {% endfor %}
         {% else %}
             <tr>
