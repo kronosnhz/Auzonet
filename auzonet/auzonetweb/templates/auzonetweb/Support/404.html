@@ -1,53 +1,41 @@
-<!doctype html>
-<html class="no-js" lang="">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>400 Not Found</title>
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="stylesheet" href="styles/vendor.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="styles/main.css">
-    <script src="scripts/vendor/modernizr.js"></script>
+    <!-- Custom styles -->
+    <link href="{% static 'auzonetweb/css/welcome_style.css' %}" rel="stylesheet">
 </head>
 <body>
-<!--[if lt IE 10]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-      <![endif]-->
-<div class="page_overlay">
-    <div class="loader-inner ball-pulse">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-<div class="wrap4002 animated fadeIn">
-    <div class="row-flex">
-        <div class="messge400">
-            <h1><span>404</span> <br>
-                Server error</h1>
-            <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh </p>
-        </div>
-    </div>
-    <div class=" cloudWrapper">
-        <div class="cloud cloud-1"><img src="images/cloud-1.png" alt=""></div>
-        <div class="cloud cloud-2"><img src="images/cloud-2.png" alt=""></div>
-        <div class="cloud cloud-4"><img src="images/cloud-4.png" alt=""></div>
-    </div>
-    <div class="waterflow">
-        <div class="charecter-5">
-            <div class="charecter-5anim row-flex"><div class="eye5"><img src="images/eye-5.gif" alt=""></div><img src="images/charecter-5.png" alt=""></div>
-            <div class="fish"><img src="images/fish.png" alt="">
-                <span class="bubble bubble-1"><img src="images/buble-1.png" alt=""></span>
-                <span class="bubble bubble-2"><img src="images/buble-1.png" alt=""></span>
-                <span class="bubble bubble-3"><img src="images/buble-1.png" alt=""></span>
+<div class="wrapper row2">
+    <div id="container" class="clear">
+        <!-- ####################################################################################################### -->
+        <!-- ####################################################################################################### -->
+        <!-- ####################################################################################################### -->
+        <!-- ####################################################################################################### -->
+        <section id="fof" class="clear" background="{% static 'auzonetweb/images/404.png' %}">
+            <div class="positioned">
+                <!-- ####################################################################################################### -->
+                <div class="hgroup">
+                    <h1>404 Error</h1>
+                    <h2>DOH! Page Not Found&hellip;</h2>
+                </div>
+                <p>The Page You Requested Could Not Be Found On Our Server</p>
+                <div id="respond">
+                    <form action="#" method="post">
+                        <fieldset>
+                            <legend>Site Search</legend>
+                            <input type="text" value="Search Our Website&hellip;"
+                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;">
+                            <input type="submit" id="submit" value="Search">
+                        </fieldset>
+                    </form>
+                </div>
             </div>
+            <!-- ####################################################################################################### -->
+        </section>
+        <!-- ####################################################################################################### -->
+        <!-- ####################################################################################################### -->
+        <!-- ####################################################################################################### -->
+        <!-- ####################################################################################################### -->
         </div>
     </div>
-</div>
-<script src="scripts/vendor.js"></script>
-<script src="scripts/plugins.js"></script>
-<script src="scripts/main.js"></script>
 </body>
 </html>
