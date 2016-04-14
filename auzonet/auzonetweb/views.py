@@ -137,13 +137,15 @@ def index(request, comid=None):
 def user_profile(request):
     requests_published = Request.objects.all().filter(owner=request.user).order_by('-date_published')
     requests_attended = Order.objects.all().filter(order_type=ORDER_TYPE_REQUEST).filter(client=request.user)
-    requests_attended_active = Request.objects.all().filter(
-        owner=request.user).filter(status=STATUS_ACTIVE)
+
+    my_requests_active = Request.objects.all().filter(
+        owner=request.user).exclude(status=STATUS_FINISHED)
 
     offers_published = Offer.objects.all().filter(owner=request.user).order_by('-date_published')
     offers_hired = Order.objects.all().filter(order_type=ORDER_TYPE_OFFER).filter(client=request.user)
-    offers_hired_active = Offer.objects.all().filter(owner=request.user).filter(
-        status=STATUS_ACTIVE)
+
+    my_offers_active = Offer.objects.all().filter(owner=request.user).exclude(
+        status=STATUS_FINISHED)
 
     my_finished_requests = Request.objects.filter(owner=request.user).filter(status=STATUS_FINISHED)
     my_finished_offers = Offer.objects.filter(owner=request.user).filter(status=STATUS_FINISHED)
@@ -172,11 +174,11 @@ def user_profile(request):
 
     return render(request, 'auzonetweb/user-profile.html', {'currentUser': request.user,
                                                             'requests_attended': requests_attended,
-                                                            'requests_attended_active': requests_attended_active,
+                                                            'my_requests_active': my_requests_active,
                                                             'requests_published': requests_published,
                                                             'offers_published': offers_published,
                                                             'offers_hired': offers_hired,
-                                                            'offers_hired_active': offers_hired_active,
+                                                            'my_offers_active': my_offers_active,
                                                             'my_finished_offers': my_finished_offers,
                                                             'my_finished_requests': my_finished_requests,
                                                             'current_year': current_date.year,
