@@ -50,5 +50,3 @@ urlpatterns = [
     }),
     url(r'^admin/', admin.site.urls),
 ]
-
-handler404 = 'handler404'
