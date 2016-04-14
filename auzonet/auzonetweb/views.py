@@ -9,8 +9,8 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import IntegrityError
 from django.db.models import Q
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, render_to_response, get_object_or_404
-from django.template import RequestContext, Context
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template import Context
 from django.template.loader import get_template
 from django.utils.translation import ugettext
 
@@ -835,18 +835,6 @@ def hire_request(request, requestid):
 
     return redirect('index')
 
-
-# SUPPORTING VIEWS
-def handler404(request):
-    response = render_to_response('auzonetweb/Support/404.html', {}, context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
-
-
-def handler500(request):
-    response = render_to_response('auzonetweb/500.html', {}, context_instance=RequestContext(request))
-    response.status_code = 500
-    return response
 
 
 # REST API
