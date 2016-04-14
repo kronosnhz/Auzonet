@@ -145,10 +145,7 @@ def user_profile(request):
     offers_hired_active = Offer.objects.all().filter(owner=request.user).filter(
         status=STATUS_ACTIVE)
 
-    my_orders = Order.objects.filter(owner=request.user).exclude(
-        status=STATUS_FINISHED)
-    my_finished_orders = Order.objects.filter(owner=request.user).exclude(
-        status=STATUS_ACTIVE).exclude(status=STATUS_PENDING)
+    my_finished_orders = Order.objects.filter(owner=request.user).filter(status=STATUS_FINISHED)
 
     current_date = datetime.datetime.now()
 
@@ -179,7 +176,6 @@ def user_profile(request):
                                                             'offers_published': offers_published,
                                                             'offers_hired': offers_hired,
                                                             'offers_hired_active': offers_hired_active,
-                                                            'my_orders': my_orders,
                                                             'my_finished_orders': my_finished_orders,
                                                             'current_year': current_date.year,
                                                             'requests_per_month': requests_per_month,

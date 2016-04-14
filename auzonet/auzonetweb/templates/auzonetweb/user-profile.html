@@ -101,8 +101,8 @@ window.onload = function(){
             <th>{% trans "Acciones" %}</th>
         </thead>
         <tbody>
-        {% if offers_hired_active.count > 0 or requests_attended_active.count > 0 %}
-            {% for offer in offers_hired_active %}
+        {% if offers_published.count > 0 or requests_published.count > 0 %}
+            {% for offer in offers_published %}
                 <tr>
 
                     <td>{{ offer.title }}</td>
@@ -114,7 +114,7 @@ window.onload = function(){
                     </td>
                 </tr>
             {% endfor %}
-            {% for req in requests_attended_active %}
+            {% for req in requests_published %}
                 <tr>
                     <td>{{ req.title }}</td>
                     <td>{% trans "Peticion" %}</td>
