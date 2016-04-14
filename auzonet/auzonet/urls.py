@@ -45,12 +45,8 @@ urlpatterns = [
     url(r'^new-offer/$', views.edit_offer, name='new-offer'),
     url(r'^new-request/$', views.edit_request, name='new-request'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^auzonetweb/media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
     url(r'^admin/', admin.site.urls),
 ]
-
-if settings.DEBUG:
-    urlpatterns += [
-        url(r'^auzonetweb/media/(?P<path>.*)$', serve, {
-            'document_root': settings.MEDIA_ROOT,
-        }),
-    ]
