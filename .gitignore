@@ -87,3 +87,5 @@ target/
 *.sqlite3
 
 auzonet/.idea/workspace.xml
+
+*.sqlite3
