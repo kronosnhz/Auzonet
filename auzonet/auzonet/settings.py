@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djangobower',
     'bootstrap3',
+    'favicon',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -122,16 +123,23 @@ LOCALE_PATHS = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
+# FOR LOCAL
+# STATIC_URL = '/static/'
+# END LOCAL
+
+# FOR SERVER
 STATIC_URL = '/auzonet/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+USE_X_FORWARDED_HOST = True
+FORCE_SCRIPT_NAME = '/auzonet'
+# END SERVER
+FAVICON_PATH = STATIC_URL + 'auzonetweb/images/favicon/'
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'djangobower.finders.BowerFinder',
 )
-
-USE_X_FORWARDED_HOST = True
-FORCE_SCRIPT_NAME = '/auzonet'
 
 # Bower package manager
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')

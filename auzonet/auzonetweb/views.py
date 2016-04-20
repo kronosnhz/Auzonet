@@ -349,6 +349,29 @@ def wizard(request):
     # ResourceID 73b6103b-0c12-4b2c-98ae-71ed33e55e8c
     communities = Community.objects.all()
 
+    # WELIVE API BOOTCAMP
+    url = 'https://dev.welive.eu/dev/api/ods/portales-de-bilbao/resource/73b6103b-0c12-4b2c-98ae-71ed33e55e8c/query'
+    payload = 'select * from results limit 10;'
+
+    # GET
+    # r = requests.get(url)
+
+    # GET with params in URL
+    # r = requests.get(url, params=payload)
+
+    # POST with form-encoded data
+    # r = requests.post(url, data=payload)
+
+    # POST with JSON
+    # r = requests.post(url, data=payload)
+
+    # Response, status etc
+    # print r.text
+    # print r.status_code
+
+    # END WELIVE API
+
+
     if request.method == 'POST':
         if request.POST['formName'] == 'joinCommunity':
             select_community_form = JoinCommunityForm(request.POST)
@@ -362,30 +385,36 @@ def wizard(request):
                                'errorMessage': ugettext(u'Tienes que seleccionar una comunidad de la lista.'),
                                'modal': 'join'})
             if select_community_form.is_valid():
-                if selected_community.access_type == ACCESS_TYPE_PRIVATE:
-                    return redirect('protectedcommunity', comid=selected_community.id)
+                # If the logged user is not already part of the joining community
+                if selected_community not in request.user.publicuser.communities.all():
+                    if selected_community.access_type == ACCESS_TYPE_PRIVATE:
+                        return redirect('protectedcommunity', comid=selected_community.id)
+                    else:
+                        current_user = get_object_or_404(User, id=request.user.id)
+                        current_user.publicuser.communities.add(selected_community)
+                        current_user.save()
+                        request.session['currentCommunityId'] = selected_community.id
+                        request.session['currentCommunityAddress'] = selected_community.address
+
+                        send_notification_email(None,
+                                                current_user.email,
+                                                ugettext(u"Bienvenido a ") + selected_community.address,
+                                                ugettext(u"Bienvenido a ") + selected_community.address,
+                                                ugettext(
+                                                    u"A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
+                                                ugettext(u"estaras al dia de lo mas relevante que ocurra en ella. ") +
+                                                ugettext(
+                                                    u"Date una vuelta por la seccion de peticiones y ofertas por ") +
+                                                ugettext(
+                                                    u"si encuentras algo de tu interes. \n \n") + selected_community.welcome_message,
+                                                ugettext(u"Ir a la web"),
+                                                PUBLIC_URL_BASE + 'auzonet/community/' + str(selected_community.id),
+                                                None
+                                                )
+
+                        return redirect('index')
                 else:
-                    current_user = get_object_or_404(User, id=request.user.id)
-                    current_user.publicuser.communities.add(selected_community)
-                    current_user.save()
-                    request.session['currentCommunityId'] = selected_community.id
-                    request.session['currentCommunityAddress'] = selected_community.address
-
-                    send_notification_email(None,
-                                            current_user.email,
-                                            ugettext(u"Bienvenido a ") + selected_community.address,
-                                            ugettext(u"Bienvenido a ") + selected_community.address,
-                                            ugettext(
-                                                u"A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
-                                            ugettext(u"estaras al dia de lo mas relevante que ocurra en ella. ") +
-                                            ugettext(u"Date una vuelta por la seccion de peticiones y ofertas por ") +
-                                            ugettext(
-                                                u"si encuentras algo de tu interes. \n \n") + selected_community.welcome_message,
-                                            ugettext(u"Ir a la web"),
-                                            PUBLIC_URL_BASE + 'auzonet/community/' + str(selected_community.id),
-                                            None
-                                            )
-
+                    # The user is already part of the community
                     return redirect('index')
             else:
                 return render(request, 'auzonetweb/wizard.html',
