@@ -32,8 +32,14 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                {% if request.user.publicuser.communities.count > 0 %}
+                    <p class="pull-left "><a href="{% url "index" %}"><span class="glyphicon glyphicon-home"></span> {% trans "back to index" %}</a></p>
+                    <br>
+                {% endif %}
+            </div>
             <div class="col-md-6">
+
                 <div id="form-join-existing">
                     <h1 class="text-center">{% trans "Bienvenido" %}</h1>
                     {%if communities.count > 0%}

@@ -146,9 +146,11 @@
                 <div class="caption-full">
                     <h4 class="pull-right">
                         {% if offer.price == 0%}
-                        {% trans "Gratis" %}
+                            {% trans "Gratis" %}
+                        {% elif offer.price == None %}
+                            {% trans "Gratis" %}
                         {% else %}
-                        {% trans "Precio" %}: {{offer.price}} €
+                            {% trans "Precio" %}: {{offer.price}} €
                         {% endif %}
                     </h4>
                     <h4><a href="#">{{offer.title}}</a>

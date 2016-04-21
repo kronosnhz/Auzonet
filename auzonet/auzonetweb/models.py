@@ -1,6 +1,9 @@
 from __future__ import unicode_literals
 
+from decimal import Decimal
+
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 from django.db import models
 
 GENDERS = (
@@ -67,7 +70,7 @@ class Request(models.Model):
     due_date = models.DateField(blank=True, null=True)
     scope = models.CharField(max_length=3, choices=SCOPE, default='COM')
     status = models.CharField(max_length=1, choices=STATUS, default='A')
-    reward = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=10, default=0, help_text="EUR. Leave it blank for no reward.")
+    reward = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=10, default=0, help_text="EUR. Leave it blank for no reward.", validators=[MinValueValidator(Decimal('0.01'))])
     image = models.ImageField(blank=True, upload_to='uploads/requests/%Y/%m/%d/')
 
     def __unicode__(self):
@@ -83,7 +86,7 @@ class Offer(models.Model):
     date_published = models.DateTimeField(auto_now_add=True)
     scope = models.CharField(max_length=3, choices=SCOPE, default='COM')
     status = models.CharField(max_length=1, choices=STATUS, default='A')
-    price = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=10, default=0, help_text="EUR. Leave it blank for no price.")
+    price = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=10, default=0, help_text="EUR. Leave it blank for no price.", validators=[MinValueValidator(Decimal('0.01'))])
     image = models.ImageField(blank=True, upload_to='uploads/offers/%Y/%m/%d/')
 
     def __unicode__(self):

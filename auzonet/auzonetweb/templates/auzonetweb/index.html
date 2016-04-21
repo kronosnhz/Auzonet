@@ -228,19 +228,19 @@
                     {% for req in myRequests %}
                     <li>
                         [{{req.date_published}}]
-                        <a href="{% url 'detail-request' req.id %}">
+                        <b>
                             {% trans "NECESITO" %}:
-                        </a>
-                        {{req.title}} {% trans "en" %} <a href="{%url 'indexcommunity' req.community.id%}">{{ req.community.address }}</a>
+                        </b>
+                        <a href="{% url 'detail-request' req.id %}">{{req.title}}</a> {% trans "en" %} <a href="{%url 'indexcommunity' req.community.id%}">{{ req.community.address }}</a>
                     </li>
                     {% endfor %}
                     {% for offer in myOffers %}
                     <li>
                         [{{offer.date_published}}]
-                        <a href="{%url 'detail-offer' offer.id%}">
+                        <b>
                             {% trans "OFREZCO" %}:
-                        </a>
-                        {{offer.title}} {% trans "en" %} <a href="{%url 'indexcommunity' offer.community.id%}">{{ offer.community.address }}</a>
+                        </b><br>
+                        <a href="{%url 'detail-offer' offer.id%}">{{offer.title}}</a> {% trans "en" %} <a href="{%url 'indexcommunity' offer.community.id%}">{{ offer.community.address }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -251,7 +251,7 @@
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">{% trans "En atención" %}</h3>
+                <h3 class="panel-title">{% trans "Acuerdos activos" %}</h3>
             </div>
             <div class="panel-body">
                 <ul>
@@ -263,15 +263,23 @@
                         <li>
                             [{{o.date_created}}]
                             {%if o.order_type == 'O'%}
-                            <a href="{%url 'detail-offer' o.offer.id%}">
-                                ({{o.owner.username}}) {% trans "OFERTA" %}:{{o.offer.title}}
-                                {{o.title}}
-                            </a>
+                                {% if o.owner == request.user %}
+                                    <b>{% trans "OFERTA" %}</b> <br>
+                                    <a href="{%url 'detail-offer' o.offer.id%}">{{o.offer.title}} {% trans " con " %} {{o.client.username}}</a>
+                                {% else %}
+                                    <b>{% trans "OFERTA" %} {% trans " of " %} {{o.owner.username}}</b><br>
+                                    <a href="{%url 'detail-offer' o.offer.id%}">{{o.offer.title}}</a>
+                                {% endif %}
+
                             {%else%}
-                                <a href="{% url 'detail-request' o.auzonetrequest.id %}">
-                                    ({{ o.owner.username }}) {% trans "NECESITO" %}:{{ o.auzonetrequest.title }}
-                                {{o.title}}
-                                </a>
+                                {% if o.owner == request.user %}
+                                    <b>{% trans "NECESITO" %}</b><br>
+                                    <a href="{% url 'detail-request' o.auzonetrequest.id %}">{{ o.auzonetrequest.title }} {% trans " con " %} {{ o.client.username }}</a>
+
+                                {% else %}
+                                    <b>{% trans "NECESITO" %} {% trans " of " %} {{ o.owner.username }}</b><br>
+                                    <a href="{% url 'detail-request' o.auzonetrequest.id %}">{{ o.auzonetrequest.title }}</a>
+                                {% endif %}
                             {%endif%}
                         </li>
                         {% endfor %}

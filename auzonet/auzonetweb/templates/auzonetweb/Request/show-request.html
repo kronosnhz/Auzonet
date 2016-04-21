@@ -183,6 +183,8 @@
                         <h4 class="pull-right">
                             {% if auzonetrequest.reward == 0 %}
                                 {% trans "Gratis" %}
+                            {% elif auzonetrequest.reward == None %}
+                                {% trans "Gratis" %}
                             {% else %}
                                 {% trans "Precio" %}: {{ auzonetrequest.reward }} €
                             {% endif %}

@@ -35,6 +35,7 @@ ORDER_TYPE_REQUEST = 'R'
 ACCESS_TYPE_PRIVATE = 'PR'
 PUBLIC_URL_BASE = 'http://apps.morelab.deusto.es/'
 
+# INTERNATIONALIZATION: django-admin makemessages -l es AND django-admin makemessages -l en AND django-admin compilemessages
 
 def access_control(comid, userid):
     accessing_community = get_object_or_404(Community, id=comid)
@@ -580,7 +581,7 @@ def welcome(request):
                                                 email,
                                                 ugettext(u"Bienvenido a Auzonet"),
                                                 ugettext(u"Bienvenido a Auzonet"),
-                                                ugettext(u"Gracias por registrarte") + first_name + ugettext(
+                                                ugettext(u"Gracias por registrarte") + u" " + first_name + ugettext(
                                                     u", busca tu comunidad entre las que ya estan ") +
                                                 ugettext(
                                                     u"registradas o crea la tuya para empezar a disfrutar de todo lo que ") +

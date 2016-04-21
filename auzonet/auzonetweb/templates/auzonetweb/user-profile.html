@@ -9,6 +9,11 @@
 {% block scripts %}
 <script src="{% static 'Chart.js/Chart.min.js' %}"></script>
 <script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<script>
 var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 var lineChartData = {
     labels : ["January","February","March","April","May","June","July", "August", "September", "October", "November", "December"],
@@ -48,6 +53,8 @@ window.onload = function(){
 {% block title %}AuzoNet - {{currentUser.first_name}} {{currentUser.last_name}}{% endblock %}
 {% block content%}
 <div class="row" id="profile">
+    <p class="pull-left "><a onclick="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> {% trans "back" %}</a></p>
+    <br>
     <img src="{%static currentUser.publicuser.avatar.url%}"  class="center-block img-circle" alt="avatar" width="250" height="250">
     <h1 class="text-center">{{currentUser.first_name}} {{currentUser.last_name}}</h1>
     <p class="text-center"><i>{% trans "Miembro de" %} </i></p>

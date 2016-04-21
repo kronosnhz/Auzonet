@@ -32,9 +32,13 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-3"></div>
+            <div class="col-md-3">
+
+            </div>
             <div class="col-md-6">
                 <div class="well well-lg text-center">
+                    <p class="pull-left "><a onclick="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> {% trans "back" %}</a></p>
+                    <br>
                     <h1>{{ address }}</h1>
                     <span id="lock-icon" class="glyphicon glyphicon-lock"></span> <br><br>
 
@@ -62,8 +66,11 @@
         <div class="container">
         </div>
     </footer>
-
-
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'jquery/jquery.js' %}"></script>
     <script src="{% static 'jquery-ui/jquery-ui.js' %}"></script>
