@@ -198,11 +198,11 @@ msgstr "antes del"
 
 #: auzonetweb/templates/auzonetweb/base.html:49
 msgid "Search community"
-msgstr "Search community"
+msgstr "Buscar comunidad"
 
 #: auzonetweb/templates/auzonetweb/base.html:51
 msgid "My communities"
-msgstr "My communities"
+msgstr "Mis comunidades"
 
 #: auzonetweb/templates/auzonetweb/base.html:58
 #: auzonetweb/templates/auzonetweb/wizard.html:72

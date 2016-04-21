@@ -58,7 +58,7 @@
     </div>
     <div class="col-lg-7">
         <h1>{{request.user.first_name}} {{request.user.last_name}}</h1>
-        <p>Karma: <a href="#">{{request.user.publicuser.karma}}</a></p>
+        <p>Karma: <a href="{%url 'my-profile'%}">{{request.user.publicuser.karma}}</a></p>
         <a class="btn btn-info btn-lg btn-block" href="{%url 'new-offer'%}"><span class="glyphicon glyphicon-hand-up"></span> {% trans "Quiero ofrecer algo" %}</a>
         <a class="btn btn-warning btn-lg btn-block" href="{%url 'new-request'%}"><span class="glyphicon glyphicon-thumbs-up"></span> {% trans "Necesito algo" %}</a>
     </div>

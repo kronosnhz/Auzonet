@@ -351,6 +351,10 @@ def wizard(request):
     communities = Community.objects.all()
 
     # WELIVE API BOOTCAMP
+    # Barrios de bilbao select distinct TBAR_DES_BARRIO_A, TTRE_COD_BARRIO from results;
+    # Calles de cada barrio select distinct TPOR_COD_CALLE, TCAL_DES_CALLE_A from results where TTRE_COD_BARRIO = 701;
+    # Portales con coordenadas select TPOR_DIR_PORTAL,TCOG_IDE_COORDX_UT,TCOG_IDE_COORDY_UT  from results where TBAR_DES_BARRIO_A = 'SAN IGNACIO' and TCAL_DES_CALLE_A='ZARANDOA'
+    #
     url = 'https://dev.welive.eu/dev/api/ods/portales-de-bilbao/resource/73b6103b-0c12-4b2c-98ae-71ed33e55e8c/query'
     payload = 'select * from results limit 10;'
 
