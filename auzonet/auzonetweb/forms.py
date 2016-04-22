@@ -57,11 +57,21 @@ class NewCommunityMsgModelForm(ModelForm):
         localized_fields = '__all__'
 
 
-class NewCommunityModelForm(ModelForm):
+
+class NewCommunityForm(forms.Form):
+    access_type = forms.ChoiceField(choices=ACCESS_TYPES)
+    neighborhood_code = forms.IntegerField(widget=forms.HiddenInput)
+    neighborhood_name = forms.CharField(widget=forms.HiddenInput)
+    street_code = forms.IntegerField(widget=forms.HiddenInput)
+    street_name = forms.CharField(widget=forms.HiddenInput)
+    door_code = forms.IntegerField(widget=forms.HiddenInput)
+    coordinatesX = forms.DecimalField(widget=forms.HiddenInput)
+    coordinatesY = forms.DecimalField(widget=forms.HiddenInput)
+    password = forms.CharField(widget=forms.PasswordInput)
+    welcome_message = forms.CharField(widget=forms.Textarea)
+
     class Meta:
-        model = Community
         localized_fields = '__all__'
-        fields = ['address', 'coordinates', 'access_type', 'password', 'welcome_message']
 
 
 class NewOfferModelForm(ModelForm):

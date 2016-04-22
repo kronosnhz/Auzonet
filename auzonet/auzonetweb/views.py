@@ -14,8 +14,8 @@ from django.template import Context
 from django.template.loader import get_template
 from django.utils.translation import ugettext
 
-from .forms import LoginForm, RegisterForm, NewCommunityModelForm, NewRequestModelForm, JoinCommunityForm, \
-    NewOfferModelForm, NewCommunityMsgModelForm, ProtectedCommunityForm
+from .forms import LoginForm, RegisterForm,  NewRequestModelForm, JoinCommunityForm, \
+    NewOfferModelForm, NewCommunityMsgModelForm, ProtectedCommunityForm, NewCommunityForm
 from .models import Community, User, PublicUser, Request, Offer, CommunityMessage, Order
 
 """
@@ -34,6 +34,7 @@ ORDER_TYPE_OFFER = 'O'
 ORDER_TYPE_REQUEST = 'R'
 ACCESS_TYPE_PRIVATE = 'PR'
 PUBLIC_URL_BASE = 'http://apps.morelab.deusto.es/'
+
 
 # INTERNATIONALIZATION: django-admin makemessages -l es AND django-admin makemessages -l en AND django-admin compilemessages
 
@@ -429,29 +430,51 @@ def wizard(request):
                                'errorMessage': ugettext(u'Por favor, revisa los campos indicados'),
                                'modal': 'join'})
         elif request.POST['formName'] == 'newCommunity':
-            new_community_model_form = NewCommunityModelForm(request.POST)
-            if new_community_model_form.is_valid():
-                new_community = new_community_model_form.save()
+            new_community_form = NewCommunityForm(request.POST)
+            if new_community_form.is_valid():
+                # process the data in form.cleaned_data as required
 
-                current_user = get_object_or_404(User, id=request.user.id)
-                current_user.publicuser.communities.add(new_community)
-                current_user.save()
-                request.session['currentCommunityId'] = new_community.id
-                request.session['currentCommunityAddress'] = new_community.address
+                try:
+                    new_neighborhood = Community(
+                        access_type=new_community_form.cleaned_data['id_access_type'],
+                        neighborhood_code=new_community_form.cleaned_data['id_neighborhood_code'],
+                        neighborhood_name=new_community_form.cleaned_data['id_neighborhood_name'],
+                        street_code=new_community_form.cleaned_data['id_street_code'],
+                        street_name=new_community_form.cleaned_data['id_street_name'],
+                        door_code=new_community_form.cleaned_data['id_door_code'],
+                        coordinatesX=new_community_form.cleaned_data['id_coordinatesX'],
+                        coordinatesY=new_community_form.cleaned_data['id_coordinatesY'],
+                        password=new_community_form.cleaned_data['id_password'],
+                        welcome_message=new_community_form.cleaned_data['id_welcome_message']
+                    )
 
-                return redirect('indexcommunity', comid=new_community.id)
+                    new_neighborhood.save()
+
+                    current_user = get_object_or_404(User, id=request.user.id)
+                    current_user.publicuser.communities.add(new_neighborhood)
+                    current_user.save()
+                    request.session['currentCommunityId'] = new_neighborhood.id
+                    request.session['currentCommunityAddress'] = new_neighborhood.address
+
+                    return redirect('indexcommunity', comid=new_neighborhood.id)
+                except IntegrityError:
+                    return render(request, 'auzonetweb/wizard.html',
+                                  {'newCommunityForm': new_community_form, 'selectCommunityForm': JoinCommunityForm(),
+                                   'communities': communities,
+                                   'errorMessage': ugettext(u'Por favor, revisa los campos indicados'),
+                                   'modal': 'new'})
             else:
                 return render(request, 'auzonetweb/wizard.html',
-                              {'newCommunityForm': new_community_model_form, 'selectCommunityForm': JoinCommunityForm(),
+                              {'newCommunityForm': new_community_form, 'selectCommunityForm': JoinCommunityForm(),
                                'communities': communities,
                                'errorMessage': ugettext(u'Por favor, revisa los campos indicados'),
                                'modal': 'new'})
     else:
-        new_community_model_form = NewCommunityModelForm()
+        new_community_form = NewCommunityForm()
         select_community_form = JoinCommunityForm()
 
     return render(request, 'auzonetweb/wizard.html',
-                  {'newCommunityForm': new_community_model_form, 'selectCommunityForm': select_community_form,
+                  {'newCommunityForm': new_community_form, 'selectCommunityForm': select_community_form,
                    'communities': communities})
 
 

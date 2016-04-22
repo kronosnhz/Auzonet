@@ -40,13 +40,18 @@ class Community(models.Model):
         verbose_name_plural = "Communities"
 
     access_type = models.CharField(max_length=2, choices=ACCESS_TYPE, default='PU')
-    address = models.CharField(max_length=250)
-    coordinates = models.CharField(max_length=250)
+    neighborhood_code = models.IntegerField()
+    neighborhood_name = models.CharField(max_length=250)
+    street_code = models.IntegerField()
+    street_name = models.CharField(max_length=250)
+    door_code = models.IntegerField()
+    coordinatesX = models.DecimalField(decimal_places=2, max_digits=10, default=0, blank=True, null=True)
+    coordinatesY = models.DecimalField(decimal_places=2, max_digits=10, default=0, blank=True, null=True)
     password = models.CharField(blank=True, max_length=250)
     welcome_message = models.TextField()
 
     def __unicode__(self):
-        return self.address
+        return self.neighborhood_name + ', ' + self.street_name + ', ' + self.door_code
 
 
 class Category(models.Model):

@@ -111,18 +111,21 @@
 
                                         </select>
                                     </div>
+                                    <div id="communityForm">
+                                        {%bootstrap_form newCommunityForm%}
+                                        <input type="hidden" name="formName" value="newCommunity">
+                                        {% buttons %}
+                                        <button type="submit" class="btn btn-primary">
+                                            {% trans "Crear" %}
+                                        </button>
+                                        <button id="btn-cancel" class="btn btn-default">{% trans "Cancelar" %}</button>
+                                    </div>
 
+                                    {% endbuttons %}
                                 </form>
                             </div>
                         </div>
-                        {%bootstrap_form newCommunityForm%}
-                        <input type="hidden" name="formName" value="newCommunity">
-                        {% buttons %}
-                        <button type="submit" class="btn btn-primary">
-                            {% trans "Crear" %}
-                        </button>
-                        <button id="btn-cancel" class="btn btn-default">{% trans "Cancelar" %}</button>
-                        {% endbuttons %}
+
                     </form>
                 </div>
             </div>
@@ -147,6 +150,7 @@
             // Hide street and door fields
             $("#streetset").hide();
             $("#doorset").hide();
+            $("#communityForm").hide();
             // List neighborhoods
             $.ajax({
                 type: "POST",
@@ -160,6 +164,9 @@
                     // Look for their streets
                     $("#neighborhood").on('change', function (e) {
                         var neighborhoodCode = this.value;
+                        // Sets the hidden form element
+                        $("#id_neighborhood_code").val(neighborhoodCode);
+                        $("#id_neighborhood_name").val(neighborhoodCode);
                         $.ajax({
                             type: "POST",
                             url: apiUrl,
@@ -176,6 +183,9 @@
                                 // Look for the doors and populate selector
                                 $("#street").on('change', function (e) {
                                     var streetCode = this.value;
+                                    // Sets the hidden form element
+                                    $("#id_street_code").val(streetCode);
+                                    $("#id_street_name").val(streetCode);
                                     $.ajax({
                                         type: "POST",
                                         url: apiUrl,
@@ -187,6 +197,15 @@
                                                 $("#door").append('<option value="' + data['rows'][i]['_id'] + '">' + data['rows'][i]['TPOR_DIR_PORTAL'] + '</option>');
                                             }
                                             $("#doorset").show();
+                                            $("#communityForm").show();
+
+                                            $("#street").on('change', function (e) {
+                                                var doorCode = this.value;
+                                                // Sets the hidden form element
+                                                $("#id_door_code").val(doorCode);
+                                                $("#id_coordinatesX").val(doorCode);
+                                                $("#id_coordinatesY").val(doorCode);
+                                            });
                                         },
                                         contentType: "text/plain"
                                     });
