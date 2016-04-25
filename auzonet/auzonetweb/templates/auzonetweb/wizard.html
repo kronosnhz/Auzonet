@@ -80,6 +80,8 @@
                             </div>
                         {% endif %}
                         {% csrf_token %}
+                        <button id="btn-back" class="btn btn-block btn-default">{% trans "Volver" %}</button>
+                        <br>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">{% trans "Busca tu portal" %}</h3>
@@ -112,6 +114,7 @@
                                         </select>
                                     </div>
                                     <div id="communityForm">
+                                        <div id="map"></div>
                                         {%bootstrap_form newCommunityForm%}
                                         <input type="hidden" name="formName" value="newCommunity">
                                         {% buttons %}
@@ -156,56 +159,68 @@
                 type: "POST",
                 url: apiUrl,
                 data: "select distinct TBAR_DES_BARRIO_A, TTRE_COD_BARRIO from results;",
-                success: function (data) {
-                    console.log(data);
-                    for (var i=0; i<data.count; i++) {
-                        $("#neighborhood").append('<option value="' + data['rows'][i]['TTRE_COD_BARRIO'] + '">' + data['rows'][i]['TBAR_DES_BARRIO_A'] + '</option>');
+                success: function (neighborhoodData) {
+                    for (var i=0; i<neighborhoodData.count; i++) {
+                        $("#neighborhood").append('<option value="' + neighborhoodData['rows'][i]['TTRE_COD_BARRIO'] + '">' + neighborhoodData['rows'][i]['TBAR_DES_BARRIO_A'] + '</option>');
                     }
                     // Look for their streets
                     $("#neighborhood").on('change', function (e) {
-                        var neighborhoodCode = this.value;
+                        var neighborhoodCode = neighborhoodData['rows'][e.target.selectedIndex-1]['TTRE_COD_BARRIO'];
+                        var neighborhoodName = neighborhoodData['rows'][e.target.selectedIndex-1]['TBAR_DES_BARRIO_A'];
                         // Sets the hidden form element
                         $("#id_neighborhood_code").val(neighborhoodCode);
-                        $("#id_neighborhood_name").val(neighborhoodCode);
+                        $("#id_neighborhood_name").val(neighborhoodName);
                         $.ajax({
                             type: "POST",
                             url: apiUrl,
                             data: "select distinct TPOR_COD_CALLE, TCAL_DES_CALLE_A from results where TTRE_COD_BARRIO = " + neighborhoodCode + ";",
-                            success: function (data) {
+                            success: function (streetData) {
                                 // Populate and show street selector
                                 $("#street").empty();
-                                for (var i=0; i<data.count; i++) {
-                                    $("#street").append('<option value="' + data['rows'][i]['TPOR_COD_CALLE'] + '">' + data['rows'][i]['TCAL_DES_CALLE_A'] + '</option>');
+                                for (var i=0; i<streetData.count; i++) {
+                                    $("#street").append('<option value="' + streetData['rows'][i]['TPOR_COD_CALLE'] + '">' + streetData['rows'][i]['TCAL_DES_CALLE_A'] + '</option>');
                                 }
                                 $("#streetset").show();
 
 
                                 // Look for the doors and populate selector
                                 $("#street").on('change', function (e) {
-                                    var streetCode = this.value;
                                     // Sets the hidden form element
+                                    console.log(streetData['rows'][e.target.selectedIndex]);
+                                    var streetCode = streetData['rows'][e.target.selectedIndex]['TPOR_COD_CALLE'];
+                                    var streetName = streetData['rows'][e.target.selectedIndex]['TCAL_DES_CALLE_A'];
                                     $("#id_street_code").val(streetCode);
-                                    $("#id_street_name").val(streetCode);
+                                    $("#id_street_name").val(streetName);
+
                                     $.ajax({
                                         type: "POST",
                                         url: apiUrl,
                                         data: "select _id,TPOR_DIR_PORTAL,TCOG_IDE_COORDX_UT,TCOG_IDE_COORDY_UT  from results where TTRE_COD_BARRIO = " + neighborhoodCode + " and TPOR_COD_CALLE=" + streetCode + ";",
-                                        success: function (data) {
+                                        success: function (doorData) {
                                             // Populate and show street selector
                                             $("#door").empty();
-                                            for (var i=0; i<data.count; i++) {
-                                                $("#door").append('<option value="' + data['rows'][i]['_id'] + '">' + data['rows'][i]['TPOR_DIR_PORTAL'] + '</option>');
+                                            for (var i=0; i<doorData.count; i++) {
+                                                $("#door").append('<option value="' + doorData['rows'][i]['_id'] + '">' + doorData['rows'][i]['TPOR_DIR_PORTAL'] + '</option>');
                                             }
-                                            $("#doorset").show();
-                                            $("#communityForm").show();
 
-                                            $("#street").on('change', function (e) {
-                                                var doorCode = this.value;
+                                            // Sets the hidden form element with the first element
+                                            $("#id_door_code").val(doorData['rows'][0]['TPOR_DIR_PORTAL']);
+                                            $("#id_coordinatesX").val(doorData['rows'][0]['TCOG_IDE_COORDX_UT']);
+                                            $("#id_coordinatesY").val(doorData['rows'][0]['TCOG_IDE_COORDY_UT']);
+                                            drawMap(neighborhoodName, streetName, doorData['rows'][0]['TPOR_DIR_PORTAL']);
+
+                                            $("#door").on('change', function (e) {
                                                 // Sets the hidden form element
-                                                $("#id_door_code").val(doorCode);
-                                                $("#id_coordinatesX").val(doorCode);
-                                                $("#id_coordinatesY").val(doorCode);
+                                                $("#id_door_code").val(doorData['rows'][e.target.selectedIndex]['TPOR_DIR_PORTAL']);
+                                                $("#id_coordinatesX").val(doorData['rows'][e.target.selectedIndex]['TCOG_IDE_COORDX_UT']);
+                                                $("#id_coordinatesY").val(doorData['rows'][e.target.selectedIndex]['TCOG_IDE_COORDY_UT']);
+
+                                                drawMap(neighborhoodName, streetName, doorData['rows'][e.target.selectedIndex]['TPOR_DIR_PORTAL']);
                                             });
+
+                                            $("#doorset").show();
+
+                                            $("#communityForm").show();
                                         },
                                         contentType: "text/plain"
                                     });
@@ -219,6 +234,32 @@
             });
 
         });
+        function drawMap(neighborhoodName, streetName, door) {
+            var address = neighborhoodName + ", " + streetName + ", " + door;
+            $.ajax({
+                url:"http://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
+                type: "POST",
+                success:function(res){
+                    var myLatLng = {lat: res.results[0].geometry.location.lat, lng: res.results[0].geometry.location.lng};
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        center: myLatLng,
+                        clickableIcons: false,
+                        draggable: false,
+                        fullscreenControl: false,
+                        zoom: 18
+                    });
+                    var marker = new google.maps.Marker({
+                        position: myLatLng,
+                        map: map,
+                        title: 'Hello World!'
+                    });
+
+                }
+            });
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsMV4aTTgymXWqdwQNcEJIP5WdaCpBPSc">
     </script>
     {% if modal == 'new' %}
         <script>

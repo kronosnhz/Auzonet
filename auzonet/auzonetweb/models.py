@@ -51,7 +51,7 @@ class Community(models.Model):
     welcome_message = models.TextField()
 
     def __unicode__(self):
-        return self.neighborhood_name + ', ' + self.street_name + ', ' + self.door_code
+        return self.neighborhood_name + ', ' + self.street_name + ', ' + str(self.door_code)
 
 
 class Category(models.Model):

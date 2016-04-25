@@ -75,10 +75,15 @@
     <table name="auzonetweb_community" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="access_type" sqlType="VARCHAR(2)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
-      <column name="address" sqlType="VARCHAR(250)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
-      <column name="coordinates" sqlType="VARCHAR(250)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
-      <column name="welcome_message" sqlType="TEXT" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="neighborhood_code" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="neighborhood_name" sqlType="VARCHAR(250)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="street_code" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="street_name" sqlType="VARCHAR(250)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="door_code" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="coordinatesX" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
+      <column name="coordinatesY" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
       <column name="password" sqlType="VARCHAR(250)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="welcome_message" sqlType="TEXT" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
     </table>
     <table name="auzonetweb_communitymessage" schema="" catalog="" type="TABLE">

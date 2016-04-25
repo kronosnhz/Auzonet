@@ -23,3 +23,9 @@ $('#btn-cancel').on("click", function(event){
         $('#form-join-existing').fadeIn();
     });
 });
+$('#btn-back').on("click", function(event){
+    event.preventDefault()
+    $('#form-new-community').fadeOut(function(){
+        $('#form-join-existing').fadeIn();
+    });
+});

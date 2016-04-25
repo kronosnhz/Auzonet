@@ -4,6 +4,7 @@ import datetime
 import requests
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import BadHeaderError, EmailMessage
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import IntegrityError
@@ -14,7 +15,7 @@ from django.template import Context
 from django.template.loader import get_template
 from django.utils.translation import ugettext
 
-from .forms import LoginForm, RegisterForm,  NewRequestModelForm, JoinCommunityForm, \
+from .forms import LoginForm, RegisterForm, NewRequestModelForm, JoinCommunityForm, \
     NewOfferModelForm, NewCommunityMsgModelForm, ProtectedCommunityForm, NewCommunityForm
 from .models import Community, User, PublicUser, Request, Offer, CommunityMessage, Order
 
@@ -57,11 +58,11 @@ def index(request, comid=None):
     # Check the community to load
     if comid is not None and access_control(comid, request.user.id):
         request.session['currentCommunityId'] = comid
-        request.session['currentCommunityAddress'] = get_object_or_404(Community, id=comid).address
+        request.session['currentCommunityAddress'] = str(get_object_or_404(Community, id=comid))
     else:
         try:
             request.session['currentCommunityId'] = request.user.publicuser.communities.all()[0].id
-            request.session['currentCommunityAddress'] = request.user.publicuser.communities.all()[0].address
+            request.session['currentCommunityAddress'] = str(request.user.publicuser.communities.all()[0])
         except IndexError:
             # The user does not have community yet
             return redirect('wizard')
@@ -377,7 +378,6 @@ def wizard(request):
 
     # END WELIVE API
 
-
     if request.method == 'POST':
         if request.POST['formName'] == 'joinCommunity':
             select_community_form = JoinCommunityForm(request.POST)
@@ -385,7 +385,7 @@ def wizard(request):
                 selected_community = get_object_or_404(Community, id=request.POST['community'])
             except ValueError:
                 return render(request, 'auzonetweb/wizard.html',
-                              {'newCommunityForm': NewCommunityModelForm(),
+                              {'newCommunityForm': NewCommunityForm(),
                                'selectCommunityForm': select_community_form,
                                'communities': communities,
                                'errorMessage': ugettext(u'Tienes que seleccionar una comunidad de la lista.'),
@@ -400,12 +400,12 @@ def wizard(request):
                         current_user.publicuser.communities.add(selected_community)
                         current_user.save()
                         request.session['currentCommunityId'] = selected_community.id
-                        request.session['currentCommunityAddress'] = selected_community.address
+                        request.session['currentCommunityAddress'] = str(selected_community)
 
                         send_notification_email(None,
                                                 current_user.email,
-                                                ugettext(u"Bienvenido a ") + selected_community.address,
-                                                ugettext(u"Bienvenido a ") + selected_community.address,
+                                                ugettext(u"Bienvenido a ") + str(selected_community),
+                                                ugettext(u"Bienvenido a ") + str(selected_community),
                                                 ugettext(
                                                     u"A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
                                                 ugettext(u"estaras al dia de lo mas relevante que ocurra en ella. ") +
@@ -424,7 +424,7 @@ def wizard(request):
                     return redirect('index')
             else:
                 return render(request, 'auzonetweb/wizard.html',
-                              {'newCommunityForm': NewCommunityModelForm(),
+                              {'newCommunityForm': NewCommunityForm(),
                                'selectCommunityForm': select_community_form,
                                'communities': communities,
                                'errorMessage': ugettext(u'Por favor, revisa los campos indicados'),
@@ -432,31 +432,40 @@ def wizard(request):
         elif request.POST['formName'] == 'newCommunity':
             new_community_form = NewCommunityForm(request.POST)
             if new_community_form.is_valid():
-                # process the data in form.cleaned_data as required
 
+                # process the data in form.cleaned_data as required
                 try:
                     new_neighborhood = Community(
-                        access_type=new_community_form.cleaned_data['id_access_type'],
-                        neighborhood_code=new_community_form.cleaned_data['id_neighborhood_code'],
-                        neighborhood_name=new_community_form.cleaned_data['id_neighborhood_name'],
-                        street_code=new_community_form.cleaned_data['id_street_code'],
-                        street_name=new_community_form.cleaned_data['id_street_name'],
-                        door_code=new_community_form.cleaned_data['id_door_code'],
-                        coordinatesX=new_community_form.cleaned_data['id_coordinatesX'],
-                        coordinatesY=new_community_form.cleaned_data['id_coordinatesY'],
-                        password=new_community_form.cleaned_data['id_password'],
-                        welcome_message=new_community_form.cleaned_data['id_welcome_message']
+                        access_type=new_community_form.cleaned_data['access_type'],
+                        neighborhood_code=new_community_form.cleaned_data['neighborhood_code'],
+                        neighborhood_name=new_community_form.cleaned_data['neighborhood_name'],
+                        street_code=new_community_form.cleaned_data['street_code'],
+                        street_name=new_community_form.cleaned_data['street_name'],
+                        door_code=new_community_form.cleaned_data['door_code'],
+                        coordinatesX=new_community_form.cleaned_data['coordinatesX'],
+                        coordinatesY=new_community_form.cleaned_data['coordinatesY'],
+                        password=new_community_form.cleaned_data['password'],
+                        welcome_message=new_community_form.cleaned_data['welcome_message']
                     )
+                    # Check if the community already exists
+                    try:
+                        Community.objects.get(neighborhood_code=new_neighborhood.neighborhood_code, street_code=new_neighborhood.street_code, door_code=new_neighborhood.door_code)
+                        return render(request, 'auzonetweb/wizard.html',
+                                      {'newCommunityForm': new_community_form, 'selectCommunityForm': JoinCommunityForm(),
+                                       'communities': communities,
+                                       'errorMessage': ugettext(
+                                           u'La comunidad que intentas crear ya existe, búscala en la opción unirme a comunidad existente.'),
+                                       'modal': 'new'})
+                    except ObjectDoesNotExist:
+                        new_neighborhood.save()
 
-                    new_neighborhood.save()
+                        current_user = get_object_or_404(User, id=request.user.id)
+                        current_user.publicuser.communities.add(new_neighborhood)
+                        current_user.save()
+                        request.session['currentCommunityId'] = new_neighborhood.id
+                        request.session['currentCommunityAddress'] = str(new_neighborhood)
 
-                    current_user = get_object_or_404(User, id=request.user.id)
-                    current_user.publicuser.communities.add(new_neighborhood)
-                    current_user.save()
-                    request.session['currentCommunityId'] = new_neighborhood.id
-                    request.session['currentCommunityAddress'] = new_neighborhood.address
-
-                    return redirect('indexcommunity', comid=new_neighborhood.id)
+                        return redirect('indexcommunity', comid=new_neighborhood.id)
                 except IntegrityError:
                     return render(request, 'auzonetweb/wizard.html',
                                   {'newCommunityForm': new_community_form, 'selectCommunityForm': JoinCommunityForm(),
@@ -492,12 +501,12 @@ def protected_community(request, comid):
                 current_user.publicuser.communities.add(community)
                 current_user.save()
                 request.session['currentCommunityId'] = community.id
-                request.session['currentCommunityAddress'] = community.address
+                request.session['currentCommunityAddress'] = str(community)
 
                 send_notification_email(None,
                                         current_user.email,
-                                        ugettext(u"Bienvenido a ") + community.address,
-                                        ugettext(u"Bienvenido a ") + community.address,
+                                        ugettext(u"Bienvenido a ") + str(community),
+                                        ugettext(u"Bienvenido a ") + str(community),
                                         ugettext(
                                             u"A partir de ahora, formas parte de tu comunidad de vecinos en Auzonet, ") +
                                         ugettext(u"estaras al dia de lo mas relevante que ocurra en ella. ") +
@@ -516,7 +525,7 @@ def protected_community(request, comid):
                 protected_community_form = ProtectedCommunityForm()
 
                 return render(request, 'auzonetweb/protected-community.html', {"errorMessage": error_message,
-                                                                               "address": community.address,
+                                                                               "address": str(community),
                                                                                "protectedCommunityForm": protected_community_form
                                                                                })
         else:
@@ -525,7 +534,7 @@ def protected_community(request, comid):
     else:
         protected_community_form = ProtectedCommunityForm()
 
-    return render(request, 'auzonetweb/protected-community.html', {"address": community.address,
+    return render(request, 'auzonetweb/protected-community.html', {"address": str(community),
                                                                    "protectedCommunityForm": protected_community_form
                                                                    })
 
@@ -553,8 +562,8 @@ def welcome(request):
                             login(request, user)
                             try:
                                 request.session['currentCommunityId'] = request.user.publicuser.communities.all()[0].id
-                                request.session['currentCommunityAddress'] = request.user.publicuser.communities.all()[
-                                    0].address
+                                request.session['currentCommunityAddress'] = str(request.user.publicuser.communities.all()[
+                                    0])
                                 # Redirect to a success page.
                                 if next:
                                     return redirect(next)
