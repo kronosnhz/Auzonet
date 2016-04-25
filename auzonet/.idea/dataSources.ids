@@ -106,11 +106,11 @@
       <column name="date_published" sqlType="DATETIME" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="scope" sqlType="VARCHAR(3)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="status" sqlType="VARCHAR(1)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="price" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
       <column name="image" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="category_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="community_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="owner_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="price" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_auzonetweb_offer_1" columns="owner_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_auzonetweb_offer_2" columns="community_id" ref-table="auzonetweb_community" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
@@ -123,22 +123,22 @@
       <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="order_type" sqlType="VARCHAR(1)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="date_created" sqlType="DATETIME" precision="0" scale="-1" nullable="false" jdbcType="12"/>
-      <column name="offer_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="owner_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="owner_voted" sqlType="BOOL" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="client_voted" sqlType="BOOL" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="status" sqlType="VARCHAR(1)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="auzonetrequest_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
       <column name="client_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="client_voted" sqlType="BOOL" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="owner_voted" sqlType="BOOL" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="status" sqlType="VARCHAR(1)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="offer_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="owner_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
-      <foreign-key name="#FAKE_auzonetweb_order_1" columns="client_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_auzonetweb_order_2" columns="auzonetrequest_id" ref-table="auzonetweb_request" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_auzonetweb_order_3" columns="owner_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_auzonetweb_order_4" columns="offer_id" ref-table="auzonetweb_offer" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="auzonetweb_order_2bfe9d72" unique="true" columns="client_id"/>
-      <index name="auzonetweb_order_64e29e0f" unique="true" columns="auzonetrequest_id"/>
+      <foreign-key name="#FAKE_auzonetweb_order_1" columns="owner_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_auzonetweb_order_2" columns="offer_id" ref-table="auzonetweb_offer" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_auzonetweb_order_3" columns="client_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_auzonetweb_order_4" columns="auzonetrequest_id" ref-table="auzonetweb_request" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="auzonetweb_order_5e7b1936" unique="true" columns="owner_id"/>
       <index name="auzonetweb_order_bf98d991" unique="true" columns="offer_id"/>
+      <index name="auzonetweb_order_2bfe9d72" unique="true" columns="client_id"/>
+      <index name="auzonetweb_order_64e29e0f" unique="true" columns="auzonetrequest_id"/>
     </table>
     <table name="auzonetweb_publicuser" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
@@ -169,11 +169,11 @@
       <column name="due_date" sqlType="DATE" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="scope" sqlType="VARCHAR(3)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="status" sqlType="VARCHAR(1)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="reward" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
       <column name="image" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="category_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="community_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="owner_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="reward" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_auzonetweb_request_1" columns="owner_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_auzonetweb_request_2" columns="community_id" ref-table="auzonetweb_community" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
