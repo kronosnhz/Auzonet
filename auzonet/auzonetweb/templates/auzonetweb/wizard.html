@@ -155,6 +155,9 @@
             var neighborhoodCode;
             var streetData;
             var doorData;
+            var neighborhoodName;
+            var streetName;
+
             // Hide street and door fields
             $("#streetset").hide();
             $("#doorset").hide();
@@ -171,7 +174,7 @@
                     // Look for their streets
                     $("#neighborhood").on('change', function (e) {
                         neighborhoodCode = neighborhoodData['rows'][e.target.selectedIndex - 1]['TTRE_COD_BARRIO'];
-                        var neighborhoodName = neighborhoodData['rows'][e.target.selectedIndex-1]['TBAR_DES_BARRIO_A'];
+                        neighborhoodName = neighborhoodData['rows'][e.target.selectedIndex - 1]['TBAR_DES_BARRIO_A'];
                         // Sets the hidden form element
                         $("#id_neighborhood_code").val(neighborhoodCode);
                         $("#id_neighborhood_name").val(neighborhoodName);
@@ -195,7 +198,7 @@
 
                                     console.log("Haciendo la query del codigo de barrio: " + neighborhoodCode + " con resultado " + streetData['rows'][e.target.selectedIndex]);
                                     var streetCode = streetData['rows'][e.target.selectedIndex]['TPOR_COD_CALLE'];
-                                    var streetName = streetData['rows'][e.target.selectedIndex]['TCAL_DES_CALLE_A'];
+                                    streetName = streetData['rows'][e.target.selectedIndex]['TCAL_DES_CALLE_A'];
                                     $("#id_street_code").val(streetCode);
                                     $("#id_street_name").val(streetName);
 
