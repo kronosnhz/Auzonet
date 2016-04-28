@@ -253,8 +253,11 @@
                 url:"http://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
                 type: "POST",
                 success:function(res){
-                    console.log(address + JSON.stringify(res.results) + " Lat: " + res.results[0].geometry.location.lat + " Long: " + res.results[0].geometry.location.lng);
-                    var myLatLng = {lat: res.results[0].geometry.location.lat, lng: res.results[0].geometry.location.lng};
+                    console.log(address + JSON.stringify(res.results) + " Lat: " + res.results[0]['geometry'].location.lat + " Long: " + res.results[0]['geometry'].location.lng);
+                    var myLatLng = {
+                        lat: res.results[0]['geometry'].location.lat,
+                        lng: res.results[0]['geometry'].location.lng
+                    };
                     var map = new google.maps.Map(document.getElementById('map'), {
                         center: myLatLng,
                         clickableIcons: false,
