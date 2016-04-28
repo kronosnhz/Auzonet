@@ -252,7 +252,7 @@
                 url:"http://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
                 type: "POST",
                 success:function(res){
-                    console.log(address + res.results[0]);
+                    console.log(address + res.results);
                     var myLatLng = {lat: res.results[0].geometry.location.lat, lng: res.results[0].geometry.location.lng};
                     var map = new google.maps.Map(document.getElementById('map'), {
                         center: myLatLng,
