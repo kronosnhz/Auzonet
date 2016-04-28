@@ -64,7 +64,11 @@ body {
     border-radius: 3px;
     color:#D9230F;
 }
-#map { height: 100%; }
+
+#map {
+    height: 100%;
+    width: 100%;
+}
 .search-query:focus + button {
     z-index: 3;
 }
