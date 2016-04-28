@@ -117,7 +117,7 @@
                                         </select>
                                     </div>
                                     <div id="communityForm">
-                                        <div id="map" style="height: 100%"></div>
+                                        <div id="map"></div>
                                         {%bootstrap_form newCommunityForm%}
                                         <input type="hidden" name="formName" value="newCommunity">
                                         {% buttons %}
@@ -161,8 +161,8 @@
 
             // Hide street and door fields
             $("#streetset").hide();
-            //$("#doorset").hide();
-            //$("#communityForm").hide();
+            $("#doorset").hide();
+            $("#communityForm").hide();
             // List neighborhoods
             $.ajax({
                 type: "POST",
@@ -179,8 +179,8 @@
                         // Sets the hidden form element
                         $("#id_neighborhood_code").val(neighborhoodCode);
                         $("#id_neighborhood_name").val(neighborhoodName);
-                        //$("#doorset").hide();
-                        //$("#communityForm").hide();
+                        $("#doorset").hide();
+                        $("#communityForm").hide();
                         $.ajax({
                             type: "POST",
                             url: apiUrl,
@@ -253,7 +253,6 @@
                 url:"http://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
                 type: "POST",
                 success:function(res){
-                    console.log(address + JSON.stringify(res.results) + " Lat: " + res.results[0]['geometry'].location["lat"] + " Long: " + res.results[0]['geometry'].location["lng"]);
                     var myLatLng = {
                         lat: res.results[0]['geometry'].location["lat"],
                         lng: res.results[0]['geometry'].location["lng"]
