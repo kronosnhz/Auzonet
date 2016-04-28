@@ -178,6 +178,8 @@
                         // Sets the hidden form element
                         $("#id_neighborhood_code").val(neighborhoodCode);
                         $("#id_neighborhood_name").val(neighborhoodName);
+                        $("#doorset").hide();
+                        $("#communityForm").hide();
                         $.ajax({
                             type: "POST",
                             url: apiUrl,
@@ -252,7 +254,7 @@
                 url:"http://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
                 type: "POST",
                 success:function(res){
-                    console.log(address + res.results);
+                    console.log(address + JSON.stringify(res.results));
                     var myLatLng = {lat: res.results[0].geometry.location.lat, lng: res.results[0].geometry.location.lng};
                     var map = new google.maps.Map(document.getElementById('map'), {
                         center: myLatLng,
