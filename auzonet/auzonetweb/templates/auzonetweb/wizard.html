@@ -252,6 +252,7 @@
                 url:"http://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
                 type: "POST",
                 success:function(res){
+                    console.log(address);
                     var myLatLng = {lat: res.results[0].geometry.location.lat, lng: res.results[0].geometry.location.lng};
                     var map = new google.maps.Map(document.getElementById('map'), {
                         center: myLatLng,
@@ -260,7 +261,7 @@
                         fullscreenControl: false,
                         zoom: 18
                     });
-                    var marker = new google.maps.Marker({
+                    new google.maps.Marker({
                         position: myLatLng,
                         map: map,
                         title: 'My community'
