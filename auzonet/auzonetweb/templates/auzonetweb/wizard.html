@@ -161,8 +161,8 @@
 
             // Hide street and door fields
             $("#streetset").hide();
-            $("#doorset").hide();
-            $("#communityForm").hide();
+            //$("#doorset").hide();
+            //$("#communityForm").hide();
             // List neighborhoods
             $.ajax({
                 type: "POST",
@@ -179,8 +179,8 @@
                         // Sets the hidden form element
                         $("#id_neighborhood_code").val(neighborhoodCode);
                         $("#id_neighborhood_name").val(neighborhoodName);
-                        $("#doorset").hide();
-                        $("#communityForm").hide();
+                        //$("#doorset").hide();
+                        //$("#communityForm").hide();
                         $.ajax({
                             type: "POST",
                             url: apiUrl,
@@ -199,7 +199,6 @@
                                 $("#street").on('change', function (e) {
                                     // Sets the hidden form element
 
-                                    console.log("Haciendo la query del codigo de barrio: " + neighborhoodCode + " con resultado " + streetData['rows'][e.target.selectedIndex]);
                                     var streetCode = streetData['rows'][e.target.selectedIndex]['TPOR_COD_CALLE'];
                                     streetName = streetData['rows'][e.target.selectedIndex]['TCAL_DES_CALLE_A'];
                                     $("#id_street_code").val(streetCode);
@@ -212,7 +211,6 @@
                                         success: function (data) {
                                             doorData = data;
                                             // Populate and show street selector
-                                            console.log("stoy haciendo la query con cod barrio:" + neighborhoodCode + "y cod de calle " + streetCode);
                                             $("#door").empty();
                                             for (var i=0; i<doorData.count; i++) {
                                                 $("#door").append('<option value="' + doorData['rows'][i]['_id'] + '">' + doorData['rows'][i]['TPOR_DIR_PORTAL'] + '</option>');
@@ -254,7 +252,6 @@
             $.ajax({
                 url:"http://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
                 type: "POST",
-                async: false,
                 success:function(res){
                     console.log(address + JSON.stringify(res.results));
                     var myLatLng = {lat: res.results[0].geometry.location.lat, lng: res.results[0].geometry.location.lng};
