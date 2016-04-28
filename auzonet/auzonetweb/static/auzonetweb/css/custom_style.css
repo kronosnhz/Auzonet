@@ -67,7 +67,6 @@ body {
 
 #map {
     height: 100%;
-    width: 100%;
 }
 .search-query:focus + button {
     z-index: 3;
