@@ -217,7 +217,7 @@
                                             for (var i=0; i<doorData.count; i++) {
                                                 $("#door").append('<option value="' + doorData['rows'][i]['_id'] + '">' + doorData['rows'][i]['TPOR_DIR_PORTAL'] + '</option>');
                                             }
-
+                                            $("#communityForm").show();
                                             // Sets the hidden form element with the first element
                                             $("#id_door_code").val(doorData['rows'][0]['TPOR_DIR_PORTAL']);
                                             $("#id_coordinatesX").val(doorData['rows'][0]['TCOG_IDE_COORDX_UT']);
