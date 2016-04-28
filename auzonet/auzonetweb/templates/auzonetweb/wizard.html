@@ -150,6 +150,9 @@
     <script>
         $(document).ready(function(){
             var apiUrl = "https://dev.welive.eu/dev/api/ods/portales-de-bilbao/resource/73b6103b-0c12-4b2c-98ae-71ed33e55e8c/query";
+            var neighborhoodCode;
+            var streetData;
+            var doorData;
             // Hide street and door fields
             $("#streetset").hide();
             $("#doorset").hide();
@@ -165,7 +168,7 @@
                     }
                     // Look for their streets
                     $("#neighborhood").on('change', function (e) {
-                        var neighborhoodCode = neighborhoodData['rows'][e.target.selectedIndex-1]['TTRE_COD_BARRIO'];
+                        neighborhoodCode = neighborhoodData['rows'][e.target.selectedIndex - 1]['TTRE_COD_BARRIO'];
                         var neighborhoodName = neighborhoodData['rows'][e.target.selectedIndex-1]['TBAR_DES_BARRIO_A'];
                         // Sets the hidden form element
                         $("#id_neighborhood_code").val(neighborhoodCode);
@@ -174,9 +177,10 @@
                             type: "POST",
                             url: apiUrl,
                             data: "select distinct TPOR_COD_CALLE, TCAL_DES_CALLE_A from results where TTRE_COD_BARRIO = " + neighborhoodCode + ";",
-                            success: function (streetData) {
+                            success: function (data) {
                                 // Populate and show street selector
                                 $("#street").empty();
+                                streetData = data;
                                 for (var i=0; i<streetData.count; i++) {
                                     $("#street").append('<option value="' + streetData['rows'][i]['TPOR_COD_CALLE'] + '">' + streetData['rows'][i]['TCAL_DES_CALLE_A'] + '</option>');
                                 }
@@ -186,7 +190,8 @@
                                 // Look for the doors and populate selector
                                 $("#street").on('change', function (e) {
                                     // Sets the hidden form element
-                                    console.log(streetData['rows'][e.target.selectedIndex]);
+
+                                    console.log("Haciendo la query del codigo de barrio: " + neighborhoodCode + " con resultado " + streetData['rows'][e.target.selectedIndex]);
                                     var streetCode = streetData['rows'][e.target.selectedIndex]['TPOR_COD_CALLE'];
                                     var streetName = streetData['rows'][e.target.selectedIndex]['TCAL_DES_CALLE_A'];
                                     $("#id_street_code").val(streetCode);
@@ -196,8 +201,10 @@
                                         type: "POST",
                                         url: apiUrl,
                                         data: "select _id,TPOR_DIR_PORTAL,TCOG_IDE_COORDX_UT,TCOG_IDE_COORDY_UT  from results where TTRE_COD_BARRIO = " + neighborhoodCode + " and TPOR_COD_CALLE=" + streetCode + ";",
-                                        success: function (doorData) {
+                                        success: function (data) {
+                                            doorData = data;
                                             // Populate and show street selector
+                                            console.log("stoy haciendo la query con cod barrio:" + neighborhoodCode + "y cod de calle " + streetCode);
                                             $("#door").empty();
                                             for (var i=0; i<doorData.count; i++) {
                                                 $("#door").append('<option value="' + doorData['rows'][i]['_id'] + '">' + doorData['rows'][i]['TPOR_DIR_PORTAL'] + '</option>');
@@ -251,15 +258,15 @@
                     var marker = new google.maps.Marker({
                         position: myLatLng,
                         map: map,
-                        title: 'Hello World!'
+                        title: 'My community'
                     });
 
                 }
             });
         }
     </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsMV4aTTgymXWqdwQNcEJIP5WdaCpBPSc">
+    <script defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsMV4aTTgymXWqdwQNcEJIP5WdaCpBPSc">
     </script>
     {% if modal == 'new' %}
         <script>
