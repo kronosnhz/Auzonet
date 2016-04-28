@@ -133,7 +133,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 USE_X_FORWARDED_HOST = True
 FORCE_SCRIPT_NAME = '/auzonet'
 # END SERVER
-FAVICON_PATH = STATIC_URL + 'images/favicon/'
+FAVICON_PATH = STATIC_URL + 'images/favicon/favicon.ico'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
