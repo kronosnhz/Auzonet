@@ -61,6 +61,8 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'auzonet.urls'
 
+SITE_ID = 1
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
