@@ -77,11 +77,11 @@ class NewOfferModelForm(ModelForm):
     class Meta:
         model = Offer
         localized_fields = '__all__'
-        fields = ['category', 'title', 'detail', 'scope', 'status', 'price', 'image']
+        fields = ['category', 'title', 'detail', 'price', 'image']
 
 
 class NewRequestModelForm(ModelForm):
     class Meta:
         model = Request
         localized_fields = '__all__'
-        fields = ['category', 'title', 'detail', 'scope', 'status', 'due_date', 'reward', 'image']
+        fields = ['category', 'title', 'detail', 'due_date', 'reward', 'image']
