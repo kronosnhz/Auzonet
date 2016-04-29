@@ -737,9 +737,17 @@ def accept_offer(request, orderid):
                                     order.offer.owner.first_name + ugettext(u" ha aceptado trabajar contigo"),
                                     ugettext(u"Acuerdo aceptado"),
                                     order.offer.owner.first_name + ugettext(
-                                        u" ha aceptado el acuerdo sobre ") + order.offer.title +
+                                        u" ha aceptado el acuerdo sobre ") +
+                                    order.offer.title +
                                     ugettext(
-                                        u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
+                                        u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado.") +
+                                    ugettext(u" Puedes ponerte en contacto con ") +
+                                    order.offer.owner.first_name +
+                                    ugettext(u" a traves de su email ") +
+                                    '<a href="mailto:' +
+                                    order.offer.owner.email +
+                                    '">' + order.offer.owner.email +
+                                    '</a>',
                                     ugettext(u"Ver la oferta"),
                                     PUBLIC_URL_BASE + "auzonet/detail-offer/" + str(order.offer.id) + "/",
                                     PUBLIC_URL_BASE + order.offer.owner.publicuser.avatar.url
@@ -856,10 +864,19 @@ def accept_request(request, orderid):
                                     order.client.email,
                                     order.auzonetrequest.owner.first_name + ugettext(u" ha aceptado tu ayuda"),
                                     ugettext(u"Acuerdo aceptado"),
-                                    order.auzonetrequest.owner.first_name + ugettext(
-                                        u" ha aceptado el acuerdo sobre ") + order.auzonetrequest.title +
+                                    order.auzonetrequest.owner.first_name +
                                     ugettext(
-                                        u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."),
+                                        u" ha aceptado el acuerdo sobre ") +
+                                    order.auzonetrequest.title +
+                                    ugettext(
+                                        u" recuerda marcar como finalizado el acuerdo cuando lo consideres terminado.") +
+                                    ugettext(u" Puedes ponerte en contacto con ") +
+                                    order.auzonetrequest.owner.first_name +
+                                    ugettext(u" a traves de su email ") +
+                                    '<a href="mailto:' +
+                                    order.auzonetrequest.owner.email +
+                                    '">' + order.auzonetrequest.owner.email +
+                                    '</a>',
                                     ugettext(u"Ver la peticion"),
                                     PUBLIC_URL_BASE + "auzonet/detail-request/" + str(order.auzonetrequest.id) + "/",
                                     PUBLIC_URL_BASE + order.auzonetrequest.owner.publicuser.avatar.url

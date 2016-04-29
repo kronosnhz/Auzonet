@@ -231,7 +231,8 @@
                         <b>
                             {% trans "NECESITO" %}:
                         </b>
-                        <a href="{% url 'detail-request' req.id %}">{{req.title}}</a> {% trans "en" %} <a href="{%url 'indexcommunity' req.community.id%}">{{ req.community.address }}</a>
+                        <a href="{% url 'detail-request' req.id %}">{{ req.title }}</a> {% trans "en" %} <a
+                            href="{% url 'indexcommunity' req.community.id %}">{{ req.community }}</a>
                     </li>
                     {% endfor %}
                     {% for offer in myOffers %}
@@ -240,7 +241,8 @@
                         <b>
                             {% trans "OFREZCO" %}:
                         </b><br>
-                        <a href="{%url 'detail-offer' offer.id%}">{{offer.title}}</a> {% trans "en" %} <a href="{%url 'indexcommunity' offer.community.id%}">{{ offer.community.address }}</a>
+                        <a href="{% url 'detail-offer' offer.id %}">{{ offer.title }}</a> {% trans "en" %} <a
+                            href="{% url 'indexcommunity' offer.community.id %}">{{ offer.community }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -264,20 +266,20 @@
                             [{{o.date_created}}]
                             {%if o.order_type == 'O'%}
                                 {% if o.owner == request.user %}
-                                    <b>{% trans "OFERTA" %}</b> <br>
-                                    <a href="{%url 'detail-offer' o.offer.id%}">{{o.offer.title}} {% trans " con " %} {{o.client.username}}</a>
+                                    <b>{{ o.client.username }}:</b>
+                                    <a href="{% url 'detail-offer' o.offer.id %}">{{ o.offer.title }}</a>
                                 {% else %}
-                                    <b>{% trans "OFERTA" %} {% trans " of " %} {{o.owner.username}}</b><br>
+                                    <b>{{ o.owner.username }}:</b>
                                     <a href="{%url 'detail-offer' o.offer.id%}">{{o.offer.title}}</a>
                                 {% endif %}
 
                             {%else%}
                                 {% if o.owner == request.user %}
-                                    <b>{% trans "NECESITO" %}</b><br>
-                                    <a href="{% url 'detail-request' o.auzonetrequest.id %}">{{ o.auzonetrequest.title }} {% trans " con " %} {{ o.client.username }}</a>
+                                    <b>{{ o.client.username }}:</b>
+                                    <a href="{% url 'detail-request' o.auzonetrequest.id %}">{{ o.auzonetrequest.title }}</a>
 
                                 {% else %}
-                                    <b>{% trans "NECESITO" %} {% trans " of " %} {{ o.owner.username }}</b><br>
+                                    <b>{{ o.owner.username }}:</b>
                                     <a href="{% url 'detail-request' o.auzonetrequest.id %}">{{ o.auzonetrequest.title }}</a>
                                 {% endif %}
                             {%endif%}

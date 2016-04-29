@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="media-body">
                                             <h4 class="media-heading">{{ o.client.username }}</h4>
-                                            {{ o.date_created }} <br>
+                                            <a href="mailto:{{ o.client.email }}">{{ o.client.email }}</a> <br>
                                             {% if o.owner_voted %}
                                                 <button class="btn btn-default btn-xs btn-block" disabled>{% trans "Esperando valoración de" %} {{ o.client.username }}</button>
                                             {% else %}
