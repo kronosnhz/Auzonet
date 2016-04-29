@@ -22,7 +22,6 @@ from auzonetweb import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^', include('favicon.urls')),
     url(r'^my-profile/$', views.user_profile, name='my-profile'),
     url(r'^delete-post/(?P<postid>\d+)/(?P<posttype>["R","O"]+)/$', views.delete_post, name='delete-post'),
     url(r'^recover-post/(?P<postid>\d+)/(?P<posttype>["R","O"]+)/$', views.recover_post, name='recover-post'),

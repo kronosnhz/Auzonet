@@ -5,6 +5,8 @@
 {% bootstrap_css %}
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
+{% load favtags %}
+{% autoescape off %}{% placeFavicon %}{% endautoescape %}
 
 <!DOCTYPE html>
 <html lang="en">

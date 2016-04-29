@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'auzonetweb.apps.AuzonetwebConfig',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -75,6 +76,15 @@ TEMPLATES = [
         },
     },
 ]
+
+# Favicon
+FAVICON_CONFIG = {
+    'shortcut icon': [16, 32, 48, 128, 192],
+    'touch-icon': [196],
+    'icon': [196],
+    'apple-touch-icon': [57, 72, 114, 144, 180],
+    'apple-touch-icon-precomposed': [57, 72, 76, 114, 120, 144, 152, 180],
+}
 
 WSGI_APPLICATION = 'auzonet.wsgi.application'
 
@@ -133,7 +143,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 USE_X_FORWARDED_HOST = True
 FORCE_SCRIPT_NAME = '/auzonet'
 # END SERVER
-FAVICON_PATH = STATIC_URL + 'images/favicon/favicon.ico'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
