@@ -749,16 +749,13 @@ def accept_offer(request, orderid):
                                     ugettext(u" Puedes ponerte en contacto con ") +
                                     order.offer.owner.first_name +
                                     ugettext(u" a traves de su email ") +
-                                    '<a href="mailto:' +
-                                    order.offer.owner.email +
-                                    '">' + order.offer.owner.email +
-                                    '</a>',
+                                    order.offer.owner.email,
                                     ugettext(u"Ver la oferta"),
                                     PUBLIC_URL_BASE + "auzonet/detail-offer/" + str(order.offer.id) + "/",
                                     PUBLIC_URL_BASE + order.offer.owner.publicuser.avatar.url
                                     )
 
-            return redirect('confirmation-success')
+            return redirect('confirmation-success', orderid=orderid)
         else:
             return HttpResponse('You already have accepted this offer.')
     else:
@@ -878,10 +875,7 @@ def accept_request(request, orderid):
                                     ugettext(u" Puedes ponerte en contacto con ") +
                                     order.auzonetrequest.owner.first_name +
                                     ugettext(u" a traves de su email ") +
-                                    '<a href="mailto:' +
-                                    order.auzonetrequest.owner.email +
-                                    '">' + order.auzonetrequest.owner.email +
-                                    '</a>',
+                                    order.auzonetrequest.owner.email,
                                     ugettext(u"Ver la peticion"),
                                     PUBLIC_URL_BASE + "auzonet/detail-request/" + str(order.auzonetrequest.id) + "/",
                                     PUBLIC_URL_BASE + order.auzonetrequest.owner.publicuser.avatar.url
