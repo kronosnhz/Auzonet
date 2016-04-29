@@ -263,7 +263,6 @@
                     <ul>
                         {% for o in myOrders %}
                         <li>
-                            [{{o.date_created}}]
                             {%if o.order_type == 'O'%}
                                 {% if o.owner == request.user %}
                                     <b>{{ o.client.username }}:</b>
