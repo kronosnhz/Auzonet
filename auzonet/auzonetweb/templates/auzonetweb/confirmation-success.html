@@ -15,6 +15,8 @@
     <div class="col-md-6 col-lg-6 text-center">
         <h1>{% trans "Fantástico" %}</h1>
         <p>{% trans "Ahora colaboráis juntos, recuerda finalizar tu acuerdo y votar tu experiencia desde la sección 'Acuerdos activos' de tu página de la comunidad cuando consideres que se ha terminado la colaboración." %}</p>
+        <p>{% trans "Puedes ponerte en contacto con" %} {{ order.client.first_name }} <a
+                href="mailto:{{ order.client.email }}">{{ order.client.email }}</a></p>
         <a class="btn btn-primary" href="{% url "index" %}" role="button">{% trans "Volver al inicio" %}</a>
         <img src="{% static "auzonetweb/images/agreement.png" %}" alt="confirmation-success" class="img img-responsive">
     </div>

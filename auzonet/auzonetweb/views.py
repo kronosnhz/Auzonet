@@ -246,8 +246,13 @@ def delete_message(request, messageid):
 
 
 @login_required
-def confirmation_success(request):
-    return render(request, 'auzonetweb/confirmation-success.html')
+def confirmation_success(request, orderid):
+    order = get_object_or_404(Order, id=orderid)
+
+    if request.user == order.owner:
+        return render(request, 'auzonetweb/confirmation-success.html', {'order': order})
+    else:
+        return redirect('index')
 
 
 @login_required
@@ -882,7 +887,7 @@ def accept_request(request, orderid):
                                     PUBLIC_URL_BASE + order.auzonetrequest.owner.publicuser.avatar.url
                                     )
 
-            return redirect('confirmation-success')
+            return redirect('confirmation-success', orderid)
         else:
             return HttpResponse('You already have accepted this request')
     else:
