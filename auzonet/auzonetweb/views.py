@@ -887,7 +887,7 @@ def accept_request(request, orderid):
                                     PUBLIC_URL_BASE + order.auzonetrequest.owner.publicuser.avatar.url
                                     )
 
-            return redirect('confirmation-success', orderid)
+            return redirect('confirmation-success', orderid=orderid)
         else:
             return HttpResponse('You already have accepted this request')
     else:
