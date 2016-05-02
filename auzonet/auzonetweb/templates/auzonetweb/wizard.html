@@ -190,6 +190,7 @@
                             success: function (data) {
                                 // Populate and show street selector
                                 $("#street").empty();
+                                $("#street").append("<option>---</option>");
                                 streetData = data;
                                 for (var i=0; i<streetData.count; i++) {
                                     $("#street").append('<option value="' + streetData['rows'][i]['TPOR_COD_CALLE'] + '">' + streetData['rows'][i]['TCAL_DES_CALLE_A'] + '</option>');
@@ -201,8 +202,8 @@
                                 $("#street").on('change', function (e) {
                                     // Sets the hidden form element
 
-                                    var streetCode = streetData['rows'][e.target.selectedIndex]['TPOR_COD_CALLE'];
-                                    streetName = streetData['rows'][e.target.selectedIndex]['TCAL_DES_CALLE_A'];
+                                    var streetCode = streetData['rows'][e.target.selectedIndex - 1]['TPOR_COD_CALLE'];
+                                    streetName = streetData['rows'][e.target.selectedIndex - 1]['TCAL_DES_CALLE_A'];
                                     $("#id_street_code").val(streetCode);
                                     $("#id_street_name").val(streetName);
 
