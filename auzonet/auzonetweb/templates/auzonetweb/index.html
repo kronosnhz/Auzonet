@@ -115,6 +115,7 @@
         </div>
     </div>
     <div id="appointment-tabs">
+        <h1>{% trans "Publicaciones en " %}{{ request.session.currentCommunityAddress }}</h1>
         <ul>
             <li><a href="#tabs-1">{% trans "Ofertas" %} ({{offers.count}})</a></li>
             <li><a href="#tabs-2">{% trans "Peticiones" %} ({{requests.count}})</a></li>
