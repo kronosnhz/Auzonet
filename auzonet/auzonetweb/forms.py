@@ -35,7 +35,7 @@ class RegisterForm(forms.Form):
     username = forms.CharField(required=True, label='Username', max_length=100)
     first_name = forms.CharField(required=True, label='Name', max_length=100)
     last_name = forms.CharField(required=True, label='Surname', max_length=100)
-    email = forms.EmailField(required=True, label='Email', max_length=100)
+    email = forms.EmailField(required=True, label='Email', max_length=100, widget=forms.EmailInput)
     password = forms.CharField(required=True, label='Password', max_length=100, widget=forms.PasswordInput)
     birthdate = forms.DateField(required=True, label='Birthday')
     gender = forms.ChoiceField(required=True, label='Gender', choices=GENDERS)
