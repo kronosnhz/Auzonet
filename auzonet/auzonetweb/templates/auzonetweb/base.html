@@ -53,12 +53,12 @@
                             <li class="dropdown-header">{% trans "My communities" %}</li>
                             {%for community in request.user.publicuser.communities.all%}
                                 <li>
-                                    {% if community.access_type == 'PR' %}
-                                        <span class="glyphicon glyphicon-lock"><a
-                                                href="{% url 'indexcommunity' community.id %}">{{ community }}</a></span>
-                                    {% else %}
-                                        <a href="{% url 'indexcommunity' community.id %}">{{ community }}</a>
+                                    <p>
+                                        {% if community.access_type == 'PR' %}
+                                            <span class="glyphicon glyphicon-lock"></span>
                                     {% endif %}
+                                        <a href="{% url 'indexcommunity' community.id %}">{{ community }}</a>
+                                    </p>
 
                                 </li>
                             {%endfor%}
