@@ -106,11 +106,11 @@
       <column name="date_published" sqlType="DATETIME" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="scope" sqlType="VARCHAR(3)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="status" sqlType="VARCHAR(1)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
-      <column name="price" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
       <column name="image" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="category_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="community_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="owner_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="price" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_auzonetweb_offer_1" columns="owner_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_auzonetweb_offer_2" columns="community_id" ref-table="auzonetweb_community" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
@@ -145,8 +145,8 @@
       <column name="birthdate" sqlType="DATE" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="gender" sqlType="VARCHAR(1)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="karma" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="avatar" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="user_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="avatar" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_auzonetweb_publicuser_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
@@ -169,11 +169,11 @@
       <column name="due_date" sqlType="DATE" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="scope" sqlType="VARCHAR(3)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="status" sqlType="VARCHAR(1)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
-      <column name="reward" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
       <column name="image" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="category_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="community_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="owner_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="reward" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_auzonetweb_request_1" columns="owner_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_auzonetweb_request_2" columns="community_id" ref-table="auzonetweb_community" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
@@ -217,6 +217,29 @@
       <column name="expire_date" sqlType="DATETIME" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <primary-key columns="session_key"/>
       <index name="django_session_de54fa62" unique="true" columns="expire_date"/>
+    </table>
+    <table name="django_site" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR(50)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="domain" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="favicon_favicon" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="faviconImage" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="isFavicon" sqlType="BOOL" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="favicon_faviconimg" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="size" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="rel" sqlType="VARCHAR(250)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="faviconImage" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="faviconFK_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_favicon_faviconimg_1" columns="faviconFK_id" ref-table="favicon_favicon" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="favicon_faviconimg_b846ff3c" unique="true" columns="faviconFK_id"/>
     </table>
     <table name="sqlite_sequence" schema="" catalog="" type="TABLE">
       <column name="name" sqlType="" precision="0" scale="-1" nullable="true" jdbcType="12"/>

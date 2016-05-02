@@ -36,7 +36,8 @@ class Community(models.Model):
     class Meta:
         verbose_name_plural = "Communities"
 
-    access_type = models.CharField(max_length=2, choices=ACCESS_TYPE, default='PU')
+    access_type = models.CharField(max_length=2, choices=ACCESS_TYPE, default='PU',
+                                   help_text="You can protect with password the community access.")
     neighborhood_code = models.IntegerField()
     neighborhood_name = models.CharField(max_length=250)
     street_code = models.IntegerField()
@@ -45,7 +46,7 @@ class Community(models.Model):
     coordinatesX = models.DecimalField(decimal_places=2, max_digits=10, default=0, blank=True, null=True)
     coordinatesY = models.DecimalField(decimal_places=2, max_digits=10, default=0, blank=True, null=True)
     password = models.CharField(blank=True, max_length=250)
-    welcome_message = models.TextField()
+    welcome_message = models.TextField(help_text="This text will be sent to new users in your community.")
 
     def __unicode__(self):
         return self.neighborhood_name + ', ' + self.street_name + ', ' + str(self.door_code)
@@ -120,7 +121,7 @@ class PublicUser(models.Model):
     birthdate = models.DateField(null=True)
     gender = models.CharField(max_length=1, choices=GENDERS, default='M')
     karma = models.IntegerField(default=0)
-    avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m/%d/')
+    avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m/%d/', help_text="Your public image in the community.")
 
     def __unicode__(self):
         return self.user.username
