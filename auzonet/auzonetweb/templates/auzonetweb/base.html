@@ -52,7 +52,12 @@
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">{% trans "My communities" %}</li>
                             {%for community in request.user.publicuser.communities.all%}
-                                <li><a href="{%url 'indexcommunity' community.id%}">{{community}}</a></li>
+                                <li>
+                                    {% if community.access_type == 'PR' %}
+                                        <span class="glyphicon glyphicon-lock"></span>
+                                    {% endif %}
+                                    <a href="{% url 'indexcommunity' community.id %}">{{ community }}</a>
+                                </li>
                             {%endfor%}
                         </ul>
                     </li>
