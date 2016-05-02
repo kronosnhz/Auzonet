@@ -1,48 +1,58 @@
 from django import forms
 from django.forms import ModelForm
+from django.utils.translation import ugettext_lazy
 
 from .models import Community, Request, Offer, CommunityMessage
 
 GENDERS = (
-    ('M', 'Male'),
-    ('F', 'Female')
+    ('M', ugettext_lazy(u"Male")),
+    ('F', ugettext_lazy(u"Female"))
 )
 
 ACCESS_TYPES = (
-    ('PU', 'Public'),
-    ('PR', 'Private'),
+    ('PU', ugettext_lazy(u"Public")),
+    ('PR', ugettext_lazy(u"Private")),
 )
 
 SCOPE = (
-    ('COM', 'Community'),
-    ('CIT', 'City'),
-    ('PRO', 'Province'),
-    ('COU', 'Country'),
+    ('COM', ugettext_lazy(u"Community")),
+    ('CIT', ugettext_lazy(u"City")),
+    ('PRO', ugettext_lazy(u"Province")),
+    ('COU', ugettext_lazy(u"Country")),
 )
 
 STATUS = (
-    ('A', 'Active'),
-    ('F', 'Finished'),
+    ('A', ugettext_lazy(u"Active")),
+    ('F', ugettext_lazy(u"Finished")),
 )
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(required=True, label='Username', max_length=100)
-    password = forms.CharField(required=True, label='Password', max_length=100, widget=forms.PasswordInput)
+    username = forms.CharField(required=True, label=ugettext_lazy(u"Username"), max_length=100)
+    password = forms.CharField(required=True, label=ugettext_lazy(u"Password"), max_length=100,
+                               widget=forms.PasswordInput)
 
 
 class RegisterForm(forms.Form):
-    username = forms.CharField(required=True, label='Username', max_length=100, help_text='Required.')
-    first_name = forms.CharField(required=True, label='Name', max_length=100, help_text='Required.')
-    last_name = forms.CharField(required=True, label='Surname', max_length=100, help_text='Required.')
-    email = forms.EmailField(required=True, label='Email', max_length=100, widget=forms.EmailInput,
-                             help_text='Required.')
-    password = forms.CharField(required=True, label='Password', max_length=100, widget=forms.PasswordInput,
-                               help_text='Required.')
-    birthdate = forms.DateField(required=True, label='Birthday', help_text='Required.')
-    gender = forms.ChoiceField(required=True, label='Gender', choices=GENDERS, help_text='Required.')
-    avatar = forms.ImageField(required=True, label='Avatar', max_length=100,
-                              help_text='Required. Will be your public image in the community.')
+    class Meta:
+        localized_fields = '__all__'
+
+    username = forms.CharField(required=True, label=ugettext_lazy(u"Username"), max_length=100,
+                               help_text=ugettext_lazy(u"* Required"))
+    first_name = forms.CharField(required=True, label=ugettext_lazy(u"Name"), max_length=100,
+                                 help_text=ugettext_lazy(u"* Required"))
+    last_name = forms.CharField(required=True, label=ugettext_lazy(u"Surname"), max_length=100,
+                                help_text=ugettext_lazy(u"* Required"))
+    email = forms.EmailField(required=True, label=ugettext_lazy(u"Email"), max_length=100, widget=forms.EmailInput,
+                             help_text=ugettext_lazy(u"* Required"))
+    password = forms.CharField(required=True, label=ugettext_lazy(u"Password"), max_length=100,
+                               widget=forms.PasswordInput,
+                               help_text=ugettext_lazy(u"* Required"))
+    birthdate = forms.DateField(required=True, label=ugettext_lazy(u"Birthday"), help_text=ugettext_lazy(u"* Required"))
+    gender = forms.ChoiceField(required=True, label=ugettext_lazy(u"Gender"), choices=GENDERS,
+                               help_text=ugettext_lazy(u"* Required"))
+    avatar = forms.ImageField(required=True, label=ugettext_lazy(u"Avatar"), max_length=100,
+                              help_text=ugettext_lazy(u"* Required. Will be your public image in the community."))
 
 
 class JoinCommunityForm(forms.Form):
@@ -50,7 +60,8 @@ class JoinCommunityForm(forms.Form):
 
 
 class ProtectedCommunityForm(forms.Form):
-    password = forms.CharField(required=True, label='Password', max_length=100, widget=forms.PasswordInput)
+    password = forms.CharField(required=True, label=ugettext_lazy(u"Password"), max_length=100,
+                               widget=forms.PasswordInput)
 
 
 class NewCommunityMsgModelForm(ModelForm):

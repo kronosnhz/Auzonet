@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-29 11:56+0200\n"
+"POT-Creation-Date: 2016-05-02 12:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,88 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: auzonetweb/forms.py:8
+msgid "Male"
+msgstr "Hombre"
+
+#: auzonetweb/forms.py:9
+msgid "Female"
+msgstr "Mujer"
+
+#: auzonetweb/forms.py:13
+msgid "Public"
+msgstr "Público"
+
+#: auzonetweb/forms.py:14
+msgid "Private"
+msgstr "Privada"
+
+#: auzonetweb/forms.py:18
+msgid "Community"
+msgstr "Comunidad"
+
+#: auzonetweb/forms.py:19
+msgid "City"
+msgstr "Ciudad"
+
+#: auzonetweb/forms.py:20
+msgid "Province"
+msgstr "Provincia"
+
+#: auzonetweb/forms.py:21
+msgid "Country"
+msgstr "País"
+
+#: auzonetweb/forms.py:25
+msgid "Active"
+msgstr "Activo"
+
+#: auzonetweb/forms.py:26
+msgid "Finished"
+msgstr "Finalizado"
+
+#: auzonetweb/forms.py:31 auzonetweb/forms.py:36
+msgid "Username"
+msgstr "Usuario"
+
+#: auzonetweb/forms.py:32 auzonetweb/forms.py:41 auzonetweb/forms.py:54
+msgid "Password"
+msgstr "Contraseña"
+
+#: auzonetweb/forms.py:36 auzonetweb/forms.py:37 auzonetweb/forms.py:38
+#: auzonetweb/forms.py:40 auzonetweb/forms.py:42 auzonetweb/forms.py:43
+#: auzonetweb/forms.py:44
+msgid "* Required"
+msgstr "* Requerido"
+
+#: auzonetweb/forms.py:37
+msgid "Name"
+msgstr "Nombre"
+
+#: auzonetweb/forms.py:38
+msgid "Surname"
+msgstr "Apellido"
+
+#: auzonetweb/forms.py:39
+msgid "Email"
+msgstr "Email"
+
+#: auzonetweb/forms.py:43
+msgid "Birthday"
+msgstr "Fecha de nacimiento"
+
+#: auzonetweb/forms.py:44
+msgid "Gender"
+msgstr "Sexo"
+
+#: auzonetweb/forms.py:45
+msgid "Avatar"
+msgstr "Imágen de perfil"
+
+#: auzonetweb/forms.py:46
+msgid "* Required. Will be your public image in the community."
+msgstr "* Requerido. Será tu imágen pública en la comunidad."
 
 #: auzonetweb/templates/auzonetweb/Offer/edit-offer.html:18
 msgid "AuzoNet - Nueva oferta"
@@ -65,8 +147,8 @@ msgstr "Si"
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:101
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:32
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:125
-#: auzonetweb/templates/auzonetweb/index.html:193
-#: auzonetweb/templates/auzonetweb/index.html:203
+#: auzonetweb/templates/auzonetweb/index.html:194
+#: auzonetweb/templates/auzonetweb/index.html:204
 msgid "No"
 msgstr "No"
 
@@ -149,7 +231,7 @@ msgstr "Volver"
 #: auzonetweb/templates/auzonetweb/Offer/show-offer.html:151
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:185
 #: auzonetweb/templates/auzonetweb/Request/show-request.html:187
-#: auzonetweb/templates/auzonetweb/index.html:150
+#: auzonetweb/templates/auzonetweb/index.html:151
 msgid "Gratis"
 msgstr "Gratis"
 
@@ -205,17 +287,17 @@ msgstr "Buscar comunidad"
 msgid "My communities"
 msgstr "Mis comunidades"
 
-#: auzonetweb/templates/auzonetweb/base.html:60
+#: auzonetweb/templates/auzonetweb/base.html:62
 #: auzonetweb/templates/auzonetweb/wizard.html:77
 msgid "Cerrar sesión"
 msgstr "Cerrar sesión"
 
-#: auzonetweb/templates/auzonetweb/base.html:84
+#: auzonetweb/templates/auzonetweb/base.html:86
 msgid "Copyright 2015. Aitor Brazaola. Universidad de Deusto. &nbsp;&nbsp;"
 msgstr "Copyright 2015. Aitor Brazaola. Universidad de Deusto."
 
 #: auzonetweb/templates/auzonetweb/confirmation-success.html:11
-#: auzonetweb/views.py:743 auzonetweb/views.py:871
+#: auzonetweb/views.py:743 auzonetweb/views.py:868
 msgid "Acuerdo aceptado"
 msgstr "Acuerdo aceptado"
 
@@ -237,7 +319,7 @@ msgstr ""
 msgid "Puedes ponerte en contacto con"
 msgstr "Puedes ponerte en contacto con"
 
-#: auzonetweb/templates/auzonetweb/confirmation-success.html:19
+#: auzonetweb/templates/auzonetweb/confirmation-success.html:20
 msgid "Volver al inicio"
 msgstr "Volver al inicio"
 
@@ -294,77 +376,81 @@ msgstr "de"
 msgid "next"
 msgstr "Siguiente"
 
-#: auzonetweb/templates/auzonetweb/index.html:119
+#: auzonetweb/templates/auzonetweb/index.html:118
+msgid "Publicaciones en "
+msgstr "Publicaciones en "
+
+#: auzonetweb/templates/auzonetweb/index.html:120
 msgid "Ofertas"
 msgstr "Ofertas"
 
-#: auzonetweb/templates/auzonetweb/index.html:120
+#: auzonetweb/templates/auzonetweb/index.html:121
 msgid "Peticiones"
 msgstr "Peticiones"
 
-#: auzonetweb/templates/auzonetweb/index.html:124
-#: auzonetweb/templates/auzonetweb/index.html:167
-#: auzonetweb/templates/auzonetweb/index.html:225
+#: auzonetweb/templates/auzonetweb/index.html:125
+#: auzonetweb/templates/auzonetweb/index.html:168
+#: auzonetweb/templates/auzonetweb/index.html:226
 msgid "Aún no se ha publicado nada"
 msgstr "Aún no se ha publicado nada"
 
-#: auzonetweb/templates/auzonetweb/index.html:130
-#: auzonetweb/templates/auzonetweb/index.html:173
-#: auzonetweb/templates/auzonetweb/user-profile.html:105
-#: auzonetweb/templates/auzonetweb/user-profile.html:147
+#: auzonetweb/templates/auzonetweb/index.html:131
+#: auzonetweb/templates/auzonetweb/index.html:174
+#: auzonetweb/templates/auzonetweb/user-profile.html:106
+#: auzonetweb/templates/auzonetweb/user-profile.html:148
 msgid "Título"
 msgstr "Título"
 
-#: auzonetweb/templates/auzonetweb/index.html:131
-#: auzonetweb/templates/auzonetweb/index.html:174
+#: auzonetweb/templates/auzonetweb/index.html:132
+#: auzonetweb/templates/auzonetweb/index.html:175
 msgid "Usuario"
 msgstr "Usuario"
 
-#: auzonetweb/templates/auzonetweb/index.html:132
+#: auzonetweb/templates/auzonetweb/index.html:133
 msgid "Coste"
 msgstr "Coste"
 
-#: auzonetweb/templates/auzonetweb/index.html:133
-#: auzonetweb/templates/auzonetweb/index.html:176
+#: auzonetweb/templates/auzonetweb/index.html:134
+#: auzonetweb/templates/auzonetweb/index.html:177
 msgid "Categoría"
 msgstr "Categoría"
 
-#: auzonetweb/templates/auzonetweb/index.html:134
-#: auzonetweb/templates/auzonetweb/index.html:178
+#: auzonetweb/templates/auzonetweb/index.html:135
+#: auzonetweb/templates/auzonetweb/index.html:179
 msgid "Publicado"
 msgstr "Publicado"
 
-#: auzonetweb/templates/auzonetweb/index.html:175
+#: auzonetweb/templates/auzonetweb/index.html:176
 msgid "Recompensa"
 msgstr "Recompensa"
 
-#: auzonetweb/templates/auzonetweb/index.html:177
+#: auzonetweb/templates/auzonetweb/index.html:178
 msgid "Fecha límite"
 msgstr "Fecha límite"
 
-#: auzonetweb/templates/auzonetweb/index.html:221
-#: auzonetweb/templates/auzonetweb/user-profile.html:102
+#: auzonetweb/templates/auzonetweb/index.html:222
+#: auzonetweb/templates/auzonetweb/user-profile.html:103
 msgid "Mis publicaciones activas"
 msgstr "Mis publicaciones activas"
 
-#: auzonetweb/templates/auzonetweb/index.html:232
+#: auzonetweb/templates/auzonetweb/index.html:233
 msgid "NECESITO"
 msgstr "NECESITO"
 
-#: auzonetweb/templates/auzonetweb/index.html:234
-#: auzonetweb/templates/auzonetweb/index.html:244
+#: auzonetweb/templates/auzonetweb/index.html:235
+#: auzonetweb/templates/auzonetweb/index.html:245
 msgid "en"
 msgstr "en"
 
-#: auzonetweb/templates/auzonetweb/index.html:242
+#: auzonetweb/templates/auzonetweb/index.html:243
 msgid "OFREZCO"
 msgstr "OFREZCO"
 
-#: auzonetweb/templates/auzonetweb/index.html:256
+#: auzonetweb/templates/auzonetweb/index.html:257
 msgid "Acuerdos activos"
 msgstr "Acuerdos activos"
 
-#: auzonetweb/templates/auzonetweb/index.html:261
+#: auzonetweb/templates/auzonetweb/index.html:262
 msgid "No tengo acuerdos activos"
 msgstr "No tengo acuerdos activos"
 
@@ -382,73 +468,73 @@ msgstr "Unirme"
 msgid "Miembro de"
 msgstr "Miembro de"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:69
+#: auzonetweb/templates/auzonetweb/user-profile.html:70
 msgid "Mi actividad en "
 msgstr "Mi actividad en "
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:82
+#: auzonetweb/templates/auzonetweb/user-profile.html:83
 msgid "Peticiones publicadas"
 msgstr "Peticiones publicadas"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:86
+#: auzonetweb/templates/auzonetweb/user-profile.html:87
 msgid "Peticiones atendidas"
 msgstr "Peticiones atendidas"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:90
+#: auzonetweb/templates/auzonetweb/user-profile.html:91
 msgid "Ofertas publicadas"
 msgstr "Ofertas publicadas"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:94
+#: auzonetweb/templates/auzonetweb/user-profile.html:95
 msgid "Ofertas contratadas"
 msgstr "Ofertas publicadas"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:106
-#: auzonetweb/templates/auzonetweb/user-profile.html:148
+#: auzonetweb/templates/auzonetweb/user-profile.html:107
+#: auzonetweb/templates/auzonetweb/user-profile.html:149
 msgid "Tipo"
 msgstr "Tipo"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:107
+#: auzonetweb/templates/auzonetweb/user-profile.html:108
 msgid "Fecha de publicacion"
 msgstr "Fecha de publicación"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:108
-#: auzonetweb/templates/auzonetweb/user-profile.html:150
+#: auzonetweb/templates/auzonetweb/user-profile.html:109
+#: auzonetweb/templates/auzonetweb/user-profile.html:151
 msgid "Acciones"
 msgstr "Acciones"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:116
-#: auzonetweb/templates/auzonetweb/user-profile.html:157
+#: auzonetweb/templates/auzonetweb/user-profile.html:117
+#: auzonetweb/templates/auzonetweb/user-profile.html:158
 msgid "Oferta"
 msgstr "Ofertas"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:120
-#: auzonetweb/templates/auzonetweb/user-profile.html:131
+#: auzonetweb/templates/auzonetweb/user-profile.html:121
+#: auzonetweb/templates/auzonetweb/user-profile.html:132
 msgid "Abrir"
 msgstr "Abrir"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:127
-#: auzonetweb/templates/auzonetweb/user-profile.html:169
+#: auzonetweb/templates/auzonetweb/user-profile.html:128
+#: auzonetweb/templates/auzonetweb/user-profile.html:170
 msgid "Peticion"
 msgstr "Petición"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:137
+#: auzonetweb/templates/auzonetweb/user-profile.html:138
 msgid "No tienes nada publicado actualmente."
 msgstr "No tienes nada publicado actualmente."
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:144
+#: auzonetweb/templates/auzonetweb/user-profile.html:145
 msgid "Historial"
 msgstr "Historial"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:149
+#: auzonetweb/templates/auzonetweb/user-profile.html:150
 msgid "Fecha de publicación"
 msgstr "Fecha de publicación"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:162
-#: auzonetweb/templates/auzonetweb/user-profile.html:174
+#: auzonetweb/templates/auzonetweb/user-profile.html:163
+#: auzonetweb/templates/auzonetweb/user-profile.html:175
 msgid "Publicar de nuevo"
 msgstr "Publicar de nuevo"
 
-#: auzonetweb/templates/auzonetweb/user-profile.html:180
+#: auzonetweb/templates/auzonetweb/user-profile.html:181
 msgid "No tienes publicaciones finalizadas."
 msgstr "No tienes publicaciones finalizadas."
 
@@ -537,8 +623,8 @@ msgid "Ver el mensaje en la web"
 msgstr "Ver el mensaje en la web"
 
 #: auzonetweb/views.py:203 auzonetweb/views.py:212 auzonetweb/views.py:232
-#: auzonetweb/views.py:243 auzonetweb/views.py:348 auzonetweb/views.py:826
-#: auzonetweb/views.py:895
+#: auzonetweb/views.py:243 auzonetweb/views.py:348 auzonetweb/views.py:823
+#: auzonetweb/views.py:889
 msgid "Unauthorized"
 msgstr "No autorizado"
 
@@ -663,7 +749,7 @@ msgstr "ofrece el servicio"
 msgid "El nombre de usuario ya existe."
 msgstr "El nombre de usuario ya existe."
 
-#: auzonetweb/views.py:691 auzonetweb/views.py:817
+#: auzonetweb/views.py:691 auzonetweb/views.py:814
 msgid "Por favor, revisa los campos indicados."
 msgstr "Por favor, revisa los campos indicados."
 
@@ -671,72 +757,72 @@ msgstr "Por favor, revisa los campos indicados."
 msgid " ha aceptado trabajar contigo"
 msgstr " ha aceptado trabajar contigo"
 
-#: auzonetweb/views.py:745 auzonetweb/views.py:874
+#: auzonetweb/views.py:745 auzonetweb/views.py:871
 msgid " ha aceptado el acuerdo sobre "
 msgstr " ha aceptado el acuerdo sobre "
 
-#: auzonetweb/views.py:748 auzonetweb/views.py:877
+#: auzonetweb/views.py:748 auzonetweb/views.py:874
 msgid ""
 " recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."
 msgstr ""
 " recuerda marcar como finalizado el acuerdo cuando lo consideres terminado."
 
-#: auzonetweb/views.py:749 auzonetweb/views.py:878
+#: auzonetweb/views.py:749 auzonetweb/views.py:875
 msgid " Puedes ponerte en contacto con "
 msgstr " Puedes ponerte en contacto con "
 
-#: auzonetweb/views.py:751 auzonetweb/views.py:880
+#: auzonetweb/views.py:751 auzonetweb/views.py:877
 msgid " a traves de su email "
 msgstr " a traves de su email "
 
-#: auzonetweb/views.py:756
+#: auzonetweb/views.py:753
 msgid "Ver la oferta"
 msgstr "Ver la oferta"
 
-#: auzonetweb/views.py:785 auzonetweb/views.py:914
+#: auzonetweb/views.py:782 auzonetweb/views.py:908
 msgid "Auzonet: "
 msgstr "Auzonet: "
 
-#: auzonetweb/views.py:785
+#: auzonetweb/views.py:782
 msgid " esta interesado en tu oferta."
 msgstr " está interesado en tu oferta."
 
-#: auzonetweb/views.py:786
+#: auzonetweb/views.py:783
 msgid "Me interesa"
 msgstr "Me interesa"
 
-#: auzonetweb/views.py:787 auzonetweb/views.py:916
+#: auzonetweb/views.py:784 auzonetweb/views.py:910
 msgid "El usuario "
 msgstr "El usuario "
 
-#: auzonetweb/views.py:788
+#: auzonetweb/views.py:785
 msgid " esta interesado en tu oferta "
 msgstr " está interesado en tu oferta "
 
-#: auzonetweb/views.py:789
+#: auzonetweb/views.py:786
 msgid "Aceptar solicitud"
 msgstr "Aceptar solicitud"
 
-#: auzonetweb/views.py:870
+#: auzonetweb/views.py:867
 msgid " ha aceptado tu ayuda"
 msgstr " ha aceptado tu ayuda"
 
-#: auzonetweb/views.py:885
+#: auzonetweb/views.py:879
 msgid "Ver la peticion"
 msgstr "Ver la petición"
 
-#: auzonetweb/views.py:914
+#: auzonetweb/views.py:908
 msgid " quiere atender tu peticion"
 msgstr " quiere atender tu petición"
 
-#: auzonetweb/views.py:915
+#: auzonetweb/views.py:909
 msgid "¿Te echo una mano?"
 msgstr "¿Te echo una mano?"
 
-#: auzonetweb/views.py:917
+#: auzonetweb/views.py:911
 msgid " quiere atender tu peticion "
 msgstr " quiere atender tu petición "
 
-#: auzonetweb/views.py:918
+#: auzonetweb/views.py:912
 msgid "Aceptar colaboración"
 msgstr "Aceptar colaboración"
