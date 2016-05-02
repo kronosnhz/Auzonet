@@ -32,14 +32,17 @@ class LoginForm(forms.Form):
 
 
 class RegisterForm(forms.Form):
-    username = forms.CharField(required=True, label='Username', max_length=100)
-    first_name = forms.CharField(required=True, label='Name', max_length=100)
-    last_name = forms.CharField(required=True, label='Surname', max_length=100)
-    email = forms.EmailField(required=True, label='Email', max_length=100, widget=forms.EmailInput)
-    password = forms.CharField(required=True, label='Password', max_length=100, widget=forms.PasswordInput)
-    birthdate = forms.DateField(required=True, label='Birthday')
-    gender = forms.ChoiceField(required=True, label='Gender', choices=GENDERS)
-    avatar = forms.ImageField(required=True, label='Avatar', max_length=100)
+    username = forms.CharField(required=True, label='Username', max_length=100, help_text='Required.')
+    first_name = forms.CharField(required=True, label='Name', max_length=100, help_text='Required.')
+    last_name = forms.CharField(required=True, label='Surname', max_length=100, help_text='Required.')
+    email = forms.EmailField(required=True, label='Email', max_length=100, widget=forms.EmailInput,
+                             help_text='Required.')
+    password = forms.CharField(required=True, label='Password', max_length=100, widget=forms.PasswordInput,
+                               help_text='Required.')
+    birthdate = forms.DateField(required=True, label='Birthday', help_text='Required.')
+    gender = forms.ChoiceField(required=True, label='Gender', choices=GENDERS, help_text='Required.')
+    avatar = forms.ImageField(required=True, label='Avatar', max_length=100,
+                              help_text='Required. Will be your public image in the community.')
 
 
 class JoinCommunityForm(forms.Form):

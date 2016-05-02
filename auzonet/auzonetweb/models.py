@@ -121,7 +121,7 @@ class PublicUser(models.Model):
     birthdate = models.DateField(null=True)
     gender = models.CharField(max_length=1, choices=GENDERS, default='M')
     karma = models.IntegerField(default=0)
-    avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m/%d/', help_text="Your public image in the community.")
+    avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m/%d/')
 
     def __unicode__(self):
         return self.user.username
