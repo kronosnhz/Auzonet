@@ -54,9 +54,12 @@
                             {%for community in request.user.publicuser.communities.all%}
                                 <li>
                                     {% if community.access_type == 'PR' %}
-                                        <span class="glyphicon glyphicon-lock"></span>
+                                        <span class="glyphicon glyphicon-lock"><a
+                                                href="{% url 'indexcommunity' community.id %}">{{ community }}</a></span>
+                                    {% else %}
+                                        <a href="{% url 'indexcommunity' community.id %}">{{ community }}</a>
                                     {% endif %}
-                                    <a href="{% url 'indexcommunity' community.id %}">{{ community }}</a>
+
                                 </li>
                             {%endfor%}
                         </ul>
