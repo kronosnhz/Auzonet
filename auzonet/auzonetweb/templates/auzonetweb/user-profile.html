@@ -60,7 +60,8 @@ window.onload = function(){
     <p class="text-center"><i>{% trans "Miembro de" %} </i></p>
     <p class="text-center">
     {%for community in request.user.publicuser.communities.all%}
-        <a href="{%url 'indexcommunity' community.id%}"><span class="glyphicon glyphicon-home"></span> {{community.address}}</a><br>
+        <a href="{% url 'indexcommunity' community.id %}"><span class="glyphicon glyphicon-home"></span> {{ community }}
+        </a><br>
     {%endfor%}
     </p>
 </div>
