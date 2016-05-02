@@ -34,3 +34,8 @@
     background: rgba(0, 0, 0, 0.56);
 
 }
+
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+}
