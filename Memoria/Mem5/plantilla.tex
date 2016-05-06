@@ -1,0 +1,372 @@
+\documentclass{DeustoFDP}
+
+\usepackage{hologo} % Paquete no necesario. Borrar en la memoria final al sustituir el texto
+
+\hypersetup{
+  pdfauthor={Cruz Enrique Borges Hern\'andez},
+  pdftitle={Documentaci\'on de la plantilla LaTeX para los proyectos fin de grado
+            de la Facultad de Ingenier\'ia de la Universidad de Deuto},
+}
+
+\bibliography{bib}
+
+\begin{document}
+
+\frontmatter
+\pagestyle{plain}
+
+% Las siguientes lineas (21--26) se pueden eliminar del documento final.
+% Notese que en ese caso es necesario descomentar la linea 28 para que las
+% paginas esten correctamente numeradas.
+\begin{titlepage}
+  \newgeometry{left=0cm,right=0cm,bottom=0cm,top=0cm}
+  \includegraphics{fig/portada}
+  \restoregeometry
+\end{titlepage}
+\cleardoublepage
+
+%\setcounter{page}{3}
+
+\chapter*{Resumen}
+
+Documentaci\'on de la plantilla \hologo{LaTeX} para los Proyectos Fin de Grado
+de la Universidad de Deusto. En este cap\'itulo se debe introducir un resumen de
+entre 200 y 250 palabras que identifique claramente los objetivos del proyecto.
+Adem\'as deber\'a contener entre 2 y 5 palabras claves separadas por comas.
+N\'otese que las dos p\'aginas anteriores (p\'agina de portada) se incluyen por
+completitud pero no deben ser usadas en la impresi\'on del documento.
+Para usarlas, es necesario copiar la portada correspondiente en la carpeta
+\verb+portadas+ a la carpeta \verb+fig+ y ponerle el nombre
+\verb+portada.pdf+. Si no se desea poner la portada en el documento
+\hologo{LaTeX} v\'ease los comentarios de este documento. N\'otese que en
+todo caso el \'indice debe comenzar siempre en la p\'agina \textit{v}.
+
+\vspace{2em}
+
+{\Large\bfseries\sectionfont Descriptores}
+\vspace{3\medskipamount}
+
+Plantilla, Proyecto Fin de Grado, \hologo{LaTeXe}.
+
+\cleardoublepage\tableofcontents
+\cleardoublepage\listoffigures
+\cleardoublepage\listoftables
+\cleardoublepage\listoflistings
+
+\mainmatter
+\pagestyle{phdthesis}
+
+\chapter{Introducci\'on}\label{cha:introduccion}
+
+Este documento contiene una plantilla para la presentaci\'on de los Proyectos
+Fin de Grado de la Faculta de Ingenier\'ia de la Universidad de Deusto. La
+plantilla se basa en tecnolog\'ias modernas y por lo tanto necesita una
+distribuci\'on de \hologo{LaTeXe} reciente (\hologo{MiKTeX} 2.9~\cite{miktex} o
+TeXLive 2012~\cite{texlive}). En particular usamos:
+\begin{description}
+  \item[\hologo{XeLaTeX} o \hologo{LuaLaTeX}:] Debido a que en esta memoria se
+    usan las fuentes Arial y Bookman Old Style que noest\'an incluidas generalmente en
+    las distribuciones \hologo{LaTeXe} es necesario recurrir a compiladores que
+    soporte fuentes TTF o OTF como \hologo{XeLaTeX} o \hologo{LuaLaTeX}.
+    Estos compiladores solo est\'an presentes en las versiones m\'as modernas de
+    \hologo{MiKTeX} (2.9) y TexLive (2012).
+
+    La fuente Arial viene por defecto en el sistema operativo Windows\textregistered\
+    mientras que en sistemas *nix se puede encontrar en el paquete
+    \texttt{corefonts}~\cite{corefonts}. En los sistemas operativos derivados
+    de Debian puede encontrarse en el paquete \texttt{ttf-mscorefonts-installer}.
+
+    Por otro lado, la fuente Bookman Old Style se puede encontrar en equipos con
+    el sistema operativo Windows al instalar la \emph{suit} ofim\'atica
+    Office\textregistered. En entornos *nix se puede descargar
+    de~\cite{fuente}\footnote{Obviamente, tambi\'en se puede instalar
+    en entornos Windows\textregistered.}. La licencia nos permite redistribuir
+    la fuente y por ello se encuentra en la carpeta \texttt{TeX-Gyre-Bonum}.
+    Para instalarlas simplemente hay que copiarlas al directorio
+    \verb+~/.fonts+ cre\'andolo si es necesario. N\'otese que \textasciitilde\ representa el
+    directorio del usuario (normalmente \verb+/home/"username"+ y que el directorio
+    \verb+.fonts+ empieza por un punto y por lo tanto es un directorio oculto.
+
+  \item[\textsc{Bib}\hologo{LaTeX}:] En la actualidad es muy dif\'icil generar
+    bibliograf\'ias de calidad sin usar un gestor de registros bibliogr\'aficos.
+    En esta plantilla se decidido usar el moderno gestor referencias
+    bibliogr\'aficas \textsc{Bib}\hologo{LaTeX}. Para su uso es necesario instalar
+    tanto el paquete \texttt{biblatex} como el programa \hologo{biber}.
+    La versi\'on mas reciente de \hologo{MiKTeX} (2.9) permite usar sin problemas
+    estos paquetes. En entornos *nix es necesario instalar estos programas desde
+    el gestor de paquetes.
+
+    \textsc{Bib}\hologo{LaTeX} es compatible con \hologo{BibTeX} as\'i como con los
+    principales gestores bibliogr\'aficos co\-mer\-cia\-les como
+    RefWorks\textregistered~\cite{refworks} o
+    Mendeley\textregistered~\cite{mendeley} as\'i como con los formatos
+    de bases de datos bibligr\'aficas RIS, Endnote\texttrademark\ XML and
+    Zotero RDFXML.
+
+    Para m\'as informaci\'on sobre como hacer bibliograf\'ias con
+    \textsc{Bib}\hologo{LaTeX} se puede consultar los diversos tutoriales que hay en la
+    web, como por ejemplo el siguiente video \cite{youtube} de YouTube\textregistered,
+    el wikilibro~\cite{wikilibro} o este mismo documento.
+
+  \item[Pygments:] Los proyectos fin de grado de esta facultad contienen
+    en muchas ocasiones c\'odigo fuente o pseudoc\'odigos. La representaci\'on
+    de c\'odigo fuente es un tema complejo pues se necesita \enquote{escapar}
+    el texto a formatear del propio c\'odigo \hologo{LaTeX}. En esta plantilla
+    hemos decidido usar programa \texttt{pygments} (de la misma manera que con
+    la bibliograf\'ia) para realizar esta tarea.  Sin embargo, en este caso no
+    es necesario realizar una llamada externa como en el caso de \hologo{BibTeX}
+    pues se la llamada se realiza al compilar el propio documento. Esto presenta
+    un problema de seguridad en general y es por ello que es necesario introducir
+    el par\'ametro \verb+-shell-escape+ en la llamada al compilador para permitir
+    este comportamiento. Cons\'ultese los manuales del IDE en uso para m\'as
+    informaci\'on sobre este proceso.
+
+    Para su uso es necesario instalar un int\'erprete Python as\'i como el
+    programa \texttt{pygments} y el paquete \texttt{minted}. En entornos *nix
+    no deber\'ia de haber ning\'un problema pues estas aplicaciones est\'an
+    en los repositorios de paquetes. En los sistemas derivados de Debian se puede
+    instalar de la siguiente forma:
+    \begin{enumerate}
+      \item Instalar los paquetes: \texttt{python-setuptools} y \texttt{texlive-latex-extra}
+      \item Ejecutar el siguiente comando desde una terminal: \texttt{sudo easy\_install pygments}
+    \end{enumerate}
+
+    Para su instalaci\'on en entornos Windows\texttrademark\ se puede seguir la
+    siguiente gu\'ia~\cite{pygments}.
+
+  \item[\texttt{Hyperref}:] Dado que uno de los objetivos de las plantillas es generar
+    documentos electr\'onicos de uniformes y de calidad se ha activado la
+    generaci\'on de hiperv\'inculos en el documento usando el paquete \texttt{hyperref}.
+    De esta forma el fichero pdf resultante contiene un \'indice adem\'as de
+    posibilidad de navegar por el documento como en una p\'agina web al
+    ser todas las citas, referencias cruzadas, notas al pi\'e de p\'agina y urls
+    hiperenlaces. Adem\'as, el contenido de los distintos \'indices tambi\'en
+    son hiperenlaces.
+\end{description}
+
+En las siguientes secciones est\'an dedicadas a hacer un resumen de las
+posibilidades de esta plantilla (y de \hologo{LaTeX} en general).
+
+\section{Entornos enumerados}
+
+Existen tres entornos enumerados que se pueden anidar de cualquiera de las
+maneras posibles. A continuaci\'on hacemos una ilustraci\'on de ellos.
+
+\subsection{Listas}
+\begin{itemize}
+  \item Soy un elemento de la lista.
+  \item Soy otro elemento de la lista.
+  \begin{itemize}
+    \item Soy un elemento anidado.
+    \item Soy otro elemento anidado.
+  \end{itemize}
+  \item Soy el \'ultimo elemento de la lista.
+\end{itemize}
+
+\subsection{Enumeraciones}
+\begin{enumerate}
+  \item Soy el primer elemento de la enumeraci\'on.
+  \begin{enumerate}
+    \item Soy un elemento anidado de una enumeraci\'on.
+    \item Soy otro elemento anidado como enumeraci\'on.
+  \end{enumerate}
+  \item Soy el segundo elemento de la enumeraci\'on.
+  \begin{itemize}
+    \item Soy un elemento anidado de una lista.
+    \item Soy otro elemento anidado como lista.
+  \end{itemize}
+  \item Soy el \'ultimo elemento enumeraci\'on.
+\end{enumerate}
+
+\subsection{Descripciones}
+
+En el cap\'itulo~\ref{cha:introduccion} podemos ver un ejemplo de una
+descripci\'on. Ponemos aqu\'i otro por completitud.
+\begin{description}
+  \item[Corta:] Esta es una etiqueta peque\~na con con algo de texto que habla
+    sobre ella misma. El texto se tiene la consistencia de un p\'arrafo con
+    sangr\'ia francesa.
+  \item[Etiqueta bastante larga:] Esta es una etiqueta m\'as larga. N\'otese
+    que el texto se sangra como en la etiqueta anterior y no a la altura
+    de esta etiqueta.
+  \item[Otra etiqueta:] Esta etiqueta esta puesta para ver como quedan los
+    textos que tiene m\'as de un p\'arrafo. Primero ponemos un poco de texto
+    de relleno.
+
+    Ahora empezamos otro p\'arrafo para que se vea como se respeta la distancia
+    entre p\'arrafos y la sangr\'ia contin\'ua siendo la misma.
+\end{description}
+
+\section{Entornos flotantes}
+
+Una de las grandes ventajas de \hologo{LaTeX}e\ se encuentra en su algoritmo de
+posicionamiento de objetos flotantes. Un objeto flotante es todo aquel que se
+le da libertad para moverse dentro del texto hasta ocupar una posici\'on donde
+encaje. T\'ipicamente los elementos flotantes suelen ser tablas e im\'agenes
+que no puede dividirse entre p\'aginas y por lo tanto deben \enquote{flotar}
+hasta su posici\'on. A continuaci\'on presentamos diversos ejemplos de uso.
+
+\subsection{Im\'agenes}
+
+La figura~\ref{fig:ud} es una figura completamente flotante y por eso el
+algoritmo la coloca preferentemente al principio de la p\'agina. Sin embargo,
+a la figura~\ref{fig:logotipos} se le ha indicado que se prefiere que se coloque
+en la posici\'on en la que est\'a (n\'otese el \texttt{[h]}) y por lo tanto
+est\'a en medio de la p\'agina. Adem\'as, esta figura est\'a compuesta
+por tres subfiguras~\ref{subfig:ud}, \ref{subfig:dt} y \ref{subfig:ESIDE}.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics{fig/ud}
+  \caption{Logotipo de la Universidad de Deusto.}\label{fig:ud}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/ud}
+    \caption{Logotipo de la Universidad.}\label{subfig:ud}
+  \end{subfigure}\quad
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/dt}
+    \caption{Logotipo de DeustoTech.}\label{subfig:dt}
+  \end{subfigure}\quad
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/ESIDE}
+    \caption{Logotipo de la Facultad.}\label{subfig:ESIDE}
+  \end{subfigure}
+  \caption{Ejemplo de subfiguras con los logotipos de la universidad, facultad
+           y DeustoTech.}\label{fig:logotipos}
+\end{figure}
+
+\subsection{Tablas}
+
+La tabla~\ref{tab:ejemplo} muestra un ejemplo de como se pueden muestran
+datos tabulados. N\'otese que al igual que antes es un entorno flotante
+y la tabla se desplazar\'a hasta donde encaje. En la tabla~\ref{tab:subtablas}
+podemos ver une ejemplo con subtablas que, aunque le hemos indicado que lo
+introduzca en esta tabla es demasiado grande y flota hasta la siguiente p\'agina.
+Por supuesto, en este caso tambi\'en podemos hacer referencias a las
+subtablas~\ref{subtab:ej1} y \ref{subtab:ej2}.
+
+\begin{table}
+  \centering
+  \caption{Ejemplo de un entorno tabulado.}\label{tab:ejemplo}
+  \begin{tabular}{cccc}
+    \toprule
+      \textbf{Nombre} & \emph{Valor 1} & \emph{Valor 2} & \emph{Valor 3}\\
+    \midrule
+      Pedro  & 100     & 200     & 300 \\
+      Juan   & 200     & 100     & 600 \\
+      Mar\'ia& 300     & 50      & 200 \\
+      Carmen & 400     & 10      & 7000\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \caption{Ejemplo de un entorno tabulado con varias subtablas.}\label{tab:subtablas}
+  \begin{subtable}{.45\textwidth}\centering
+    \begin{tabular}{cccc}
+      \toprule
+        \textbf{Nombre} & \emph{Valor 1} & \emph{Valor 2} & \emph{Valor 3}\\
+      \midrule
+        Pedro  & -100     & 200      & $a$ \\
+        Juan   & 2000     & -100     & $b$ \\
+        Mar\'ia& 300      & 50       & $c$ \\
+        Carmen & 400      & -10      & $f$ \\
+      \bottomrule
+    \end{tabular}
+    \caption{Valores de algo.}\label{subtab:ej1}
+  \end{subtable}\quad
+  \begin{subtable}{.45\textwidth}\centering
+    \begin{tabular}{cccc}
+      \toprule
+        \textbf{Nombre} & \emph{Valor 1} & \emph{Valor 2} & \emph{Valor 3}\\
+      \midrule
+        Pedro  & 100     & $\alpha$& 300 \\
+        Juan   & $\gamma$& 100     & 600 \\
+        Mar\'ia& 300     & 50      & $\beta$ \\
+        Carmen & $\omega$& 10      & $\varepsilon$\\
+      \bottomrule
+    \end{tabular}
+    \caption{Valores de otra cosa.}\label{subtab:ej2}
+  \end{subtable}
+\end{table}
+
+\subsection{Algoritmos}
+
+Finalmente terminamos con el \'ultimo entorno flotante que falta: los algoritmos.
+Este entorno flotante es el m\'as extra\~no pues necesita interpretar
+de forma completamente distinta el texto. Los algoritmos~\ref{lst:holamundo} y
+\ref{lst:python} hay dos ejemplos muy simples de sus posibilidades.
+
+\begin{listing}\centering
+  \begin{minipage}{.4\textwidth}
+    \begin{minted}[linenos=true]{c}
+int main() {
+  printf("hello world");
+  return 0;
+}
+    \end{minted}
+  \end{minipage}
+  \caption{\enquote{Hola mundo} en C.}\label{lst:holamundo}
+\end{listing}
+
+\begin{listing}\centering
+  \begin{minipage}{.4\textwidth}
+    \begin{minted}[linenos=true,mathescape,gobble=6]{python}
+      # Returns $\sum_{i=1}^{n}i$
+      def sum_from_one_to(n):
+        r = range(1, n + 1)
+        return sum(r)
+    \end{minted}
+  \end{minipage}
+  \caption{Ejemplo m\'as elaborado en Python.}\label{lst:python}
+\end{listing}
+
+\section{Referencias cruzadas y citas bibliogr\'aficas}
+
+Una de las grandes caracter\'isticas de \hologo{LaTeX} es la facilidad para
+hacer tanto referencias cruzadas como citas bibliogr\'aficas. Como ya se ha
+visto anteriormente, para referenciar un cap\'itulo, secci\'on, etc. o
+un elemento flotante solo es necesario asignarle un \verb+\label{}+ y
+posteriormente citarle con \verb+\ref{}+. Por ejemplo, para referenciar
+el primer cap\'itulo basta con colocar la etiqueta
+\verb+\label{cha:introduccion}+ en cualquier punto del cap\'itulo
+(preferiblemente despu\'es del t\'itulo) y luego hacer referencia a \'el
+con \verb+\ref{cha:introduccion}+. Es decir, hacemos referencia al
+cap\'itulo~\ref{cha:introduccion}. De la misma forma podemos hacer referencia a
+los elementos flotantes como figuras, tablas y algoritmos.
+
+Finalmente, la bibliograf\'ia se genera de forma autom\'atica conteniendo
+\'unicamente los trabajo expl\'icitamente citados en la
+memoria\footnote{Hay varios mecanismos para incluir tambi\'en otras obras.
+V\'ease la documentaci\'on de \textsc{Bib}\hologo{LaTeX}.}. Para ello es necesario
+contar una base de datos bibliogr\'afica en un formato reconocido. El m\'as
+tradicional es el formato \texttt{.bib}. El fichero \texttt{bib.bib}
+incluido en esta memoria es un ejemplo b\'asico con el que se han construido
+las citas de este documento.
+
+A modo de ejemplo ponemos aqu\'i una lista de citas de relleno para completar
+la bibliograf\'ia \cite{article,conference,book}, \cite{phd} y \cite{master}.
+
+\printbibliography[heading=bibintoc]
+
+\appendix
+
+\chapter{Normativa}\label{an:normativa}
+
+En este ap\'endice mostramos como dividir textos grandes en ficheros m\'as
+manejables mediante el comando \verb+\input{}+. Para ello incluiremos la
+normativa en este anexo.
+
+\input{normativa}
+
+\backmatter
+
+\end{document}
