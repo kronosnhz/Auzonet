@@ -3,7 +3,6 @@
 
 \LoadClass[a4paper,10pt]{book}          % Leemos la plantilla book sobre la que nos basamos
 
-\RequirePackage[spanish,es-tabla]{babel}% Castellanizamos LaTeX
 \RequirePackage{csquotes}               % Usamos comillas espa\~nolas
 \RequirePackage[citestyle=numeric-comp, % Paquete para definir el estilo de la Bibliograf\'ia
                 bibstyle=numeric,
@@ -48,7 +47,7 @@
 
 \fancypagestyle{phdthesis}{             % Redefinimos el estilo de p\'agina principal
   \fancyhf{}
-  \fancyhead[RO]{\itshape\MakeUppercase{Proyecto Fin de Grado}}
+  \fancyhead[RO]{\itshape\MakeUppercase{Final Degree Project}}
   \fancyhead[LE]{\sectionfont\itshape\thechapter. \leftmark}
   \fancyfoot[LE,RO]{\thepage}
   \renewcommand{\headrulewidth}{0pt}
@@ -69,8 +68,8 @@
 \RequirePackage{subcaption}             % Paquete para hacer subfiguras
 \RequirePackage[chapter]{minted}        % Paquete para introducir c\'odigo fuente
                                         % Personalizaci\'on del entorno para el c\'odigo fuente
-\renewcommand\listingscaption{Algoritmo}
-\renewcommand\listoflistingscaption{\'Indice de algoritmos}
+\renewcommand\listingscaption{Algorithm}
+\renewcommand\listoflistingscaption{Algorithm Index}
 \renewcommand{\listoflistings}{%
   %\addcontentsline{toc}{chapter}{\listoflistingscaption}%
   \listof{listing}{\listoflistingscaption}%
@@ -90,9 +89,9 @@
 %\RequirePackage{tocbibind}              % Paquete para incluir los distintos \'indices en el \'indice
 \RequirePackage[titles]{tocloft}        % Paquete para personalizar el \'indce
 \preto\section{\ifnum\value{section}=0\addtocontents{toc}{\vskip10pt}\fi}
-\preto\figure{\ifnum\value{figure}=0\addtocontents{lof}{{\bfseries Cap\'itulo \thechapter\vskip10pt}}\fi}
-\preto\table{\ifnum\value{table}=0\addtocontents{lot}{{\bfseries Cap\'itulo \thechapter\vskip10pt}}\fi}
-\preto\listing{\ifnum\value{listing}=0\addtocontents{lol}{{\bfseries Cap\'itulo \thechapter\vskip10pt}}\fi}
+\preto\figure{\ifnum\value{figure}=0\addtocontents{lof}{{\bfseries Chapter \thechapter\vskip10pt}}\fi}
+\preto\table{\ifnum\value{table}=0\addtocontents{lot}{{\bfseries Chapter \thechapter\vskip10pt}}\fi}
+\preto\listing{\ifnum\value{listing}=0\addtocontents{lol}{{\bfseries Chapter \thechapter\vskip10pt}}\fi}
 
 \RequirePackage{hyperref}               % Paquete para introducir hiperv\'inculos en el documento
 \hypersetup{
