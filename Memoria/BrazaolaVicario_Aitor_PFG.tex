@@ -461,12 +461,21 @@ The application must have a good user interface, allowing users from all ages fo
 \subsection{Hardware specification}
 For fulfilling the previous requirements and taking advantage of the web server technology already available on MORElab, the server where the application is deployed belongs to the laboratory and the same domain of MORElab applications is used. The application is accessible on http://apps.morelab.deusto.es/auzonet
 
-The server specification are:
+The hardware requirements are going to fit the existing hardware shared for other applications developed on MORElab, specifically, in the server called "Olentzero" with the following specifications:
+
+\begin{itemize}
+	\item Intel(R) Xeon(R) CPU E5-2430 @ 2.20GHz
+	\item 16 GB RAM
+	\item 1TB Hard disk
+\end{itemize}
+
+Deploying here the application where already have available a complete software environment of web dependencies save time reusing already existing modules.
 
 \subsection{Software specification}
-The web application running on Olentzero server must have the following software installed for correct performance:
+The web application running on "Olentzero" server must have the following software installed for correct performance:
 
 \begin{description}
+	\item[Ubuntu Server 14.04.4 LTS:] Open Source operating system running on "Olentzero" server.
 	\item[Python 2.7 or newer:] Python is a widely used high-level, general-purpose, interpreted, dynamic programming language.
 	\item[Django framework 1.9:] Develop the web application
 	\item[gunicorn:] Python WSGI HTTP server for UNIX to serve the web application
@@ -478,7 +487,7 @@ The web application running on Olentzero server must have the following software
 	\item[MySQL:] For storing the data.
 \end{description}
 
-Django is a modular web framework extensible via applications, which are basically plugins that add to the core functionality of Django special features, in Auzonet development has been installed the following ones:
+Django is a modular web framework extensible via applications, which are basically plugins that add to the core functionality of Django special features, in Auzonet development, has been installed the following ones:
 
 \begin{description}
 	\item[django-bootstrap:] For native integration of front-end library Twitter Bootstrap.
@@ -503,17 +512,17 @@ Some features considered advanced, are only possible to perform here, contacting
 In the last chapter are included ways to implement some of the mentioned options in the public user interface, but by the moment, only the features that has been considered essential has been implemented.
 
 \subsubsection{User registration process}
-When a new user is registered in Auzonet, a tiny wizard starts asking him if is searching an already community or want to register one for the first time, in case of register a new community, the form displayed will gather data directly from Bilbao's council public data for showing the neighbors.
+When a new user is registered in Auzonet, a tiny wizard starts asking him if is searching an already created community or wants to register one for the first time, in case of registering a new one, the form displayed will gather data directly from Bilbao's council public data for showing the neighbors selection drop downs.
 
-A set of subsequent AJAX calls to WeLive REST API are executed for obtaining the data.
+A set of subsequent AJAX calls to WeLive REST API are performed for obtaining the data.
 
 TODO: Show the code responsible of getting WeLive Data.
 
 During the registration process, an email is sent to the user for confirming the set up of the new account and another one is sent when the community process creation has finished and the user belongs to it automatically.
 
-After the portal selection process, the user can set a password to the community, that password stored in the community table of the database, is necessary for allowing others to join in that community.
+After the portal selection process, the user can set a password to the community, that password is stored in the community table of the database and is necessary for allowing others to join into community.
 
-From the user perspective that joins into a existing community, can select the community at the beginning of the process after registering from a drop down, if the community is private, a password will be prompt, once the join process is successful, an email with a welcome message to the community is sent.
+From the user perspective that joins into a existing community, can select the community at the beginning of the process after registering from a drop down showing all registered ones, if the community is private, a password will be prompt, once the join process is finished, will receive an email with a custom welcome message set by the creator of the community.
 
 TODO: Add a chart of the registration flow process.
 
@@ -522,7 +531,9 @@ As any other Django developed application, some steps have to be followed for se
 
 TODO: Put a network map
 
-During the development on the student's laptop, the application has been using an SQlite database running on a local server, this type of database is inadequate because the technical limitations of performance, for ensuring a fast and reliably data access a MySQL database 
+During the development on the student's laptop, the application has been using an SQlite database running on a local server, this type of database is inadequate because the technical limitations of performance, for ensuring a fast and reliably data access a MySQL database. 
+
+"Olentzero" as previously mentioned already have installed typical software used by Web Applications, and there is no need to install a new instance of it, only creating an specific schema for Auzonet and configure the settings file for accessing it is required. 
 
 \subsection{Issue management}
 All changes and requests received during the development process of the project will be managed through the following procedure:
@@ -533,6 +544,7 @@ All changes and requests received during the development process of the project 
 	\item If the changes are technically feasible and fit the budget and schedule, proceed to implementation.
 	\item Modify the work plan and budget.
 \end{enumerate}
+
 \section{Responsive design and mobility}
 \section{Technology}
 \subsection{Hardware}
@@ -548,20 +560,109 @@ The software involved in the development of this project is structured in the fo
 \end{itemize}
 
 \subsubsection{Web application: Front-end}
-One of the requirements of the project was guarantee the maximum compatibility with the most important web browsers, because of that, for writing the views that represent the user interface that the final user is going to use, the last version of the HyperText Markup Language has been selected, the version 5, which is the used in the project, contain several improvements in the syntax that makes easier to develop and better for indexing in search engines.
+{\large HTML5}
 
-HTML5 also come with many more improvements that makes 
+One of the requirements of the project was guarantee the maximum compatibility with the most common web browsers, because of that, for writing the views of the user interface, the last version of the HyperText Markup Language has been selected, HTML5 contain several improvements in the syntax that makes easier to develop and better for indexing in search engines, performance in rendering rich elements like videos and more.
+
+HTML5 also come with more improvements that makes the template code cleaner easier to maintain, and provide certain characteristics that improve the smartphone page viewing, specially in this project, because of the technologies used for deploying in mobile devices, ensuring the best performance on smartphones is priority.
+
+{\large CSS3}
+
+For achieving a clear structure in the front end code, taking account the importance of getting an attractive design, the code responsible of all the visuals has separated in different external CSS files, actually, the most part of the CSS classes belongs to Twitter Bootstrap front end framework, but in some parts of the web like the landing page, it was necessary to develop custom classes in custom files.
+
+The decision to select version 3 of CSS is because as with HTML, this project also serve as learning proposal of the latest technologies for developing the future web, although is already know some feature incompatibilities in some browsers, the advantages in number of lines of code saving and new effects has taken more in account.
+
+{\large JavaScript}
+
+Being the language most extended on web development, the election of this technology ensure maximum compatibility with almost every device on the market. All the logic placed on client side is programmed with this language, from the AJAX calls, to controlling the user interface animations along the application.
+
+JavaScript makes easy to manage dynamically any element on the pages, and thanks to dynamic panels fired by JavaScript events has been saved a handle of HTML pages on this project.
+
+The following JavaScript libraries has been used for improve the language capabilities:
+\begin{description}
+	\item[jQuery] To simplify most used web development JavaScript operations.
+	\item[jQuery UI] For adding a toolkit of user interface elements.
+	\item[jQuery numeric] For helping to avoid non-numeric input in some forms.
+	\item[Chart.js] For drawing charts.
+\end{description}
+
+{\large Twitter Bootstrap}
+
+Twitter Bootstrap is an easy way to provide good user experience through good user interface already built in CSS classes already created by experts in design, moreover, all their CSS classes are responsive and prepared for represent contents in wide variety of screen sizes using media queries.
+
+Some parts of the application are fully designed by the student, like the landing page or logo, but getting benefit of all the CSS classes designed by professionals in Twitter Bootstrap framework, help to get a more sophisticated and advanced look to the application.
+
+TODO: logo de Twitter Bootstrap   
+
+{\large Bower}
+
+Today, the amount of libraries involved in a web development is huge, and keep the latest versions of each is a nightmare for programmers, with Bower, the libraries can be managed from repositories, and be installed, updated or removed with one command line.
+
+As similar UNIX tools like apt-get on Linux, Bower unify the package dependence for web developments providing a same file structure for avoiding library reference errors in the HTML pages and keep a detailed log of all the operations related.
+
+TODO: logo de Bower
 
 \subsubsection{Web application: Back-end}
-\subsubsection{Web application: Mobile application}
+Unlike the front-end there are high variety of programming languages and frameworks for server side, the most extended is PHP but the learning proposal of the project was learn building a real application a new language and framework for web development, PHP is a language with the student already had used during the degree and researching on internet, others with high capabilities are growing.
+
+Along the research, the following technologies were taken account:
+\begin{itemize}
+	\item Python with Django
+	\item JavaScript with AngularJS
+	\item Ruby with Ruby on rails
+	\item Java with Spring
+\end{itemize}
+
+Finally, Python was selected because the clean syntax and the philosophy of Django framework to avoid repetition in the most used web tasks and their solid community.
+
+TODO: Django logo
+
+The documentation site of Django framework is clear and well structured and provides API's for all the common needs for every web development like an ORM for database mapping or security features, moreover, is possible to build your own custom functionalities on top of them.
+
+\subsubsection{Mobile application}
+For providing a native environment to Auzonet in mobile platforms the native SDK of each platfor was desestimated due the limited resources for developing the project, thanks to web technologies and the responsive user interface designed in the web application, Apache Cordova framework has been used for provide a native look and feel on the common mobile operating systems.
+
+Apache Cordova is a framework for create mobile applications using HTML, CSS and JavaScript gaining access to native features of the hardware like accelerometer or camera, as project from Apache Foundation, is licensed under Apache license that authorizes to use free of charge the software.
+
+TODO: Apache logo
+
+Apache Cordova allows to get advantage of all the existing software written in the web application and port the experience to a native application distributable via mobile stores and porting to Android, iOS or Windows Phone.
+
+For creating the application, has been necessary create artworks for different screen sizes and device orientations of the icon and splash screen.
+
 TODO: Put Apache Cordova logo.
 \section{Tools}
 \subsection{Code editor}
+TODO: Put an image of atom
+The code editor used along the project for writing Python code and HTML front-end is Atom by GitHub.
 
-\subsection{Testing}
+Atom is an application built with web technologies and open source that allow to be modified by the community, because of that, the wide variety of plug-ins such as language syntax support or Git integrations is huge.
+
+Before this project, the student had experience with other privative tools like Sublime Text but at the beginning of the development, the student made a small research for a new tool to learn for improve productivity in the programming phase.
+
+Atom features like embedded browser and terminal, has become a huge productivity boost during the development.
+\subsection{Image editor}
+Though most of the visual assets are provided by Twitter Bootstrap, others like logo and mobile icons and splash screens has been created using a image editor.
+
+TODO: Pixelmator image
+
+Pixelmator is a Mac application based on the popular Adobe Photoshop with less features but enough to design and prepare the visual assets used in Auzonet. Was selected because the student already owned a license and is easy to use.
+
 \subsection{Operating system}
-\subsection{Version control}
+TODO: FOTO OSX
+All the development process has take place on an Apple MacBook Pro of early 2011, property of the student with OS X El Capitan version 10.11, the UNIX solid architecture and good user experience became the perfect choice for being the main computer used for programming.
 
+The UNIX-like capabilities of this operating system has become an advantage for running almost every tool involved in a web development process.
+\subsection{Version control}
+TODO: LOGO GIT
+Git has been the software responsible of keep version control of all the files of the application. Git is an open-source software developed by Linus Torvalds widely used in the industry, allows to keep a central repository and create branches separated from the main development code.
+
+TODO: GITHUB LOGO
+GitHub is a service created for hosting Git repositories and allow store public and private code, thanks to the student pack offered by the company, code has been hosted in a private repository for free that, otherwise would be needed a paid subscription.
+\subsection{Testing}
+All the tests performed has been focused y the end user perspective, along two weeks the application was released under beta status to a closed group of people closer to the student for making a simulation of real usage.
+
+Al the faults and user experience suggestions were gathered 
 \chapter{Conclusions and future work}
 \section{Data mining}
 \section{Conclusions}
