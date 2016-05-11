@@ -433,6 +433,97 @@ The main section of the development is going to be for the web application, the 
 
 Both products has been submitted to testing with collaborators and the process of the tests will be detailed, finally a user manual will be included for helping to use all functionality implemented by the platform.
 \section{Web application}
+\subsection{Software and Hardware requeriments}
+The application must have a good user interface, allowing users from all ages for using it with less effort, furthermore, the application must make a good usage of the public data of the Bilbao's council provide using WeLive platform.
+
+\subsubsection{Software requirements}
+\begin{itemize}
+	\item All communities existing on Bilbao must be available for register in the platform.
+	\item The communities must have a common place to exchange information among members.
+	\item The users information must be protected with security measurements for avoiding data stealing or spam.
+	\item Users can post or attend offers among them.
+	\item Users can post or attend requests among them.
+	\item Users can set an access password to communities for avoid external viewers.
+	\item Users can belong to more than once community.
+	\item There have to exist a way for measure the trustfulness of each user in the community, a reputation system.
+	\item There have to exist a mail notification system in real time for the activity in each community.
+	\item The look and feel of the platform should fit to different sizes of screen.
+\end{itemize}
+
+\subsubsection{Hardware requirements}
+\begin{itemize}
+	\item The application must run on MORElab servers.
+	\item The performance of the application must be smooth and fast on every web browser.
+	\item The platform must have a smartphone application.
+	\item The platform must be able to manage a huge quantity of request concurrently with no fault.
+	\item No new hardware than the already existing on MORElab must be need.
+\end{itemize}
+\subsection{Hardware specification}
+For fulfilling the previous requirements and taking advantage of the web server technology already available on MORElab, the server where the application is deployed belongs to the laboratory and the same domain of MORElab applications is used. The application is accessible on http://apps.morelab.deusto.es/auzonet
+
+The server specification are:
+
+\subsection{Software specification}
+The web application running on Olentzero server must have the following software installed for correct performance:
+
+\begin{description}
+	\item[Python 2.7 or newer:] Python is a widely used high-level, general-purpose, interpreted, dynamic programming language.
+	\item[Django framework 1.9:] Develop the web application
+	\item[gunicorn:] Python WSGI HTTP server for UNIX to serve the web application
+	\item[nginx:] A free, Open-Source, high-performance HTTP server and reverse proxy for serve the static and media files.
+	\item[pip:] A python package manager for install python packages in the virtual environment.
+	\item[supervisord:] A client/server system to monitor and control processes on UNIX-like operating systems for monitoring the gunicorn instance that serves the web application.
+	\item[virtualenv:] A tool to create isolated python environments for create an isolated environment for developing and deploying purposes, without library conflicts.
+	\item[virtualenvwrapper:] A set of extensions to virtualenv for ease the use of virtualenv through the command line.
+	\item[MySQL:] For storing the data.
+\end{description}
+
+Django is a modular web framework extensible via applications, which are basically plugins that add to the core functionality of Django special features, in Auzonet development has been installed the following ones:
+
+\begin{description}
+	\item[django-bootstrap:] For native integration of front-end library Twitter Bootstrap.
+	\item[django-bower:] For manage all the front-end packages and libraries.
+	\item[django-favicon:] For generating and inject the appropriate sizes of favicons in different browsers. 
+\end{description}
+
+TODO: A schema of how the software layers are on top o the other.
+
+\subsubsection{Back-end}
+Auzonet, has some administration functionality on a separate web in the same server, accessible in the URL http://apps.morelab.deusto.es/auzonet/admin with an admin account, there are the management console in which is possible to manage all tables on the database schema.
+
+Some features considered advanced, are only possible to perform here, contacting with the admin of the site. For example:
+
+\begin{itemize}
+	\item Setting new categories for requests and offers.
+	\item Change details of already registered users and communities.
+	\item Remove user accounts.
+	\item Resetting passwords.
+\end{itemize}
+
+In the last chapter are included ways to implement some of the mentioned options in the public user interface, but by the moment, only the features that has been considered essential has been implemented.
+
+\subsubsection{User registration process}
+When a new user is registered in Auzonet, a tiny wizard starts asking him if is searching an already community or want to register one for the first time, in case of register a new community, the form displayed will gather data directly from Bilbao's council public data for showing the neighbors.
+
+A set of subsequent AJAX calls to WeLive REST API are executed for obtaining the data.
+
+TODO: Show the code responsible of getting WeLive Data.
+
+During the registration process, an email is sent to the user for confirming the set up of the new account and another one is sent when the community process creation has finished and the user belongs to it automatically.
+
+After the portal selection process, the user can set a password to the community, that password stored in the community table of the database, is necessary for allowing others to join in that community.
+
+From the user perspective that joins into a existing community, can select the community at the beginning of the process after registering from a drop down, if the community is private, a password will be prompt, once the join process is successful, an email with a welcome message to the community is sent.
+
+TODO: Add a chart of the registration flow process.
+
+\subsection{Deployment considerations}
+As any other Django developed application, some steps have to be followed for setting a clean installation of Auzonet in a server
+
+TODO: Put a network map
+
+During the development on the student's laptop, the application has been using an SQlite database running on a local server, this type of database is inadequate because the technical limitations of performance, for ensuring a fast and reliably data access a MySQL database 
+
 \subsection{Issue management}
 All changes and requests received during the development process of the project will be managed through the following procedure:
 \begin{enumerate}
@@ -446,8 +537,27 @@ All changes and requests received during the development process of the project 
 \section{Technology}
 \subsection{Hardware}
 \subsection{Software}
+The software involved in the development of this project is structured in the following blocks:
+\begin{itemize}
+	\item Web application
+	\begin{itemize}
+		\item Front-end
+		\item Back-end
+	\end{itemize}
+	\item Mobile application
+\end{itemize}
+
+\subsubsection{Web application: Front-end}
+One of the requirements of the project was guarantee the maximum compatibility with the most important web browsers, because of that, for writing the views that represent the user interface that the final user is going to use, the last version of the HyperText Markup Language has been selected, the version 5, which is the used in the project, contain several improvements in the syntax that makes easier to develop and better for indexing in search engines.
+
+HTML5 also come with many more improvements that makes 
+
+\subsubsection{Web application: Back-end}
+\subsubsection{Web application: Mobile application}
+TODO: Put Apache Cordova logo.
 \section{Tools}
 \subsection{Code editor}
+
 \subsection{Testing}
 \subsection{Operating system}
 \subsection{Version control}
