@@ -86,7 +86,7 @@ In the development chapter the internal development process will de explained, r
 
 Finally, the conclusions found throughout the entire process of creation and information will be taken about the use in tests scheduled for future projects will be presented.
 
-\chapter{Background and rationale}
+\chapter{Background and rationale}\label{cha:backgroundandrationale}
 \section{Background}
 Creating a social network of neighbors in which all members of each portal or community can interact with each other by sharing resources and information is not a new initiative, in other countries like Germany or United States similar projects \cite{larazon} have been developed, internet has extended the creation of communities of all kinds of areas, however, the already existing proposals rarely get benefit of the public entities data, and in many cases, they are the most reliable source of information for building applications and services for citizens.
 
@@ -97,7 +97,7 @@ The fact that most of datasets that are published by public organizations are no
 \section{Rationale}
 This project aims to unify the capabilities of communication between people that internet provides with the benefits of the Open Data to citizens, something that rarely have been done in similar intiatives.
 
-\chapter{Goals and scope}
+\chapter{Goals and scope}\label{cha:goalsandscope}
 \section{Project definition}
 Auzonet must meet the expectations of at least two types of users:
 \begin{description}
@@ -349,7 +349,7 @@ Following, there are listed the main roles played by the student:
 
 In addition to the student, the project has its project manager who is responsible for approving all changes and proposals that the student considers interesting to improve the product, will be present at the meetings and will be responsible for marking the milestone dates.
 
-\chapter{Planning}
+\chapter{Planning}\label{cha:planning}
 \section{Precedence diagram}
 \begin{figure}[H]
 	\centering
@@ -409,7 +409,7 @@ The following estimation is based on the different profiles of the total 255 hou
 	\end{itemize}
 	\item 4. Tests: 12 hours.
 \end{itemize}
-\chapter{Budget}
+\chapter{Budget}\label{cha:budget}
 The budget will take into account only the hours of work because the necessary equipments are already owned by the programmer and DeustoTech facilities where the project is located.
 
 \begin{table}[H]
@@ -428,7 +428,7 @@ The budget will take into account only the hours of work because the necessary e
 	\end{tabular}
 \end{table}
 
-\chapter{Development}
+\chapter{Development}\label{cha:development}
 The main section of the development is going to be for the web application, the part of the project with more effort, and technologies involved in development, then, the mobile application as a derivative product from the web app will be explained in detail reasoning the technologies used with their advantages and drawbacks.
 
 Both products has been submitted to testing with collaborators and the process of the tests will be detailed, finally a user manual will be included for helping to use all functionality implemented by the platform.
@@ -662,19 +662,95 @@ GitHub is a service created for hosting Git repositories and allow store public 
 \subsection{Testing}
 All the tests performed has been focused y the end user perspective, along two weeks the application was released under beta status to a closed group of people closer to the student for making a simulation of real usage.
 
-Al the faults and user experience suggestions were gathered 
-\chapter{Conclusions and future work}
+The proposed tests starts with the creation of a new account by the user without any assistance watching the usability problems that the user have, and taking notes of how the user navigate through the app.
+
+The proposed workflow for the test are always the same:
+
+\begin{enumerate}
+	\item Register a new account.
+	\item Register a new community with password.
+	\item Create a new offer in the community.
+	\item Create a new request in the community.
+	\item Post a new advice on the community board.
+	\item Post a new info message on community board.
+	\item Logout
+	\item Create another account
+	\item Joining to the previously created community
+	\item Hire the offer created by the previous user and finish the agreement voting each other
+	\item Attend the request created by the previous user and finish the agreement voting each other
+	\item Enter in profile view and check the recent activity and karma.
+	\item Logout.
+\end{enumerate}
+
+Same process with the mobile application.
+
+All faults and user experience suggestions were gathered in the task manager software and tagged for fixing as soon as possible.
+
+\chapter{Conclusions and future work}\label{cha:conclusions}
+This project has developed a full-stack platform for citizens using Open Data very similar to already existing, well-known applications of every day life, in this chapter some conclusions and future lines of work will be presented.
 \section{Data mining}
 \section{Conclusions}
+Today, we are surrounded by services that centralize the logic and data on cloud servers, smartphones quickly became the angular piece for interacting with them, having the knowledge of creating the full-stack technologies involved in these solutions is essential for every computer engineer.
+
+The aim of learning a full stack technologies creating a real application based on social interaction and Open Data has achieved successfully, today, more than ever, we have a huge variety of technologies available, select the appropriate ones for a service a provide a good user experience is more difficult.
+
+As can be seen, this project ended successfully achieving all the major objectives proposed from the beginning and implemented all the MORElab requested requirements with WeLive platform. A mobile application has been created ate the same time, bringing all the core functionality to different mobile operating systems and only latest web technologies has been used for proving the maturity of these solutions.
+
+Both applications, mobile and web are fully functional, running on servers hosted in DeustoTech and ready to deploy in bigger environment with small tweaks. In the other hand, data mining purposes of user's data could not be tested or developed, due time limitations but the software architecture is totally prepared for future data analytics features.
+
 \section{Future lines of work}
+Although the application is fully functional and complete, there are some features that could be interesting to develop in further releases:
 
-\chapter{Acknowledgments}
+\begin{itemize}
+	\item User profile customization by the end user.
+	\item Facebook, Twitter and Google login integration.
+	\item Native mobile apps.
+	\item Public REST Api for allowing third party integrations.
+	\item Full featured data analysis portal for public institutions.
+	\item Automatic community detection using HTML5 geolocation API.
+	\item Implement a search field for offers and requests.
+	\item Add support for more cities and extend the scope of the posts.
+\end{itemize}
 
-\chapter{Agradecimientos}
+All these features are really plausible to implement due the actual architecture of the platform.
 
+\chapter{Bibliography}\label{cha:bibliography}
 \printbibliography[heading=bibintoc]
+\chapter{Acronyms}\label{cha:acronyms}
+\begin{description}
+	\item[label] description
+\end{description}
+\chapter{Acknowledgments}\label{cha:aknowledgements}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum condimentum lectus et mauris pellentesque, non porta elit congue. Sed mattis sodales lobortis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam imperdiet lectus eget iaculis vestibulum. Curabitur nunc orci, fringilla nec pellentesque vitae, luctus placerat lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas luctus tincidunt libero, eu consectetur ipsum viverra ut. Nam aliquam varius nulla sit amet pretium. Proin sollicitudin orci id enim commodo auctor. Sed eget lectus neque.
+
+Proin suscipit consectetur semper. In id ipsum elit. Quisque nulla ex, consequat ac consectetur posuere, auctor eget tellus. Pellentesque pharetra sodales ornare. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec porttitor pretium blandit. Nulla facilisi. Duis pellentesque est sit amet risus posuere, vel consectetur nulla sodales. Donec porttitor interdum risus, ac convallis risus consequat quis. Integer sodales nunc nec neque efficitur luctus. Morbi tempor vestibulum iaculis. Aenean hendrerit nibh libero, id efficitur enim scelerisque non. Fusce ut quam sem. Praesent ut molestie orci, in mattis ligula. Aliquam et leo lacinia, ultrices purus nec, dictum est.
+
+Ut cursus velit nunc, et tempor mi blandit laoreet. Fusce condimentum ipsum in arcu auctor, et efficitur massa luctus. Ut sapien libero, venenatis a ante eu, dignissim posuere ligula. Phasellus in purus accumsan, imperdiet nunc vitae, aliquam odio. Vestibulum dui orci, consequat eu faucibus imperdiet, faucibus a lectus. Cras imperdiet quam vel placerat eleifend. Morbi placerat gravida leo a tincidunt. Sed eu pulvinar risus, ac fermentum odio. Vivamus id dui magna. Fusce pellentesque turpis ex, ac blandit augue iaculis in. In sollicitudin bibendum dolor, in maximus velit maximus ac.
+
+Cras venenatis vel sapien id volutpat. Sed pharetra turpis sed dui euismod sagittis. Vivamus lobortis eros ut risus ultrices tempus. Etiam sodales velit eu accumsan consectetur. Duis suscipit nisl a lacinia volutpat. Phasellus congue purus ex, nec bibendum leo ultrices lacinia. Praesent vel augue luctus, placerat ex nec, semper nisl.
+
+Nunc congue enim in placerat hendrerit. Aliquam erat volutpat. Donec mollis commodo neque. Vestibulum at viverra ante. Aenean congue non urna quis consequat. Curabitur consequat, lacus et vestibulum euismod, ex odio placerat orci, vel lobortis tortor est in nunc. Sed rutrum mi non urna iaculis, vitae fermentum lectus iaculis. Pellentesque ornare leo eu risus ultricies, at sagittis odio interdum. Maecenas eu mattis tellus. Curabitur pellentesque accumsan nisl. Pellentesque eleifend sit amet arcu sit amet ornare. Phasellus mollis, turpis quis consequat interdum, justo tortor finibus leo, sit amet ultrices purus lacus et augue. In non aliquam dui. Vestibulum id sagittis est, et accumsan eros. Praesent eleifend imperdiet felis, sit amet mollis neque fermentum sit amet.
+
+\chapter{Agradecimientos}\label{cha:agradecimientos}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum condimentum lectus et mauris pellentesque, non porta elit congue. Sed mattis sodales lobortis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam imperdiet lectus eget iaculis vestibulum. Curabitur nunc orci, fringilla nec pellentesque vitae, luctus placerat lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas luctus tincidunt libero, eu consectetur ipsum viverra ut. Nam aliquam varius nulla sit amet pretium. Proin sollicitudin orci id enim commodo auctor. Sed eget lectus neque.
+
+Proin suscipit consectetur semper. In id ipsum elit. Quisque nulla ex, consequat ac consectetur posuere, auctor eget tellus. Pellentesque pharetra sodales ornare. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec porttitor pretium blandit. Nulla facilisi. Duis pellentesque est sit amet risus posuere, vel consectetur nulla sodales. Donec porttitor interdum risus, ac convallis risus consequat quis. Integer sodales nunc nec neque efficitur luctus. Morbi tempor vestibulum iaculis. Aenean hendrerit nibh libero, id efficitur enim scelerisque non. Fusce ut quam sem. Praesent ut molestie orci, in mattis ligula. Aliquam et leo lacinia, ultrices purus nec, dictum est.
+
+Ut cursus velit nunc, et tempor mi blandit laoreet. Fusce condimentum ipsum in arcu auctor, et efficitur massa luctus. Ut sapien libero, venenatis a ante eu, dignissim posuere ligula. Phasellus in purus accumsan, imperdiet nunc vitae, aliquam odio. Vestibulum dui orci, consequat eu faucibus imperdiet, faucibus a lectus. Cras imperdiet quam vel placerat eleifend. Morbi placerat gravida leo a tincidunt. Sed eu pulvinar risus, ac fermentum odio. Vivamus id dui magna. Fusce pellentesque turpis ex, ac blandit augue iaculis in. In sollicitudin bibendum dolor, in maximus velit maximus ac.
+
+Cras venenatis vel sapien id volutpat. Sed pharetra turpis sed dui euismod sagittis. Vivamus lobortis eros ut risus ultrices tempus. Etiam sodales velit eu accumsan consectetur. Duis suscipit nisl a lacinia volutpat. Phasellus congue purus ex, nec bibendum leo ultrices lacinia. Praesent vel augue luctus, placerat ex nec, semper nisl.
+
+Nunc congue enim in placerat hendrerit. Aliquam erat volutpat. Donec mollis commodo neque. Vestibulum at viverra ante. Aenean congue non urna quis consequat. Curabitur consequat, lacus et vestibulum euismod, ex odio placerat orci, vel lobortis tortor est in nunc. Sed rutrum mi non urna iaculis, vitae fermentum lectus iaculis. Pellentesque ornare leo eu risus ultricies, at sagittis odio interdum. Maecenas eu mattis tellus. Curabitur pellentesque accumsan nisl. Pellentesque eleifend sit amet arcu sit amet ornare. Phasellus mollis, turpis quis consequat interdum, justo tortor finibus leo, sit amet ultrices purus lacus et augue. In non aliquam dui. Vestibulum id sagittis est, et accumsan eros. Praesent eleifend imperdiet felis, sit amet mollis neque fermentum sit amet.
 
 \appendix
+
+\chapter{Planning2}\label{cha:planning2}
+\section{Precedence diagram2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=210pt]{fig/precedencia}
+	\caption{Precedence diagram}\label{fig:precedencediagram}
+\end{figure}
 
 \backmatter
 
