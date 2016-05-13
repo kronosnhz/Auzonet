@@ -2239,6 +2239,9 @@
     <bcf:citekey order="2">DeustoTech</bcf:citekey>
     <bcf:citekey order="3">Morelab</bcf:citekey>
     <bcf:citekey order="4">larazon</bcf:citekey>
+    <bcf:citekey order="5">ODStars</bcf:citekey>
+    <bcf:citekey order="6">Bilbao Open Data</bcf:citekey>
+    <bcf:citekey order="7">WeLive</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty" type="entry" sortscheme="nty">
   <bcf:sorting>

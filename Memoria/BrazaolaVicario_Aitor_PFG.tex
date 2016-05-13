@@ -91,25 +91,82 @@ Creating a social network for neighbors in which all members of a portal or comm
 \caption[Nextdoor]{Nextdoor. Existing alternative in USA.}
 \label{fig:nextdoor}
 \end{figure}
+Nextdoor is a service only for USA neighborhoods created in California working since 2010, and the most remarkable features are:
 
+\begin{itemize}
+	\item Meeting point for find possible babysitters.
+	\item Chats of different topics in each neighborhood.
+	\item Exchange point for goods or services.
+	\item Shared garages management.
+\end{itemize}
+
+There is no revenue currently coming from the service and is completely free of charge, the project is supported by venture capital firms and they are still looking for a way of making revenue that benefits both users and creators not specified yet.
+ 
+Nextdoor has been recommended by many famous publications like New York Times, CNN and Wall Street Journal, what definitely demonstrate the feasibility of these solutions for neighborhoods.
+
+Recently, this platform has extended his coverage expanding to Netherlands, outside of the USA.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/goneighbor}
+\caption[Goneighbour]{Goneighbour, Canadian alternative to Nextdoor}
+\label{fig:goneighbor}
+\end{figure}
+
+GoNeighbour is another social network with neighborhoods in mind, created in Canada with less market share, and similar features, trying to port the Nextdoor experience exclusive from USA to Canada, but making an emphasis on creating a market of goods by neighbors.
 
 \subsection{Open Data}
+As we have seen, there are a growing tendency of internet neighborhood communities, but all the previously mentioned use geolocation or has his own database of addresses, this is the essential difference with Auzonet. Auzonet takes advantage of data released by public organizations like Bilbao's council for offering data consistency and provide precise information.
+
+Firstly, is important to analyze how is categorized Open Data. Tim Bernsers-Lee, the inventor of the Web and Linked Data initiator, suggested a 5-star deployment scheme for Open Data \cite{ODStars}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/5starod}
+\caption[5 Star of Open Data]{5 Star of Open Data}
+\label{fig:5starod}
+\end{figure}
+
+As we can see in the image \ref{fig:5starod}, Open Data is classified by how data is accessible by human or computers. Along this project, the data source is categorized as three stars because is publicly available of Bilbao's council data web platform \cite{Bilbao Open Data} in structured format without proprietary extension\footnote{Bilbao's council data is provided in CSV and later converted to JSON via WeLive API}. 
+
 Although it is true that currently, many public entities make available this data in digital format only by the look of transparency and are unaware of the true value of themselves, is one of the motivation of this project, in fact, have been moments during the development in which the data found poorly formatted and have had to request modifications to the agencies involved.
 
 The fact that most of datasets that are published by public organizations are not used in systems created by third parties, causes certain unconcern in the status and integrity of them.
 
-\section{Rationale}
-This project aims to unify the capabilities of communication between people that internet provides with the benefits of the Open Data to citizens, something that rarely have been done in similar intiatives.
+\subsubsection{WeLive Project}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/welive}
+\caption[WeLive Project]{WeLive Project}
+\label{fig:welive}
+\end{figure}
 
+
+WeLive is an EU H2020 funded project, addressing ICT-enabled open government – INSO1 topic, about a new concept of public administration based on citizen co-created mobile urban services.
+
+The project is conceived to transform the current approach towards e-government by providing a new open model oriented towards the design, production and deployment of public services based in the collaboration of a quadruple helix, i.e. research organizations, companies, public administrations and citizens. WeLive will provide a novel We-Government ecosystem of tools (Live) built on the Open Data, Open Services and Open  Innovation paradigms that is easily deployable in different public administrations and which promotes co-innovation and co-creation of personalized public services through public-private partnership and the  empowerment of all the stakeholders to actively take part in the value-chain of a municipality or a territory. \cite{WeLive}
+
+The city of Bilbao, is one of the four pilot cities selected for the project, thanks to the process of urban regeneration addressing the physical decline of the city after being highly dependent of shipbuilding and steel industry.
+
+The WeLive initiative in Bilbao is being carried out by several companies and research centers where University of Deusto and DeustoTech are in.
+
+This project, attend one of the proposals made in smart cities context and tries to add value to Bilbao's citizenship experience.
+
+\section{Rationale}
+Internet social networks are quite common today, and neighborhood based ones are not an exception, this project aims to get the best advantages of social networks and Open Data, creating a platform to exchange goods, services or information among neighbors.
+
+Furthermore, the project brings a high learning value of web applications development and also serve as an example of how based on WeLive project, can be created third party applications getting advantage of public data published by institutions and easily accessed via WeLive platform tools.
+
+The project will face the challenge of creating responsive web applications easily usable on all mobile platforms like smartphones or tablets using modern web technologies and standards. 
 \chapter{Goals and scope}\label{cha:goalsandscope}
 \section{Project definition}
 Auzonet must meet the expectations of at least two types of users:
 \begin{description}
-	\item[Citizen:] It is the primary user of the system and the beneficiary of the features offered by the platform and the source of the information that the system creates for later exploitation.
-	\item[Public institution:] It who analyze the data generated by the platform for statistics and promoting services that improve the quality of life in cities and people.
+	\item[Citizen:] The primary user of the system and beneficiary of all the features and advantages given by the platform.
+	\item[Public institution:] To analyze the data generated by the platform for statistics and promoting services to improve the quality of life in cities and people.
 \end{description}
 
-To achieve this it will develop:
+To achieve this objectives will be developed:
 \begin{itemize}
 	\item A web application where users can register their neighborhood based on existing data published by the council of Bilbao, the rest of neighbors interested can join to it and get benefit from its functions.
 	
@@ -117,28 +174,30 @@ To achieve this it will develop:
 \end{itemize}
 
 \subsection{Functionality}
-Users can search their portal trough an interactive form based on the existing neighbors and streets of the city of Bilbao, for better confirmation of the place, a small map showing the exact situation of the door will be displayed, if the information is correct, a few setting should be configure like the privacy level of the community having the option to protect it with a password or add a few lines of welcome message to new members via mail.
+Users can search their portal trough an interactive form based on the existing neighborhoods and streets of Bilbao, for better confirmation of the place, a small map showing the exact situation of the door will be displayed, if the information is correct, a few setting should be configured like the privacy level of the community allowing to protect the access with a password or adding few lines of welcome message to new members via mail.
 
-Each user can belong to more than one community of neighbors, considering that may want to be aware of the community of their usual residence and for example the holidays.
+Each user can belong to more than one neighborhood, considering that some users may want to be aware of their usual community residence and the rented property one.
 
-Each neighborhood community represented in the application has its own home page where you can see the cork with warnings or information notes published and a lower table divided into two sections called Requests and Offers where will be displayed the posts created by members of that community.
+Each neighborhood community represented in the application has its own home page where users can see the pinboard with warnings or information notes published, and a lower table divided in two sections called Requests and Offers where will be displayed the posts created by members of that community.
 
-From the home page of each community, the user can create a request for a product or service or to publish an offer in which can specify whether you want to get paid or offer the service for free.
+From the home page of each community, the user can create a request for products, services or publish an offer specifying whether he wants to get paid or offer the service for free.
 
-To ensure some confidence when working with another user, a karma level system represented by a numeric value that is higher or lower by other users past reviews determine the trust level of each user.
+To ensure some confidence when users work with each others, a karma level system represented by a numeric value that is higher or lower by other users past reviews determine the trust level of each.
+
+The home page  also allow access to statistics about logged user in the platform, displaying charts with number of offers and request has published or attended and recover options for old publications to allow periodical posts of the same issue.
 
 \subsection{Limitations}
-Auzonet never going to manage payments among individuals, beyond the simple fact of a history of interactions between requests and offers between neighbors. Interested parties should agree on a transaction which methods used to pay if they require and have the complete responsibility for ensuring the successful transaction in a legal economic frame.
+Auzonet never going to manage payments among individuals, beyond the simple fact of interactions between requests and offers history among neighbors. Interested parties should agree on transaction methods by their own with complete responsibility for ensuring the successful transaction in a legal economic frame.
 
-Will be the users themselves who in case to use the platform will have to register their portal in the section for creating communities to make use of the software functions.
+Will be the users themselves, who in case to use the platform will have to register their neighborhood once they sign up for the first time in the service to get benefit of the software features.
 
-There are no plans to develop applications with the native development kit of each mobile operating system for avoiding multiple processes of simultaneous development during the creation of the mobile application, web technologies to deploy the application available on the market will be used.
+There are no plans to develop applications with smartphones native development kit of each mobile operating system for avoid multiple simultaneous developments during the creation of  mobile application, only web technologies currently available will be used.
 
 \section{Description of the embodiment}
 \subsection{Development methodology}
 The realization of Auzonet is separated in two main functional units, first will focus on finalizing the web application and then mobile app.
 
-As can be seen in the figure \ref{fig:edt} the development phases are going to be the following:
+As can be seen in the figure \ref{fig:edt} development phases are going to be the following:
 \begin{description}
 	\item[Requirements:] Analysis of the main functional requirements.
 	\item[Design:] Design data and logical structures needed for running the application and approach to the aesthetic design of the solution.
