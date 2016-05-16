@@ -1,5 +1,6 @@
 \documentclass{DeustoFDP}
 \usepackage{hologo} % Paquete no necesario. Borrar en la memoria final al sustituir el texto
+
 \hypersetup{
 pdfauthor={Aitor Brazaola Vicario},
 pdftitle={Final Degree Project - Aitor Brazaola. University of Deusto},
@@ -226,160 +227,52 @@ Tasks are classified as follows:
 
 Sometimes, certain tasks can come from external sources such as suggestions for improvement or major deficiencies found in a test, in that case, they are added to the list with the corresponding label and prioritized according to their importance.
 \subsection{Intermediate products}
-\begin{itemize}
-	\item Web application.
-	\item Public data integrated via WeLive platform.
-	\item Mobile application.
-\end{itemize}
+There are clearly two intermediate products clearly defined for this project:
+
+\begin{description}
+	\item[Web application] Is the main application developed along the project, should be accessible from all web browsers in the market and responsive design for fitting on all screen sizes. 
+	\item[Mobile application] Is a wrapper of the main application, taking advantage of the responsive design, the mobile application should provide a native-like environment for iOS and Android.
+\end{description}
+
+Both applications are the final product, the idea is provide a full stack platform working from the first day on web and mobile, with same user experience and without losing features. 
 \newpage
+
 \begin{figure}[H]
 	\centering
 	\includegraphics{fig/EDT}
 	\caption{EDT}\label{fig:edt}
 \end{figure}
 \subsection{Main tasks}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/1}
-	\caption{Task 1}
-	\label{fig:t1}
-\end{figure}
+\subsubsection{T1 - Requirement analysis}
+A detailed analysis will be performed for understanding all the features and limitations of the platform, how has to integrate Open Data sources and how might be look and feel for satisfy all user needs in a wide range of ages.
+\subsubsection{Web application}
+\begin{description}
+	\item[T2 - Web application prototype:] Create a low fidelity prototype showing the final application look and feel.
+	\item[T3 - Data modeling:] Design how the data is being stored and relationships between tables. 
+	\item[T4 - Software design:] Develop the logical base structure of all classes and packages that would be the architecture of the application on server side.
+	\item[T5 - Core features implementation:] Implementation of exchange features between users such as offering and requesting functions.
+	\item[T6 - Mail notifications:] Implement a notification system via email with custom link to actions with friendly look and feel.
+	\item[T7 - Security assessment:] Fix data leaks via url cross-site scripting or non allowed access to other users data changing url patterns.
+	\item[T8 - Friendly error messages:] Create user friendly error messages integrated on platform's design to provide user feedback.
+	\item[T9 - Internationalization:] Make application available in english and spanish.
+	\item[T10 - Server deployment:] Deploy the application on a server for allow the access via internet.
+	\item[T11 - WeLive integration:] Implement WeLive API calls to request Bilbao's Open Data required in community set up process.
+	\item[T12 - Fix high density display bugs:] Fix some visual error when the application is loaded on devices with high density displays, like retina MacBooks or iPads.
+\end{description}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/21}
-	\caption{Task 2.1.}
-	\label{fig:t21}
-\end{figure}
+\subsubsection{Mobile application}
+\begin{description}
+	\item[T13 - Mobile application prototype:]
+	\item[T14 - Research of technology selected:] 
+	\item[T15 - Implementation:] 
+\end{description}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/22}
-	\caption{Task 2.2.}
-	\label{fig:t22}
-\end{figure}
+\subsubsection{T16 - Testing}
+The platform access will be distributed in a private beta testing to users from different ages to gather feedback of usability improvements and bug reporting. 
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/23}
-	\caption{Task 2.3.}
-	\label{fig:t23}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/24}
-	\caption{Task 2.4.}
-	\label{fig:t24}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/25}
-	\caption{Task 2.5.}
-	\label{fig:t25}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/26}
-	\caption{Task 2.6.}
-	\label{fig:t26}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/27}
-	\caption{Task 2.7.}
-	\label{fig:t27}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/28}
-	\caption{Task 2.8.}
-	\label{fig:t28}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/29}
-	\caption{Task 2.9.}
-	\label{fig:t29}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/210}
-	\caption{Task 2.10.}
-	\label{fig:t210}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/212}
-	\caption{Task 2.12.}
-	\label{fig:t212}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/213}
-	\caption{Task 2.13.}
-	\label{fig:t213}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/214}
-	\caption{Task 2.14.}
-	\label{fig:t214}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/215}
-	\caption{Task 2.15.}
-	\label{fig:t215}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/216}
-	\caption{Task 2.16.}
-	\label{fig:t216}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/31}
-	\caption{Task 3.1.}
-	\label{fig:t31}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/32}
-	\caption{Task 3.2.}
-	\label{fig:t32}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/33}
-	\caption{Task 3.3.}
-	\label{fig:t33}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{fig/Tareas/4}
-	\caption{Task 4.}
-	\label{fig:t4}
-\end{figure}
 \section{Organization}
 \subsection{Organizational structure}
-The organization as can be seen in the figure \ref{fig:esquemaorganizacion}, is composed by the Project manager, and the student who perform the roles of programmer and designer.
+The organization as can be seen in the figure \ref{fig:esquemaorganizacion}, is composed by the Project manager, WeLive development team experts to help in WeLive integration process and the student who perform the roles of programmer and designer.
 
 \begin{figure}[h]
 	\centering
@@ -388,17 +281,10 @@ The organization as can be seen in the figure \ref{fig:esquemaorganizacion}, is 
 	\label{fig:esquemaorganizacion}
 \end{figure}
 
-Every two weeks there will be a session for reviewing the work done and the necessary changes will be assessed and if the product is already to consider as a functional unit.
+Every month will take place a session for review the work done and determine the status of development, in this sessions it will be assess if are necessary to change some functionality or bugs.
 
-\newpage
-The main assistants will be the programmer and the project manager, the details exposed will be gathered in the meeting act, the template used for this proposal can be seen in the figure \ref{fig:Actareunion}, and will be prioritized over the rest of the features in the pipeline, avoiding develop in an incorrect way.
+The main assistants will be the programmer and project manager, details exposed will be gathered, and requested changes will be prioritized over the rest of features in the pipeline.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/Actareunion}
-	\caption[Template meeting act]{Template meeting act}
-	\label{fig:Actareunion}
-\end{figure}
 \subsection{Human resources plan}
 The student will be the unique physical person in the development team but will be necessary the acquisition of various roles along the project, it is true that un punctual cases can be helped by other mates of the laboratory where is working on, but the most of the project is developed by him.
 
@@ -410,7 +296,9 @@ Following, there are listed the main roles played by the student:
 	\item[Designer:] It is commissioned to design a user interface that fits all available screens and make the application accessible to people with disabilities and ensure a satisfactory user experience and consistent navigation between different sections of the web.
 \end{description}
 
-In addition to the student, the project has its project manager who is responsible for approving all changes and proposals that the student considers interesting to improve the product, will be present at the meetings and will be responsible for marking the milestone dates.
+When WeLive API integration development will being taking place, programmer will have help from members of WeLive development working in the same DeustoTech laboratory, WeLive team collaboration is crucial for detecting failures on a real third party application and ensure an optimal implementation of this programming interface.
+
+In addition, project manager is responsible for approving all changes and proposals considered by the student to improve the product. Project manager will be present at meetings and will be responsible for setting milestone dates.
 
 \chapter{Planning}\label{cha:planning}
 \section{Precedence diagram}
@@ -473,11 +361,14 @@ The following estimation is based on the different profiles of the total 255 hou
 	\item 4. Tests: 12 hours.
 \end{itemize}
 \chapter{Budget}\label{cha:budget}
-The budget will take into account only the hours of work because the necessary equipments are already owned by the programmer and DeustoTech facilities where the project is located.
+This section list all devices and human resources involved in project development, all software used is Open Source or with student licenses free of charge, so there are no costs related with them.
 
+Internet connection, power usage and server architecture is provided by DeustoTech without specific cost for the project.
+
+\section{Human resources}
 \begin{table}[H]
 	\centering
-	\caption{Budget by profile.}\label{tab:budgetprofile}
+	\caption{Human resource budget.}\label{tab:budgetprofile}
 	\begin{tabular}{cccc}
 		\toprule
 		\textbf{Profile} & \emph{Workload} & \emph{Cost} & \emph{Price}\\
@@ -490,6 +381,24 @@ The budget will take into account only the hours of work because the necessary e
 		\bottomrule
 	\end{tabular}
 \end{table}
+
+\section{Hardware}
+\begin{table}[H]
+	\centering
+	\caption{Hardware budget.}\label{tab:budgethardware}
+	\begin{tabular}{cccc}
+		\toprule
+		\textbf{Hardware} & \emph{Price}\\
+		\midrule
+		Apple MacBook Pro  & 1.119€ \\
+		Apple iPhone 6 & 639€ \\
+		Lenovo ThinkVision T2224pD & 165€ \\
+		
+		TOTAL & & & 1.923€\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
 
 \chapter{Development}\label{cha:development}
 The main section of the development is going to be for the web application, the part of the project with more effort, and technologies involved in development, then, the mobile application as a derivative product from the web app will be explained in detail reasoning the technologies used with their advantages and drawbacks.
@@ -558,6 +467,22 @@ Django is a modular web framework extensible via applications, which are basical
 	\item[django-favicon:] For generating and inject the appropriate sizes of favicons in different browsers. 
 \end{description}
 
+\subsubsection{Mobile application}
+Mobile application has been designed as a wrapper of web version, this decision is because for developing native applications for all mobile operating systems require a Restful API and independent developments that could not fit in project's calendar.
+
+For performing this conversion, Apache Cordova solution has been used, being the perfect choice thanks to the Apache Cordova Open Source license.
+
+The strucutre of an application made with Apache Cordova is the represented in figure \ref{fig:cordova_workflow}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/cordova_workflow}
+\caption[Apache Cordova structure]{Apache Cordova structure}
+\label{fig:cordova_workflow}
+\end{figure}
+
+Apache Cordova allow access to native hardware features of the device from web technologies and provide customization of the application environment such as loading screen and native icon.
+
 TODO: A schema of how the software layers are on top o the other.
 
 \subsubsection{Back-end}
@@ -579,7 +504,17 @@ When a new user is registered in Auzonet, a tiny wizard starts asking him if is 
 
 A set of subsequent AJAX calls to WeLive REST API are performed for obtaining the data.
 
-TODO: Show the code responsible of getting WeLive Data.
+\begin{listing}\centering
+	\begin{minipage}{.4\textwidth}
+		\begin{minted}[linenos=true]{c}
+			int main(){
+			printf("hello world");
+			return 0;
+			}
+		\end{minted}
+	\end{minipage}
+	\caption{\enquote{Hola mundo} en C.}\label{lst:holamundo}
+\end{listing}
 
 During the registration process, an email is sent to the user for confirming the set up of the new account and another one is sent when the community process creation has finished and the user belongs to it automatically.
 
@@ -607,10 +542,7 @@ All changes and requests received during the development process of the project 
 	\item If the changes are technically feasible and fit the budget and schedule, proceed to implementation.
 	\item Modify the work plan and budget.
 \end{enumerate}
-
-\section{Responsive design and mobility}
 \section{Technology}
-\subsection{Hardware}
 \subsection{Software}
 The software involved in the development of this project is structured in the following blocks:
 \begin{itemize}
@@ -655,7 +587,13 @@ Twitter Bootstrap is an easy way to provide good user experience through good us
 
 Some parts of the application are fully designed by the student, like the landing page or logo, but getting benefit of all the CSS classes designed by professionals in Twitter Bootstrap framework, help to get a more sophisticated and advanced look to the application.
 
-TODO: logo de Twitter Bootstrap   
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/bootstrap-3}
+\caption[Twitter Bootstrap]{Twitter Bootstrap}
+\label{fig:bootstrap-3}
+\end{figure}
+
 
 {\large Bower}
 
@@ -663,7 +601,13 @@ Today, the amount of libraries involved in a web development is huge, and keep t
 
 As similar UNIX tools like apt-get on Linux, Bower unify the package dependence for web developments providing a same file structure for avoiding library reference errors in the HTML pages and keep a detailed log of all the operations related.
 
-TODO: logo de Bower
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\linewidth]{fig/Bower}
+\caption[Bower logo]{Bower logo}
+\label{fig:Bower}
+\end{figure}
+
 
 \subsubsection{Web application: Back-end}
 Unlike the front-end there are high variety of programming languages and frameworks for server side, the most extended is PHP but the learning proposal of the project was learn building a real application a new language and framework for web development, PHP is a language with the student already had used during the degree and researching on internet, others with high capabilities are growing.
@@ -678,7 +622,13 @@ Along the research, the following technologies were taken account:
 
 Finally, Python was selected because the clean syntax and the philosophy of Django framework to avoid repetition in the most used web tasks and their solid community.
 
-TODO: Django logo
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{fig/python-django}
+\caption[Django and Python logos]{Django and Python logos}
+\label{fig:python-django}
+\end{figure}
+
 
 The documentation site of Django framework is clear and well structured and provides API's for all the common needs for every web development like an ORM for database mapping or security features, moreover, is possible to build your own custom functionalities on top of them.
 
@@ -687,16 +637,34 @@ For providing a native environment to Auzonet in mobile platforms the native SDK
 
 Apache Cordova is a framework for create mobile applications using HTML, CSS and JavaScript gaining access to native features of the hardware like accelerometer or camera, as project from Apache Foundation, is licensed under Apache license that authorizes to use free of charge the software.
 
-TODO: Apache logo
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\linewidth]{fig/apache}
+\caption[Apache foundation logo]{Apache foundation logo}
+\label{fig:apache}
+\end{figure}
+
 
 Apache Cordova allows to get advantage of all the existing software written in the web application and port the experience to a native application distributable via mobile stores and porting to Android, iOS or Windows Phone.
 
 For creating the application, has been necessary create artworks for different screen sizes and device orientations of the icon and splash screen.
 
-TODO: Put Apache Cordova logo.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\linewidth]{fig/cordova}
+\caption[Apache Cordova logo]{Apache Cordova logo}
+\label{fig:cordova}
+\end{figure}
+
 \section{Tools}
 \subsection{Code editor}
-TODO: Put an image of atom
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/atom}
+\caption[Atom editor logo]{Atom editor logo}
+\label{fig:atom}
+\end{figure}
+
 The code editor used along the project for writing Python code and HTML front-end is Atom by GitHub.
 
 Atom is an application built with web technologies and open source that allow to be modified by the community, because of that, the wide variety of plug-ins such as language syntax support or Git integrations is huge.
@@ -707,20 +675,45 @@ Atom features like embedded browser and terminal, has become a huge productivity
 \subsection{Image editor}
 Though most of the visual assets are provided by Twitter Bootstrap, others like logo and mobile icons and splash screens has been created using a image editor.
 
-TODO: Pixelmator image
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\linewidth]{fig/pixelmator}
+\caption[Pixelmator logo]{Pixelmator logo}
+\label{fig:pixelmator}
+\end{figure}
+
 
 Pixelmator is a Mac application based on the popular Adobe Photoshop with less features but enough to design and prepare the visual assets used in Auzonet. Was selected because the student already owned a license and is easy to use.
 
 \subsection{Operating system}
-TODO: FOTO OSX
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/osxelcapitan}
+\caption[OS X El Capitan logo]{OS X El Capitan logo}
+\label{fig:osxelcapitan}
+\end{figure}
+
+
 All the development process has take place on an Apple MacBook Pro of early 2011, property of the student with OS X El Capitan version 10.11, the UNIX solid architecture and good user experience became the perfect choice for being the main computer used for programming.
 
 The UNIX-like capabilities of this operating system has become an advantage for running almost every tool involved in a web development process.
 \subsection{Version control}
-TODO: LOGO GIT
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{fig/git}
+\caption[GIT logo]{GIT logo}
+\label{fig:git}
+\end{figure}
+
 Git has been the software responsible of keep version control of all the files of the application. Git is an open-source software developed by Linus Torvalds widely used in the industry, allows to keep a central repository and create branches separated from the main development code.
 
-TODO: GITHUB LOGO
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/github-logo}
+\caption[GitHub logo]{GitHub logo}
+\label{fig:github-logo}
+\end{figure}
+
 GitHub is a service created for hosting Git repositories and allow store public and private code, thanks to the student pack offered by the company, code has been hosted in a private repository for free that, otherwise would be needed a paid subscription.
 \subsection{Testing}
 All the tests performed has been focused y the end user perspective, along two weeks the application was released under beta status to a closed group of people closer to the student for making a simulation of real usage.
