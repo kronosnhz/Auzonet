@@ -128,7 +128,7 @@ Firstly, is important to analyze how is categorized Open Data. Tim Bernsers-Lee,
 \label{fig:5starod}
 \end{figure}
 
-As we can see in the image \ref{fig:5starod}, Open Data is classified by how data is accessible by human or computers. Along this project, the data source is categorized as three stars because is publicly available of Bilbao's council data web platform \ref{BilbaoOpenData} in structured format without proprietary extension\footnote{Bilbao's council data is provided in CSV and later converted to JSON via WeLive API}. 
+As we can see in the image \ref{fig:5starod}, Open Data is classified by how data is accessible by human or computers. Along this project, the data source is categorized as three stars because is publicly available of Bilbao's council data web platform \cite{BilbaoOpenData} in structured format without proprietary extension\footnote{Bilbao's council data is provided in CSV and later converted to JSON via WeLive API}. 
 
 Although it is true that currently, many public entities make available this data in digital format only by the look of transparency and are unaware of the true value of themselves, is one of the motivation of this project, in fact, have been moments during the development in which the data found poorly formatted and have had to request modifications to the agencies involved.
 
@@ -262,9 +262,9 @@ A detailed analysis will be performed for understanding all the features and lim
 
 \subsubsection{Mobile application}
 \begin{description}
-	\item[T13 - Mobile application prototype:]
-	\item[T14 - Research of technology selected:] 
-	\item[T15 - Implementation:] 
+	\item[T13 - Mobile application prototype:] Create a low profile prototype of the application user interface.
+	\item[T14 - Research of technology selected:] Research available technologies for porting web applications to mobile platforms and learn how to use them.
+	\item[T15 - Implementation:] Develop the application logic.
 \end{description}
 
 \subsubsection{T16 - Testing}
@@ -314,17 +314,27 @@ The project development is going to happen during the working time in DeustoTech
 	\item[Programmer:] Person in charge of programming the control structures of the platform.
 	\item[Designer:] Person in charge of the final appearance with the end user will interact.
 	\item[Project manager:] Person in charge of monitoring the progress of the project and its organization.
-	\item[Experto en plataforma WeLive:] MoreLab team member participating in the development of technical advice WeLive platform for the team.
+	\item[Expert in WeLive platform:] MoreLab team member involved in WeLive development.
 \end{description}
 
 \newpage
 \section{GANTT diagram}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=340pt]{fig/gantt}
-	\caption{GANTT diagram}\label{fig:gantt}
-\end{figure}
-
+\begin{center}
+	\includegraphics[width=0.9\linewidth]{fig/g1}
+\end{center}
+\begin{center}
+	\includegraphics[width=0.9\linewidth]{fig/g2}
+\end{center}
+\begin{center}
+	\includegraphics[width=0.9\linewidth]{fig/g3}
+\end{center}
+\begin{center}
+	\includegraphics[width=0.9\linewidth]{fig/g4}
+\end{center}
+\begin{center}
+	\includegraphics[width=0.9\linewidth]{fig/g5}
+\end{center}
+\newpage
 \section{Workload estimation by profile}
 The following estimation is based on the different profiles of the total 255 hours:
 \begin{description}
@@ -483,8 +493,6 @@ The strucutre of an application made with Apache Cordova is the represented in f
 
 Apache Cordova allow access to native hardware features of the device from web technologies and provide customization of the application environment such as loading screen and native icon.
 
-TODO: A schema of how the software layers are on top o the other.
-
 \subsubsection{Back-end}
 Auzonet, has some administration functionality on a separate web in the same server, accessible in the URL http://apps.morelab.deusto.es/auzonet/admin with an admin account, there are the management console in which is possible to manage all tables on the database schema.
 
@@ -522,12 +530,15 @@ After the portal selection process, the user can set a password to the community
 
 From the user perspective that joins into a existing community, can select the community at the beginning of the process after registering from a drop down showing all registered ones, if the community is private, a password will be prompt, once the join process is finished, will receive an email with a custom welcome message set by the creator of the community.
 
-TODO: Add a chart of the registration flow process.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/Registerflow}
+\caption[Registration procedure]{Registration procedure}
+\label{fig:Registerflow}
+\end{figure}
 
 \subsection{Deployment considerations}
 As any other Django developed application, some steps have to be followed for setting a clean installation of Auzonet in a server
-
-TODO: Put a network map
 
 During the development on the student's laptop, the application has been using an SQlite database running on a local server, this type of database is inadequate because the technical limitations of performance, for ensuring a fast and reliably data access a MySQL database. 
 
@@ -583,7 +594,7 @@ The following JavaScript libraries has been used for improve the language capabi
 
 {\large Twitter Bootstrap}
 
-Twitter Bootstrap is an easy way to provide good user experience through good user interface already built in CSS classes already created by experts in design, moreover, all their CSS classes are responsive and prepared for represent contents in wide variety of screen sizes using media queries.
+Twitter Bootstrap \cite{Twitterbootstrap} is an easy way to provide good user experience through good user interface already built in CSS classes already created by experts in design, moreover, all their CSS classes are responsive and prepared for represent contents in wide variety of screen sizes using media queries.
 
 Some parts of the application are fully designed by the student, like the landing page or logo, but getting benefit of all the CSS classes designed by professionals in Twitter Bootstrap framework, help to get a more sophisticated and advanced look to the application.
 
@@ -630,7 +641,7 @@ Finally, Python was selected because the clean syntax and the philosophy of Djan
 \end{figure}
 
 
-The documentation site of Django framework is clear and well structured and provides API's for all the common needs for every web development like an ORM for database mapping or security features, moreover, is possible to build your own custom functionalities on top of them.
+The documentation site of Django framework \cite{Djangodocs} is clear and well structured and provides API's for all the common needs for every web development like an ORM for database mapping or security features, moreover, is possible to build your own custom functionalities on top of them.
 
 \subsubsection{Mobile application}
 For providing a native environment to Auzonet in mobile platforms the native SDK of each platfor was desestimated due the limited resources for developing the project, thanks to web technologies and the responsive user interface designed in the web application, Apache Cordova framework has been used for provide a native look and feel on the common mobile operating systems.
@@ -645,7 +656,7 @@ Apache Cordova is a framework for create mobile applications using HTML, CSS and
 \end{figure}
 
 
-Apache Cordova allows to get advantage of all the existing software written in the web application and port the experience to a native application distributable via mobile stores and porting to Android, iOS or Windows Phone.
+Apache Cordova \cite{Cordova} allows to get advantage of all the existing software written in the web application and port the experience to a native application distributable via mobile stores and porting to Android, iOS or Windows Phone.
 
 For creating the application, has been necessary create artworks for different screen sizes and device orientations of the icon and splash screen.
 
@@ -665,7 +676,7 @@ For creating the application, has been necessary create artworks for different s
 \label{fig:atom}
 \end{figure}
 
-The code editor used along the project for writing Python code and HTML front-end is Atom by GitHub.
+The code editor used along the project for writing Python code and HTML front-end is Atom by GitHub \cite{atom}.
 
 Atom is an application built with web technologies and open source that allow to be modified by the community, because of that, the wide variety of plug-ins such as language syntax support or Git integrations is huge.
 
@@ -705,7 +716,7 @@ The UNIX-like capabilities of this operating system has become an advantage for 
 \label{fig:git}
 \end{figure}
 
-Git has been the software responsible of keep version control of all the files of the application. Git is an open-source software developed by Linus Torvalds widely used in the industry, allows to keep a central repository and create branches separated from the main development code.
+Git \cite{git} has been the software responsible of keep version control of all the files of the application. Git is an open-source software developed by Linus Torvalds widely used in the industry, allows to keep a central repository and create branches separated from the main development code.
 
 \begin{figure}[h]
 \centering
@@ -714,7 +725,7 @@ Git has been the software responsible of keep version control of all the files o
 \label{fig:github-logo}
 \end{figure}
 
-GitHub is a service created for hosting Git repositories and allow store public and private code, thanks to the student pack offered by the company, code has been hosted in a private repository for free that, otherwise would be needed a paid subscription.
+GitHub \cite{Github} is a service created for hosting Git repositories and allow store public and private code, thanks to the student pack offered by the company, code has been hosted in a private repository for free that, otherwise would be needed a paid subscription.
 \subsection{Testing}
 All the tests performed has been focused y the end user perspective, along two weeks the application was released under beta status to a closed group of people closer to the student for making a simulation of real usage.
 
@@ -770,16 +781,84 @@ Although the application is fully functional and complete, there are some featur
 
 All these features are really plausible to implement due the actual architecture of the platform.
 
-\chapter{Bibliography}\label{cha:bibliography}
 \printbibliography[heading=bibintoc]
 \chapter{Acronyms}\label{cha:acronyms}
 \begin{description}
-	\item[label] description
+	\item[App] Application
+	\item[API] Application Programming Interface
+	\item[CSV] comma-separated values
+	\item[JSON] JavaScript Object Notation
+	\item[GB] GigaByte
+	\item[TB] TeraByte
+	\item[GHz] GigaHertz
+	\item[WSGI] Web Server Gateway Interface
+	\item[HTTP] Hypertext Transfer Protocol 
+	\item[AJAX] Asynchronous JavaScript And XML
+	\item[CSS] Cascading Style Sheets
 \end{description}
 
 \appendix
 
-\chapter{GANTT}\label{cha:gantt}
+\chapter{Mockups}\label{cha:mockups}
+The following mockups represent how was prototyped the application at beginning of the project.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/mockups/landing2}
+\caption[Landing page]{Landing page}
+\label{fig:landing2}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/mockups/landing}
+\caption[Login form]{Login form}
+\label{fig:landing}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/mockups/register}
+\caption[Register form]{Register form}
+\label{fig:register}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/mockups/wizard}
+	\caption[Welcome wizard]{Welcome wizard}
+	\label{fig:wizard}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/mockups/newcommunity}
+	\caption[New community]{New community}
+	\label{fig:newcommunity}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/mockups/home}
+\caption[Homepage]{Homepage}
+\label{fig:home}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/mockups/newoffer}
+\caption[New offer form]{New offer form}
+\label{fig:newoffer}
+\end{figure}
+
+\chapter{Initial data model}
+Although this was the initial data model, some changes has been performed along the project for improving data integrity and performance.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/Database}
+\caption[Initial data model]{Initial data model}
+\label{fig:Database}
+\end{figure}
 
 
 \backmatter

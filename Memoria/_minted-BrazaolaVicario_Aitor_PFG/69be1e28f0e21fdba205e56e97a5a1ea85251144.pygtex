@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{Iint} \PYG{n+nx}{main}\PYG{p}{()\PYGZob{}}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{Iprintf}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}hello world\PYGZdq{}}\PYG{p}{);}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{Ireturn} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nx}{I}\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
