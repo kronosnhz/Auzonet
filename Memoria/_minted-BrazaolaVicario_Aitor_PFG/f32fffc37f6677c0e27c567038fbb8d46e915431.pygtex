@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if} \PYG{p}{(}\PYG{n+nx}{navigator}\PYG{p}{.}\PYG{n+nx}{connection}\PYG{p}{.}\PYG{n+nx}{type} \PYG{o}{==} \PYG{n+nx}{Connection}\PYG{p}{.}\PYG{n+nx}{NONE}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+  \PYG{n+nx}{navigator}\PYG{p}{.}\PYG{n+nx}{notification}\PYG{p}{.}\PYG{n+nx}{alert}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}An internet connection is required to continue\PYGZsq{}}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{p}{\PYGZob{}}
+  \PYG{n+nb}{window}\PYG{p}{.}\PYG{n+nx}{location}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}http://apps.morelab.deusto.es/auzonet/\PYGZdq{}}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
