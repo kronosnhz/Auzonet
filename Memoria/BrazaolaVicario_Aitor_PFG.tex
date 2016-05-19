@@ -155,11 +155,36 @@ WeLive is an EU H2020 funded project, addressing ICT-enabled open government –
 
 The project is conceived to transform the current approach towards e-government by providing a new open model oriented towards the design, production and deployment of public services based in the collaboration of a quadruple helix, i.e. research organizations, companies, public administrations and citizens. WeLive will provide a novel We-Government ecosystem of tools (Live) built on the Open Data, Open Services and Open  Innovation paradigms that is easily deployable in different public administrations and which promotes co-innovation and co-creation of personalized public services through public-private partnership and the  empowerment of all the stakeholders to actively take part in the value-chain of a municipality or a territory. \cite{WeLive}
 
+With the increased focus on sustainability and development of Smart Cities has come the increased focus on more inclusive public administration, i.e. public administration that incorporates citizens into the planning of development activities by providing different channels enabling engagement of citizens on various matters. This has resulted in creation of the Living Labs, cities used as places where new services can be deployed and tested in a real environment, capturing the feedback from the citizens.
+
 The city of Bilbao, is one of the four pilot cities selected for the project, thanks to the process of urban regeneration addressing the physical decline of the city after being highly dependent of shipbuilding and steel industry.
 
 WeLive initiative in Bilbao is being carried out by several companies and research centers where University of Deusto and DeustoTech belongs to it.
 
-This project, attend one of the proposals made in smart cities context and tries to add value to Bilbao's citizenship experience.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/weliveconsortium}
+\caption[WeLive consortium]{WeLive consortium}
+\label{fig:weliveconsortium}
+\end{figure}
+
+
+WeLive aims to develop an innovative and open technological framework to involve citizens, public administrations (P.A.) and local businesses and companies into the innovation process. Specifically, the WeLive will enable:
+\begin{itemize}
+	\item Citizens, companies and public administration to express their needs and elaborate new ideas for services and apps and to choose the most promising ones
+	\item Companies to develop basic building blocks that emerge from the needs expressed by the selected ideas
+	\item Public Administration and Citizens (final users) to release open data that emerge from the needs expressed by the selected ideas
+	\item Citizens and P.A. to fund companies to transform popular ideas into Applications, using the building blocks (open service and open data) available in the marketplace.
+\end{itemize}
+
+Objectives are broken down into smaller Societal (SO) and technological (TO) objectives, as shown in figure \ref{fig:welive3}.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/welive3}
+\caption[WeLive objectives]{WeLive objectives}
+\label{fig:welive3}
+\end{figure}
+
 
 \section{Rationale}
 Internet social networks are quite common today, and neighborhood based ones are not an exception, this project aims to get the best advantages of social networks and Open Data, creating a platform to exchange goods, services or information among neighbors.
@@ -243,13 +268,7 @@ There are clearly two intermediate products clearly defined for this project:
 \end{description}
 
 Both applications are the final product, the idea is provide a full stack platform working from the first day on web and mobile, with same user experience and without losing features. 
-\newpage
 
-\begin{figure}[H]
-	\centering
-	\includegraphics{fig/EDT}
-	\caption{EDT}\label{fig:edt}
-\end{figure}
 \subsection{Main tasks}
 \subsubsection{T1 - Requirement analysis}
 A detailed analysis will be performed for understanding all the features and limitations of the platform, how has to integrate Open Data sources and how might be look and feel for satisfy all user needs in a wide range of ages.
@@ -277,6 +296,15 @@ A detailed analysis will be performed for understanding all the features and lim
 
 \subsubsection{T16 - Testing}
 The platform access will be distributed in a private beta testing to users from different ages to gather feedback of usability improvements and bug reporting. 
+
+\newpage
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/EDT}
+\caption[EDT]{EDT}
+\label{fig:EDT}
+\end{figure}
+
 
 \section{Organization}
 \subsection{Organizational structure}
@@ -311,16 +339,16 @@ In addition, project manager is responsible for approving all changes and propos
 \chapter{Planning}\label{cha:planning}
 \section{Precedence diagram}
 \begin{center}
-\includegraphics[width=0.9\linewidth]{fig/precedence-1}
+\includegraphics[width=1\linewidth]{fig/precedence-1}
 \end{center}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{fig/precedence-2}
+	\includegraphics[width=1\linewidth]{fig/precedence-2}
 \end{center}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{fig/precedence-3}
+	\includegraphics[width=1\linewidth]{fig/precedence-3}
 \end{center}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{fig/precedence-4}
+	\includegraphics[width=1\linewidth]{fig/precedence-4}
 \end{center}
 \newpage
 
@@ -336,19 +364,19 @@ The project development is going to happen during the working time in DeustoTech
 \newpage
 \section{GANTT diagram}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{fig/g1}
+	\includegraphics[width=1\linewidth]{fig/g1}
 \end{center}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{fig/g2}
+	\includegraphics[width=1\linewidth]{fig/g2}
 \end{center}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{fig/g3}
+	\includegraphics[width=1\linewidth]{fig/g3}
 \end{center}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{fig/g4}
+	\includegraphics[width=1\linewidth]{fig/g4}
 \end{center}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{fig/g5}
+	\includegraphics[width=1\linewidth]{fig/g5}
 \end{center}
 \newpage
 \section{Workload estimation by profile}
@@ -558,7 +586,7 @@ The strucutre of an application made with Apache Cordova is the represented in f
 \end{figure}
 
 Apache Cordova allow access to native hardware features of the device from web technologies and provide customization of the application environment such as loading screen and native icon.
-
+\newpage
 \subsubsection{Back-end}
 Auzonet, has some administration functionality on a separate web in the same server, accessible in the URL http://apps.morelab.deusto.es/auzonet/admin with an admin account, there are the management console in which is possible to manage all tables on the database schema.
 
@@ -572,7 +600,15 @@ Some features considered advanced, are only possible to perform here, contacting
 \end{itemize}
 
 In the last chapter are included ways to implement some of the mentioned options in the public user interface, but by the moment, only the features that has been considered essential has been implemented.
-
+\newpage
+\subsubsection{Database schema}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/DatabaseUML}
+\caption[Database schema]{Database schema}
+\label{fig:DatabaseUML}
+\end{figure}
+\newpage
 \subsubsection{User registration process}
 When a new user is registered in Auzonet, a tiny wizard starts asking him if is searching an already created community or wants to register one for the first time, in case of registering a new one, the form displayed will gather data directly from Bilbao's council public data for showing the neighbors selection drop downs.
 
@@ -641,18 +677,24 @@ From the user perspective that joins into a existing community, can select the c
 
 \newpage
 \subsection{Code repository}
-Although the first month of the development all code files were stored and edited in the programmer's computer, the code was uploaded to a private repository on GitHub service.
+For keeping track of all changes during development and facilitate the implementation of certain features without affecting working code, all files has been tracked using Git version control system and the repository has been hosted in Github service.
+
+Figure \ref{fig:githubhome} shows an screenshot of the repository appearance and figure \ref{fig:githubactivity} the activity during the development dates.
+
+During the first months, all code was stored in programmer's laptop, only when existing code was executable was uploaded to repository as first commit.
+
+The URL of the repository is https://github.com/kronosnhz/Auzonet
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\linewidth]{fig/githubhome}
+\includegraphics[width=0.8\linewidth]{fig/githubhome}
 \caption[Auzonet on GitHub]{Auzonet on GitHub}
 \label{fig:githubhome}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\linewidth]{fig/githubactivity}
+\includegraphics[width=0.8\linewidth]{fig/githubactivity}
 \caption[Repository activity]{Repository activity}
 \label{fig:githubactivity}
 \end{figure}
@@ -663,6 +705,18 @@ As any other Django developed application, some steps have to be followed for se
 During the development on the student's laptop, the application has been using an SQlite database running on a local server, this type of database is inadequate because the technical limitations of performance, for ensuring a fast and reliably data access a MySQL database. 
 
 "Olentzero" as previously mentioned already have installed typical software used by Web Applications, and there is no need to install a new instance of it, only creating an specific schema for Auzonet and configure the settings file for accessing it is required. 
+
+
+\subsubsection{Deployment architecture}
+Auzonet core functionalities are going to use WeLive API from Olentzero server,in the figure \ref{fig:cordova} can be seen a visual representation of how the application is deployed.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/deployment}
+\caption[Deployment schema]{Deployment schema}
+\label{fig:deployment}
+\end{figure}
+
 
 \subsection{Issue management}
 All changes and requests received during the development process of the project will be managed through the following procedure:
@@ -694,11 +748,19 @@ HTML5 also come with more improvements that makes the template code cleaner easi
 
 {\large CSS3}
 
+Cascading Style Sheets, or CSS, are a way to change the look of HTML and XHTML web pages. CSS was designed by the W3C, and is supported well by most modern web browsers. The current version of CSS is CSS 2. CSS version 3 is currently being worked on. It will introduce new properties like border-radius. \cite{css}
+
+One advantage to using CSS is a web page can still be displayed and understood, even if the CSS is not working or removed.
+
 For achieving a clear structure in the front end code, taking account the importance of getting an attractive design, the code responsible of all the visuals has separated in different external CSS files, actually, the most part of the CSS classes belongs to Twitter Bootstrap front end framework, but in some parts of the web like the landing page, it was necessary to develop custom classes in custom files.
 
 The decision to select version 3 of CSS is because as with HTML, this project also serve as learning proposal of the latest technologies for developing the future web, although is already know some feature incompatibilities in some browsers, the advantages in number of lines of code saving and new effects has taken more in account.
 
 {\large JavaScript}
+
+JavaScript is a high-level, dynamic, untyped, and interpreted programming language.It has been standardized in the ECMAScript language specification. 
+
+Alongside HTML and CSS, it is one of the three core technologies of World Wide Web content production; the majority of websites employ it and it is supported by all modern Web browsers without plug-ins. JavaScript is prototype-based with first-class functions, making it a multi-paradigm language, supporting object-oriented,imperative, and functional programming styles. It has an API for working with text, arrays, dates and regular expressions, but does not include any I/O, such as networking, storage, or graphics facilities, relying for these upon the host environment in which it is embedded. \cite{javascript}
 
 Being the language most extended on web development, the election of this technology ensure maximum compatibility with almost every device on the market. All the logic placed on client side is programmed with this language, from the AJAX calls, to controlling the user interface animations along the application.
 
@@ -730,7 +792,11 @@ Some parts of the application are fully designed by the student, like the landin
 
 Today, the amount of libraries involved in a web development is huge, and keep the latest versions of each is a nightmare for programmers, with Bower, the libraries can be managed from repositories, and be installed, updated or removed with one command line.
 
+Bower can manage components that contain HTML, CSS, JavaScript, fonts or even image files. Bower doesn’t concatenate or minify code or do anything else - it just installs the right versions of the packages you need and their dependencies.
+
 As similar UNIX tools like apt-get on Linux, Bower unify the package dependence for web developments providing a same file structure for avoiding library reference errors in the HTML pages and keep a detailed log of all the operations related.
+
+Bower is optimized for the front-end. If multiple packages depend on a package - jQuery for example - Bower will download jQuery just once. This is known as a flat dependency graph and it helps reduce page load. \cite{bowerio}
 
 \begin{figure}[h]
 \centering
@@ -753,27 +819,24 @@ Along the research, the following technologies were taken account:
 
 Finally, Python was selected because the clean syntax and the philosophy of Django framework to avoid repetition in the most used web tasks and their solid community.
 
-\begin{figure}[h]
+Django’s template engine provides a powerful mini-language for defining the user-facing layer of your application, encouraging a clean separation of application and presentation logic. Templates can be maintained by anyone with an understanding of HTML.
+
+The figure \ref{fig:djangoarchitecture} represents the project architecture of Auzonet application.
+
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.5\linewidth]{fig/python-django}
-\caption[Django and Python logos]{Django and Python logos}
-\label{fig:python-django}
+\includegraphics[width=0.9\linewidth]{fig/djangoarchitecture}
+\caption[Django engine]{Django engine}
+\label{fig:djangoarchitecture}
 \end{figure}
 
 
 The documentation site of Django framework \cite{Djangodocs} is clear and well structured and provides API's for all the common needs for every web development like an ORM for database mapping or security features, moreover, is possible to build your own custom functionalities on top of them.
-
+\newpage
 \subsubsection{Mobile application}
 For providing a native environment to Auzonet in mobile platforms the native SDK of each platfor was desestimated due the limited resources for developing the project, thanks to web technologies and the responsive user interface designed in the web application, Apache Cordova framework has been used for provide a native look and feel on the common mobile operating systems \cite{convertingwebapps}.
 
 Apache Cordova is a framework for create mobile applications using HTML, CSS and JavaScript gaining access to native features of the hardware like accelerometer or camera, as project from Apache Foundation, is licensed under Apache license that authorizes to use free of charge the software.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.4\linewidth]{fig/apache}
-\caption[Apache foundation logo]{Apache foundation logo}
-\label{fig:apache}
-\end{figure}
 
 Although Apache Cordova provide a native look and feel, all the application functionality, including the user interface is loaded via internet, for ensuring that the phone is always connected to network, Apache Cordova provide access to native message boxes, allowing to notice the user that the connection is required and providing visual feedback instead of showing blank screen.
 
@@ -986,6 +1049,13 @@ The last section of the homepage is divided in two main sections:
 \end{itemize}
 \newpage
 \subsection{Information board}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/board}
+\caption[Information board]{Information board}
+\label{fig:board}
+\end{figure}
+
 This is the place for posting warnings or just relevant information for all members of the community, there are two different types of messages, Warnings or Infos, the main difference is that every warning posted automatically sends a mail message to every member of the community.
 
 Please use this feature carefully because could be intrusive sent too many warning without real important reasons.
@@ -1060,7 +1130,7 @@ Once you have voted, the button will change to inactive state with text “Waiti
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.9\linewidth]{fig/Manual/endagreementsowner}
+\includegraphics[width=0.7\linewidth]{fig/Manual/endagreementsowner}
 \caption[Agreements box in own post]{Agreements box in own post}
 \label{fig:endagreementsowner}
 \end{figure}
@@ -1137,7 +1207,7 @@ There are certain operations that only can be made by administrators, deleting u
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.9\linewidth]{fig/Manual/adminpanel}
+\includegraphics[width=1\linewidth]{fig/Manual/adminpanel}
 \caption[Admin panel]{Admin panel}
 \label{fig:adminpanel}
 \end{figure}
@@ -1220,16 +1290,6 @@ All these features are really plausible to implement due the actual architecture
 \end{description}
 
 \appendix
-
-\chapter{Initial data model}
-Although this was the initial data model, some changes has been performed along the project for improving data integrity and performance.
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{fig/Database}
-\caption[Initial data model]{Initial data model}
-\label{fig:Database}
-\end{figure}
-
 
 \backmatter
 
