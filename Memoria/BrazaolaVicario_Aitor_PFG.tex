@@ -492,6 +492,57 @@ Django is a modular web framework extensible via applications, which are basical
 	\item[django-favicon:] For generating and inject the appropriate sizes of favicons in different browsers. 
 \end{description}
 
+The following mockups represent how was prototyped the application at beginning of the project.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/mockups/landing2}
+	\caption[Landing page]{Landing page}
+	\label{fig:landing2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/mockups/landing}
+	\caption[Login form]{Login form}
+	\label{fig:landing}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/mockups/register}
+	\caption[Register form]{Register form}
+	\label{fig:register}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/mockups/wizard}
+	\caption[Welcome wizard]{Welcome wizard}
+	\label{fig:wizard}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/mockups/newcommunity}
+	\caption[New community]{New community}
+	\label{fig:newcommunity}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/mockups/home}
+	\caption[Homepage]{Homepage}
+	\label{fig:home}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/mockups/newoffer}
+	\caption[New offer form]{New offer form}
+	\label{fig:newoffer}
+\end{figure}
+\newpage
 \subsubsection{Mobile application}
 Mobile application has been designed as a wrapper of web version, this decision is because for developing native applications for all mobile operating systems require a Restful API and independent developments that could not fit in project's calendar.
 
@@ -558,7 +609,7 @@ $.ajax({
           success: function (data) {
               ...
               $("#doorset").show();
-              $("#communityForm").show();
+              \$("#communityForm").show();
             },
             contentType: "text/plain"
           });
@@ -581,11 +632,29 @@ After the portal selection process, the user can set a password to the community
 
 From the user perspective that joins into a existing community, can select the community at the beginning of the process after registering from a drop down showing all registered ones, if the community is private, a password will be prompt, once the join process is finished, will receive an email with a custom welcome message set by the creator of the community.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=0.7\linewidth]{fig/Registerflow}
 \caption[Registration procedure]{Registration procedure}
 \label{fig:Registerflow}
+\end{figure}
+
+\newpage
+\subsection{Code repository}
+Although the first month of the development all code files were stored and edited in the programmer's computer, the code was uploaded to a private repository on GitHub service.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/githubhome}
+\caption[Auzonet on GitHub]{Auzonet on GitHub}
+\label{fig:githubhome}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/githubactivity}
+\caption[Repository activity]{Repository activity}
+\label{fig:githubactivity}
 \end{figure}
 
 \subsection{Deployment considerations}
@@ -791,6 +860,7 @@ Git \cite{git} has been the software responsible of keep version control of all 
 \end{figure}
 
 GitHub \cite{Github} is a service created for hosting Git repositories and allow store public and private code, thanks to the student pack offered by the company, code has been hosted in a private repository for free that, otherwise would be needed a paid subscription.
+\newpage
 \subsection{Testing}
 All the tests performed has been focused y the end user perspective, along two weeks the application was released under beta status to a closed group of people closer to the student for making a simulation of real usage.
 
@@ -818,6 +888,292 @@ Same process with the mobile application.
 
 All faults and user experience suggestions were gathered in the task manager software and tagged for fixing as soon as possible.
 
+\chapter{Users manual}\label{usersmanual}
+\section{Introduction}
+Auzonet is a social network for neighborhood, at this moment is only working for Bilbao city, first you need to create and account and register your community in the application if is not already by other neighbor.
+
+This manual explains how to register, use and get advantage of all features of Auzonet.
+\section{Accessing to Auzonet}
+Auzonet is a web application, you can enter via web browser or using the mobile application, the url is http://apps.morelab.deusto.es/auzonet 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{"fig/Manual/landing"}
+\caption[Auzonet landing page]{Auzonet landing page}
+\label{fig:landing}
+\end{figure}
+
+There are two options:
+\begin{itemize}
+	\item Login if you are already registered on the service.
+	\item Register, for new members.
+\end{itemize}
+
+Please note that here is possible to switch the language of the application with the small dropdown of right bottom part of the web.
+\subsubsection{Register a new member}
+After clicking register, you have to fulfill the following form, please, take care that all fields are required, and put special attention to password and username, will be your credentials for future login.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/register}
+\caption[Register form]{Register form}
+\label{fig:register}
+\end{figure}
+
+\subsubsection{Login}
+The login process is quite similar to register, just click on login and put your credentials.
+\subsubsection{Register a new community}
+If you have registered as new user, your account is not belonging to any community yet, in the screen after register form, you can select one existing community clicking the dropdown and search if your address is already registered, if you are the first neighbor using the system, you have to register your community clicking the button “Create new one”
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/wizard}
+\caption[Welcome wizard]{Welcome wizard}
+\label{fig:wizard}
+\end{figure}
+
+In the following form, thanks to Bilbao’s council Open Data, you can find your address and check if are correct in the map.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/address}
+\caption[Community wizard]{Community wizard}
+\label{fig:address}
+\end{figure}
+
+For provide better security, is possible to create a password for new members to the community, you can write a password selecting the option of “Private”, this password will be prompt to every user who joins the community, if you are responsible of setting up your community on the platform, share the password with your neighbors.
+Finally, you can write few lines giving a custom welcome message to new members via email.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/address2}
+\caption[Register form part two]{Register form part two}
+\label{fig:address2}
+\end{figure}
+
+\newpage
+\subsection{Home page}
+After joining or creating a community you will arrive to home page of Auzonet, this is a panel in which you can see what is happening on your community at a glance.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/home}
+\caption[Auzonet homepage]{Auzonet homepage}
+\label{fig:home}
+\end{figure}
+
+From top to bottom, in the navigation bar you have shortcuts to the following sections:
+\begin{itemize}
+	\item Community switcher
+	\item User activity
+	\item Logout
+\end{itemize}
+
+Under the bar, next to your avatar, name and karma level are the buttons for creating a new offer or submit a request, this are the core features of Auzonet, and all your post using these two buttons can be deactivated and republished from your activity page.
+
+Under the action panel you have the board, this section is for posting notices or information important for the community and is sorted in pages chronologically, everyone can publish here but only the author of each post can delete it from the small cross on right side of the message.
+
+The next block is the offers and request posts available in the community, switching the selected tab you can see all the offers and request of your neighbors, clicking on the title you access to detail page for check details and hire or attend the publication, if you are the owner of one you can also delete or edit it.
+There is a color code for quickly spot your posts, if is shadowed of light blue is yours.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/colors}
+\caption[Posts with colors]{Posts with colors}
+\label{fig:colors}
+\end{figure}
+
+
+The last section of the homepage is divided in two main sections:
+\begin{itemize}
+	\item My active posts: Is a list of all your posts for quick access, can be offers or requests, here is the best place to check how many posts you have currently in the community. 
+	\item Active agreements: Once you have a confirmed agreement to collaborate with other user, here you can see and have a quick access to the offer or request related, and the user with you are working together. Remember to finalize and rate all your agreements at the end of a collaboration. If you have finished and rated an agreement with one user and the user has not voted yet, the entre of the agreement still be there, only when the other user end the agreement and vote you the entry will disappear.
+
+\end{itemize}
+\newpage
+\subsection{Information board}
+This is the place for posting warnings or just relevant information for all members of the community, there are two different types of messages, Warnings or Infos, the main difference is that every warning posted automatically sends a mail message to every member of the community.
+
+Please use this feature carefully because could be intrusive sent too many warning without real important reasons.
+
+Info messages are represented in blue and warnings in yellow. Only the author of each message can delete it from the board clicking on the cross displayed on the right side.
+
+If the amount of messages is up to 3, will be organized in pages.
+
+\subsection{Post an offer}
+Auzonet is perfect for offering something you have or you know how to do, if you think that could provide benefit to the community, post an offer, can be free of charge or you can request money for it, and other member can check it and make an agreement with you.
+
+There are two big categories of posts in Auzonet, offers and requests, the procedure is quite similar, in this manual will be detailed all the process with an offer, but all the instructions can be applied to requests also.
+
+Start from the homepage and click on “I want to offer something” button.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/offerform}
+\caption[Offer form]{Offer form}
+\label{fig:offerform}
+\end{figure}
+
+
+All offers are categorized, search the type of offer you are posting and fill the title and details, you can put price or leave it blank for mark the offer free of charge. In the last field, you can upload an image for complete the offer details, the image is optional.
+
+Remember that you always can change details of your offers clicking on edit button in the detail view.
+
+Once the post is posted, you will receive an email if other user wants to hire your services, before starting the collaboration you must confirm the request.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/memberinterested}
+\caption[Member interested]{Member interested}
+\label{fig:memberinterested}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/confirmationmail}
+\caption[Confirmation mail]{Confirmation mail}
+\label{fig:confirmationmail}
+\end{figure}
+
+If you click on accept request, you will be redirected to Auzonet webpage and a new agreement will be set up with that user, he also will receive an email noticing that you have accepted to work with him.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/confirmedagreement}
+\caption[Agreement confirmed]{Agreement confirmed}
+\label{fig:confirmedagreement}
+\end{figure}
+
+
+Now, both users have a new entry in the “Active agreements” panel of their homepages, first is displayed the username of the user with you have the agreement and following the title of the offer clickable for quick access to the post.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/activeagreements}
+\caption[Active agreements tab]{Active agreements tab}
+\label{fig:activeagreements}
+\end{figure}
+
+\newpage
+\subsection{End agreement}
+Once the collaboration is finish, both users must mark as finished the agreement from their accounts and rate the user based on the experience.
+
+For finish an offer, first you have to find the post in the active agreement tab and click on the title for access to the detail view.
+
+If you are the owner of the post you will see a table of users with active collaboration on top of the edit and delete buttons, search the user with you want to finish the agreement and click on “End agreement”, will be displayed one message for voting the experience positive or negative and the user will receive a notification via mail telling that you have marked the agreement as finished with your rating remembering that he also have to done the same.
+
+Once you have voted, the button will change to inactive state with text “Waiting user rating” as soon as the other user end the agreement and rate his experience, you will be notified and the agreement will be finished.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/endagreementsowner}
+\caption[Agreements box in own post]{Agreements box in own post}
+\label{fig:endagreementsowner}
+\end{figure}
+
+\newpage
+\subsection{Hire an offer}
+If you spot an interesting offer in the community offers table, just click on the title and the detail view will be displayed. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/detailoffer}
+\caption[Detail view of an offer]{Detail view of an offer}
+\label{fig:detailoffer}
+\end{figure}
+
+
+Click on “Hire offer” side button and an email for requesting your collaboration will be sent to the owner of the post, you will be notified via email if the user accept working with you.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/ownerconfirmation}
+\caption[Author of the offer collaboration acceptance]{Author of the offer collaboration acceptance}
+\label{fig:ownerconfirmation}
+\end{figure}
+
+
+Once the owner of the offer has accepted, you will receive in the email his email for start communication, at the same time, he receives yours for facilitate collaboration.
+
+When you consider that the agreement has finished, both users must mark as finished the agreement, click on the title of the agreement from the “Active agreements” section of the homepage, and click on “End agreement” button.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/endagreementclient}
+\caption[End agreement button]{End agreement button}
+\label{fig:endagreementclient}
+\end{figure}
+
+
+After a confirmation message, the owner of the post will receive a mail notification remembering that he also must end the agreement and rate the experience, you will be notified when that happen.
+\newpage
+\subsection{Karma level}
+Karma is a numeric value attached to every member profile that represent your reputation, positive ratings adds more karma and negative remove points, you can use karma level for decide the trustfulness level of the other users when you make deals in the community.
+
+\subsection{Profile and recent activity}
+Auzonet provides you information about your account activity, clicking on your username on the top navigation bar you access to your profile view, here you can see a chart with all your recent activity on the current year and quick access to your active posts and history of finished ones.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/profile}
+\caption[User activity]{User activity}
+\label{fig:profile}
+\end{figure}
+
+
+In your profile view you have a list of all the communities you belong, you can quickly access one clicking on the address.
+\newpage
+\subsection{Multi-community registering}
+Auzonet allows to belong more than one community, this feature is especially interesting for people who have different properties and want to stay up to date on all of them, for searching or joining new communities just click on the name of the community on the navigation bar and click on “Search”
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/multiaccount}
+\caption[Community switcher]{Community switcher}
+\label{fig:multiaccount}
+\end{figure}
+
+
+Then you will arrive to the welcome wizard in which you can join in another existent community or register a new one.
+
+Under “Search community” option will be displayed, all the communities that you belong, click on the address to enter that community.
+\newpage
+\subsection{Administration pages}
+There are certain operations that only can be made by administrators, deleting users, changing passwords or create new categories are only possible from this section by one superadmin.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/Manual/adminpanel}
+\caption[Admin panel]{Admin panel}
+\label{fig:adminpanel}
+\end{figure}
+\newpage
+\subsection{Mobile application}
+Auzonet is also available on mobile platforms, you can have access to your offers, profile and post new content from your smartphone with adapted user interface.
+
+Here are a few screenshots of how is displayed Auzonet in mobile phones.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/Manual/mobilehome}
+\caption[Smartphone Home]{Smartphone Home}
+\label{fig:mobilehome}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/Manual/mobilewelcome}
+\caption[Smartphone welcome wizard]{Smartphone welcome wizard}
+\label{fig:mobilewelcome}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/Manual/mobileprofile}
+\caption[Smartphone activity]{Smartphone activity}
+\label{fig:mobileprofile}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/Manual/mobileoffer}
+\caption[Smartphone offer]{Smartphone offer}
+\label{fig:mobileoffer}
+\end{figure}
+
 \chapter{Conclusions and future work}\label{cha:conclusions}
 This project has developed a full-stack platform for citizens using Open Data very similar to already existing, well-known applications of every day life, in this chapter some conclusions and future lines of work will be presented.
 
@@ -836,6 +1192,7 @@ Although the application is fully functional and complete, there are some featur
 \begin{itemize}
 	\item User profile customization by the end user.
 	\item Facebook, Twitter and Google login integration.
+	\item Special members with moderator's privileges.
 	\item Native mobile apps.
 	\item Public REST Api for allowing third party integrations.
 	\item Full featured data analysis portal for public institutions.
@@ -863,58 +1220,6 @@ All these features are really plausible to implement due the actual architecture
 \end{description}
 
 \appendix
-
-\chapter{Mockups}\label{cha:mockups}
-The following mockups represent how was prototyped the application at beginning of the project.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{fig/mockups/landing2}
-\caption[Landing page]{Landing page}
-\label{fig:landing2}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{fig/mockups/landing}
-\caption[Login form]{Login form}
-\label{fig:landing}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{fig/mockups/register}
-\caption[Register form]{Register form}
-\label{fig:register}
-\end{figure}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/mockups/wizard}
-	\caption[Welcome wizard]{Welcome wizard}
-	\label{fig:wizard}
-\end{figure}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/mockups/newcommunity}
-	\caption[New community]{New community}
-	\label{fig:newcommunity}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{fig/mockups/home}
-\caption[Homepage]{Homepage}
-\label{fig:home}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{fig/mockups/newoffer}
-\caption[New offer form]{New offer form}
-\label{fig:newoffer}
-\end{figure}
 
 \chapter{Initial data model}
 Although this was the initial data model, some changes has been performed along the project for improving data integrity and performance.
