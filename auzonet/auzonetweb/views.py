@@ -54,7 +54,7 @@ def access_control(comid, userid):
 
 # COMMON PLACES
 @login_required
-def index(request, comid=None):
+def index(request, comid=None, info=None):
     # Check the community to load
     if comid is not None and access_control(comid, request.user.id):
         request.session['currentCommunityId'] = comid
@@ -125,6 +125,10 @@ def index(request, comid=None):
     else:
         message_model_form = NewCommunityMsgModelForm()
 
+    if info == '1':
+        message = ugettext(u'A request for collaboration has been sent, you will receive an email if the user accepts . ')
+    else:
+        message = None
     return render(request, 'auzonetweb/index.html', {
         'offers': community_offers,
         'requests': community_requests,
@@ -132,7 +136,8 @@ def index(request, comid=None):
         'myOrders': my_orders,
         'myOffers': my_offers,
         'communityMessages': paged_community_messages,
-        'messageModelForm': message_model_form
+        'messageModelForm': message_model_form,
+        'infoMessage': message
     })
 
 
@@ -788,8 +793,8 @@ def hire_offer(request, offerid):
     avatarLink = PUBLIC_URL_BASE + userInterested.publicuser.avatar.url
 
     send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink)
-
-    return redirect('index')
+    # redirect('detail-request', requestid=newRequest.id)
+    return redirect('index-message', info=1)
 
 
 # REQUESTS
@@ -915,7 +920,7 @@ def hire_request(request, requestid):
 
     send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink)
 
-    return redirect('index')
+    return redirect('index-message', info=1)
 
 
 # REST API

@@ -136,7 +136,7 @@ LOCALE_PATHS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # FOR LOCAL
-# STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 # END LOCAL
 
 # FOR SERVER

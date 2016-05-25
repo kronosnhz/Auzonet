@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -126,6 +127,21 @@ class PublicUser(models.Model):
     def __unicode__(self):
         return self.user.username
 
+    def save(self, size=(400, 300)):
+        """
+        Save Photo after ensuring it is not blank.  Resize as needed.
+        """
+
+        if not self.id and not self.source:
+            return
+
+        super(PublicUser, self).save()
+
+        filename = self.get_source_filename()
+        image = Image.open(filename)
+
+        image.thumbnail(size, Image.ANTIALIAS)
+        image.save(filename)
     """ IMAGE PROCESSING ON DEVELOPMENT
     def save(self):
         factor = 1

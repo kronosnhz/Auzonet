@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^accept-request/(?P<orderid>\d+)/$', views.accept_request, name='accept-request'),
     url(r'^hire-request/(?P<requestid>\d+)/$', views.hire_request, name='hire-request'),
     url(r'^community/(?P<comid>\d+)/$', views.index, name='indexcommunity'),
+    url(r'^confirmationsent/(?P<info>\d+)/$', views.index, name='index-message'),
     url(r'^protectedcommunity/(?P<comid>\d+)/$', views.protected_community, name='protectedcommunity'),
     url(r'^new-offer/$', views.edit_offer, name='new-offer'),
     url(r'^new-request/$', views.edit_request, name='new-request'),
