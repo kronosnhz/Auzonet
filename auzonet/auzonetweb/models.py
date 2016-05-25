@@ -81,6 +81,25 @@ class Request(models.Model):
     def __unicode__(self):
         return self.title + " created on " + str(self.date_published)
 
+    def get_source_filename(self):
+        return str(self.image.file)
+
+    def save(self, size=(1000, 500)):
+        """
+        Save Photo after ensuring it is not blank.  Resize as needed.
+        """
+
+        if not self.id and not self.image:
+            return
+
+        super(Request, self).save()
+
+        filename = self.get_source_filename()
+        image = Image.open(filename)
+
+        image.thumbnail(size, Image.ANTIALIAS)
+        image.save(filename)
+
 
 class Offer(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -97,6 +116,25 @@ class Offer(models.Model):
 
     def __unicode__(self):
         return self.title + " created on " + str(self.date_published)
+
+    def get_source_filename(self):
+        return str(self.image.file)
+
+    def save(self, size=(1000, 500)):
+        """
+        Save Photo after ensuring it is not blank.  Resize as needed.
+        """
+
+        if not self.id and not self.image:
+            return
+
+        super(Offer, self).save()
+
+        filename = self.get_source_filename()
+        image = Image.open(filename)
+
+        image.thumbnail(size, Image.ANTIALIAS)
+        image.save(filename)
 
 
 class Order(models.Model):
@@ -130,7 +168,7 @@ class PublicUser(models.Model):
     def get_source_filename(self):
         return str(self.avatar.file)
     
-    def save(self, size=(400, 300)):
+    def save(self, size=(500, 300)):
         """
         Save Photo after ensuring it is not blank.  Resize as needed.
         """
@@ -145,46 +183,6 @@ class PublicUser(models.Model):
 
         image.thumbnail(size, Image.ANTIALIAS)
         image.save(filename)
-    """ IMAGE PROCESSING ON DEVELOPMENT
-    def save(self):
-        factor = 1
-        if not self.id and not self.photo:
-            return
-
-        super(PublicUser, self).save()
-
-        userPhoto = Image.open(self.photo)
-        (width, height) = userPhoto.size
-        print(str(userPhoto.size))
-        "Max width and height 800"
-        if (800 / width < 800 / height):
-            factor = 800 / height
-        else:
-            factor = 800 / width
-
-        size = ( width / factor, height / factor)
-        userPhoto = userPhoto.resize(size, Image.ANTIALIAS)
-        userPhoto.save(self.photo.path)
-
-        if not self.id and not self.avatar:
-            return
-
-        super(PublicUser, self).save()
-
-        userAvatar = Image.open(self.avatar)
-        (width, height) = userAvatar.size
-
-        "Max width and height 800"
-        if (800 / width < 800 / height):
-            factor = 800 / height
-        else:
-            factor = 800 / width
-
-        size = ( width / factor, height / factor)
-        userAvatar = userAvatar.resize(size, Image.ANTIALIAS)
-        userAvatar.save(self.avatar.path)
-        """
-
 
 class CommunityMessage(models.Model):
     community = models.ForeignKey(Community, on_delete=models.CASCADE)
