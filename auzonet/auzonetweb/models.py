@@ -132,7 +132,7 @@ class PublicUser(models.Model):
         Save Photo after ensuring it is not blank.  Resize as needed.
         """
 
-        if not self.id and not self.source:
+        if not self.id and not self.avatar:
             return
 
         super(PublicUser, self).save()
