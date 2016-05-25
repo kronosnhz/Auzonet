@@ -127,6 +127,9 @@ class PublicUser(models.Model):
     def __unicode__(self):
         return self.user.username
 
+    def get_source_filename(self):
+        return str(self.avatar.file)
+    
     def save(self, size=(400, 300)):
         """
         Save Photo after ensuring it is not blank.  Resize as needed.
