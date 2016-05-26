@@ -127,6 +127,9 @@ def index(request, comid=None, info=None):
 
     if info == '1':
         message = ugettext(u'A request for collaboration has been sent, you will receive an email if the user accepts . ')
+    elif info == '2':
+        message = ugettext(
+            u'You already belong to this community.')
     else:
         message = None
     return render(request, 'auzonetweb/index.html', {
@@ -431,7 +434,7 @@ def wizard(request):
                         return redirect('index')
                 else:
                     # The user is already part of the community
-                    return redirect('index')
+                    return redirect('index-message', info=2)
             else:
                 return render(request, 'auzonetweb/wizard.html',
                               {'newCommunityForm': NewCommunityForm(),

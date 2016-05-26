@@ -124,7 +124,7 @@
                 </div>
 
                 {% endif %}
-                <a class="btn btn-warning btn-block" href="{%url 'edit-offer' offer.id%}" role="button">Editar</a>
+                <a class="btn btn-warning btn-block" href="{%url 'edit-offer' offer.id%}" role="button">{% trans "Editar" %}</a>
                 <button id="btn-finish" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDeleteModal">{% trans "Finalizar" %}</button>
             {%else%}
                 {%if is_client == 1%}

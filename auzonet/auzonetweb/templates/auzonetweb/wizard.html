@@ -68,7 +68,7 @@
                         </form>
 
                     </div>
-                    <p class="text-center">o</p>
+                    <p class="text-center">{% trans "o" %}</p>
                     {%else%}
                     <div>{% trans "Aún no hay comunidades de vecinos activas" %}</div>
                     {%endif%}
@@ -98,21 +98,21 @@
                                 </div>
                                 <form>
                                     <div class="form-group">
-                                        <label for="neighborhood">Barrio</label>
+                                        <label for="neighborhood">{% trans "Barrio" %}</label>
                                         <select id="neighborhood" class="form-control">
                                             <option>----</option>
 
                                         </select>
                                     </div>
                                     <div class="form-group" id="streetset">
-                                        <label for="street">Calle</label>
+                                        <label for="street">{% trans "Calle" %}</label>
                                         <select id="street" class="form-control">
                                             <option>----</option>
 
                                         </select>
                                     </div>
                                     <div class="form-group" id="doorset">
-                                        <label for="door">Portal</label>
+                                        <label for="door">{% trans "Portal" %}</label>
                                         <select id="door" class="form-control">
                                             <option>----</option>
 

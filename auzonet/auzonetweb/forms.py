@@ -72,7 +72,7 @@ class NewCommunityMsgModelForm(ModelForm):
 
 
 class NewCommunityForm(forms.Form):
-    access_type = forms.ChoiceField(choices=ACCESS_TYPES)
+    access_type = forms.ChoiceField(label=ugettext_lazy(u"Tipo de acceso"), choices=ACCESS_TYPES)
     neighborhood_code = forms.IntegerField(widget=forms.HiddenInput)
     neighborhood_name = forms.CharField(widget=forms.HiddenInput)
     street_code = forms.IntegerField(widget=forms.HiddenInput)
@@ -80,8 +80,8 @@ class NewCommunityForm(forms.Form):
     door_code = forms.IntegerField(widget=forms.HiddenInput)
     coordinatesX = forms.DecimalField(widget=forms.HiddenInput)
     coordinatesY = forms.DecimalField(widget=forms.HiddenInput)
-    password = forms.CharField(widget=forms.PasswordInput, required=False)
-    welcome_message = forms.CharField(widget=forms.Textarea, required=False)
+    password = forms.CharField(label=ugettext_lazy(u"Password"), widget=forms.PasswordInput, required=False)
+    welcome_message = forms.CharField(label=ugettext_lazy(u"Mensaje de bienvenida"), widget=forms.Textarea, required=False)
 
     class Meta:
         localized_fields = '__all__'
