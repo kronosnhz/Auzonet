@@ -36,7 +36,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">{% trans "Publicar mensaje en la corchera" %}</h4>
                 </div>
-                <form id="form-post-message" action="" method="post">
+                <form id="form-post-message" method="post">
                     <div class="modal-body">
                         <div class="alert alert-info" role="alert">
                             <b>{% trans "Consejo:" %}</b> {% trans "Publica como AVISO si quieres que todos los miembros de tu comunidad sean notificados por email sobre el nuevo mensaje." %}
@@ -130,7 +130,7 @@
             {% if offers.count == 0 %}
                 <p class="text-center">{% trans "Aún no se ha publicado nada" %}</p>
             {% else %}
-                <div id="table-recent" class="table-responsive">
+                <div id="table-recent-offer" class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -173,7 +173,7 @@
             {% if requests.count == 0 %}
                 <p class="text-center">{% trans "Aún no se ha publicado nada" %}</p>
             {% else %}
-                <div id="table-recent" class="table-responsive">
+                <div id="table-recent-request" class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -263,7 +263,7 @@
                 <h3 class="panel-title">{% trans "Acuerdos activos" %}</h3>
             </div>
             <div class="panel-body">
-                <ul>
+
                     {% if myOrders.count == 0 %}
                         <p class="text-center">{% trans "No tengo acuerdos activos" %}</p>
                     {% else %}
@@ -293,7 +293,7 @@
                         {% endfor %}
                     </ul>
                     {%endif%}
-                </ul>
+
             </div>
         </div>
     </div>

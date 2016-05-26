@@ -159,7 +159,7 @@ class PublicUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     communities = models.ManyToManyField(Community)
     birthdate = models.DateField(null=True)
-    gender = models.CharField(max_length=1, choices=GENDERS, default='M')
+    gender = models.CharField(max_length=1, choices=GENDERS)
     karma = models.IntegerField(default=0)
     avatar = models.ImageField(upload_to='uploads/avatars/%Y/%m/%d/')
 
@@ -187,7 +187,7 @@ class PublicUser(models.Model):
 
 class CommunityMessage(models.Model):
     community = models.ForeignKey(Community, on_delete=models.CASCADE)
-    message_type = models.CharField(ugettext_lazy(u'Message type'), max_length=1, choices=MESSAGE_TYPES, default='I')
+    message_type = models.CharField(ugettext_lazy(u'Message type'), max_length=1, choices=MESSAGE_TYPES)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posted_by")
     date_published = models.DateTimeField(auto_now_add=True)
     message_text = models.TextField(ugettext_lazy(u'Texto'))

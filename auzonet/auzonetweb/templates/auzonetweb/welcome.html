@@ -1,16 +1,15 @@
-{% load static from staticfiles %}
-{% load bootstrap3 %}
-{% load i18n %}
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
-{% load favtags %}
-{% autoescape off %}{% placeFavicon %}{% endautoescape %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static from staticfiles %}
+    {% load bootstrap3 %}
+    {% load i18n %}
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+    {% load favtags %}
+    {% autoescape off %}{% placeFavicon %}{% endautoescape %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +71,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="loginModalLabel">{% trans "Iniciar sesión" %}</h4>
                 </div>
-                <form action="" method="post">
+                <form method="post">
                     <div class="modal-body">
                             {% if errorMessage != None and modal == 'login'%}
                             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -103,7 +102,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="registerModalLabel">{% trans "Register" %}</h4>
                 </div>
-                <form enctype="multipart/form-data" action="" method="post">
+                <form enctype="multipart/form-data" method="post">
                     <div class="modal-body">
                         {% if errorMessage != None and modal == 'register'%}
                             <div class="alert alert-danger alert-dismissible" role="alert">
