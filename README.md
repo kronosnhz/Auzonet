@@ -13,3 +13,9 @@ Web programming, Cloud Computing an even recommendation engines are needed.
 
 #Project
 This project is the Final Grade Project of Aitor Brazaola at [University of Deusto](http://www.deusto.es) (Spain), is developed in collaboration with [DeustoTech MoreLab](http://morelab.deusto.es) and integrates the [WeLive](http://welive.eu) Service for intelligent cities.
+
+#Project considerations
+This project and its dependencies are isolated within a virtual environment called `AuzonetEnv`, to activate this VE
+execute `source venv/bin/activate` in source folder.
+
+If virtualenv tools is not enabled install it via `pip install virtualenv`

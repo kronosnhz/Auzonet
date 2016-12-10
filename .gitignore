@@ -91,3 +91,5 @@ auzonet/.idea/workspace.xml
 *.sqlite3
 *.DS_Store
 video/
+
+.idea/

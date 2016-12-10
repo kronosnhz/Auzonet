@@ -19,7 +19,7 @@ SECRET_KEY = 'f_+dc(p+5!uiuvmf5ym(^uu8bqafbd(m8_)vc_^h_tuage9%oe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'apps.morelab.deusto.es']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'apps.morelab.deusto.es', 'auzonet-env.mehfcbcfzm.us-west-2.elasticbeanstalk.com']
 
 # Media files management
 MEDIA_ROOT = os.path.join(BASE_DIR, 'auzonetweb/media/')
@@ -28,8 +28,8 @@ MEDIA_URL = '/auzonet/auzonetweb/media/'
 # Email settings
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'auzonet.noreply@gmail.com'
-EMAIL_HOST_PASSWORD = 'MZg6oU42JaBJD9eH7E'
+EMAIL_HOST_USER = 'aitor.brazaola@opendeusto.es'
+EMAIL_HOST_PASSWORD = 'CT7V8BkWdJ'
 EMAIL_USE_TLS = 'TRUE'
 
 # Application definition
@@ -136,14 +136,14 @@ LOCALE_PATHS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # FOR LOCAL
-#STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 # END LOCAL
 
 # FOR SERVER
-STATIC_URL = '/auzonet/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
-USE_X_FORWARDED_HOST = True
-FORCE_SCRIPT_NAME = '/auzonet'
+#STATIC_URL = '/auzonet/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+#USE_X_FORWARDED_HOST = True
+#FORCE_SCRIPT_NAME = '/auzonet'
 # END SERVER
 
 STATICFILES_FINDERS = (
