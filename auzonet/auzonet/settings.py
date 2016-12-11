@@ -21,10 +21,6 @@ SECRET_KEY = 'f_+dc(p+5!uiuvmf5ym(^uu8bqafbd(m8_)vc_^h_tuage9%oe'
 DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'apps.morelab.deusto.es', 'auzonet-env.mehfcbcfzm.us-west-2.elasticbeanstalk.com']
 
-# Media files management
-MEDIA_ROOT = os.path.join(BASE_DIR, 'auzonetweb/media/')
-MEDIA_URL = '/auzonet/auzonetweb/media/'
-
 # Email settings
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
@@ -134,15 +130,25 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, '../locale'),
 )
 
+# Media files management (local)
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'auzonetweb/media/')
+#MEDIA_URL = '/auzonet/auzonetweb/media/'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # FOR S3
-STATIC_URL = 'https://auzonet-bucket.s3-website-us-west-2.amazonaws.com/'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_S3_CUSTOM_DOMAIN = 'https://auzonet-bucket.s3-website-us-west-2.amazonaws.com/'
+STATICFILES_LOCATION = 'static'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 AWS_STORAGE_BUCKET_NAME = 'auzonet-bucket'
 AWS_ACCESS_KEY_ID = 'AKIAJSVJEMMUQQZ5Z3OA'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_S3_HOST = 's3-us-west-2.amazonaws.com'
+
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 # END S3
 
 # FOR LOCAL
