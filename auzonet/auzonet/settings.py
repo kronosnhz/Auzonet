@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'djangobower',
     'bootstrap3',
     'favicon',
+    'storages',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -135,8 +136,17 @@ LOCALE_PATHS = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
+# FOR S3
+STATIC_URL = 'https://auzonet-bucket.s3-website-us-west-2.amazonaws.com/'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_STORAGE_BUCKET_NAME = 'auzonet-bucket'
+AWS_ACCESS_KEY_ID = 'AKIAJSVJEMMUQQZ5Z3OA'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_S3_HOST = 's3-us-west-2.amazonaws.com'
+# END S3
+
 # FOR LOCAL
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 # END LOCAL
 
 # FOR SERVER
