@@ -55,7 +55,7 @@ window.onload = function(){
 <div class="row" id="profile">
     <p class="pull-left "><a onclick="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> {% trans "back" %}</a></p>
     <br>
-    <img src="{% static currentUser.publicuser.avatar.url %}" class="center-block img-circle" alt="avatar" width="250">
+    <img src="{{ currentUser.publicuser.avatar.url }}" class="center-block img-circle" alt="avatar" width="250">
     <h1 class="text-center">{{currentUser.first_name}} {{currentUser.last_name}}</h1>
     <p class="text-center"><i>{% trans "Miembro de" %} </i></p>
     <p class="text-center">

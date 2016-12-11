@@ -1,0 +1,11 @@
+Amazon S3
+aitorbrazaola
+
+Secret
+jrZRSoqd/Q9hXz8qrBzOfp2SickSeidI4ZZFY3tu
+
+Access
+AKIAJSVJEMMUQQZ5Z3OA
+
+ARN: arn:aws:iam::137687110272:user/aitorbrazaola
+Bucket: auzonet-bucket

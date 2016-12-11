@@ -72,8 +72,8 @@
         <div class="col-md-3">
             <p class="lead text-center">
                 {% if  offer.owner.publicuser.avatar %}
-                    {% static offer.owner.publicuser.avatar.url as avatar %}
-                    <img src="{{avatar}}" height="150" width=auto class="thumbnail center-block" alt="owner_avatar" />
+                    <img src="{{ offer.owner.publicuser.avatar.url }}" height="150" width=auto
+                         class="thumbnail center-block" alt="owner_avatar"/>
                 {% endif %}
                 {{offer.owner.first_name}} {{offer.owner.last_name}} ({{offer.owner}})
                 <br>
@@ -106,7 +106,8 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                  <img class="media-object" src="{% static o.client.publicuser.avatar.url %}" height="64" width="64" alt="...">
+                                    <img class="media-object" src="{{ o.client.publicuser.avatar.url }}" height="64"
+                                         width="64" alt="...">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -158,8 +159,7 @@
                     <p>{{offer.detail}}</p>
                 </div>
                 {% if offer.image%}
-                    {% static offer.image.url as photo %}
-                    <img src="{{photo}}" height="800" width="300" class="img-resposive" alt="offer_photo" />
+                    <img src="{{ offer.image.url }}" height="800" width="300" class="img-resposive" alt="offer_photo"/>
                 {% endif %}
             </div>
         </div>

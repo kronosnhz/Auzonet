@@ -84,8 +84,8 @@
             <div class="col-md-3">
                 <p class="lead text-center">
                     {% if  auzonetrequest.owner.publicuser.avatar %}
-                        {% static auzonetrequest.owner.publicuser.avatar.url as avatar %}
-                        <img src="{{ avatar }}" height="150" width=auto class="thumbnail center-block"
+                        <img src="{{ auzonetrequest.owner.publicuser.avatar.url }}" height="150" width=auto
+                             class="thumbnail center-block"
                              alt="owner_avatar"/>
                     {% endif %}
                     {{ auzonetrequest.owner.first_name }} {{ auzonetrequest.owner.last_name }}
@@ -131,7 +131,7 @@
                                         <div class="media-left">
                                             <a href="#">
                                                 <img class="media-object"
-                                                     src="{% static o.client.publicuser.avatar.url %}" height="64"
+                                                     src="{{ o.client.publicuser.avatar.url }}" height="64"
                                                      width="64" alt="...">
                                             </a>
                                         </div>
@@ -197,8 +197,8 @@
                         <p>{{ auzonetrequest.detail }}</p>
                     </div>
                     {% if auzonetrequest.image %}
-                        {% static auzonetrequest.image.url as photo %}
-                        <img src="{{ photo }}" height="800" width="300" class="img-resposive" alt="request_photo"/>
+                        <img src="{{ auzonetrequest.image.url }}" height="800" width="300" class="img-resposive"
+                             alt="request_photo"/>
                     {% endif %}
                 </div>
             </div>

@@ -137,7 +137,7 @@ LOCALE_PATHS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # FOR S3
-AWS_S3_CUSTOM_DOMAIN = 'https://auzonet-bucket.s3-website-us-west-2.amazonaws.com/'
+AWS_S3_CUSTOM_DOMAIN = 's3-us-west-2.amazonaws.com/auzonet-bucket'
 STATICFILES_LOCATION = 'static'
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 STATICFILES_STORAGE = 'custom_storages.StaticStorage'
