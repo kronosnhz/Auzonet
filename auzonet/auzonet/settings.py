@@ -151,8 +151,8 @@ if 'RDS_HOSTNAME' in os.environ:
     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
     AWS_STORAGE_BUCKET_NAME = 'auzonet-bucket'
-    AWS_ACCESS_KEY_ID = 'AKIAJSVJEMMUQQZ5Z3OA'
-    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_ACCESS_KEY_ID = 'AKIAI46MTNFQ5DCCJLRA'
+    AWS_SECRET_ACCESS_KEY = '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'
     AWS_S3_HOST = 's3-us-west-2.amazonaws.com'
 
     MEDIAFILES_LOCATION = 'media'
