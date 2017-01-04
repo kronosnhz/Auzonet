@@ -142,32 +142,31 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, '../locale'),
 )
 
-# Media files management (local)
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'auzonetweb/media/')
-#MEDIA_URL = '/auzonet/auzonetweb/media/'
+if 'RDS_HOSTNAME' in os.environ:
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/1.9/howto/static-files/
+    # FOR S3
+    AWS_S3_CUSTOM_DOMAIN = 's3-us-west-2.amazonaws.com/auzonet-bucket'
+    STATICFILES_LOCATION = 'static'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    AWS_STORAGE_BUCKET_NAME = 'auzonet-bucket'
+    AWS_ACCESS_KEY_ID = 'AKIAJSVJEMMUQQZ5Z3OA'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_S3_HOST = 's3-us-west-2.amazonaws.com'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-# FOR S3
-AWS_S3_CUSTOM_DOMAIN = 's3-us-west-2.amazonaws.com/auzonet-bucket'
-STATICFILES_LOCATION = 'static'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-AWS_STORAGE_BUCKET_NAME = 'auzonet-bucket'
-AWS_ACCESS_KEY_ID = 'AKIAJSVJEMMUQQZ5Z3OA'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_S3_HOST = 's3-us-west-2.amazonaws.com'
+    MEDIAFILES_LOCATION = 'media'
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    # END S3
+else:
+    # Media files management (local)
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'auzonetweb/media/')
+    MEDIA_URL = '/auzonet/auzonetweb/media/'
+    STATIC_URL = '/static/'
+    # END LOCAL
 
-MEDIAFILES_LOCATION = 'media'
-MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
-# END S3
-
-# FOR LOCAL
-# STATIC_URL = '/static/'
-# END LOCAL
-
-# FOR SERVER
+# FOR SERVER (DEPRECATED NOW ARE IN AWS)
 #STATIC_URL = '/auzonet/static/'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 #USE_X_FORWARDED_HOST = True
