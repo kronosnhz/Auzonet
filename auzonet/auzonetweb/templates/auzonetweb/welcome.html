@@ -39,6 +39,8 @@
                     <h2 id="main-subtitle" class="text-center thin-text">{% trans "La red social de vecinos" %}</h2>
                     <button class="btn btn-primary btn-lg account-buttons center-block btn-block outline" data-toggle="modal" data-target="#loginModal">{% trans "Inicia sesión" %}</button>
                     <button class="btn btn-primary btn-lg account-buttons center-block btn-block outline" data-toggle="modal" data-target="#registerModal">{% trans "Regístrate" %}</button>
+                    <a class="btn btn-primary btn-lg account-buttons center-block btn-block outline"
+                       href="{% url 'social:begin' "google-oauth2" %}">Sign in with Google</a>
                 </div>
             </div>
             <div class="col-lg-3"></div>

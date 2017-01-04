@@ -28,6 +28,17 @@ EMAIL_HOST_USER = 'aitor.brazaola@opendeusto.es'
 EMAIL_HOST_PASSWORD = 'CT7V8BkWdJ'
 EMAIL_USE_TLS = 'TRUE'
 
+# GOOGLE OAUTH
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '786087698701-444vhpsfqlekae54nb2vf745aseuf4l4.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'wUR6pPpq3zrQvtTka85ItJ3Y'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+)
+
+# SOCIAL_AUTH_USER_MODEL = 'django.contrib.auth.models.User'
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
+
 # Application definition
 INSTALLED_APPS = [
     'auzonetweb.apps.AuzonetwebConfig',
@@ -42,6 +53,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'favicon',
     'storages',
+    'social_django',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -54,6 +66,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'auzonet.urls'
@@ -71,6 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
