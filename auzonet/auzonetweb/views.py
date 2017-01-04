@@ -34,7 +34,7 @@ MESSAGE_TYPE_WARNING = 'W'
 ORDER_TYPE_OFFER = 'O'
 ORDER_TYPE_REQUEST = 'R'
 ACCESS_TYPE_PRIVATE = 'PR'
-PUBLIC_URL_BASE = 'http://apps.morelab.deusto.es/'
+PUBLIC_URL_BASE = 'http://auzonet-env.mehfcbcfzm.us-west-2.elasticbeanstalk.com//'
 
 
 # INTERNATIONALIZATION: django-admin makemessages -l es AND django-admin makemessages -l en AND django-admin compilemessages
