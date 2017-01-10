@@ -126,7 +126,8 @@ def index(request, comid=None, info=None):
         message_model_form = NewCommunityMsgModelForm()
 
     if info == '1':
-        message = ugettext(u'A request for collaboration has been sent, you will receive an email if the user accepts . ')
+        message = ugettext(
+            u'A request for collaboration has been sent, you will receive an email if the user accepts . ')
     elif info == '2':
         message = ugettext(
             u'You already belong to this community.')
@@ -462,9 +463,12 @@ def wizard(request):
                     )
                     # Check if the community already exists
                     try:
-                        Community.objects.get(neighborhood_code=new_neighborhood.neighborhood_code, street_code=new_neighborhood.street_code, door_code=new_neighborhood.door_code)
+                        Community.objects.get(neighborhood_code=new_neighborhood.neighborhood_code,
+                                              street_code=new_neighborhood.street_code,
+                                              door_code=new_neighborhood.door_code)
                         return render(request, 'auzonetweb/wizard.html',
-                                      {'newCommunityForm': new_community_form, 'selectCommunityForm': JoinCommunityForm(),
+                                      {'newCommunityForm': new_community_form,
+                                       'selectCommunityForm': JoinCommunityForm(),
                                        'communities': communities,
                                        'errorMessage': ugettext(
                                            u'La comunidad que intentas crear ya existe, búscala en la opción unirme a comunidad existente.'),
@@ -575,8 +579,9 @@ def welcome(request):
                             login(request, user)
                             try:
                                 request.session['currentCommunityId'] = request.user.publicuser.communities.all()[0].id
-                                request.session['currentCommunityAddress'] = str(request.user.publicuser.communities.all()[
-                                    0])
+                                request.session['currentCommunityAddress'] = str(
+                                    request.user.publicuser.communities.all()[
+                                        0])
                                 # Redirect to a success page.
                                 if next:
                                     return redirect(next)
@@ -674,6 +679,36 @@ def logout_view(request):
     logout(request)
     # Redirect to a success page.
     return redirect('welcome')
+
+
+def save_profile(backend, user, response, *args, **kwargs):
+    if backend.name == 'GoogleOAuth2':
+        public = user.publicuser
+        if public is None:
+            public = PublicUser()
+            public.user = user
+            public.save()
+
+            user.publicuser = public
+            user.publicuser.save()
+
+            user.save()
+
+            send_notification_email(None,
+                                    user.email,
+                                    ugettext(u"Bienvenido a Auzonet"),
+                                    ugettext(u"Bienvenido a Auzonet"),
+                                    ugettext(u"Gracias por registrarte") + u" " + user.first_name + ugettext(
+                                        u", busca tu comunidad entre las que ya estan ") +
+                                    ugettext(
+                                        u"registradas o crea la tuya para empezar a disfrutar de todo lo que ") +
+                                    ugettext(u"ofrece el servicio"),
+                                    None,
+                                    None,
+                                    None
+                                    )
+
+    return redirect('wizard')
 
 
 # OFFERS
