@@ -33,6 +33,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '786087698701-444vhpsfqlekae54nb2vf745aseuf4l4.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'wUR6pPpq3zrQvtTka85ItJ3Y'
 
 AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.google.GoogleOAuth2',
 )
 
@@ -46,10 +47,10 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
     'social.pipeline.user.create_user',
-    'save_profile',
     'social.pipeline.social_auth.associate_user',
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
+    'auzonetweb.views.save_profile',
 )
 
 # Application definition

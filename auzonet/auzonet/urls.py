@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^finalize-order/(?P<orderid>\d+)/(?P<feedback>["0","1"]+)/$', views.finalize_order, name='finalize-order'),
     url(r'^wizard/$', views.wizard, name='wizard'),
     url(r'^welcome/$', views.welcome, name='welcome'),
+    url(r'^register-public-profile/$', views.register_public_profile, name='register-public-profile'),
     url(r'^bootcamp/$', views.bootcamp, name='bootcamp'),
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^edit-offer/(?P<offerid>\d+)/$', views.edit_offer, name='edit-offer'),

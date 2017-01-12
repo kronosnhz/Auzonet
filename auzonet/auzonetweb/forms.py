@@ -55,6 +55,17 @@ class RegisterForm(forms.Form):
                               help_text=ugettext_lazy(u"* Required. Will be your public image in the community."))
 
 
+class RegisterPublicForm(forms.Form):
+    class Meta:
+        localized_fields = '__all__'
+
+    birthdate = forms.DateField(required=True, label=ugettext_lazy(u"Birthday"), help_text=ugettext_lazy(u"* Required"))
+    gender = forms.ChoiceField(required=True, label=ugettext_lazy(u"Gender"), choices=GENDERS,
+                               help_text=ugettext_lazy(u"* Required"))
+    avatar = forms.ImageField(required=True, label=ugettext_lazy(u"Avatar"), max_length=100,
+                              help_text=ugettext_lazy(u"* Required. Will be your public image in the community."))
+
+
 class JoinCommunityForm(forms.Form):
     community = forms.ModelChoiceField(queryset=Community.objects.all())
 

@@ -16,7 +16,7 @@ from django.template.loader import get_template
 from django.utils.translation import ugettext
 
 from .forms import LoginForm, RegisterForm, NewRequestModelForm, JoinCommunityForm, \
-    NewOfferModelForm, NewCommunityMsgModelForm, ProtectedCommunityForm, NewCommunityForm
+    NewOfferModelForm, NewCommunityMsgModelForm, ProtectedCommunityForm, NewCommunityForm, RegisterPublicForm
 from .models import Community, User, PublicUser, Request, Offer, CommunityMessage, Order
 
 """
@@ -682,34 +682,56 @@ def logout_view(request):
 
 
 def save_profile(backend, user, response, *args, **kwargs):
-    if backend.name == 'GoogleOAuth2':
+    try:
         public = user.publicuser
-        if public is None:
-            public = PublicUser()
-            public.user = user
-            public.save()
 
-            user.publicuser = public
-            user.publicuser.save()
+        return redirect('index')
+    except ObjectDoesNotExist:
+        # Llevarlo a el nuevo formulario de registro de usuario
+        return redirect('register-public-profile')
 
-            user.save()
 
-            send_notification_email(None,
-                                    user.email,
-                                    ugettext(u"Bienvenido a Auzonet"),
-                                    ugettext(u"Bienvenido a Auzonet"),
-                                    ugettext(u"Gracias por registrarte") + u" " + user.first_name + ugettext(
-                                        u", busca tu comunidad entre las que ya estan ") +
-                                    ugettext(
-                                        u"registradas o crea la tuya para empezar a disfrutar de todo lo que ") +
-                                    ugettext(u"ofrece el servicio"),
-                                    None,
-                                    None,
-                                    None
-                                    )
+def register_public_profile(request):
+    if request.method == 'POST':
+        register_form = RegisterPublicForm(request.POST, request.FILES)
+        if register_form.is_valid():
+            birthdate = request.POST['birthdate']
+            avatar = request.FILES['avatar']
 
-    return redirect('wizard')
+            try:
+                user = request.user
 
+                public = PublicUser()
+                public.user = user
+                public.save()
+
+                user.publicuser = public
+                user.publicuser.birthdate = birthdate
+                user.publicuser.avatar = avatar
+                user.publicuser.save()
+                user.save()
+                send_notification_email(None,
+                                        user.email,
+                                        ugettext(u"Bienvenido a Auzonet"),
+                                        ugettext(u"Bienvenido a Auzonet"),
+                                        ugettext(u"Gracias por registrarte") + u" " + user.first_name + ugettext(
+                                            u", busca tu comunidad entre las que ya estan ") +
+                                        ugettext(
+                                            u"registradas o crea la tuya para empezar a disfrutar de todo lo que ") +
+                                        ugettext(u"ofrece el servicio"),
+                                        None,
+                                        None,
+                                        None
+                                        )
+            except IntegrityError:
+                return render(request, 'auzonetweb/welcome.html', {})
+
+            return redirect('wizard')
+    else:
+        register_form = RegisterPublicForm()
+
+    return render(request, 'auzonetweb/register-public-profile.html',
+                  {'RegisterPublicForm': register_form})
 
 # OFFERS
 @login_required
