@@ -15,10 +15,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template import Context
 from django.template.loader import get_template
 from django.utils.translation import ugettext
+from rest_framework import viewsets
 
 from .forms import LoginForm, RegisterForm, NewRequestModelForm, JoinCommunityForm, \
     NewOfferModelForm, NewCommunityMsgModelForm, ProtectedCommunityForm, NewCommunityForm, RegisterPublicForm
-from .models import Community, User, PublicUser, Request, Offer, CommunityMessage, Order
+from .models import Community, User, PublicUser, Request, Offer, CommunityMessage, Order, Category, \
+    CategoriesSerializer, \
+    CommunitiesSerializer
 
 """
 Here is where the POST and GET request are processed
@@ -987,7 +990,15 @@ def hire_request(request, requestid):
 
 
 # REST API
-# Under construction...
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategoriesSerializer
+
+
+class CommunityViewSet(viewsets.ModelViewSet):
+    queryset = Community.objects.all()
+    serializer_class = CommunitiesSerializer
 
 # EMAIL
 def send_notification_email(fromEmail, toEmail, subject, subtitle, content, buttonText, buttonLink, avatarLink):

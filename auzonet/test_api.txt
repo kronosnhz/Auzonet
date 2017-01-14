@@ -1,0 +1,2 @@
+curl -H 'Accept: application/json; indent=4' -u admin:admin1234 http://127.0.0.1:8000/communities/
+curl -H 'Accept: application/json; indent=4' -u admin:admin1234 http://127.0.0.1:8000/categories/

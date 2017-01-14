@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'favicon',
     'storages',
     'social_django',
+    'rest_framework'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -83,6 +84,13 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    'PAGE_SIZE': 10
+}
 
 ROOT_URLCONF = 'auzonet.urls'
 

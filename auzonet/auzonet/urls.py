@@ -17,8 +17,13 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.static import serve
+from rest_framework import routers
 
 from auzonetweb import views
+
+router = routers.DefaultRouter()
+router.register(r'categories', views.CategoryViewSet)
+router.register(r'communities', views.CommunityViewSet)
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -52,4 +57,6 @@ urlpatterns = [
     }),
     url(r'^admin/', admin.site.urls),
     url(r'^social/', include('social_django.urls', namespace='social')),
+    url(r'^', include(router.urls)),
+    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
 ]

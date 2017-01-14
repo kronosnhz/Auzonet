@@ -4,6 +4,7 @@ from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext, ugettext_lazy
+from rest_framework import serializers
 
 GENDERS = (
     ('M', 'Male'),
@@ -183,7 +184,8 @@ class PublicUser(models.Model):
         # image = Image.open(filename)
 
         # image.thumbnail(size, Image.ANTIALIAS)
-        #image.save(filename)
+        # image.save(filename)
+
 
 class CommunityMessage(models.Model):
     community = models.ForeignKey(Community, on_delete=models.CASCADE)
@@ -194,3 +196,26 @@ class CommunityMessage(models.Model):
 
     def __unicode__(self):
         return self.message_type + " created on " + str(self.date_published)
+
+
+class CategoriesSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('title', 'description')
+
+
+class CommunitiesSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Community
+        fields = (
+            'access_type',
+            'neighborhood_code',
+            'neighborhood_name',
+            'street_code',
+            'street_name',
+            'door_code',
+            'coordinatesX',
+            'coordinatesY',
+            'password',
+            'welcome_message'
+        )
