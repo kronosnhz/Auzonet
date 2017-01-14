@@ -3,6 +3,7 @@ import datetime
 
 import requests
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import get_user
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import BadHeaderError, EmailMessage
@@ -578,6 +579,12 @@ def welcome(request):
                         if user.is_active:
                             login(request, user)
                             try:
+                                public = user.publicuser
+                            except ObjectDoesNotExist:
+                                # Llevarlo a el nuevo formulario de registro de usuario
+                                return redirect('register-public-profile')
+
+                            try:
                                 request.session['currentCommunityId'] = request.user.publicuser.communities.all()[0].id
                                 request.session['currentCommunityAddress'] = str(
                                     request.user.publicuser.communities.all()[
@@ -681,57 +688,53 @@ def logout_view(request):
     return redirect('welcome')
 
 
-def save_profile(backend, user, response, *args, **kwargs):
+def register_public_profile(request):
     try:
-        public = user.publicuser
+        public = request.user.publicuser
 
         return redirect('index')
     except ObjectDoesNotExist:
-        # Llevarlo a el nuevo formulario de registro de usuario
-        return redirect('register-public-profile')
+        if request.method == 'POST':
+            register_form = RegisterPublicForm(request.POST, request.FILES)
+            if register_form.is_valid():
+                birthdate = request.POST['birthdate']
+                avatar = request.FILES['avatar']
 
+                try:
+                    user = get_user(request)
 
-def register_public_profile(request):
-    if request.method == 'POST':
-        register_form = RegisterPublicForm(request.POST, request.FILES)
-        if register_form.is_valid():
-            birthdate = request.POST['birthdate']
-            avatar = request.FILES['avatar']
+                    public = PublicUser()
+                    public.user = user
+                    public.save()
 
-            try:
-                user = request.user
+                    user.publicuser = public
+                    user.publicuser.birthdate = birthdate
+                    user.publicuser.avatar = avatar
+                    user.publicuser.save()
+                    user.save()
+                    send_notification_email(None,
+                                            user.email,
+                                            ugettext(u"Bienvenido a Auzonet"),
+                                            ugettext(u"Bienvenido a Auzonet"),
+                                            ugettext(u"Gracias por registrarte") + u" " + user.first_name + ugettext(
+                                                u", busca tu comunidad entre las que ya estan ") +
+                                            ugettext(
+                                                u"registradas o crea la tuya para empezar a disfrutar de todo lo que ") +
+                                            ugettext(u"ofrece el servicio"),
+                                            None,
+                                            None,
+                                            None
+                                            )
+                except IntegrityError:
+                    return render(request, 'auzonetweb/welcome.html', {})
 
-                public = PublicUser()
-                public.user = user
-                public.save()
+                return redirect('wizard')
+        else:
+            register_form = RegisterPublicForm()
 
-                user.publicuser = public
-                user.publicuser.birthdate = birthdate
-                user.publicuser.avatar = avatar
-                user.publicuser.save()
-                user.save()
-                send_notification_email(None,
-                                        user.email,
-                                        ugettext(u"Bienvenido a Auzonet"),
-                                        ugettext(u"Bienvenido a Auzonet"),
-                                        ugettext(u"Gracias por registrarte") + u" " + user.first_name + ugettext(
-                                            u", busca tu comunidad entre las que ya estan ") +
-                                        ugettext(
-                                            u"registradas o crea la tuya para empezar a disfrutar de todo lo que ") +
-                                        ugettext(u"ofrece el servicio"),
-                                        None,
-                                        None,
-                                        None
-                                        )
-            except IntegrityError:
-                return render(request, 'auzonetweb/welcome.html', {})
+        return render(request, 'auzonetweb/register-public-profile.html',
+                      {'RegisterPublicForm': register_form})
 
-            return redirect('wizard')
-    else:
-        register_form = RegisterPublicForm()
-
-    return render(request, 'auzonetweb/register-public-profile.html',
-                  {'RegisterPublicForm': register_form})
 
 # OFFERS
 @login_required

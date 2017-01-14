@@ -179,11 +179,11 @@ class PublicUser(models.Model):
 
         super(PublicUser, self).save()
 
-        filename = self.get_source_filename()
-        image = Image.open(filename)
+        # filename = self.get_source_filename()
+        # image = Image.open(filename)
 
-        image.thumbnail(size, Image.ANTIALIAS)
-        image.save(filename)
+        # image.thumbnail(size, Image.ANTIALIAS)
+        #image.save(filename)
 
 class CommunityMessage(models.Model):
     community = models.ForeignKey(Community, on_delete=models.CASCADE)

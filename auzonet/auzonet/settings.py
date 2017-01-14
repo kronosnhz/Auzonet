@@ -39,6 +39,8 @@ AUTHENTICATION_BACKENDS = (
 
 # SOCIAL_AUTH_USER_MODEL = 'django.contrib.auth.models.User'
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/register-public-profile'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
@@ -50,7 +52,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.associate_user',
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
-    'auzonetweb.views.save_profile',
 )
 
 # Application definition
