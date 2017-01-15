@@ -15,6 +15,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template import Context
 from django.template.loader import get_template
 from django.utils.translation import ugettext
+from pusher import pusher
 from rest_framework import viewsets
 
 from .forms import LoginForm, RegisterForm, NewRequestModelForm, JoinCommunityForm, \
@@ -39,6 +40,14 @@ ORDER_TYPE_OFFER = 'O'
 ORDER_TYPE_REQUEST = 'R'
 ACCESS_TYPE_PRIVATE = 'PR'
 PUBLIC_URL_BASE = 'http://auzonet-env.mehfcbcfzm.us-west-2.elasticbeanstalk.com//'
+
+pusher_client = pusher.Pusher(
+    app_id='290359',
+    key='9462013600737ebb1b9d',
+    secret='6206075bbb5ab0e3bb35',
+    cluster='eu',
+    ssl=True
+)
 
 
 # INTERNATIONALIZATION: django-admin makemessages -l es AND django-admin makemessages -l en AND django-admin compilemessages
@@ -105,6 +114,12 @@ def index(request, comid=None, info=None):
             new_message.community = get_object_or_404(Community, id=request.session['currentCommunityId'])
             new_message.owner = request.user
             new_message.save()
+
+            pusher_client.trigger('community_messages', 'changes_in_messages',
+                                  {
+                                      'userId': request.user.id,
+                                      'communityId': request.session['currentCommunityId']
+                                  })
 
             if new_message.message_type == MESSAGE_TYPE_WARNING:
                 community_users = PublicUser.objects.filter(communities=request.session['currentCommunityId'])
@@ -227,6 +242,11 @@ def delete_post(request, postid, posttype):
     p.status = STATUS_FINISHED
 
     p.save()
+    pusher_client.trigger('community_posts', 'changes_in_posts',
+                          {
+                              'userId': request.user.id,
+                              'communityId': request.session['currentCommunityId']
+                          })
     return redirect('indexcommunity', comid=request.session['currentCommunityId'])
 
 
@@ -251,6 +271,11 @@ def recover_post(request, postid, posttype):
 def delete_message(request, messageid):
     message = get_object_or_404(CommunityMessage, id=messageid)
     if message.owner.id == request.user.id:
+        pusher_client.trigger('community_messages', 'changes_in_messages',
+                              {
+                                  'userId': request.user.id,
+                                  'communityId': request.session['currentCommunityId']
+                              })
         message.delete()
     else:
         return HttpResponse(ugettext('Unauthorized'), status=401)
@@ -316,6 +341,11 @@ def finalize_order(request, orderid, feedback):
         # Save the publicuser rating and the order new status
         order.owner.publicuser.save()
         order.save()
+        pusher_client.trigger('community_posts', 'changes_in_posts',
+                              {
+                                  'userId': request.user.id,
+                                  'communityId': request.session['currentCommunityId']
+                              })
         return redirect('index')
     elif order.owner == request.user:
         # The owner is finalizing the order
@@ -356,6 +386,11 @@ def finalize_order(request, orderid, feedback):
         # Save the publicuser rating and the order new status
         order.client.publicuser.save()
         order.save()
+        pusher_client.trigger('community_posts', 'changes_in_posts',
+                              {
+                                  'userId': request.user.id,
+                                  'communityId': request.session['currentCommunityId']
+                              })
         return redirect('index')
     else:
         return HttpResponse(ugettext('Unauthorized'), status=401)
@@ -755,6 +790,11 @@ def edit_offer(request, offerid=None):
             newOffer.community = get_object_or_404(Community, id=request.session['currentCommunityId'])
             newOffer.owner = request.user
             newOffer.save()
+            pusher_client.trigger('community_posts', 'changes_in_posts',
+                                  {
+                                      'userId': request.user.id,
+                                      'communityId': request.session['currentCommunityId']
+                                  })
             return redirect('detail-offer', offerid=newOffer.id)
         else:
             return render(request, 'auzonetweb/Offer/edit-offer.html',
@@ -879,6 +919,11 @@ def edit_request(request, requestid=None):
             newRequest.community = get_object_or_404(Community, id=request.session['currentCommunityId'])
             newRequest.owner = request.user
             newRequest.save()
+            pusher_client.trigger('community_posts', 'changes_in_posts',
+                                  {
+                                      'userId': request.user.id,
+                                      'communityId': request.session['currentCommunityId']
+                                  })
         else:
             return render(request, 'auzonetweb/Request/edit-request.html',
                           {'requestForm': requestForm,

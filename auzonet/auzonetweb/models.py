@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 
-from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext, ugettext_lazy
@@ -83,25 +82,6 @@ class Request(models.Model):
     def __unicode__(self):
         return self.title + " created on " + str(self.date_published)
 
-    def get_source_filename(self):
-        return str(self.image.file)
-
-    def save(self, size=(1000, 500)):
-        """
-        Save Photo after ensuring it is not blank.  Resize as needed.
-        """
-
-        if not self.id and not self.image:
-            return
-
-        super(Request, self).save()
-
-        filename = self.get_source_filename()
-        image = Image.open(filename)
-
-        image.thumbnail(size, Image.ANTIALIAS)
-        image.save(filename)
-
 
 class Offer(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=ugettext_lazy(u'Category'))
@@ -118,25 +98,6 @@ class Offer(models.Model):
 
     def __unicode__(self):
         return self.title + " created on " + str(self.date_published)
-
-    def get_source_filename(self):
-        return str(self.image.file)
-
-    def save(self, size=(1000, 500)):
-        """
-        Save Photo after ensuring it is not blank.  Resize as needed.
-        """
-
-        if not self.id and not self.image:
-            return
-
-        super(Offer, self).save()
-
-        filename = self.get_source_filename()
-        image = Image.open(filename)
-
-        image.thumbnail(size, Image.ANTIALIAS)
-        image.save(filename)
 
 
 class Order(models.Model):

@@ -16,8 +16,36 @@
             $("#btn-cancel-post").prop('disabled', true);
             $("#form-post-message").submit();
         });
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('9462013600737ebb1b9d', {
+            cluster: 'eu',
+            encrypted: true
+        });
+
+        var channelCommunities = pusher.subscribe('community_messages');
+        channelCommunities.bind('changes_in_messages', function (data) {
+            if (({{ request.user.id }} != data.userId) &&
+            ({{request.session.currentCommunityId}} == data.communityId
+            ))
+            {
+                location.reload();
+            }
+        });;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+        var channelPosts = pusher.subscribe('community_posts');
+        channelPosts.bind('changes_in_posts', function (data) {
+            if (({{ request.user.id }} != data.userId) &&
+            ({{request.session.currentCommunityId}} == data.communityId
+            ))
+            {
+                location.reload();
+            }
+        });;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     });
 </script>
+    <script src="//js.pusher.com/3.1/pusher.min.js"></script>
 {% endblock %}
 
 {% block title %}AuzoNet - {{request.session.currentCommunityAddress}}{% endblock %}

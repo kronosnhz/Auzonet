@@ -69,7 +69,8 @@ INSTALLED_APPS = [
     'favicon',
     'storages',
     'social_django',
-    'rest_framework'
+    'rest_framework',
+    'pusher'
 ]
 
 MIDDLEWARE_CLASSES = [
