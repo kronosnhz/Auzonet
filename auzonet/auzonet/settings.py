@@ -25,12 +25,12 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'apps.morelab.deusto.es', 'auzonet-en
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'aitor.brazaola@opendeusto.es'
-EMAIL_HOST_PASSWORD = 'CT7V8BkWdJ'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = 'TRUE'
 
 # GOOGLE OAUTH
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '786087698701-444vhpsfqlekae54nb2vf745aseuf4l4.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'wUR6pPpq3zrQvtTka85ItJ3Y'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -189,9 +189,9 @@ if 'RDS_HOSTNAME' in os.environ:
     STATICFILES_LOCATION = 'static'
     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-    AWS_STORAGE_BUCKET_NAME = 'auzonet-bucket'
-    AWS_ACCESS_KEY_ID = 'AKIAI46MTNFQ5DCCJLRA'
-    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = ''
+    AWS_ACCESS_KEY_ID = ''
+    AWS_SECRET_ACCESS_KEY = ''
     AWS_S3_HOST = 's3-us-west-2.amazonaws.com'
 
     MEDIAFILES_LOCATION = 'media'
