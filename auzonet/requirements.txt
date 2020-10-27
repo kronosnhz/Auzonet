@@ -5,7 +5,7 @@ botocore==1.4.85
 cement==2.8.2
 cffi==1.9.1
 colorama==0.3.7
-cryptography==1.7.1
+cryptography==3.2
 Django==1.10.4
 django-bootstrap3==7.1.0
 django-bower==5.2.0
